@@ -41,6 +41,8 @@ public class Collector : MonoBehaviour , IFoodPickup
 
     private bool attached =  false;
 
+    public bool playerControlled;
+
     private Vector2 direction;
     private int feedNum = 0;
 
@@ -50,6 +52,7 @@ public class Collector : MonoBehaviour , IFoodPickup
 
     enum BEHAVIOUR {Idle, Collect, Return}
     BEHAVIOUR behaviour = BEHAVIOUR.Idle;
+    private Vector2 input_vector;
 
     void Start()
     {
@@ -73,7 +76,15 @@ public class Collector : MonoBehaviour , IFoodPickup
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (behaviour == BEHAVIOUR.Return)
+        if (playerControlled)
+        {
+            input_vector.x = Input.GetAxisRaw("Horizontal");
+            input_vector.y = Input.GetAxisRaw("Vertical");
+
+            rb.velocity = input_vector.normalized * speed;
+            return;
+        }
+            if (behaviour == BEHAVIOUR.Return)
         {
             if (attached)
             {
@@ -218,4 +229,5 @@ public class Collector : MonoBehaviour , IFoodPickup
     target = player;
     } 
 }
+
 

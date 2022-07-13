@@ -331,6 +331,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodText: {fileID: 1515180678}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
   speed: 5
 --- !u!58 &212005382
 CircleCollider2D:
