@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour , IFoodPickup
 {
@@ -16,6 +17,9 @@ public class PlayerMovement : MonoBehaviour , IFoodPickup
     private bool switchtoAlly = false;
 
     private bool playerControlled = true;
+
+    [SerializeField]
+    private CinemachineVirtualCamera cam;
 
     public int food 
     { 
@@ -61,22 +65,7 @@ public class PlayerMovement : MonoBehaviour , IFoodPickup
                 }
             }
 
-            if (Input.GetKey("4"))
-            {
-                switchtoAlly = true;
-            }
 
-            if (switchtoAlly && Input.GetMouseButtonDown(0))
-            {
-                // Check if selected an ally
-                Collider2D result = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
-                if (result != null)
-                {
-                    GameObject Object = result.gameObject;
-                    NewAlly(Object);
-                    print(Object);
-
-                }
 
                 // if (result != null)
                 // {
@@ -84,33 +73,10 @@ public class PlayerMovement : MonoBehaviour , IFoodPickup
                 // }
                 // If not, return
             }
-        }
+        
         else
         {
-            if (Input.GetKey("1"))
-            {
-                if (food >= 20)
-                {
-                    food -= 20;
-                    spawning.SpawnAlly("Collector");
-                }
-            }
-            if (Input.GetKey("4"))
-            {
-                switchtoAlly = true;
-            }
-            if (switchtoAlly && Input.GetMouseButtonDown(0))
-            {
-                // Check if selected an ally
-                Collider2D result = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
-                if (result != null)
-                {
-                    GameObject Object = result.gameObject;
-                    NewAlly(Object);
-                    print(Object);
-
-                }
-            }
+            
         }
             
 
@@ -134,14 +100,5 @@ public class PlayerMovement : MonoBehaviour , IFoodPickup
         
     }
 
-    private void NewAlly(GameObject ally)
-    {
-        playerControlled = false;
-        ally.GetComponent<Collector>().playerControlled = true;
-        Camera c = Camera.main;
-        c.transform.SetParent(ally.transform);
-        c.transform.position = new Vector3(0, 0, -1);
-        
-        
-    }
+
 }
