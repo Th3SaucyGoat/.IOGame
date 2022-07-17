@@ -170,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 71031496}
   - component: {fileID: 71031497}
+  - component: {fileID: 71031498}
   m_Layer: 0
   m_Name: MapBrain
   m_TagString: Untagged
@@ -207,6 +208,22 @@ MonoBehaviour:
   topBounds: {fileID: 1991274413}
   bottomBounds: {fileID: 1791043393}
   food: {fileID: 6839631081696888031, guid: 45ad3a984f2abea41a449757fdc8e7e4, type: 3}
+--- !u!114 &71031498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71031495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b23b408e309d74687908d741294bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  cam: {fileID: 479598336}
 --- !u!1 &212005377
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,10 +237,10 @@ GameObject:
   - component: {fileID: 212005378}
   - component: {fileID: 212005381}
   - component: {fileID: 212005382}
-  - component: {fileID: 212005383}
   - component: {fileID: 212005384}
+  - component: {fileID: 212005385}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Hivemind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,6 +332,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519420032}
+  - {fileID: 1454451982564135592}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -330,8 +348,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c4e3f1cca73b943826b874275cba05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodText: {fileID: 1515180678}
-  cam: {fileID: 479598336}
   layerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -352,18 +368,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &212005383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212005377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e33d4dbb50dcc4f8bb52bc0ea43518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &212005384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +381,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collector: {fileID: 7393865367695140061, guid: ab17d9580ea2cbf449896d6eac82d664, type: 3}
+--- !u!114 &212005385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212005377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154ce0708cc3f544fa9b49026201b452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodText: {fileID: 1515180678}
 --- !u!1 &313922550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,3 +1675,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1454451982564135592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805817740928779291}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00000019868213, y: -0.00000012417632, z: 0}
+  m_LocalScale: {x: 1.6666665, y: 1.6666665, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 212005380}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4805817740928779291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1454451982564135592}
+  - component: {fileID: 7730641799578742800}
+  - component: {fileID: 7032881005758453181}
+  m_Layer: 7
+  m_Name: FoodHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &7032881005758453181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805817740928779291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da5edd36612f4248832a2b2bd391fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &7730641799578742800
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805817740928779291}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3

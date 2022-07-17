@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class FoodPickup : MonoBehaviour
+public class FoodPickup : MonoBehaviour , IFoodPickup
 {
+    public int food { set; get; } = 0;
 
+    public int foodCapacity { set; get; } = 200;
     // Start is called before the first frame update
     void Start()
     {

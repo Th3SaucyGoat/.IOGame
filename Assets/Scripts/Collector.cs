@@ -175,7 +175,6 @@ public class Collector : MonoBehaviour , IFoodPickup
         // Find distance from player and determine next action
         Vector3 position = gameObject.transform.position - player.transform.position;
         float distance = position.magnitude;
-        print(distance);
         if (distance >3.5){
         target = player;
         behaviour = BEHAVIOUR.Idle;

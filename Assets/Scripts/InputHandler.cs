@@ -1,79 +1,80 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Cinemachine;
+using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    private bool switchtoAlly = false;
 
-    private CinemachineVirtualCamera cam;
+
+    //private
 
     [SerializeField]
-    private int layerMask;
+    private LayerMask layerMask;
+
+    [SerializeField]
+    private CinemachineVirtualCamera cam;
+
+    private bool switchtoAlly = false;
+
+    private Spawning spawning;
+    private IFoodPickup foodPickup;
+
+    private GameObject currentControlledEntity;
+
+    private GameObject hive;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //Get a reference to the Hivemind and her food count and spawning function.
+        currentControlledEntity = GameObject.Find("Hivemind");
+        hive = currentControlledEntity;
+        spawning = hive.GetComponent<Spawning>();
+        foodPickup = hive.GetComponent<IFoodPickup>();
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKey("4"))
+        if (Input.GetKeyDown("4"))
         {
             switchtoAlly = true;
         }
-        if (Input.GetKey("1"))
+        if (Input.GetKeyDown("1"))
         {
-            if (food >= 20)
+            if (foodPickup.food >= 20)
             {
-                food -= 20;
+                foodPickup.food -= 20;
                 spawning.SpawnAlly("Collector");
             }
         }
-        if (Input.GetKey("4"))
-        {
-            switchtoAlly = true;
-        }
         if (switchtoAlly && Input.GetMouseButtonDown(0))
         {
             // Check if selected an ally
             Collider2D result = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
-
-            if (result != null)
+            switchtoAlly = false;
+            if (result.gameObject != null)
             {
-                GameObject Object = result.gameObject;
-                print(Object);
-                NewAlly(Object);
+                GameObject new_ally = result.gameObject;
+                print(result);
+                NewAlly(new_ally);
 
             }
         }
+    }
 
-        if (switchtoAlly && Input.GetMouseButtonDown(0))
-        {
-            // Check if selected an ally
-            Collider2D result = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
-            if (result != null)
-            {
-                GameObject Object = result.gameObject;
-                NewAlly(Object);
-                print(Object);
-
-            }
-        }
-
-
-}
-
-private void NewAlly(GameObject ally)
+    private void NewAlly(GameObject ally)
     {
-        ally.GetComponent<Collector>().playerControlled = true;
+        currentControlledEntity.TryGetComponent<PlayerMovement>(out PlayerMovement result);
+        //Destroy(result);
+        //ally.AddComponent<PlayerMovement>();
         cam.LookAt = ally.transform;
         cam.Follow = ally.transform;
-
+        ally.GetComponent<IPlayerMovement>().PlayerControlled = true;
 
     }
 }
