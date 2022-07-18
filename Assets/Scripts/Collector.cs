@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : MonoBehaviour , IFoodPickup
+public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
 {
 
     public int food {get {return _food;} 
@@ -41,7 +41,7 @@ public class Collector : MonoBehaviour , IFoodPickup
 
     private bool attached =  false;
 
-    public bool playerControlled;
+    public bool PlayerControlled { get; set; }
 
     private Vector2 direction;
     private int feedNum = 0;
@@ -53,6 +53,8 @@ public class Collector : MonoBehaviour , IFoodPickup
     enum BEHAVIOUR {Idle, Collect, Return}
     BEHAVIOUR behaviour = BEHAVIOUR.Idle;
     private Vector2 input_vector;
+
+    private Vector2 point;
 
     void Start()
     {
@@ -76,13 +78,22 @@ public class Collector : MonoBehaviour , IFoodPickup
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (playerControlled)
+        if (PlayerControlled && behaviour != BEHAVIOUR.Return)
         {
             input_vector.x = Input.GetAxisRaw("Horizontal");
             input_vector.y = Input.GetAxisRaw("Vertical");
 
             rb.velocity = input_vector.normalized * speed;
-            return;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Vector3 position = gameObject.transform.position - player.transform.position;
+                float distance = position.magnitude;
+                if (distance < 2.0)
+                {
+                    Return();
+                }
+            }
         }
             if (behaviour == BEHAVIOUR.Return)
         {
@@ -106,6 +117,9 @@ public class Collector : MonoBehaviour , IFoodPickup
 
         if (behaviour == BEHAVIOUR.Idle)
         {
+            if (point != null)
+            {
+            }
             Vector3 position = gameObject.transform.position - player.transform.position;
             float distance = position.magnitude;
             if (distance < 2.0)
@@ -128,17 +142,22 @@ public class Collector : MonoBehaviour , IFoodPickup
         attachedOffset = Vector2.zero;
         target = null;
         rb.mass = 1;
+        
     }
 
     private void Move()
     {
-        if (playerControlled)
+        if (PlayerControlled && behaviour != BEHAVIOUR.Return)
         {
-            
+            input_vector.x = Input.GetAxisRaw("Horizontal");
+            input_vector.y = Input.GetAxisRaw("Vertical");
+            rb.velocity = input_vector.normalized * speed;
+
+            return;
         }
         // direction = (mainCamera.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position);
-        Vector2 point = gameObject.transform.position - player.transform.position;  
-        float distance = point.magnitude;
+        Vector2 pos = gameObject.transform.position - player.transform.position;  
+        float distance = pos.magnitude;
         if (target != null){
         direction = (target.transform.position - gameObject.transform.position);
 
@@ -146,7 +165,7 @@ public class Collector : MonoBehaviour , IFoodPickup
         }
         else if (distance > 1)
         {
-            direction = point/distance;
+            direction = pos/distance;
             rb.velocity = -direction.normalized*speed;
  
         }

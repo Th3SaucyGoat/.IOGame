@@ -57,10 +57,10 @@ public class InputHandler : MonoBehaviour
             // Check if selected an ally
             Collider2D result = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition), layerMask);
             switchtoAlly = false;
-            if (result.gameObject != null)
+            if (result != null)
             {
                 GameObject new_ally = result.gameObject;
-                print(result);
+                
                 NewAlly(new_ally);
 
             }
@@ -69,12 +69,15 @@ public class InputHandler : MonoBehaviour
 
     private void NewAlly(GameObject ally)
     {
-        currentControlledEntity.TryGetComponent<PlayerMovement>(out PlayerMovement result);
-        //Destroy(result);
+        currentControlledEntity.GetComponent<IPlayerMovement>().PlayerControlled = false;
         //ally.AddComponent<PlayerMovement>();
         cam.LookAt = ally.transform;
         cam.Follow = ally.transform;
+        //Destroy(result);
         ally.GetComponent<IPlayerMovement>().PlayerControlled = true;
+        currentControlledEntity = ally;
+        //print(ally.name);
+        
 
     }
 }
