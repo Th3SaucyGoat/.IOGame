@@ -1,5 +1,7 @@
 using Cinemachine;
 using UnityEngine;
+using System.Collections.Generic;
+
 
 public class InputHandler : MonoBehaviour
 {
@@ -22,6 +24,7 @@ public class InputHandler : MonoBehaviour
 
     private GameObject hive;
 
+    private List<GameObject> alliesFollowing = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +76,35 @@ public class InputHandler : MonoBehaviour
         {
             //find closest collector/ally. Set entity to follow to the current player object if at minimum distance away.
             GameObject closestAlly = findClosestAlly();
+            if (closestAlly != null)
+            {
+                closestAlly.GetComponent<Collector>().EntityToFollow = currentControlledEntity;
+                closestAlly.GetComponent<Collector>().determineState();
 
+                foreach (GameObject ally in alliesFollowing)
+                {
+                    if (closestAlly == ally)
+                    {
+                        print("RETURNED AN ALREADY FOLLOWING ALLY");
+                    }
+                }
+                alliesFollowing.Add(closestAlly);
+                print(alliesFollowing.Count);
+
+            }
+        }
+
+        //dismiss following allies
+        if (Input.GetKeyDown("3"))
+        {
+            if (alliesFollowing.Count > 0)
+            {
+                foreach (GameObject ally in alliesFollowing)
+                {
+                    ally.GetComponent<Collector>().EntityToFollow = hive;
+                }
+                alliesFollowing.Clear();
+            }
         }
     }
 
@@ -98,7 +129,7 @@ public class InputHandler : MonoBehaviour
         GameObject closestTarget = null;
         foreach (GameObject ally in allAllies)
         {
-            if (ally == null)
+            if (ally == null | alliesFollowing.Contains(ally))
             {
                 continue;
             }
@@ -111,7 +142,17 @@ public class InputHandler : MonoBehaviour
             }
 
         }
-        return closestTarget;
+        if (closestDistance < 4.0f)
+        {
+            return closestTarget;
+        }
+        else
+        {
+            return null;
+        }
+
+        
     }
+
     }
 

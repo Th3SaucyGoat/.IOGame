@@ -12,9 +12,13 @@ public class Collector : PlayerMovement , IFoodPickup
         if (_food >= foodCapacity)
         {
             _food = foodCapacity;
-                if (!PlayerControlled)
+                if (!PlayerControlled && EntityToFollow == hivemind)
                 {
                     Feed();
+                }
+                else
+                {
+                    behaviour = BEHAVIOUR.Idle;
                 }
         }
         if (_food < 0)
@@ -29,7 +33,7 @@ public class Collector : PlayerMovement , IFoodPickup
 
     private IFoodPickup hivemindFood;
 
-    private GameObject entityToFollow;
+    public GameObject EntityToFollow;
 
     public int foodCapacity {get;} = 20;
 
@@ -66,7 +70,7 @@ public class Collector : PlayerMovement , IFoodPickup
         base.Start();
         speed = 3f;
         hivemindFood = hivemind.gameObject.GetComponent<IFoodPickup>() ;
-        entityToFollow = hivemind;
+        EntityToFollow = hivemind;
         SubscribetoEvents();
         
     }
@@ -138,14 +142,14 @@ public class Collector : PlayerMovement , IFoodPickup
             if (point != null)
             {
             }
-            Vector3 position = gameObject.transform.position - entityToFollow.transform.position;
+            Vector3 position = gameObject.transform.position - EntityToFollow.transform.position;
             float distance = position.magnitude;
             // Stay at a distance from player
             if (distance > 1.5f)
             {
-                MovetoPoint((Vector2) entityToFollow.transform.position);
+                MovetoPoint((Vector2) EntityToFollow.transform.position);
             }
-            else if (foodInRange.Count >= 1)
+            else if (foodInRange.Count >= 1 && food < foodCapacity)
             {
                 behaviour = BEHAVIOUR.Collect;
                 target = findClosestFood();
@@ -176,7 +180,6 @@ public class Collector : PlayerMovement , IFoodPickup
 
     private void Detach()
     {
-        print("Detached");
         behaviour = BEHAVIOUR.Idle;
         attached = false;
         attachedOffset = Vector2.zero;
@@ -216,7 +219,7 @@ public class Collector : PlayerMovement , IFoodPickup
         Destroy(other.gameObject);
         Name = other.name;
         // Find distance from player and determine next action
-        Vector3 position = gameObject.transform.position - entityToFollow.transform.position;
+        Vector3 position = gameObject.transform.position - EntityToFollow.transform.position;
         float distance = position.magnitude;
         //Too far away, return to the player
         if (distance > 3.5){
@@ -282,6 +285,23 @@ public class Collector : PlayerMovement , IFoodPickup
     {
     behaviour = BEHAVIOUR.Return;
     } 
+    //To be called when changing entityFollowed to allow for smooth transition of AI logic
+    public void determineState()
+    {
+        if (food == foodCapacity && EntityToFollow == hivemind)
+        {
+            behaviour = BEHAVIOUR.Return;
+        }
+        else if (food < foodCapacity)
+        {
+            behaviour = BEHAVIOUR.Collect;
+            target = findClosestFood();
+        }
+        else
+        {
+            behaviour = BEHAVIOUR.Idle;
+        }
+    }
 }
 
 

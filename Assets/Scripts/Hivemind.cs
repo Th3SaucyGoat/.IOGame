@@ -44,7 +44,7 @@ public class Hivemind : PlayerMovement, IFoodPickup
     {
         base.Start();
         PlayerControlled = true;
-        food = 20;
+        food = 100;
         ProxyTrigger foodHitbox = transform.Find("FoodHitbox").GetComponent<ProxyTrigger>();
         foodHitbox.OnTriggerEnter2D_Action += foodHitbox_OnTriggerEnter2D;
 
