@@ -1,65 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using Cinemachine;
+using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour , IPlayerMovement
+
+public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
 
     private Vector2 input_vector;
 
-  
+    
+    public float speed;
 
-    private Spawning spawning;
-
-
-    public bool PlayerControlled { get; set; } = true;
-
-
-
-    public int foodCapacity { get;} = 200;
+    public bool PlayerControlled { get; set; }
 
     [SerializeField]
     private LayerMask layerMask;
 
-    [SerializeField] float speed;
-
 
      //Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spawning = GetComponent<Spawning>();
+        //spawning = GetComponent<Spawning>();
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
-        if (PlayerControlled)
-        {
             input_vector.x = Input.GetAxisRaw("Horizontal");
             input_vector.y = Input.GetAxisRaw("Vertical");
 
-                // if (result != null)
-                // {
-                //     print(result);
-                // }
-                // If not, return
-            }
+            // if (result != null)
+            // {
+            //     print(result);
+            // }
+            // If not, return
+            Move();
+            
 
         
             
 
     }
 
-    private void FixedUpdate() {
-        Move();
-    }
 
-    private void Move()
+
+    protected void Move()
     {
+
         rb.velocity = input_vector.normalized*speed;
     }
 

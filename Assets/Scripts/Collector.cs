@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
+public class Collector : PlayerMovement , IFoodPickup
 {
 
     public int food {get {return _food;} 
@@ -12,7 +12,10 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
         if (_food >= foodCapacity)
         {
             _food = foodCapacity;
-            Feed();
+                if (!PlayerControlled)
+                {
+                    Feed();
+                }
         }
         if (_food < 0)
         {
@@ -21,10 +24,17 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
     }
     }
     private int _food;
-    public GameObject player;
+
+    public GameObject hivemind;
+
+    private IFoodPickup hivemindFood;
+
+    private GameObject entityToFollow;
 
     public int foodCapacity {get;} = 20;
- 
+
+    public GameObject foodCheck;
+    public bool foodChek = false;
 
     public float distanceFromPlayer = 1;
 
@@ -33,15 +43,8 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
     // private Hivemind hivemind;
     private List<GameObject> foodInRange =  new List<GameObject>{};
 
-    private Rigidbody2D rb;
-
-    private float speed =2.5f;
-
-    private Camera mainCamera;
-
     private bool attached =  false;
 
-    public bool PlayerControlled { get; set; }
 
     private Vector2 direction;
     private int feedNum = 0;
@@ -51,16 +54,19 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
     private Vector2 attachedOffset;
 
     enum BEHAVIOUR {Idle, Collect, Return}
+       
     BEHAVIOUR behaviour = BEHAVIOUR.Idle;
-    private Vector2 input_vector;
+
 
     private Vector2 point;
+ 
 
-    void Start()
+    protected override void Start()
     {
-
-        rb = GetComponent<Rigidbody2D>();
-        mainCamera = Camera.main;
+        base.Start();
+        speed = 3f;
+        hivemindFood = hivemind.gameObject.GetComponent<IFoodPickup>() ;
+        entityToFollow = hivemind;
         SubscribetoEvents();
         
     }
@@ -76,62 +82,96 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+
+    public override void Update()
     {
+        //Checking if player inputs should be taken into account for this gameobject
         if (PlayerControlled && behaviour != BEHAVIOUR.Return)
         {
-            input_vector.x = Input.GetAxisRaw("Horizontal");
-            input_vector.y = Input.GetAxisRaw("Vertical");
-
-            rb.velocity = input_vector.normalized * speed;
+            //The parent update function deals with input handling and moving
+            base.Update();
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Vector3 position = gameObject.transform.position - player.transform.position;
+                //Feed Hivemind if close enough
+                Vector3 position = gameObject.transform.position - hivemind.transform.position;
                 float distance = position.magnitude;
                 if (distance < 2.0)
                 {
                     Return();
                 }
             }
+            return;
         }
-            if (behaviour == BEHAVIOUR.Return)
+        //Needs to check if attached and handle attached logic
+        if (behaviour == BEHAVIOUR.Return)
         {
+
             if (attached)
             {
                 feedNum += 1;
-                if (feedNum == 5){
-                food -= 1;
-                player.gameObject.GetComponent<IFoodPickup>().food += 1;
-                feedNum = 0;
+                if (feedNum == 5)
+                {
+                    food -= 1;
+                    hivemindFood.food += 1;
+
+                    feedNum = 0;
                 }
-                rb.MovePosition((Vector2) player.transform.position - attachedOffset);
+                rb.MovePosition((Vector2) hivemind.transform.position - attachedOffset);
                 if (food == 0)
                 {
                     Detach();
 
                 }
-            return;
             }
-        }
+            //Move towards player
+            else
+            {
+                MovetoPoint((Vector2) hivemind.transform.position);
+            }
 
-        if (behaviour == BEHAVIOUR.Idle)
+        }
+        //No food recognized nearby and can't feed. Stay at a certain distance away from entity following
+        else if (behaviour == BEHAVIOUR.Idle)
         {
+
             if (point != null)
             {
             }
-            Vector3 position = gameObject.transform.position - player.transform.position;
+            Vector3 position = gameObject.transform.position - entityToFollow.transform.position;
             float distance = position.magnitude;
-            if (distance < 2.0)
+            // Stay at a distance from player
+            if (distance > 1.5f)
             {
-                target = null;
+                MovetoPoint((Vector2) entityToFollow.transform.position);
             }
+            else if (foodInRange.Count >= 1)
+            {
+                behaviour = BEHAVIOUR.Collect;
+                target = findClosestFood();
+            }
+            else
+            {
+                rb.velocity = Vector2.zero;
+
+            }
+            //Seek food if detects food (done with locator)
         }
-        if (target == null && food != foodCapacity)
+
+        //Currently focused on collecting a food
+        else if (behaviour == BEHAVIOUR.Collect)
         {
-            target = findClosestFood();
-        } 
-        Move();
+            if (target == null)
+            {
+                target = findClosestFood();
+            }
+            else
+            {
+                MovetoPoint((Vector2) target.transform.position);
+
+            }
+
+        }
     }
 
     private void Detach()
@@ -140,48 +180,32 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
         behaviour = BEHAVIOUR.Idle;
         attached = false;
         attachedOffset = Vector2.zero;
-        target = null;
         rb.mass = 1;
         
     }
 
-    private void Move()
+    private void MovetoPoint(Vector2 point)
     {
-        if (PlayerControlled && behaviour != BEHAVIOUR.Return)
-        {
-            input_vector.x = Input.GetAxisRaw("Horizontal");
-            input_vector.y = Input.GetAxisRaw("Vertical");
-            rb.velocity = input_vector.normalized * speed;
-
-            return;
-        }
-        // direction = (mainCamera.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position);
-        Vector2 pos = gameObject.transform.position - player.transform.position;  
-        float distance = pos.magnitude;
-        if (target != null){
-        direction = (target.transform.position - gameObject.transform.position);
-
+        Vector2 direction =  point - (Vector2) gameObject.transform.position  ;
         rb.velocity = direction.normalized*speed;
-        }
-        else if (distance > 1)
-        {
-            direction = pos/distance;
-            rb.velocity = -direction.normalized*speed;
- 
-        }
-        else{
-            rb.velocity = Vector2.zero;
-        }
+
     }
+
+    
 
     private void foodLocator_OnTriggerEnter2D(Collider2D other)
     {
         foodInRange.Add(other.gameObject);
-    }
+        }
 
     private void foodLocator_OnTriggerExit2D(Collider2D other)
     {
+        
         foodInRange.Remove(other.gameObject);
+        if (foodInRange.Count == 0)
+        {
+            behaviour = BEHAVIOUR.Idle;
+        }
     }
 
     private void foodHitbox_OnTriggerEnter2D(Collider2D other)
@@ -192,20 +216,25 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
         Destroy(other.gameObject);
         Name = other.name;
         // Find distance from player and determine next action
-        Vector3 position = gameObject.transform.position - player.transform.position;
+        Vector3 position = gameObject.transform.position - entityToFollow.transform.position;
         float distance = position.magnitude;
-        if (distance >3.5){
-        target = player;
-        behaviour = BEHAVIOUR.Idle;
+        //Too far away, return to the player
+        if (distance > 3.5){
+        if (behaviour != BEHAVIOUR.Return)
+        {
+         behaviour = BEHAVIOUR.Idle;
         }
+        }
+
         }
     }
+
     private void OnCollisionEnter2D(Collision2D other) {
-        if (behaviour == BEHAVIOUR.Return && other.gameObject == player)
+        if (behaviour == BEHAVIOUR.Return && other.gameObject == hivemind)
         {
             if (!attached)
             {
-                attachedOffset = (Vector2) player.transform.position - (Vector2) gameObject.transform.position; 
+                attachedOffset = (Vector2) hivemind.transform.position - (Vector2) gameObject.transform.position; 
                 attached = true;
                 rb.mass = 0.1f;
             }
@@ -213,7 +242,15 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
     }
 
     private GameObject findClosestFood()
-    {
+    {  
+        if (foodInRange.Count == 0)
+        {
+            if (behaviour == BEHAVIOUR.Collect)
+                {
+                    behaviour = BEHAVIOUR.Idle;
+                }
+            return null;
+        }
         float closestDistance = 999999f;
         GameObject closestTarget =  null;
         foreach (GameObject f in foodInRange)
@@ -244,7 +281,6 @@ public class Collector : MonoBehaviour , IFoodPickup ,  IPlayerMovement
     private void Feed()
     {
     behaviour = BEHAVIOUR.Return;
-    target = player;
     } 
 }
 

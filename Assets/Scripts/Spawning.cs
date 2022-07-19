@@ -18,10 +18,7 @@ public class Spawning : MonoBehaviour
     {
  
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            Return();
-        }
+
     }
 
     public void SpawnAlly(string type)
@@ -30,7 +27,7 @@ public class Spawning : MonoBehaviour
         {
             case "Collector":
                 GameObject ally = Instantiate(collector, gameObject.transform.position, Quaternion.identity);
-                ally.GetComponent<Collector>().player = gameObject;
+                ally.GetComponent<Collector>().hivemind = gameObject;
                 break;
         }
     }

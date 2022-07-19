@@ -235,7 +235,6 @@ GameObject:
   - component: {fileID: 212005380}
   - component: {fileID: 212005379}
   - component: {fileID: 212005378}
-  - component: {fileID: 212005381}
   - component: {fileID: 212005382}
   - component: {fileID: 212005384}
   - component: {fileID: 212005385}
@@ -266,7 +265,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!212 &212005379
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -336,22 +335,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &212005381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 212005377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2c4e3f1cca73b943826b874275cba05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  speed: 5
 --- !u!58 &212005382
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -393,7 +376,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154ce0708cc3f544fa9b49026201b452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   foodText: {fileID: 1515180678}
+  topBounds: {fileID: 1991274413}
+  bottomBounds: {fileID: 1791043393}
 --- !u!1 &313922550
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -507,7 +497,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5999998, y: 1}
+    m_SensorSize: {x: 1.6, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1385,7 +1375,7 @@ GameObject:
   - component: {fileID: 1791043393}
   - component: {fileID: 1791043394}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: BottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1602,7 +1592,7 @@ GameObject:
   - component: {fileID: 1991274413}
   - component: {fileID: 1991274414}
   m_Layer: 0
-  m_Name: Square
+  m_Name: TopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

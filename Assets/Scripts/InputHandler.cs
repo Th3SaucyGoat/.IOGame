@@ -65,19 +65,53 @@ public class InputHandler : MonoBehaviour
 
             }
         }
+        if (Input.GetButtonDown("Fire2"))
+        {
+            spawning.Return();
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            //find closest collector/ally. Set entity to follow to the current player object if at minimum distance away.
+            GameObject closestAlly = findClosestAlly();
+
+        }
     }
 
     private void NewAlly(GameObject ally)
     {
-        currentControlledEntity.GetComponent<IPlayerMovement>().PlayerControlled = false;
+        currentControlledEntity.GetComponent<PlayerMovement>().PlayerControlled = false;
         //ally.AddComponent<PlayerMovement>();
         cam.LookAt = ally.transform;
         cam.Follow = ally.transform;
         //Destroy(result);
-        ally.GetComponent<IPlayerMovement>().PlayerControlled = true;
+        ally.GetComponent<PlayerMovement>().PlayerControlled = true;
         currentControlledEntity = ally;
         //print(ally.name);
         
 
     }
-}
+
+    private GameObject findClosestAlly()
+    {
+        GameObject[] allAllies = GameObject.FindGameObjectsWithTag("Collector");
+        float closestDistance = 999999f;
+        GameObject closestTarget = null;
+        foreach (GameObject ally in allAllies)
+        {
+            if (ally == null)
+            {
+                continue;
+            }
+            Vector3 position = transform.position - ally.transform.position;
+            float distance = position.magnitude;
+            if (distance < closestDistance)
+            {
+                closestTarget = ally;
+                closestDistance = distance;
+            }
+
+        }
+        return closestTarget;
+    }
+    }
+
