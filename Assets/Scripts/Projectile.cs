@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField]
+    private int damage = 5;
 
-    public int damage = 5;
+    private float speed = 5f;
 
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    public Vector2 direction;
+    private void Start()
     {
+        print(transform.localRotation.ToString() + transform.rotation.ToString());
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        transform.Translate(Vector3.right * Time.deltaTime * speed);
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Ally"))
+        if (other.CompareTag("Ally"))
         {
             return;
         }

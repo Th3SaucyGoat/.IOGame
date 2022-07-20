@@ -11,7 +11,7 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
 
     public int foodCapacity { get; set; } = 200;
 
-    public int MaxHealth { get; }
+    public int MaxHealth { get; } = 100;
 
     private int _health;
     public int health
@@ -60,6 +60,7 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
     protected override void Start()
     {
         base.Start();
+        health = MaxHealth;
         PlayerControlled = true;
         food = 100;
         ProxyTrigger foodHitbox = transform.Find("FoodHitbox").GetComponent<ProxyTrigger>();

@@ -78,26 +78,59 @@ public class InputHandler : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            spawning.Return();
+            //spawning.Return();
+            List<Shooter> shooters =  new List<Shooter> { };
+            GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+            foreach (GameObject ally in allies)
+            {
+                if (ally.TryGetComponent(out Shooter s))
+                {
+                    shooters.Add(s);
+                }
+            }
+            foreach (Shooter shoot in shooters)
+            {
+                shoot.behaviour = Shooter.BEHAVIOUR.Protect;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            //spawning.Return();
+            List<Shooter> shooters = new List<Shooter> { };
+            GameObject[] allies = GameObject.FindGameObjectsWithTag("Ally");
+            foreach (GameObject ally in allies)
+            {
+                if (ally.TryGetComponent(out Shooter s))
+                {
+                    shooters.Add(s);
+                }
+            }
+            foreach (Shooter shoot in shooters)
+            {
+                shoot.behaviour = Shooter.BEHAVIOUR.Chase;
+            }
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
             //find closest collector/ally. Set entity to follow to the current player object if at minimum distance away.
             GameObject closestAlly = findClosestAlly();
+            print(closestAlly);
             if (closestAlly != null)
             {
-                closestAlly.GetComponent<Collector>().EntityToFollow = currentControlledEntity;
-                closestAlly.GetComponent<Collector>().determineFollowState();
-
                 foreach (GameObject ally in alliesFollowing)
                 {
                     if (closestAlly == ally)
                     {
                         print("RETURNED AN ALREADY FOLLOWING ALLY");
+                        return;
                     }
                 }
+                closestAlly.GetComponent<ICommandable>().EntityToFollow = currentControlledEntity;
+                closestAlly.GetComponent<ICommandable>().determineFollowState();
+
+
                 alliesFollowing.Add(closestAlly);
-                print(alliesFollowing.Count);
+                print("Allies Following = " + alliesFollowing.Count.ToString());
 
             }
         }
@@ -109,9 +142,8 @@ public class InputHandler : MonoBehaviour
             {
                 foreach (GameObject ally in alliesFollowing)
                 {
-                    ally.GetComponent<Collector>().EntityToFollow = hive;
-                    ally.GetComponent<Collector>().determineDismissState();
-                    
+                    ally.GetComponent<ICommandable>().EntityToFollow = hive;
+                    ally.GetComponent<ICommandable>().determineDismissState();
                 }
                 alliesFollowing.Clear();
             }
@@ -131,8 +163,13 @@ public class InputHandler : MonoBehaviour
     }
 
     private GameObject findClosestAlly()
+        //spawning.allyContainer  GameObject.FindGameObjectsWithTag("Ally");
     {
-        GameObject[] allAllies = GameObject.FindGameObjectsWithTag("Collector");
+        List<GameObject> allAllies =  new List<GameObject> { };
+        foreach (Transform child in spawning.allyContainer.transform)
+        {
+            allAllies.Add(child.gameObject);
+        }
         float closestDistance = 999999f;
         GameObject closestTarget = null;
         foreach (GameObject ally in allAllies)
@@ -141,7 +178,7 @@ public class InputHandler : MonoBehaviour
             {
                 continue;
             }
-            Vector3 position = transform.position - ally.transform.position;
+            Vector3 position = currentControlledEntity.transform.position - ally.transform.position;
             float distance = position.magnitude;
             if (distance < closestDistance)
             {

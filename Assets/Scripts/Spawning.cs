@@ -7,6 +7,8 @@ public class Spawning : MonoBehaviour
 
     [SerializeField] private GameObject collector;
     [SerializeField] private GameObject shooter;
+
+    [SerializeField] public Transform allyContainer;
     
     // Start is called before the first frame update
     void Start()
@@ -29,10 +31,14 @@ public class Spawning : MonoBehaviour
             case "Collector":
                 GameObject ally = Instantiate(collector, gameObject.transform.position, Quaternion.identity);
                 ally.GetComponent<Collector>().hivemind = gameObject;
+                ally.transform.parent = allyContainer;
                 break;
             case "Shooter":
                 GameObject a = Instantiate(shooter, gameObject.transform.position, Quaternion.identity);
                 a.GetComponent<Shooter>().hivemind = gameObject;
+                a.GetComponent<Shooter>().cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+                a.transform.parent = allyContainer;
+
                 break;
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : PlayerMovement , IDamagable
+public class Shooter : PlayerMovement , IDamagable , ICommandable
 {
 
     public int MaxHealth { get; }
@@ -23,32 +23,40 @@ public class Shooter : PlayerMovement , IDamagable
 
     public GameObject hivemind;
 
-    public GameObject EntityToFollow;
+    public GameObject EntityToFollow { set; get; }
 
     private GameObject target;
+
+    private FunctionTimer ROFTimer;
 
     private List<GameObject> enemiesInRange = new List<GameObject>{};
 
     private Vector2 direction;
 
-    private int frameNum = 0;
 
     [SerializeField]
-    private Transform projectile;
+    private GameObject projectile;
+    public Transform EOG;
 
     public float bulletForce = 5f;
 
-    enum BEHAVIOUR { Protect, Chase }
-    BEHAVIOUR behaviour = BEHAVIOUR.Chase;
+    public Camera cam;
+
+    public enum BEHAVIOUR { Protect, Chase }
+    public BEHAVIOUR behaviour = BEHAVIOUR.Chase;
+
+    private bool canShoot = true;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        ROFTimer = FunctionTimer.Create(OnShootTimerCompleted, 0.8f, false);
+        ROFTimer.gameObject.transform.parent = transform;
+        rb.freezeRotation = true;
         EntityToFollow = hivemind;
         speed = 2;
         subscribeToEvents();
-
     }
 
     private void subscribeToEvents()
@@ -66,6 +74,15 @@ public class Shooter : PlayerMovement , IDamagable
         {
             base.Update();
 
+            Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+            LookAtPoint(mousePos);
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (canShoot)
+                {
+                    shoot();
+                }
+            }
             return;
         }
         //Chase State where chases after enemies
@@ -76,7 +93,7 @@ public class Shooter : PlayerMovement , IDamagable
                 //Start Timer. At the end of timeout, put back into protect mode. Or can have him idle/pace back and forth in place
                 if (enemiesInRange.Count ==0)
                 {
-
+                    rb.velocity = Vector2.zero;
                 }
                 else
                 {
@@ -123,26 +140,34 @@ public class Shooter : PlayerMovement , IDamagable
             }
 
         }
-        if (frameNum >= 100)
+
+        //Constant looking at the target if there is one. Shoot if able
+        if (target == null && enemiesInRange.Count > 0)
         {
-            if (target != null)
+            target = findClosestEnemy();
+        }
+        else if (target != null)
+        {
+            LookAtPoint((Vector2)target.transform.position);
+            if (canShoot)
             {
                 shoot();
-                frameNum = 0;
             }
         }
-        frameNum += 1;
-
     }
 
+    private void LookAtPoint( Vector2 point)
+    {
+        Vector2 lookDir = point - (Vector2)gameObject.transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        rb.rotation = angle;
+    }
     private void entityLocator_OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
         {
             enemiesInRange.Add(other.gameObject);
-            print(enemiesInRange.Count);
         }
-            
     }
 
     private void entityLocator_OnTriggerExit2D(Collider2D other)
@@ -157,9 +182,6 @@ public class Shooter : PlayerMovement , IDamagable
     {
         Vector2 direction = point - (Vector2) gameObject.transform.position;
         rb.velocity = direction.normalized * speed;
-        Vector2 lookDir = point - (Vector2) transform.position;
-        float angle = Mathf.Atan2( lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        transform.eulerAngles = angle;
     }
 
     private GameObject findClosestEnemy()
@@ -179,15 +201,30 @@ public class Shooter : PlayerMovement , IDamagable
                 closestTarget = enemy;
                 closestDistance = distance;
             }
-
         }
         return closestTarget;
     }
 
     private void shoot()
     {
-        Transform bullet = Instantiate(projectile, transform.position, rb.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(-transform.up * bulletForce, ForceMode2D.Impulse);
+        ROFTimer.Start();
+        canShoot = false;
+        GameObject bullet = Instantiate(projectile, EOG.position, EOG.rotation);
+        bullet.GetComponent<Projectile>().direction = ((Vector2) EOG.position - (Vector2) gameObject.transform.position).normalized;
+        //bullet.GetComponent<Rigidbody2D>().AddForce(EOG.right * bulletForce, ForceMode2D.Impulse);
+    }
 
+    public void determineFollowState()
+    {
+        behaviour = BEHAVIOUR.Protect;
+    }
+    public void determineDismissState()
+    {
+        behaviour = BEHAVIOUR.Chase;
+    }
+
+    public void OnShootTimerCompleted()
+    {
+        canShoot = true;
     }
 }

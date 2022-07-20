@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : PlayerMovement , IFoodPickup , IDamagable
+public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandable
 {
-
     public int food {get {return _food;} 
    
     set {
@@ -53,7 +52,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable
 
     private IFoodPickup hivemindFood;
 
-    public GameObject EntityToFollow;
+    public GameObject EntityToFollow { set; get; }
 
     public int foodCapacity {get;} = 20;
 
