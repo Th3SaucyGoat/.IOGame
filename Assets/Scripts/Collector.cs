@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : PlayerMovement , IFoodPickup
+public class Collector : PlayerMovement , IFoodPickup , IDamagable
 {
 
     public int food {get {return _food;} 
@@ -12,6 +12,7 @@ public class Collector : PlayerMovement , IFoodPickup
         if (_food >= foodCapacity)
         {
             _food = foodCapacity;
+            sprite.color = Color.blue;
                 if (!PlayerControlled && EntityToFollow == hivemind)
                 {
                     Feed();
@@ -21,6 +22,10 @@ public class Collector : PlayerMovement , IFoodPickup
                     behaviour = BEHAVIOUR.Idle;
                 }
         }
+            else
+            {
+                sprite.color = firstColor;
+            }
         if (_food < 0)
         {
             _food = 0;
@@ -28,6 +33,21 @@ public class Collector : PlayerMovement , IFoodPickup
     }
     }
     private int _food;
+
+    public int MaxHealth { get; }
+
+    private int _health;
+    public int health { 
+        set
+        {
+            _health = value;
+            if (_health <= 0)
+            {
+                print(gameObject.name.ToString() + " Died");
+            }
+        }
+        get { return _health; }
+    }
 
     public GameObject hivemind;
 
@@ -43,6 +63,9 @@ public class Collector : PlayerMovement , IFoodPickup
     public float distanceFromPlayer = 1;
 
     public GameObject target;
+
+    private SpriteRenderer sprite;
+    private Color firstColor;
 
     // private Hivemind hivemind;
     private List<GameObject> foodInRange =  new List<GameObject>{};
@@ -71,6 +94,8 @@ public class Collector : PlayerMovement , IFoodPickup
         speed = 3f;
         hivemindFood = hivemind.gameObject.GetComponent<IFoodPickup>() ;
         EntityToFollow = hivemind;
+        sprite = GetComponent<SpriteRenderer>();
+        firstColor = sprite.color;
         SubscribetoEvents();
         
     }
@@ -87,7 +112,7 @@ public class Collector : PlayerMovement , IFoodPickup
 
     // Update is called once per frame
 
-    public override void Update()
+    protected override void Update()
     {
         //Checking if player inputs should be taken into account for this gameobject
         if (PlayerControlled && behaviour != BEHAVIOUR.Return)
@@ -138,7 +163,7 @@ public class Collector : PlayerMovement , IFoodPickup
         //No food recognized nearby and can't feed. Stay at a certain distance away from entity following
         else if (behaviour == BEHAVIOUR.Idle)
         {
-
+            
             if (point != null)
             {
             }
@@ -199,13 +224,13 @@ public class Collector : PlayerMovement , IFoodPickup
     private void foodLocator_OnTriggerEnter2D(Collider2D other)
     {
         foodInRange.Add(other.gameObject);
-        }
+     }
 
     private void foodLocator_OnTriggerExit2D(Collider2D other)
     {
         
         foodInRange.Remove(other.gameObject);
-        if (foodInRange.Count == 0)
+        if (foodInRange.Count == 0 && behaviour != BEHAVIOUR.Return)
         {
             behaviour = BEHAVIOUR.Idle;
         }
@@ -246,14 +271,6 @@ public class Collector : PlayerMovement , IFoodPickup
 
     private GameObject findClosestFood()
     {  
-        if (foodInRange.Count == 0)
-        {
-            if (behaviour == BEHAVIOUR.Collect)
-                {
-                    behaviour = BEHAVIOUR.Idle;
-                }
-            return null;
-        }
         float closestDistance = 999999f;
         GameObject closestTarget =  null;
         foreach (GameObject f in foodInRange)
@@ -285,8 +302,13 @@ public class Collector : PlayerMovement , IFoodPickup
     {
     behaviour = BEHAVIOUR.Return;
     } 
+
+    public void determineFollowState()
+    {
+        behaviour = BEHAVIOUR.Idle;
+    }
     //To be called when changing entityFollowed to allow for smooth transition of AI logic
-    public void determineState()
+    public void determineDismissState()
     {
         if (food == foodCapacity && EntityToFollow == hivemind)
         {

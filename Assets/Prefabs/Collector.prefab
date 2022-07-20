@@ -200,7 +200,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d510cd93b5a82dc418673538a8019a07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  speed: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  hivemind: {fileID: 0}
+  EntityToFollow: {fileID: 0}
+  foodCheck: {fileID: 0}
+  foodChek: 0
   distanceFromPlayer: 1
   target: {fileID: 0}
 --- !u!114 &656361439235508646

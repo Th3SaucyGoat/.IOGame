@@ -208,6 +208,7 @@ MonoBehaviour:
   topBounds: {fileID: 1991274413}
   bottomBounds: {fileID: 1791043393}
   food: {fileID: 6839631081696888031, guid: 45ad3a984f2abea41a449757fdc8e7e4, type: 3}
+  enemy: {fileID: 4504472355834843796, guid: b0acc8c538c5d1443a4243c4b8e302ca, type: 3}
 --- !u!114 &71031498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +331,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 519420032}
   - {fileID: 1454451982564135592}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collector: {fileID: 7393865367695140061, guid: ab17d9580ea2cbf449896d6eac82d664, type: 3}
+  shooter: {fileID: 7792416116514486704, guid: 8908f0d510c858244a0dd8441096cbcf, type: 3}
 --- !u!114 &212005385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +498,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6, y: 1}
+    m_SensorSize: {x: 1.5994236, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -599,13 +600,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.49576843, y: -0.6846141, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 212005380}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -1678,7 +1679,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 212005380}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4805817740928779291
 GameObject:

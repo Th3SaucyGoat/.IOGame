@@ -9,6 +9,7 @@ public class MapBrain : MonoBehaviour
     [SerializeField] private Transform bottomBounds;
 
     [SerializeField] private GameObject food;
+    [SerializeField] private GameObject enemy; 
 
     private float[] x_range;
     private float[] y_range;
@@ -29,6 +30,8 @@ public class MapBrain : MonoBehaviour
         }
         doneSpawning = true;
         Invoke("SpawnFood", 1f);
+        SpawnEnemy();
+
     }
 
     // Update is called once per frame
@@ -42,5 +45,14 @@ public class MapBrain : MonoBehaviour
         Vector2 position = new Vector2(Random.Range(x_range[0], x_range[1]), Random.Range(y_range[0], y_range[1]));
         Instantiate(food, new Vector3(position.x,position.y, 0), Quaternion.identity);
         if (doneSpawning) { Invoke("SpawnFood", 1f);}
+    }
+
+    void SpawnEnemy()
+    {
+        Vector2 position = new Vector2(Random.Range(x_range[0], x_range[1]), Random.Range(y_range[0], y_range[1]));
+        GameObject e = Instantiate(enemy, (Vector3)position, Quaternion.identity);
+        e.GetComponent<Enemy>().x_range = x_range;
+        e.GetComponent<Enemy>().y_range = y_range;
+        Invoke("SpawnEnemy", 10f);
     }
 }

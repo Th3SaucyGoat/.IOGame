@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Food
   - Collector
+  - Enemy
+  - Ally
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - Water
   - UI
   - Food
-  - Locator
-  - 
-  - 
+  - FoodLocator
+  - EntityLocator
+  - Hitbox
   - 
   - 
   - 

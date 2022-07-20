@@ -7,7 +7,6 @@ public class InputHandler : MonoBehaviour
 {
 
 
-    //private
 
     [SerializeField]
     private LayerMask layerMask;
@@ -43,7 +42,7 @@ public class InputHandler : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown("4"))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             switchtoAlly = true;
         }
@@ -55,6 +54,15 @@ public class InputHandler : MonoBehaviour
                 spawning.SpawnAlly("Collector");
             }
         }
+
+        if (Input.GetKeyDown("2"))
+        {
+            if (foodPickup.food >= 50)
+            {
+                foodPickup.food -= 50;
+                spawning.SpawnAlly("Shooter");
+            }
+        }
         if (switchtoAlly && Input.GetMouseButtonDown(0))
         {
             // Check if selected an ally
@@ -64,22 +72,22 @@ public class InputHandler : MonoBehaviour
             {
                 GameObject new_ally = result.gameObject;
                 
-                NewAlly(new_ally);
+                SwitchControl(new_ally);
 
             }
         }
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             spawning.Return();
         }
-        if (Input.GetKeyDown("2"))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             //find closest collector/ally. Set entity to follow to the current player object if at minimum distance away.
             GameObject closestAlly = findClosestAlly();
             if (closestAlly != null)
             {
                 closestAlly.GetComponent<Collector>().EntityToFollow = currentControlledEntity;
-                closestAlly.GetComponent<Collector>().determineState();
+                closestAlly.GetComponent<Collector>().determineFollowState();
 
                 foreach (GameObject ally in alliesFollowing)
                 {
@@ -95,20 +103,22 @@ public class InputHandler : MonoBehaviour
         }
 
         //dismiss following allies
-        if (Input.GetKeyDown("3"))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             if (alliesFollowing.Count > 0)
             {
                 foreach (GameObject ally in alliesFollowing)
                 {
                     ally.GetComponent<Collector>().EntityToFollow = hive;
+                    ally.GetComponent<Collector>().determineDismissState();
+                    
                 }
                 alliesFollowing.Clear();
             }
         }
     }
 
-    private void NewAlly(GameObject ally)
+    private void SwitchControl(GameObject ally)
     {
         currentControlledEntity.GetComponent<PlayerMovement>().PlayerControlled = false;
         //ally.AddComponent<PlayerMovement>();
@@ -118,8 +128,6 @@ public class InputHandler : MonoBehaviour
         ally.GetComponent<PlayerMovement>().PlayerControlled = true;
         currentControlledEntity = ally;
         //print(ally.name);
-        
-
     }
 
     private GameObject findClosestAlly()
@@ -129,7 +137,7 @@ public class InputHandler : MonoBehaviour
         GameObject closestTarget = null;
         foreach (GameObject ally in allAllies)
         {
-            if (ally == null | alliesFollowing.Contains(ally))
+            if (ally == null | alliesFollowing.Contains(ally) | ally == currentControlledEntity)
             {
                 continue;
             }
@@ -142,7 +150,7 @@ public class InputHandler : MonoBehaviour
             }
 
         }
-        if (closestDistance < 4.0f)
+        if (closestDistance < 9999f)
         {
             return closestTarget;
         }

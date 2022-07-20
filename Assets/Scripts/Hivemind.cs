@@ -4,12 +4,29 @@ using TMPro;
 using UnityEngine;
 
 
-public class Hivemind : PlayerMovement, IFoodPickup
+public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
 {
 
     public TextMeshProUGUI foodText;
 
     public int foodCapacity { get; set; } = 200;
+
+    public int MaxHealth { get; }
+
+    private int _health;
+    public int health
+    {
+        set
+        {
+            _health = value;
+            if (_health <= 0)
+            {
+                print(gameObject.name.ToString() + " Died");
+            }
+        }
+        get { return _health; }
+    }
+
 
 
     [SerializeField]
@@ -53,7 +70,7 @@ public class Hivemind : PlayerMovement, IFoodPickup
         point = findNewPoint();
 }
 
-    public override void Update()
+    protected override void Update()
     {
         if (PlayerControlled)
         {
