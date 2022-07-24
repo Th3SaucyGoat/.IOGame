@@ -76,7 +76,7 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
 
             Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
             LookAtPoint(mousePos);
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButton(0))
             {
                 if (canShoot)
                 {
@@ -93,7 +93,6 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
                 //Start Timer. At the end of timeout, put back into protect mode. Or can have him idle/pace back and forth in place
                 if (enemiesInRange.Count ==0)
                 {
-                    rb.velocity = Vector2.zero;
                 }
                 else
                 {
@@ -106,11 +105,10 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
                 float distance = position.magnitude;
                 if (distance > 2.0)
                 {
-                    MovetoPoint((Vector2)target.transform.position);
+                    moveTowardsPoint((Vector2)target.transform.position);
                 }
                 else
                 {
-                    rb.velocity = Vector2.zero;
                 }
             }
         }
@@ -122,21 +120,20 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
             // Head back if too far away
             if (distance > 3.0f)
             {
-                MovetoPoint((Vector2) EntityToFollow.transform.position);
+                moveTowardsPoint((Vector2) EntityToFollow.transform.position);
             }
             // Ok to pursue a little bit if not too far away and there's an enemy
             else if (target != null)
             {
-                MovetoPoint((Vector2) target.transform.position);
+                moveTowardsPoint((Vector2) target.transform.position);
             }
             // Stay around at a distance from following entity
             else if (distance > 1.5f)
             {
-                MovetoPoint((Vector2) EntityToFollow.transform.position);
+                moveTowardsPoint((Vector2) EntityToFollow.transform.position);
             }
             else
             {
-                rb.velocity = Vector2.zero;
             }
 
         }
@@ -162,6 +159,7 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
     }
+
     private void entityLocator_OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy"))
@@ -178,13 +176,15 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
         }
     }
 
-    private void MovetoPoint(Vector2 point)
+    private void moveTowardsPoint(Vector2 point)
     {
-        Vector2 direction = point - (Vector2) gameObject.transform.position;
-        rb.velocity = direction.normalized * speed;
+        
+        Vector2 direction = point - (Vector2)gameObject.transform.position;
+        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, speed * Time.deltaTime * 1.5f);
+
     }
 
-    private GameObject findClosestEnemy()
+        private GameObject findClosestEnemy()
     {
         float closestDistance = 999999f;
         GameObject closestTarget = null;

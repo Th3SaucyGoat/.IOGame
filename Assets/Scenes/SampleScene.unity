@@ -378,11 +378,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154ce0708cc3f544fa9b49026201b452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
+  speed: 3
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  ACCELERATION: 5
   foodText: {fileID: 1515180678}
+  factor: 1
   topBounds: {fileID: 1991274413}
   bottomBounds: {fileID: 1791043393}
 --- !u!1 &313922550

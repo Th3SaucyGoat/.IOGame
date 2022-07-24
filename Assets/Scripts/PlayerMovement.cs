@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector2 input_vector;
 
-    private Vector2 velocity;
+    private Vector2 Velocity;
 
     
     public float speed;
@@ -22,9 +22,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private LayerMask layerMask;
+    public float ACCELERATION;
 
 
-     //Start is called before the first frame update
+    //Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,23 +38,26 @@ public class PlayerMovement : MonoBehaviour
             input_vector.x = Input.GetAxisRaw("Horizontal");
             input_vector.y = Input.GetAxisRaw("Vertical");
         // Velocity Changing
-        velocity = Vector2.MoveTowards(velocity, input_vector.normalized * speed, Time.deltaTime*speed*1.5f);
+        Velocity = Vector2.MoveTowards(Velocity, input_vector.normalized * speed, Time.deltaTime*ACCELERATION);
+
         // Using Addforce
         //velocity = input_vector.normalized * speed;
 
-            
 
-        
-            
+
+
+
 
     }
 
     protected void FixedUpdate()
     {
-        if (PlayerControlled)
+        print(input_vector);
+        if (PlayerControlled && input_vector != Vector2.zero)
         {
             // velocity changing
-            rb.velocity = velocity;
+            rb.velocity = Velocity;
+            //rb.velocity = Vector2.Lerp(rb.velocity, input_vector.normalized * speed, 1);
             // Using Addforce
             //rb.AddForce(velocity);
             //rb.velocity = Vector2.ClampMagnitude(rb.velocity, 1);

@@ -13,6 +13,8 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
 
     public int MaxHealth { get; } = 100;
 
+    public float factor;
+
     private int _health;
     public int health
     {
@@ -40,7 +42,7 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
     private Vector2 point;
     private Vector2 direction;
 
-
+    private Vector2 velocity;
 
 
     private int _food;
@@ -76,11 +78,11 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
         if (PlayerControlled)
         {
             base.Update();
+            return;
         }
         else if (point != null)
         {
-            direction = (point - (Vector2) gameObject.transform.position);
-            rb.velocity = direction.normalized * speed;
+            moveTowardsPoint(point);
 
             Vector2 pos = point - (Vector2) gameObject.transform.position;
             float distance = pos.magnitude;
@@ -91,7 +93,13 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
         }
     }
 
+    private void moveTowardsPoint( Vector2 point)
+    {
+        direction = (point - (Vector2)gameObject.transform.position);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime);
+        
 
+    }
     private void foodHitbox_OnTriggerEnter2D(Collider2D collision)
     {
         Food the_food = collision.gameObject.GetComponent<Food>();

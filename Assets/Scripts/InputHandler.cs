@@ -170,6 +170,7 @@ public class InputHandler : MonoBehaviour
         {
             allAllies.Add(child.gameObject);
         }
+        print(allAllies.Count);
         float closestDistance = 999999f;
         GameObject closestTarget = null;
         foreach (GameObject ally in allAllies)

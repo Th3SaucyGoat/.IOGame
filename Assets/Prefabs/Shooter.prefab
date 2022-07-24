@@ -169,6 +169,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
+  ACCELERATION: 5
   hivemind: {fileID: 0}
   projectile: {fileID: 4421774840843884049, guid: 3166cde7cef94a1409c8b44d61bab5c3, type: 3}
   EOG: {fileID: 6333834857969143226}
@@ -188,7 +189,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}

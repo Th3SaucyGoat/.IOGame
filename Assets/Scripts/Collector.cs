@@ -132,7 +132,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             return;
         }
         //Needs to check if attached and handle attached logic
-        if (behaviour == BEHAVIOUR.Return)
+        else if (behaviour == BEHAVIOUR.Return)
         {
 
             if (attached)
@@ -155,7 +155,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             //Move towards player
             else
             {
-                MovetoPoint((Vector2) hivemind.transform.position);
+                moveToPoint((Vector2) hivemind.transform.position);
             }
 
         }
@@ -171,7 +171,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             // Stay at a distance from player
             if (distance > 1.5f)
             {
-                MovetoPoint((Vector2) EntityToFollow.transform.position);
+                moveToPoint((Vector2) EntityToFollow.transform.position);
             }
             else if (foodInRange.Count >= 1 && food < foodCapacity)
             {
@@ -180,7 +180,6 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             }
             else
             {
-                rb.velocity = Vector2.zero;
 
             }
             //Seek food if detects food (done with locator)
@@ -195,8 +194,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             }
             else
             {
-                MovetoPoint((Vector2) target.transform.position);
-
+                moveToPoint((Vector2) target.transform.position);
             }
 
         }
@@ -211,11 +209,10 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
         
     }
 
-    private void MovetoPoint(Vector2 point)
+    private void moveToPoint(Vector2 point)
     {
         Vector2 direction =  point - (Vector2) gameObject.transform.position  ;
-        rb.velocity = direction.normalized*speed;
-
+        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime * speed * 5.0f);
     }
 
     
