@@ -155,7 +155,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             //Move towards player
             else
             {
-                moveToPoint((Vector2) hivemind.transform.position);
+                moveTowardsPoint((Vector2) hivemind.transform.position);
             }
 
         }
@@ -171,7 +171,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             // Stay at a distance from player
             if (distance > 1.5f)
             {
-                moveToPoint((Vector2) EntityToFollow.transform.position);
+                moveTowardsPoint((Vector2) EntityToFollow.transform.position);
             }
             else if (foodInRange.Count >= 1 && food < foodCapacity)
             {
@@ -194,7 +194,7 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
             }
             else
             {
-                moveToPoint((Vector2) target.transform.position);
+                moveTowardsPoint((Vector2) target.transform.position);
             }
 
         }
@@ -209,10 +209,10 @@ public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandabl
         
     }
 
-    private void moveToPoint(Vector2 point)
+    private void moveTowardsPoint(Vector2 point)
     {
         Vector2 direction =  point - (Vector2) gameObject.transform.position  ;
-        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime * speed * 5.0f);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime * ACCELERATION);
     }
 
     

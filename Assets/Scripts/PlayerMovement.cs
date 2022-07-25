@@ -22,13 +22,15 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField]
     private LayerMask layerMask;
-    public float ACCELERATION;
+
+    protected float ACCELERATION;
 
 
     //Start is called before the first frame update
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        ACCELERATION = 10f;
         //spawning = GetComponent<Spawning>();
     }
 
@@ -39,15 +41,8 @@ public class PlayerMovement : MonoBehaviour
             input_vector.y = Input.GetAxisRaw("Vertical");
         // Velocity Changing
         Velocity = Vector2.MoveTowards(Velocity, input_vector.normalized * speed, Time.deltaTime*ACCELERATION);
-
         // Using Addforce
         //velocity = input_vector.normalized * speed;
-
-
-
-
-
-
     }
 
     protected void FixedUpdate()

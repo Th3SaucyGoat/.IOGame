@@ -96,7 +96,7 @@ public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
     private void moveTowardsPoint( Vector2 point)
     {
         direction = (point - (Vector2)gameObject.transform.position);
-        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime* ACCELERATION);
         
 
     }

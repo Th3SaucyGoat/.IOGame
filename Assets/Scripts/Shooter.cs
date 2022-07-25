@@ -180,7 +180,7 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
     {
         
         Vector2 direction = point - (Vector2)gameObject.transform.position;
-        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, speed * Time.deltaTime * 1.5f);
+        rb.velocity = Vector2.MoveTowards(rb.velocity, direction.normalized * speed, Time.deltaTime * ACCELERATION);
 
     }
 

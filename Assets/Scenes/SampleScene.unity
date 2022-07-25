@@ -382,7 +382,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  ACCELERATION: 5
   foodText: {fileID: 1515180678}
   factor: 1
   topBounds: {fileID: 1991274413}

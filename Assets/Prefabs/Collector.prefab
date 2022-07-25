@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7342625843448372705}
   m_Layer: 7
   m_Name: FoodHitbox
-  m_TagString: Untagged
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 656361439235508646}
   m_Layer: 0
   m_Name: Collector
-  m_TagString: Collector
+  m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 0
-  ACCELERATION: 20
   hivemind: {fileID: 0}
   foodCheck: {fileID: 0}
   foodChek: 0
@@ -236,6 +235,10 @@ PrefabInstance:
     - target: {fileID: 245646597999077926, guid: 39931245593ce414d94ea36b1b4f6901, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 245646597999077926, guid: 39931245593ce414d94ea36b1b4f6901, type: 3}
+      propertyPath: m_TagString
+      value: Ally
       objectReference: {fileID: 0}
     - target: {fileID: 3067450801224769069, guid: 39931245593ce414d94ea36b1b4f6901, type: 3}
       propertyPath: m_Enabled
