@@ -1,0 +1,46 @@
+2022-08-03 15:48:08.8915 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-03 15:48:08.9020 [INFO; Root]  Loaded config.json
+2022-08-03 15:48:08.9025 [INFO; Root]  Loaded config.GameScene.json
+2022-08-03 15:48:08.9085 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-03 15:48:08.9085 [INFO; Root]  Reactor Server v0.10.0
+2022-08-03 15:48:08.9090 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-03 15:48:08.9100 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-03 15:48:08.9195 [DEBUG; Root]  Loading Asset Scripts
+2022-08-03 15:48:08.9225 [DEBUG; Root]  Loading Room Configs
+2022-08-03 15:48:08.9270 [DEBUG; Root]  Initializing PhysX
+2022-08-03 15:48:08.9420 [DEBUG; Root]  Loading PhysX geometry
+2022-08-03 15:48:08.9565 [INFO; Root]  Loaded 5 geometries
+2022-08-03 15:48:08.9580 [INFO; Root]  Loaded 3 geometries
+2022-08-03 15:48:08.9580 [DEBUG; Root]  Loading entity prefabs
+2022-08-03 15:48:08.9720 [INFO; Root]  Loaded 3 entity prefabs
+2022-08-03 15:48:08.9720 [DEBUG; Root]  Loading entity instances
+2022-08-03 15:48:08.9880 [DEBUG; Root]  Initializing scripts
+2022-08-03 15:48:08.9975 [DEBUG; Root]  Room setup complete
+2022-08-03 15:48:08.9975 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-03 15:48:08.9975 [INFO; Root]  Sending client updates every 2 frames
+2022-08-03 15:48:08.9975 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-03 15:48:08.9980 [INFO; Root]  Opening TCP port 8000
+2022-08-03 15:48:14.0262 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-03 15:48:14.0287 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-03 15:48:14.0437 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-03 15:48:14.0697 [INFO; Root]  Player False joined
+2022-08-03 15:48:14.7552 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-03 15:48:14.7552 [INFO; Root]  HeheTrue
+2022-08-03 15:48:14.7602 [INFO; Root]  Start Match!
+2022-08-03 15:48:16.9172 [INFO; Root]  Locator
+2022-08-03 15:48:17.1792 [INFO; Root]  Locator
+2022-08-03 15:48:18.6052 [INFO; Root]  Locator
+2022-08-03 15:48:19.2562 [INFO; Root]  Locator
+2022-08-03 15:48:21.4252 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-03 15:48:21.4272 [INFO; Root]  Player 1 left
+2022-08-03 15:48:22.5093 [INFO; Root]  Locator
+2022-08-03 15:48:22.6178 [INFO; Root]  Locator
+2022-08-03 15:48:23.5793 [INFO; Root]  Locator
+2022-08-03 15:48:25.1820 [INFO; Root]  Locator
+2022-08-03 15:48:25.7691 [INFO; Root]  Locator
+2022-08-03 15:48:27.8486 [INFO; Root]  Locator
+2022-08-03 15:48:28.1878 [INFO; Root]  Locator
+2022-08-03 15:48:28.3255 [INFO; Root]  Locator
+2022-08-03 15:48:28.8787 [INFO; Root]  Locator
+2022-08-03 15:48:29.5111 [INFO; Root]  Locator
+2022-08-03 15:48:31.0023 [INFO; Root]  Locator

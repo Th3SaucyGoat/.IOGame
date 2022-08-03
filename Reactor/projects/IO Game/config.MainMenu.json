@@ -1,0 +1,21 @@
+{
+	"rooms": {
+		"Room": {
+			"player limit": 0,
+			"communication rate": 2,
+			"recover update time": true,
+			"transform precision": {
+				"position": 0.001,
+				"rotation": 0.001,
+				"scale": 0.001
+			},
+			"cluster reconnect delay": 10,
+			"cluster reconnect attempts": -1,
+			"scripts": [
+				{
+					"name": "ServerRoom"
+				}
+			]
+		}
+	}
+}

@@ -454,6 +454,103 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &406147791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406147794}
+  - component: {fileID: 406147793}
+  - component: {fileID: 406147792}
+  m_Layer: 0
+  m_Name: Room
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &406147792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406147791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc28043044ad1994785f539458df6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_gravity: {x: 0, y: -9.81, z: 0}
+  m_bounceThreshold: 2
+  m_queryHitBackFaces: 0
+  m_enableAdaptiveForce: 0
+  m_enableEnhancedDeterminism: 0
+  AutoSync: 1
+  m_solverType: 0
+  DefaultCollisionFilter: {fileID: 0}
+  DefaultMaterial: {fileID: 0}
+  DefaultEntityPhysics:
+    ContactOffset: 0.01
+    SleepThreshold: 0.005
+    MaxLinearSpeed: 1000
+    MaxAngularSpeed: 50000
+    MaxDepenetrationSpeed: 1000
+    PositionIterations: 6
+    VelocityIterations: 1
+    m_rigidBodyType: 0
+  m_usePhysXVisualDebugger: 0
+  m_pvdAddress: 127.0.0.1
+  m_pvdPort: 5425
+  m_sleepThreshold: 0
+  m_contactOffset: 0
+  m_maxLinearSpeed: 0
+  m_maxAngularSpeed: 0
+  m_maxDepenetrationSpeed: 0
+  m_positionIterations: 0
+  m_velocityIterations: 0
+--- !u!114 &406147793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406147791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f9fafc72047e9419604f25afe390b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_networkSyncRate: 30
+  m_recoverUpdateTime: 1
+  m_applyServerTimeScale: 1
+  m_playerLimit: 0
+  TransformPrecisionOverrides:
+    Position: 0.001
+    Rotation: 0.001
+    Scale: 0.001
+  m_clusterReconnectDelay: 10
+  m_shutdownWithoutCluster: 0
+  m_clusterReconnectAttempts: 3
+  m_port: 8000
+--- !u!4 &406147794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406147791}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &479598335
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +597,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5995669, y: 1}
+    m_SensorSize: {x: 1.6004015, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

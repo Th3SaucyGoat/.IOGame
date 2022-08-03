@@ -1,0 +1,193 @@
+{
+	"entities": {
+		"Collector": [
+			{
+				"asset id": 5,
+				"scale": [
+					0.5,
+					0.5,
+					1.0
+				],
+				"collision filter": {
+					"asset": 4
+				},
+				"scripts": [
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 3,
+							"material": null,
+							"filter": null,
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": false,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					},
+					{
+						"name": ".ksBaseRigidBody",
+						"params": {
+							"use gravity": false,
+							"rigid body type": 1
+						}
+					},
+					{
+						"name": "CollectorServer"
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 4,
+							"material": null,
+							"filter": {
+								"asset": 6
+							},
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": true,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					}
+				]
+			}
+		],
+		"Food": [
+			{
+				"asset id": 3,
+				"scale": [
+					0.2,
+					0.2,
+					1.0
+				],
+				"collision filter": {
+					"asset": 2
+				},
+				"scripts": [
+					{
+						"name": ".ksBaseRigidBody",
+						"params": {
+							"use gravity": false,
+							"constraints": 112,
+							"rigid body type": 1
+						}
+					},
+					{
+						"name": "ServerFood"
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 2,
+							"material": null,
+							"filter": null,
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": false,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					}
+				]
+			}
+		],
+		"Hivemind": [
+			{
+				"asset id": 1,
+				"collision filter": {
+					"asset": 4
+				},
+				"scripts": [
+					{
+						"name": "HivemindServer"
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 1,
+							"material": null,
+							"filter": null,
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": false,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					},
+					{
+						"name": ".ksBaseRigidBody",
+						"params": {
+							"constraints": 120,
+							"rigid body type": 1
+						}
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 5,
+							"material": null,
+							"filter": {
+								"asset": 6
+							},
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": true,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					}
+				]
+			}
+		]
+	},
+	"assets": {
+		"ReactorScripts/ksCollisionFilters/Food": {
+			"asset id": 2,
+			"name": "/ksCollisionFilter",
+			"fields": {
+				"m_group": 1,
+				"m_notify": 2,
+				"m_collide": 0
+			}
+		},
+		"ReactorScripts/ksCollisionFilters/Hivemind": {
+			"asset id": 4,
+			"name": "/ksCollisionFilter",
+			"fields": {
+				"m_group": 2,
+				"m_notify": 0,
+				"m_collide": 2
+			}
+		},
+		"ReactorScripts/ksCollisionFilters/Locator": {
+			"asset id": 6,
+			"name": "/ksCollisionFilter",
+			"fields": {
+				"m_group": 4,
+				"m_notify": 1,
+				"m_collide": 0
+			}
+		}
+	}
+}

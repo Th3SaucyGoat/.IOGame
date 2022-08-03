@@ -1,0 +1,43 @@
+{
+	"rooms": {
+		"Room": {
+			"player limit": 0,
+			"communication rate": 2,
+			"recover update time": true,
+			"transform precision": {
+				"position": 0.001,
+				"rotation": 0.001,
+				"scale": 0.001
+			},
+			"cluster reconnect delay": 10,
+			"cluster reconnect attempts": -1,
+			"physics": {
+				"gravity": [
+					0.0,
+					-9.81,
+					0.0
+				],
+				"bounce threshold": 2.0,
+				"query hit back faces": false,
+				"enable adaptive force": false,
+				"enable enhanced determinism": false,
+				"auto sync": true,
+				"solver type": 0,
+				"collision filter": null,
+				"material": null,
+				"entity": {
+					"contact offset": 0.01,
+					"sleep threshold": 0.005,
+					"max linear speed": 1000.0,
+					"max angular speed": 50000.0,
+					"max depenetration speed": 1000.0,
+					"position iterations": 6,
+					"velocity iterations": 1,
+					"rigid body type": 0
+				},
+				"PVD Address": "",
+				"PVD Port": 0
+			}
+		}
+	}
+}

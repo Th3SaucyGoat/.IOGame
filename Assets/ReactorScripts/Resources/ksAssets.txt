@@ -1,0 +1,6 @@
+2|*ReactorScripts/ksCollisionFilters/Food
+4|*ReactorScripts/ksCollisionFilters/Hivemind
+6|*ReactorScripts/ksCollisionFilters/Locator
+5|Collector
+3|Food
+1|Hivemind

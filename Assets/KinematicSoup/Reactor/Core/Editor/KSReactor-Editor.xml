@@ -1,0 +1,1967 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KSReactor-Editor</name>
+    </assembly>
+    <members>
+        <member name="T:KS.Reactor.Server.ksCharacterControllerData">
+            <summary>This struct is used to store the character controller settings.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksCharacterControllerData.DirtyFlags">
+            <summary>Flags used to indicate that a field has changed.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.SlopeLimit">
+            <summary>Slope limit in degrees.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.StepOffset">
+            <summary>Step offset.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.SkinWidth">
+            <summary>Collision skin width.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.MinMoveDistance">
+            <summary>
+            Minimum move distance of the character controller. If travelled distance is smaller, the character doesn't
+            move. This is used to stop the recursive motion algorithm when remaining distance to travel is small.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.Center">
+            <summary>The center of the character's collider relative to the transform's position.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.Radius">
+            <summary>The radius of the character's capsule.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.EnableOverlapRecovery">
+            <summary>
+            Enables or disables overlap recovery. Used to depenetrate character controllers from static objects when an
+            overlap is detected.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.DetectCollisions">
+            <summary>
+            Determines whether other rigidbodies or character controllers collide with this character controller.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.Height">
+            <summary>The height of the character's capsule.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.Velocity">
+            <summary>Average velocity after the last move</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.IsGrounded">
+            <summary>Is the bottom of the controller touching something.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterControllerData.CollisionFlags">
+            <summary>
+            Bit flags describing which part of the collider had contacts during the last move.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterControllerData.SetDirty(KS.Reactor.Server.ksCharacterControllerData.DirtyFlags)">
+            <summary>
+            Sets the dirty flag for a property.
+            </summary>
+            <param name="flag">Dirty flag to set.</param>
+        </member>
+        <member name="T:KS.Reactor.Server.ksClusterEvents">
+            Contains event handler delegates for cluster events.
+        </member>
+        <member name="T:KS.Reactor.Server.ksClusterEvents.RPCHandler">
+            Cluster RPC Handler
+            
+            @param   uint - ID of the calling room.
+            @param   params ksMultiType[] - rpc arguments
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:KS.Reactor.Server.ksClusterEvents.GetRoomInfoListHandler" -->
+        <member name="T:KS.Reactor.Server.ksClusterEvents.GetRoomInfoHandler">
+            Cluster handler for RPC calls that return a single ksRoomInfo object.
+            
+            @param   ksRoomInfo - Room information
+            @param   string - Error message
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:KS.Reactor.Server.ksClusterEvents.PropertyHandler" -->
+        <member name="T:KS.Reactor.Server.ksContact">
+            Information about a point of contact with an entity.
+        </member>
+        <member name="F:KS.Reactor.Server.ksContact.Collider0">
+            The collider belonging to the entity reporting the collision.
+        </member>
+        <member name="F:KS.Reactor.Server.ksContact.Collider1">
+            The collider belonging to the other entity collided with.
+        </member>
+        <member name="F:KS.Reactor.Server.ksContact.Point">
+            The point of contact.
+        </member>
+        <member name="F:KS.Reactor.Server.ksContact.Impulse">
+            Impulse from the contact.
+        </member>
+        <member name="F:KS.Reactor.Server.ksContact.Normal">
+            Normal at the point of contact on the entity.
+        </member>
+        <member name="M:KS.Reactor.Server.ksContact.#ctor(KS.Reactor.Server.ksCollider,KS.Reactor.Server.ksCollider,KS.Reactor.ksVector3,KS.Reactor.ksVector3,KS.Reactor.ksVector3)">
+            Constructor
+            
+            @param   ksCollider collider belonging to the entity reporting the collision.
+            @param   ksCollider collider belonging to the other entity collided with.
+            @param   ksVector3 point of contact.
+            @oaram   ksVector3 impulse from the contact.
+            @param   ksVector3 normal at the point of contact on the entity.
+        </member>
+        <member name="T:KS.Reactor.Server.ksICluster">
+            Public interface for Room clusters.
+        </member>
+        <member name="P:KS.Reactor.Server.ksICluster.IsConnected">
+            Cluster connection state
+        </member>
+        <member name="P:KS.Reactor.Server.ksICluster.Exists">
+            True if the room was launched as part of a cluster. False if it was launched as a stand-alone room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksICluster.OnRPC">
+            Register a cluster RPC handler;
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.StartRoom(System.String,System.String,System.String,KS.Reactor.ksJSON,System.Collections.Generic.IEnumerable{System.String})" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.StartRoom(System.String,System.String,System.String,KS.Reactor.ksJSON,System.String[])" -->
+        <member name="M:KS.Reactor.Server.ksICluster.StopRoom(System.UInt32[])">
+            Send a request to the cluster to stop a group of rooms. 
+            The result is returned and completed immediately. Error is null if the request was 
+            not sent otherwise it contains a string explaining why the request was not sent.
+            
+            @param   uint[] - Room Ids
+            @return  ksAsyncResult - aysnc result
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.GetRoomInfo(System.Collections.Generic.IEnumerable{System.String})" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.GetRoomInfo(System.String[])" -->
+        <member name="M:KS.Reactor.Server.ksICluster.CallRoomRPC(System.UInt32,KS.Reactor.ksMultiType[])">
+            Send an RPC request to all cluster rooms
+            The result is returned and completed immediately. Error is null if the request was 
+            not sent otherwise it contains a string explaining why the request was not sent.
+            
+            @param   uint - RPC ID
+            @param   params ksMultiType[] - RPC arguments
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.CallRoomRPC(System.Collections.Generic.IEnumerable{System.UInt32},System.UInt32,KS.Reactor.ksMultiType[])" -->
+        <member name="M:KS.Reactor.Server.ksICluster.CallRoomRPC(System.String,System.UInt32,KS.Reactor.ksMultiType[])">
+            Send an RPC request to rooms that match a tag.
+            The result is returned and completed immediately. Error is null if the request was 
+            not sent otherwise it contains a string explaining why the request was not sent.
+            
+            @param   string - Tag
+            @param   uint - RPC ID
+            @param   params ksMultiType[] - RPC arguments
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.CallRoomRPC(System.Collections.Generic.IEnumerable{System.String},System.UInt32,KS.Reactor.ksMultiType[])" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.GetProperty(System.String,KS.Reactor.ksClusterProperty.ReadCache)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.SetProperty(System.String,KS.Reactor.ksMultiType,KS.Reactor.ksClusterProperty.WriteCache)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.SetProperty(System.Collections.Generic.Dictionary{System.String,KS.Reactor.ksMultiType},KS.Reactor.ksClusterProperty.WriteCache)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksICluster.DeleteProperty(System.String,KS.Reactor.ksClusterProperty.DeleteCache)" -->
+        <member name="T:KS.Reactor.Server.ksIInputProcessor">
+            <summary>
+            Interface for processing player input. <see cref="T:KS.Reactor.Server.ksServerPlayerScript"/>s should implement this if they need
+            to process player input.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksIInputProcessor.ProcessInput(KS.Reactor.ksInput,System.Int32)">
+            <summary>
+            Do any input processing and updating of player controllers here. May be called multiple times in one frame
+            if multiple frames of client input arrive at once.
+            </summary>
+            <param name="input">Player input</param>
+            <param name="numUpdates">
+            The number of new frames of client input being processed this frame. Zero if there were no new frames of
+            input to process and we are repeating the last frame.
+            </param>
+            <returns>
+            True to stop any other input processors from processing the input. If all input processors return false and
+            none of them use the input (by calling <see cref="M:KS.Reactor.Server.ksIServerPlayer.UpdateControllers(System.Single,KS.Reactor.ksInput)"/> or
+            <see cref="M:KS.Reactor.ksInput.Use"/>), Reactor will process he input and update controllers.
+            </returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksIServerEntity">
+            Public interface for server entities. An entity is an object in the scene.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.Room">
+            Room the entity is in.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.Transform">
+            Transform
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.Transform2D">
+            2D Transform
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.RigidBody">
+            Rigid body
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.RigidBody2D">
+            2D rigid body
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.PlayerController">
+            Player controller
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.Owner">
+            Owner of player controller.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.IsDestroyed">
+            Is the entity destroyed?
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.SyncGroup">
+            Get/Set the sync group for this entity
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.PhysXActor">
+            Get/Set the PhysX actor
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.Scripts">
+            List of scripts attached to the entity.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.CollisionFilter">
+            Determines which entities to collide with and notify of collision/overlap events. Setting this will set the
+            collision filter on all colliders with UseEntityCollisionFilter set to true.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.PhysicsMaterial">
+            Determines the friction and resitution of attached colliders. Setting this will set the material on all
+            colliders with UseEntityPhysicsMaterial set to true.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.SetController(KS.Reactor.ksPlayerController,KS.Reactor.Server.ksIServerPlayer)">
+            Sets the player controller on this entity and informs the owner of the controller.
+            
+            @param   ksPlayerController controller to control this entity.
+            @param   ksIServerPlayer owner who will control this entity.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.RemoveController">
+            Removes the player controller from this entity, if there is one.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerEntity.OnRPC">
+            Invoked when a player calls an RPC on the entity. Indexed by RPC id.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.RegisterRPC(System.UInt32,KS.Reactor.Server.ksServerEvents.RPCHandler)">
+            Register an RPC
+            
+            @param   uint RPC Id
+            @param   ksServerEvents.RPCHandler RPC handler
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.UnregisterRPC(System.UInt32,KS.Reactor.Server.ksServerEvents.RPCHandler)">
+            Unregister an RPC
+            
+            @param   uint RPC Id
+            @param   ksServerEvents.RPCHandler RPC handler
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.CallRPC(System.UInt32,KS.Reactor.ksMultiType[])">
+            Calls an RPC on this entity. All players who can see this entity will receive the RPC.
+            
+            @param   uint rpcId
+            @param   params ksMultiType[] arguments
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.CallRPC(KS.Reactor.Server.ksIServerPlayer,System.UInt32,KS.Reactor.ksMultiType[])">
+            Calls a function on this entity for a player.
+            
+            @param   ksIServerPlayer player to call the RPC on.
+            @param   uint rpcId of function to call on client.
+            @param   params ksMultiType[] arguments to send to the client.
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerEntity.CallRPC(System.Collections.Generic.IList{KS.Reactor.Server.ksIServerPlayer},System.UInt32,KS.Reactor.ksMultiType[])" -->
+        <member name="M:KS.Reactor.Server.ksIServerEntity.Destroy">
+            Destroys this entity.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerEntity.UpdateScale">
+            If the transform's scale is dirty, finds and updates the scale on all colliders attached to the entity.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnDestroy">
+            Invoked when the entity is destroyed.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnWake">
+            Invoked when the entity awakens in the physics system.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnSleep">
+            Invoked when the entity falls asleep in the physics system.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnCollision">
+            Invoked when this entity collides with another.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnContactUpdate">
+            Invoked every frame this entity remains in contact with another. Not invoked if both entities are asleep.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnContactLost">
+            Invoked when this entity loses contact with another.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnOverlapStart">
+            Invoked when the entity starts overlapping another.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerEntity.OnOverlapEnd">
+            Invoked when the entity stops overlapping another.
+        </member>
+        <member name="T:KS.Reactor.Server.ksPhysicsDelegates">
+            <summary>Physics delegates.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksPhysicsDelegates.Filter">
+            <summary>Delegate for filtering a rigid body.</summary>
+            <param name="rigidBody">Rigid body</param>
+            <returns>True to include the rigid body, false to exclude it.</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksIServerPhysics">
+            <summary>Extended physics interface available on the server.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPhysics.Gravity">
+            <summary>
+            Get/Set the current gravity in the scene
+            Attention: Component updates (Physics.Gravity.Y = 1) will not compile.
+                       Instead reassign the gravity using a set (Physics.Gravity = new Vector3())
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPhysics.SyncMassProperties">
+            <summary>
+            Builds <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/>, <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/>, and
+            <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/> for rigid bodies whose values need to be rebuilt. You should not
+            need to call this if <see cref="P:KS.Reactor.ksIPhysics.AutoSync"/> is true, as they will be built automatically when
+            needed if you access the getters.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPhysics.ApplyExplosiveForce(KS.Reactor.ksVector3,System.Single,System.Single,KS.Reactor.ksMath.Interpolation,System.UInt32,System.Single,KS.Reactor.ksForceMode,KS.Reactor.Server.ksPhysicsDelegates.Filter)">
+            <summary>
+            Applies an explosive force to all rigid bodies that overlap a sphere. The force is applied at the point on
+            the rigid body nearest to the <paramref name="origin"/> of the explosion. Trigger colliders are ignored
+            when finding the nearest point. The force is weaker the further this point is from the explosion
+            <paramref name="origin"/>. The force points in the direction of a line starting at the explosion
+            <paramref name="origin"/> and ending at the nearest point where the force is applied. If the rigid body
+            overlaps the explosion <paramref name="origin"/>, the rigid body's center of mass is used as the end point
+            for calculating the force direction instead.
+            </summary>
+            <param name="origin">The origin of the explosion.</param>
+            <param name="radius">The explosion radius. If zero or less, this function does nothing.</param>
+            <param name="force">How much force to apply at the <paramref name="origin"/> of the explosion.</param>
+            <param name="falloff">
+            The falloff equation type for calculating the force at a distance from the <paramref name="origin"/>. Use
+            <see cref="F:KS.Reactor.ksMath.Interpolation.CONSTANT"/> to use the full force regardless of the distance.
+            </param>
+            <param name="groupMask">
+            Only rigid bodies belonging to at least one of the collision groups in this group mask will be affected.
+            </param>
+            <param name="upwardsModifier">When calculating the force direction, the <paramref name="origin"/> is
+            shifted down this amount to shift the resulting direction upwards and make the explosion lift object
+            upwards.
+            </param>
+            <param name="mode">The type of force to apply. Defaults to impulse.</param>
+            <param name="filter">
+            Delegate for filtering which rigid bodies to apply the force to. Returns true to apply the force.
+            </param>
+        </member>
+        <member name="T:KS.Reactor.Server.ksIServerPlayer">
+            Public interface for server player. A player represents a client connected to the room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Id">
+            Player id
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.AuthenticatedId">
+            Player Authenticated Id
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Address">
+            Address the player is connected from.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Port">
+            Port the player is connected on.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Connected">
+            True if this player is connected to the room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.IsIdle">
+            Is the player idle?
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.IdleTime">
+            Amount of time the client has been idle.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Properties">
+            Properties
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Room">
+            Room the player is in.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.VirtualInput">
+            Get an input object for virtual players
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.Scripts">
+            List of scripts attached to the player.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.ControlledEntities">
+            Entities with player controllers owned by this player.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerPlayer.IsVirtual">
+            True if this is a virtual players
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.Disconnect">
+            Disconnects this client.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.UpdateControllers(System.Single,KS.Reactor.ksInput)">
+            Calls Update on all player controllers controlled by this player.
+            
+            @param   float deltaTime - if non-negative, changes Time.Delta to this value when updating the controllers.
+            @param   ksInput input - if non-null, overrides the current input.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.RemoveAllControllers">
+            Removes all player controllers owned by this player.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.DestroyControlledEntities">
+            Destroys all entities with player controllers owned by this player.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerPlayer.OnLeave">
+            Invoked when the player leaves the room.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.AddToSyncGroup(System.UInt32)">
+            Add a player to a sync group.
+            
+            @param   uint Sync group
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.RemoveFromSyncGroup(System.UInt32)">
+            Remove a player from a sync group.
+            
+            @param   uint Sync group
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerPlayer.GetSyncGroups">
+            Get a list of sync groups the player is in.
+            
+            @return   uint[] Sync groups
+        </member>
+        <member name="T:KS.Reactor.Server.ksIServerRoom">
+            Public interface for a server room. A room can have a simulation. Players can connect to rooms.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Id">
+            Room id
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Time">
+            Server time
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Type">
+            Room type
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Scene">
+            Scene name
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.IsPublic">
+            Is the room public
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.PublicData">
+            Get the public room data.
+            Updates to public data must be applied using the PublicData setter.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.PublicTags">
+            Public room tags. Tags can be retrieved from ksRoomInfo objects returned in GetRooms calls from the cluster
+            or on the client.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Physics">
+            Physics Interface
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.PhysXScenes">
+            PhysX scenes managed by the room.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.AddPhysXScene(KS.Reactor.Server.PhysX.pxScene,System.Boolean)">
+            Add a PhysX scene to the list of scenes managed by the room.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.RemovePhysXScene(KS.Reactor.Server.PhysX.pxScene)">
+            Remove a PhysX scene from the list of scenes managed by the room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.DefaultPhysXScene">
+            Get the default PhysX scene.  When spawning new entities, they will be added to this scene.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.DefaultPhysXSceneIndex">
+            Get the default PhysX scene index.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Cluster">
+            Cluster Interface
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Properties">
+            Properties
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Scripts">
+            List of scripts attached to the room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Entities">
+            List of entities in the room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Players">
+            List of players in the room.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.ConnectedPlayerCount">
+            Number of connected (non-virtual) players.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.VirtualPlayerCount">
+            Number of virtual players.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.OnUpdate">
+            Delegates are invoked every update in sorted order of indices.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.Coroutines">
+            Access to the coroutine sub system.
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.OnRPC">
+            Invoked when a player calls an RPC on the room. Indexed by RPC id.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.RegisterRPC(System.UInt32,KS.Reactor.Server.ksServerEvents.RPCHandler)">
+            Register an RPC
+            
+            @param   uint RPC Id
+            @param   ksServerEvents.RPCHandler RPC handler
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.UnregisterRPC(System.UInt32,KS.Reactor.Server.ksServerEvents.RPCHandler)">
+            Unregister an RPC
+            
+            @param   uint RPC Id
+            @param   ksServerEvents.RPCHandler RPC handler
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.CallRPC(System.UInt32,KS.Reactor.ksMultiType[])">
+            Calls a function on all players.
+            
+            @param   uint rpcId of function to call on clients.
+            @param   params ksMultiType[] arguments to send to clients.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.CallRPC(KS.Reactor.Server.ksIServerPlayer,System.UInt32,KS.Reactor.ksMultiType[])">
+            Calls a function on a player.
+            
+            @param   ksIServerPlayer player to call the RPC on.
+            @param   uint rpcId of function to call on client.
+            @param   params ksMultiType[] arguments to send to the client.
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.CallRPC(System.Collections.Generic.IList{KS.Reactor.Server.ksIServerPlayer},System.UInt32,KS.Reactor.ksMultiType[])" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.CallBatchRPC(System.UInt32,System.Collections.Generic.IList{KS.Reactor.Server.ksIServerEntity},KS.Reactor.ksMultiType[])" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.CallBatchRPC(KS.Reactor.Server.ksIServerPlayer,System.UInt32,System.Collections.Generic.IList{KS.Reactor.Server.ksIServerEntity},KS.Reactor.ksMultiType[])" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.CallBatchRPC(System.Collections.Generic.IList{KS.Reactor.Server.ksIServerPlayer},System.UInt32,System.Collections.Generic.IList{KS.Reactor.Server.ksIServerEntity},KS.Reactor.ksMultiType[])" -->
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity">
+            Spawns an entity.
+            
+            @return ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String)">
+            Spawns an entity. 
+            
+            @param   string type of entity to spawn.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String,KS.Reactor.ksVector3)">
+            Spawns an entity. 
+            
+            @param   string type of entity to spawn.
+            @param   ksVector3 position of entity.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String,KS.Reactor.ksVector3,KS.Reactor.ksQuaternion)">
+            Spawns an entity. 
+            
+            @param   string type of entity to spawn.
+            @param   ksVector3 position of entity.
+            @param   ksQuaternion rotation of entity.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String,KS.Reactor.ksVector3,KS.Reactor.ksQuaternion,KS.Reactor.ksVector3)">
+            Spawns an entity. 
+            
+            @param   string type of entity to spawn.
+            @param   ksVector3 position of entity.
+            @param   ksQuaternion rotation of entity.
+            @param   ksVector3 scale of entity. If the scale contains nans, the prefab scale will be used. Otherwise
+                     this is an absolute scale.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String,KS.Reactor.ksVector2)">
+            Spawns an entity.
+            
+            @param   ksVector2 position of entity.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String,KS.Reactor.ksVector2,System.Single)">
+            Spawns an entity. 
+            
+            @param   string type of entity to spawn.
+            @param   ksVector2 position of entity.
+            @param   float rotation of entity in degrees.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.SpawnEntity(System.String,KS.Reactor.ksVector2,System.Single,KS.Reactor.ksVector2)">
+            Spawns an entity. 
+            
+            @param   string type of entity to spawn.
+            @param   ksVector2 position of entity.
+            @param   float rotation of entity in degrees.
+            @param   ksVector2 scale of entity.  If the scale contains nans, the prefab scale will be used. Otherwise
+                     this is an absolute scale.
+            @return  ksIServerEntity entity spawned.
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String,KS.Reactor.ksVector3)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String,KS.Reactor.ksVector3,KS.Reactor.ksQuaternion)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String,KS.Reactor.ksVector3,KS.Reactor.ksQuaternion,KS.Reactor.ksVector3)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String,KS.Reactor.ksVector2)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String,KS.Reactor.ksVector2,System.Single)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksIServerRoom.SpawnCollection(System.String,KS.Reactor.ksVector2,System.Single,KS.Reactor.ksVector2)" -->
+        <member name="M:KS.Reactor.Server.ksIServerRoom.GetEntity(System.UInt32)">
+            Gets the entity in this room with the given id.
+            
+            @param   uint entityId of entity to get.
+            @return  ksIServerEntity with the given id, or null if no entity with that id was found.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.GetPlayer(System.UInt32)">
+            Gets the player with the given id connected to this room.
+            
+            @param   uint playerId of player to get.
+            @return  ksIServerPlayer with the given id, or null if no player with that id is connected to the room.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerRoom.OnShutDown">
+            Invoked when room begins to shut down
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerRoom.OnPlayerJoin">
+            Invoked when a player joins the room.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerRoom.OnPlayerLeave">
+            Invoked when a player leaves the room.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerRoom.OnSpawnEntity">
+            Invoked when an entity is spawned.
+        </member>
+        <member name="E:KS.Reactor.Server.ksIServerRoom.OnDestroyEntity">
+            Invoked when an entity is destroyed.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.ShutDown">
+            Shut down the room
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.HasActivity(KS.Reactor.Server.ksServerRoomScript.ActivityFlags)">
+            Check for specific server activities.  If a combination of flags is checked
+            then the result will return true if any of the flags are set.
+            
+            @param   ksServerRoomScript.ActivityFlags flag
+            @return  bool - true if an activity corresponding to any of the set flags was tracked
+        </member>
+        <member name="P:KS.Reactor.Server.ksIServerRoom.SkipFrameUpdates">
+            Check or set whether updates should be run this frame. At the beginng of each update cycle this value is set
+            to false. Setting this to true during an update will finish running all update handlers in the current
+            execution group and prevent later execution groups from running.
+        </member>
+        <member name="M:KS.Reactor.Server.ksIServerRoom.CreateVirtualPlayer(KS.Reactor.ksMultiType[])">
+            Create a virtual player and pass authentication arguments
+            
+            @param   params ksMultiType[] authentication arguments
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEntityScript">
+            Base class for scripts that can be attached to server entities.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Entity">
+            Access the entity
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Room">
+            Access the underlying room 
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Time">
+            Get room time.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Physics">
+            Physics interface
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Properties">
+            Entity properties
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Transform">
+            Entity transform
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.Transform2D">
+            2D entity transform
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.RigidBody">
+            Rigid body
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerEntityScript.RigidBody2D">
+            2D rigid body
+        </member>
+        <member name="M:KS.Reactor.Server.ksServerEntityScript.SetParent(KS.Reactor.Server.ksIServerEntity)">
+            Sets the entity this script is attached to.
+            
+            @param   ksIServerEntity entity the script is attached to.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents">
+            Contains event handler delegates for room, entities, and players.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.UpdateHandler">
+            Update event handler.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.RPCHandler">
+            RPC event handler.
+            
+            @param   ksIServerPlayer player that called the RPC.
+            @param   ksMultiType[] arguments from the client.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.RoomShutDownEvent">
+            Room shutdown event handler.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.PlayerJoinHandler">
+            Player join event handler.
+            
+            @param   ksIServerPlayer player that joined the room.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.PlayerLeaveHandler">
+            Player leave event handler.
+            
+            @param   ksIServerPlayer player that left the room.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.SpawnEntityHandler">
+            Spawn entity event handler.
+            
+            @param   ksIServerEntity entity that was spawned.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.DestroyEntityHandler">
+            Destroy entity event handler.
+            
+            @param   ksIServerEntity entity that was destroyed.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.LeaveHandler">
+            Player leave event handler.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.CollisionHandler">
+            Entity collision event handler.
+            
+            @param   ksContact contact data for the collision.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.OverlapHandler">
+            Entity overlap event handler.
+            
+            @param   ksCollider collider0 - ksCollider on the reporting entity which started overlapping
+            @param   ksCollider collider1 - ksCollider on the other entity which started overlapping
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.SleepStateChangeHandler">
+            Entity sleep state change handler.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerEvents.DestroyHandler">
+            Entity destroy event handler.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerPlayerScript">
+            Base class for scripts that can be attached to server players.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.Player">
+            Access the player
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.Room">
+            Access the room 
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.IsVirtual">
+            True if this is a virtual player
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.VirtualInput">
+            Get an input object for virtual players. Returns null for non-virtual players.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.Time">
+            Access the room time
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.Properties">
+            Player properties
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerPlayerScript.Physics">
+            Physics interface
+        </member>
+        <member name="M:KS.Reactor.Server.ksServerPlayerScript.SetParent(KS.Reactor.Server.ksIServerPlayer)">
+            Sets the player this script is attached to.
+            
+            @param   ksIServerPlayer player the script is attached to.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerRoomScript">
+            Base class for scripts that can be attached to server rooms.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerRoomScript.Room">
+            Access the underlying room 
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerRoomScript.Time">
+            Access the room time
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerRoomScript.Physics">
+            Physics interface
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerRoomScript.Cluster">
+            Cluster interface
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerRoomScript.Properties">
+            Room properties
+        </member>
+        <member name="M:KS.Reactor.Server.ksServerRoomScript.Authenticate(KS.Reactor.Server.ksIServerPlayer,KS.Reactor.ksMultiType[])">
+            Authentication methods are called prior to a player joining the server.  The default behavior is
+            to return 0 (approved) for all connections.  If any one authenication method returns a non zero
+            value, the player will be sent an authentication failure id before closing the connection.
+            
+            @param   ksIServerPlayer player
+            @param   ksMultiType[] args
+            @param   uint authentication failure id
+        </member>
+        <member name="M:KS.Reactor.Server.ksServerRoomScript.SetParent(KS.Reactor.Server.ksIServerRoom)">
+            Sets the room this script is attached to.
+            
+            @param   ksIServerRoom room the script is attached to.
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerRoomScript.ActivityFlags">
+            Activity Tracking
+        </member>
+        <member name="M:KS.Reactor.Server.ksServerRoomScript.HasActivity(KS.Reactor.Server.ksServerRoomScript.ActivityFlags)">
+            Check for specific server activities.If a combination of flags is checked
+            then the result will return true if any of the flags are set.
+            
+            @param ksServerRoomScript.ActivityFlags flag
+            @return  bool - true if an activity corresponding to any of the set flags was tracked
+        </member>
+        <member name="M:KS.Reactor.Server.ksServerRoomScript.CreateVirtualPlayer(KS.Reactor.ksMultiType[])">
+            Create a virtual player and pass authentication arguments
+            
+            @param   params ksMultiType[] authentication arguments
+        </member>
+        <member name="T:KS.Reactor.Server.ksServerTime">
+            Holds server time data.
+        </member>
+        <member name="F:KS.Reactor.Server.ksServerTime.m_zero">
+            Time with zero for all values.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerTime.FramesUntilSync">
+            Number of frames until data is synced to clients.
+            0 means that the sync will happen after the current update scripts complete.
+        </member>
+        <member name="P:KS.Reactor.Server.ksServerTime.TimeScale">
+            Time scale applied to simulation steps
+        </member>
+        <member name="T:KS.Reactor.Server.ksVirtualInput">
+            Input manager for virutal players.  Button and axis updates are stored and applied once per update cycle
+            during input processing.
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.#ctor(KS.Reactor.ksInput)">
+            Constructor
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.SetButton(System.UInt32,System.Boolean)">
+            Set the state of a button
+            
+            @param   uint button id
+            @param  bool is the button held down
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.SetAxis(System.UInt32,System.Single)">
+            Set the value for an axis
+            
+            @param   uint axis id
+            @param  float axis value
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.IsPressed(System.UInt32)">
+            Check if a button was pressed.
+            
+            @param   uint button id
+            @return  bool true if the button was pressed since the last processing
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.IsDown(System.UInt32)">
+            Check if a button is down.
+            
+            @param   uint button id
+            @return  bool true if the button is down
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.IsReleased(System.UInt32)">
+            Check if a button was released.
+            
+            @param   uint button id
+            @return  bool true if the button was released since the last processing
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.GetAxis(System.UInt32)">
+            Get an axis value.  Returns the last axis value set, or the current input value if no
+            axis value has been set since the last time inputs were processes.
+            
+            @param   uint axis id
+            @return  float axis value
+        </member>
+        <member name="M:KS.Reactor.Server.ksVirtualInput.ApplyInputs">
+            Apply button and axis states to the input object
+        </member>
+        <member name="M:KS.Reactor.Server.PhysX.pxCapsuleController.CloneCapsuleGeometry">
+            <summary>
+            Get the height and width of the physX capsule used for collision detection and 
+            create a pxCapsule for use in Physics and Geometry queries.
+            </summary>
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxHitFlags.MODIFIABLE_FLAGS">
+            \brief Only this subset of flags can be modified by pre-filter. Other modifications will be discarded. 
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxRigidBody.DefaultMaxLinearSpeed">
+            <summary>Default max linear speed.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxRigidBody.DefaultMaxAngularSpeed">
+            <summary>Default max angular speed in radians per second.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxRigidBody.DefaultMaxDepenetrationSpeed">
+            <summary>Default max depenetration speed.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxRigidDynamic.DefaultSleepThreshold">
+            <summary>Default sleep threshold.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxRigidDynamic.DefaultPositionIterations">
+            <summary>Default number of position solver iterations.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.PhysX.pxRigidDynamic.DefaultVelocityIterations">
+            <summary>Default number of velocity solver iterations.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.PhysX.UnmanagedPtr.Finalize">
+            <summary>
+            When GC is invoked put the pointers and release callbacks into a list.  
+            This list is processed at the end of the update cycle by the server room.
+            </summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksBaseRigidBody">
+            <summary>
+            The base class for PhysX rigid bodies. When derived scripts are attached to entities, it allows the entity to
+            be controlled by the physics simulation with its properties such as mass, drag, and velocity. If isKinematic is
+            enabled, forces, collisions or joints will not affect the rigidbody, but it will push regular dynamic actors
+            out of the way when moved.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.DefaultType">
+            <summary>
+            Determines if rigid bodies are 3D or 2D by default when spawning prefabs or loading the scene.
+            </summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksBaseRigidBody.DetachCallback">
+            <summary>Delegate for detaching ksRigidBody.</summary>
+            <param name="rigidBody">Detached ksRigidBody.</param>
+        </member>
+        <member name="E:KS.Reactor.Server.ksBaseRigidBody.OnDetach">
+            <summary>Invoked when the rigid body is detached.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksBaseRigidBody.CollisionDetectionModes">
+            <summary>The collision detection mode used for <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CollisionDetectionMode"/>.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.Initialize">
+            <summary>
+            Attaches the dynamic actor to the entity. Removes the existing actor from the entity
+            and keeps a reference to it so that it can be reattached when this script is detached.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.Detached">
+            <summary>Invokes the OnDetach handlers and performs clean up.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.PhysXRigidBody">
+            <summary>PhysX rigidbody.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.Mass">
+            <summary>Mass of the rigid body.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.Drag">
+            <summary>Damping.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.AngularDrag">
+            <summary>Angular damping.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.AddForceAtPosition(KS.Reactor.ksVector3,KS.Reactor.ksVector3,KS.Reactor.ksForceMode)">
+            <summary>Adds a force to the rigidbody at a position in world space.</summary>
+            <param name="force">Force to add.</param>
+            <param name="position">Position in world space.</param>
+            <param name="mode">Determines how the force is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.AddExplosiveForce(KS.Reactor.ksVector3,System.Single,System.Single,KS.Reactor.ksMath.Interpolation,System.Single,KS.Reactor.ksForceMode,System.Collections.Generic.List{KS.Reactor.Server.ksCollider})">
+            <summary>
+            Applies an explosive force to the rigid body at the point on the rigid body nearest to the
+            <paramref name="origin"/> of the explosion. If the rigidbody has no non-trigger colliders, no force is
+            applied. The force is weaker the further this point is from the explosion <paramref name="origin"/>. The
+            force points in the direction of a line starting at the explosion <paramref name="origin"/> and ending at
+            the nearest point where the force is applied. If the rigid body overlaps the explosion
+            <paramref name="origin"/>, the rigid body's center of mass is used as the end point for calculating the
+            force direction instead.
+            </summary>
+            <param name="origin">The origin of the explosion.</param>
+            <param name="radius">
+            The explosion radius. If zero, the full <paramref name="force"/> is used regardless of the distance from
+            the <paramref name="origin"/>, and <paramref name="falloff"/> is ignored. If less than zero, no force is
+            applied.
+            </param>
+            <param name="force">How much force to apply at the <paramref name="origin"/> of the explosion.</param>
+            <param name="falloff">
+            The falloff equation type for calculating the force at a distance from the <paramref name="origin"/>. Use
+            <see cref="F:KS.Reactor.ksMath.Interpolation.CONSTANT"/> to use the full force if the distance is less than
+            <paramref name="radius"/>.
+            </param>
+            <param name="upwardsModifier">When calculating the force direction, the <paramref name="origin"/> is
+            shifted down this amount to shift the resulting direction upwards and make the explosion lift object
+            upwards.
+            </param>
+            <param name="mode">The type of force to apply. Defaults to impulse.</param>
+            <param name="colliders">
+            List of colliders to consider for finding the nearest point. If null, all enabled non-trigger colliders are
+            used.
+            </param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.ClearForce">
+            <summary>Clears the force on the rigidbody.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.ClearTorque">
+            <summary>Clears the torque on the rigidbody.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.IsKinematic">
+            <summary>
+            If true, the entity will not be effected by gravity or other impulses, but may be moved around by setting
+            translation and rotation from scripts.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.UseGravity">
+            <summary>If true, the entity will be affected by the scene gravity.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.CollisionDetectionMode">
+            <summary>The rigidbody's collision detection mode.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.Constraints">
+            <summary>
+            Controls which degrees of freedom are allowed for the simulation of this rigidbody.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.MaxLinearSpeed">
+            <summary>
+            The maximimum linear speed of the rigidbody. Range [0, float.MaxValue).
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.MaxAngularSpeed">
+            <summary>
+            The maximimum angular speed of the rigidbody measured in degrees per second. Range [0, float.MaxValue).
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.MaxDepenetrationSpeed">
+            <summary>
+            Maximum speed of a rigidbody when moving out of penetrating state. Range (0, float.MaxValue)
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.SleepThreshold">
+            <summary>
+            The mass-normalized energy threshold, below which objects start going to sleep.  Range [0, float.MaxValue)
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.SolverIterations">
+            <summary>
+            SolverIterations determines how accurately Rigidbody joints and collision contacts are resolved. Range [1, 255]
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.SolverVelocityIterations">
+            <summary> 
+            SolverVelocityIterations affects how how accurately Rigidbody joints and collision contacts are resolved. Range [0, 255]
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.IsSleeping">
+            <summary>Is the rigidbody sleeping?</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.Sleep">
+            <summary> Forces the rigid body to sleep. </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.WakeUp">
+            <summary>Forces the rigid body to wake up.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateInertiaTensor">
+            <summary>
+            Are <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/> and <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/> calculated automatically from the
+            colliders attached to this rigidbody?
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor">
+            <summary>
+            The rigidbody's inertia tensor, defined as a diagonal matrix in a reference frame positioned at the
+            <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/> and rotated by <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/>. The higher the inertia
+            tensor value is for an axis, the more torque is required to rotate the body around that axis. Zero is
+            treated an infinite, making it impossible to rotate around that axis.
+            
+            If <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateInertiaTensor"/> is true, this is automatically calculated from the attached
+            colliders.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation">
+            <summary>
+            The rotation of <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/>.
+            
+            If <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateInertiaTensor"/> is true, this is automatically calculated from the attached
+            colliders.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateCenterOfMass">
+            <summary>
+            Is <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/> calculated automatically from the colliders attached to this rigidbody?
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass">
+            <summary>
+            The rigidbody's center of mass in local space.
+            
+            If <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateCenterOfMass"/> is true, this is automatically calculated from the attached
+            colliders.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.WorldCenterOfMass">
+            <summary>The center of mass of the rigidbody in world space.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorDirty">
+            <summary>Do <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/> and <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/> need to be recalculated?</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMassDirty">
+            <summary>Does <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/> need to be recalculated?</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.MarkMassPropertiesDirty(System.Boolean,System.Boolean)">
+            <summary>
+            Triggers a rebuild of <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/>, <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/>, and
+            <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/> based on the attached colliders on the next Physics update of the next time they
+            are accessed, if the corresponding <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateInertiaTensor"/> and
+            <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateCenterOfMass"/> flags are true. Normally you do not need to call this function as
+            it is called for you whenever you modify colliders. You only need to call this function if you are directly
+            modifying the PhysX geometry instead of using <see cref="T:KS.Reactor.Server.ksShapeCollider"/> methods and properties.
+            </summary>
+            <param name="dirtyInertiaTensor">
+            Should inertia tensor be marked dirty? Does nothing if <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateInertiaTensor"/> is false.
+            </param>
+            <param name="dirtyCenterOfMass">
+            Should center of mass be marked dirty? Does nothing if <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateCenterOfMass"/> is false.
+            </param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.BuildMassProperties">
+            <summary>
+            Builds <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/>, <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/>, and <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/>
+            from the attached colliders, if the inertia tensor or center of mass are dirty and the corresponding 
+            <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateInertiaTensor"/> and <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateCenterOfMass"/> flags are true. You
+            should not need to call this if <see cref="P:KS.Reactor.ksIPhysics.AutoSync"/> is true, as they will be built
+            automatically when needed if you access the getters.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.Clone">
+            <summary>Creates a copy of the rigid body.</summary>
+            <returns>Cloned rigid body.</returns>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.UpdateScale">
+            <summary>
+            Called when the entity's scale changes. Scales the center of mass stored in the
+            <see cref="P:KS.Reactor.Server.ksBaseRigidBody.PhysXRigidBody"/> if <see cref="P:KS.Reactor.Server.ksBaseRigidBody.AutoCalculateCenterOfMass"/> is false and marks mass properties
+            dirty.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBaseRigidBody.InvScale">
+            <summary>
+            The inverse scale of the transform. If a component of the scale is zero, it will also be zero in the
+            inverse scale.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.BuildAllMassProperties">
+            <summary>
+            Builds <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensor"/>, <see cref="P:KS.Reactor.Server.ksBaseRigidBody.InertiaTensorRotation"/>, and <see cref="P:KS.Reactor.Server.ksBaseRigidBody.CenterOfMass"/>
+            for rigid bodies whose values need to be rebuilt. You should not need to call this if
+            <see cref="P:KS.Reactor.ksIPhysics.AutoSync"/> is true, as they will be built automatically when needed if you access
+            the getters.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.ApplyKinematicMotion">
+            <summary>Applies kinematic motion.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBaseRigidBody.ApplyAllKinematicMotion">
+            <summary>Applies kinematic motion to kinematic rigid bodies.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksBoxCollider">
+            <summary>A box-shaped primitive collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBoxCollider.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBoxCollider.#ctor(KS.Reactor.Server.PhysX.pxBox)">
+            <summary>Constructor.</summary>
+            <param name="box">PhysX box geometry to create the box collider with.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBoxCollider.Size">
+            <summary>Gets/Sets the size of the box.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksBoxCollider.ScaledSize">
+            <summary>Gets the scaled size of the box.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBoxCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksBoxCollider.Clone">
+            <summary>Creates a copy of the collider.</summary>
+            <returns>Cloned collider.</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksCapsuleCollider">
+            <summary>Capsule-shaped primitive collider.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksCapsuleCollider.Axis">
+            <summary>The axis of the capsule.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCapsuleCollider.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCapsuleCollider.#ctor(KS.Reactor.Server.PhysX.pxCapsule)">
+            <summary>Constructor.</summary>
+            <param name="capsule">PhysX capsule geometry to create the capsule collider with.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.Radius">
+            <summary>The radius of the sphere, measured in the object's local space.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.ScaledRadius">
+            <summary>Radius of the capsule after applying the attached entity transform scale.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.Height">
+            <summary>The height of the capsule measured in the object's local space.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.ScaledHeight">
+            <summary>Height of the capsule after applying the attached entity transform scale.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.Direction">
+            <summary>The direction of the capsule.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCapsuleCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.AxisRotation">
+            <summary>Gets the rotation with axis applied.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCapsuleCollider.Rotation">
+            <summary>Rotation.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCapsuleCollider.Clone">
+            <summary>Creates a copy of the collider.</summary>
+            <returns>Cloned collider.</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksCharacterController">
+            <summary>
+            Character controller script.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksCharacterController.#ctor(KS.Reactor.Server.ksIServerRoom,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,KS.Reactor.ksVector3)" -->
+        <!-- Badly formed XML comment ignored for member "M:KS.Reactor.Server.ksCharacterController.#ctor(KS.Reactor.Server.PhysX.pxControllerManager,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,KS.Reactor.ksVector3)" -->
+        <member name="P:KS.Reactor.Server.ksCharacterController.PhysXCharacterController">
+            <summary>PhysX capsule character controller.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.PhysXCapsule">
+            <summary>Get a PhysX capsule that represents the geometry used by the character controller.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.IsQueryCollider">
+            <summary>Scene queries flag.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.IsSimulationCollider">
+            <summary>Simulation flag.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.IsTrigger">
+            <summary>Trigger flag.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.CollisionFilter">
+            <summary>Collision filter.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.Bounds">
+            <summary>
+            Get the bounds of a collider at the position of its attached entity or at the origin
+            if the collider is not attached to an entity.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.IsEnabled">
+            <summary>Enabled flag. Setting to true to put the character controller into the scene.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.ContactOffset">
+            <summary>Shape contact offset.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.Offset">
+            <summary>
+            The offset of the character's collider relative to the transform's position.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.SlopeLimit">
+            <summary>
+            Slope limit in degrees.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.StepOffset">
+            <summary>
+            Step offset.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.SkinWidth">
+            <summary>
+            Collision skin width.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.MinMoveDistance">
+            <summary>
+            Minimum move distance of the character controller. If travelled distance is smaller, the character doesn't
+            move. This is used to stop the recursive motion algorithm when remaining distance to travel is small.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.Radius">
+            <summary>
+            The radius of the character's capsule.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.ScaledRadius">
+            <summary>
+            The radius of the character's capsule with entity scaling applied.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.Height">
+            <summary>
+            The height of the character's capsule.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.ScaledHeight">
+            <summary>
+            The height of the character's capsule with entity scaling applied
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.EnableOverlapRecovery">
+            <summary>
+            Enables or disables overlap recovery. Used to depenetrate character controllers from static objects when an
+            overlap is detected.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.DetectCollisions">
+            <summary>
+            Determines whether other rigidbodies or character controllers collide with this character controller.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.Velocity">
+            <summary>
+            Average velocity of the last move.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.IsGrounded">
+            <summary
+            >Did the bottom of the controller touch something during the last move.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCharacterController.CollisionFlags">
+            <summary>
+            What part of the collider collided with the environment during the last move call.
+            </summary>
+        </member>
+        <member name="E:KS.Reactor.Server.ksCharacterController.OnColliderHit">
+            Invoked when this character controller hits a collider.
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.Initialize">
+            <summary>
+            Puts the controller in the default scene. Tracks the controller in the manager. Initializes position.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.Detached">
+            <summary>Removes the controller from the scene and the manager.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.ScaleGeometry">
+            <summary>Update character controller scale.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.SimpleMove(KS.Reactor.ksVector3)">
+            <summary>
+            Moves the character with velocity. Gravity is automatically applied. Returns if the character is grounded.
+            </summary>
+            <param name="velocity">Velocity to move with.</param>
+            <returns>True if the character is grounded.</returns>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.Move(KS.Reactor.ksVector3)">
+            <summary>
+            Moves the character with a displacement vector. Users are responsible for applying gravity to characters.
+            </summary>
+            <param name="delta"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.Move(KS.Reactor.ksVector3,System.Boolean)">
+            <summary>
+            Moves the character with a displacement vector. Users are responsible for applying gravity to characters.
+            </summary>
+            <param name="delta"></param>
+            <param name="computeVelocity">If true, compute and record the average velocity during the move.</param>
+            <returns></returns>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.InvokeColliderHitHandler">
+            <summary>Process collision events with character controller.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.SetPosition(KS.Reactor.ksVector3)">
+            <summary>Sets the controller's position.</summary>
+            <param name="position"></param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.UpdateTransform">
+            <summary>Syncs the controller's position with the transform.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.Enable">
+            <summary>Enable the character controller.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.Disable">
+            <summary>Disable the character controller.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCharacterController.ConstructClone">
+            <summary>Constructs a new instance of this type. Used for cloning.</summary>
+            <returns>Constructed instance</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksCollider">
+            <summary>The base class of all colliders.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.KS#Reactor#ksICollider#Entity">
+            <summary>Entity the collider is attached to.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.IsQueryCollider">
+            <summary>If true, the collider will partake in scene queries.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.IsSimulationCollider">
+            <summary>If true, the collider will partake in collision in the physical simulation.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.IsTrigger">
+            <summary>
+            If true, the collider will not partake in collisions in the physical simulation. Instead, it raises
+            <see cref="E:KS.Reactor.Server.ksIServerEntity.OnOverlapStart"/> and <see cref="E:KS.Reactor.Server.ksIServerEntity.OnOverlapEnd"/> events.
+            The <see cref="P:KS.Reactor.Server.ksCollider.CollisionFilter"/>'s Collide flag will be ignored if this is true.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.CollisionFilter">
+            <summary>Determines which entities to collide with and notify of collision/overlap events.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.Bounds">
+            <summary>
+            Get the bounds of a collider at the position of its attached entity or at the origin
+            if the collider is not attached to an entity.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.IsEnabled">
+            <summary>
+            Gets/Sets the enabled state of the collider. If false, the collider won't collide with other colliders.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.ContactOffset">
+            <summary>
+            Gets/Sets the contact offset of the collider.
+            Colliders whose distance is less than the sum of their contact offset values will generate contacts.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksCollider.Offset">
+            <summary>Gets/Sets the offset from the entity position.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCollider.UpdateScale">
+            <summary>Updates scale and creates new geometry with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCollider.Clone">
+            <summary>Creates a copy of the collider.</summary>
+            <returns>Cloned collider.</returns>
+        </member>
+        <member name="M:KS.Reactor.Server.ksCollider.ConstructClone">
+            <summary>
+            Constructs a new instance of this type. Used for cloning. Derived classes must override this if they do not
+            have a parameterless constructor.
+            </summary>
+            <returns>Constructed instance</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksConvexMeshCollider">
+            <summary>A convex mesh collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksConvexMeshCollider.#ctor(KS.Reactor.Server.PhysX.pxConvexMesh)">
+            <summary>Constructor.</summary>
+            <param name="convexMesh">PhysX convex mesh geometry to create the convex mesh collider with.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksConvexMeshCollider.PhysXMeshData">
+            <summary>PhysX mesh data.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksConvexMeshCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksConvexMeshCollider.ConstructClone">
+            <summary>Constructs a new instance of this type. Used for cloning.</summary>
+            <returns>Constructed instance</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksFixedJoint">
+            <summary>
+            The Fixed joint groups together two rigidbodies, making them stick together in their bound position,
+            or binds one rigidbody in place, preventing it from moving.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksFixedJoint.CreateJoint">
+            <summary>Create a fixed joint.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksHeightFieldCollider">
+            <summary>A heightfield-based collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksHeightFieldCollider.#ctor(KS.Reactor.Server.PhysX.pxHeightField)">
+            <summary>Constructor.</summary>
+            <param name="heightField">PhysX heightfield geometry to create the heightfield collider with.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksHeightFieldCollider.PhysXHeightData">
+            <summary>PhysX heightfield data.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksHeightFieldCollider.Size">
+            <summary>Size.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksHeightFieldCollider.ScaledSize">
+            <summary>Scaled size.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksHeightFieldCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksHeightFieldCollider.ConstructClone">
+            <summary>Constructs a new instance of this type. Used for cloning.</summary>
+            <returns>Constructed instance</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksJoint">
+            <summary>The base class of all joints.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksJoint.JointBreakCallback">
+            <summary>Callback for joint break event.</summary>
+            <param name="joint">The joint that broke.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.Initialize">
+            <summary>Initializes the joint.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.Detached">
+            <summary>Cleans up the joint.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.CreateJoint">
+            <summary>Creates the joint.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.WorldAnchor">
+            <summary>Gets the anchor position in world coordinates.</summary>
+            <returns>Anchor position in world coordinates.</returns>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.ReconfigureConnectedAchors">
+            <summary>Reconfigures the connected anchors.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.LocalBody">
+            <summary>Get the local rigidbody the joint is connected to.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.ConnectedBody">
+            <summary>The rigidbody the joint connects to.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.Axis">
+            <summary>
+            Direction of the axis around which the body is constrained relative to the local rigidbody.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.Anchor">
+            <summary>
+            Position of the anchor around which the joints motion is constrained relative to the local rigidbody.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.ConnectedAxis">
+            <summary>
+            Direction of the axis around which the body is constrained relative to the connected rigidbody.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.ConnectedAnchor">
+            <summary>
+            Position of the anchor around which the joints motion is constrained relative to the connected rigidbody.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.AutoConfigureConnectedAnchor">
+            <summary>
+            Should the connected anchor and axis be calculated automatically when attaching a new connected rigidbody?
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.BreakForce">
+            <summary>The force that needs to be applied for this joint to break.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.BreakTorque">
+            <summary>
+            The torque that needs to be applied for this joint to break.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.EnableCollision">
+            <summary>Enable collision between bodies connected with the joint.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.EnablePreprocessing">
+            <summary>Toggle preprocessing for this joint.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.MassScale">
+            <summary>
+            The scale to apply to the inverse mass and inertia tensor of the body prior to solving the constraints.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.ConnectedMassScale">
+            <summary>
+            The scale to apply to the inverse mass and inertia tensor of the connected body
+            prior to solving the constraints.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.CurrentForce">
+            <summary>The force applied by the solver to satisfy all constraints.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.CurrentTorque">
+            <summary>The torque applied by the solver to satisfy all constraints.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksJoint.IsBroken">
+            <summary>Is the joint broken?</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.Break">
+            <summary>Invoke the registered break events.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksJoint.HandleDetachedRigidBody(KS.Reactor.Server.ksBaseRigidBody)">
+            <summary>Remove the reference to the connected body and destroy the physX joint.</summary>
+            <param name="rigidBody">Detached rigidbody.</param>
+        </member>
+        <member name="T:KS.Reactor.Server.ksPhysicsMaterial">
+            <summary>A physics material that controls the friction and restitution of colliders.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.Default">
+            <summary>
+            The default physics material. Setting this to a new instance will not affect any existing colliders using
+            the old default material, but will change the material used by new colliders that don't have a material
+            assigned.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPhysicsMaterial.Get(KS.Reactor.Server.PhysX.pxMaterial)">
+            <summary>
+            Gets the physics material for a <see cref="T:KS.Reactor.Server.PhysX.pxMaterial"/>. Creates one if it does not already exist.
+            </summary>
+            <param name="material">Material</param>
+            <returns>Physics material</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksPhysicsMaterial.CombineMode">
+            <summary>
+            Determines how friction or restitution of two colliding objects is combined. If the objects have different
+            combine modes, the one with the highest priority will be used. The priority is defined as <see cref="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.MAX"/> > 
+            <see cref="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.MULTIPLY"/> > <see cref="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.MIN"/> > <see cref="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.AVERAGE"/>.
+            </summary>
+        </member>
+        <member name="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.AVERAGE">
+            <summary>Use the average value.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.MIN">
+            <summary>Use the minimum value.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.MULTIPLY">
+            <summary>Multiply the two values.</summary>
+        </member>
+        <member name="F:KS.Reactor.Server.ksPhysicsMaterial.CombineMode.MAX">
+            <summary>Use the maximum value.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.PhysXMaterial">
+            <summary>The PhysX material.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.StaticFriction">
+            <summary>
+            The friction used when an object is laying still on a surface. Usually a value from zero to one.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.DynamicFriction">
+            <summary>The friction used when an object is moving. Usually a value from zero to one.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.Restitution">
+            <summary>
+            The coefficient of restitution, or bounciness. A value of zero will not bounce, and a value of one will
+            bounce without any energy loss.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.FrictionCombineMode">
+            <summary>Determines how friction between two colliders is combined.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPhysicsMaterial.RestitutionCombineMode">
+            <summary>Determines how <see cref="P:KS.Reactor.Server.ksPhysicsMaterial.Restitution"/> between two colliders is combined.s</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPhysicsMaterial.#ctor">
+            <summary>Constructor</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPhysicsMaterial.#ctor(KS.Reactor.Server.PhysX.pxMaterial)">
+            <summary>Constructor</summary>
+            <param name="material">Material</param>
+        </member>
+        <member name="T:KS.Reactor.Server.ksPlaneCollider">
+            <summary>A plane collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPlaneCollider.#ctor">
+            <summary>Constructor.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPlaneCollider.#ctor(KS.Reactor.Server.PhysX.pxPlane)">
+            <summary>Constructor.</summary>
+            <param name="plane">PhysX plane geometry to create the plane collider with.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPlaneCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPlaneCollider.AxisRotation">
+            <summary>Gets the rotation with axis applied.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksPlaneCollider.Rotation">
+            <summary>Rotation.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksPlaneCollider.Clone">
+            <summary>Constructs a new instance of this type. Used for cloning.</summary>
+            <returns>Constructed instance</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksRigidBody">
+            <summary>
+            A 3D rigid body. When attached to entities, it allows the entity to be controlled by the physics simulation
+            with its properties such as mass, drag, and velocity. If isKinematic is enabled, forces, collisions or joints
+            will not affect the rigidbody, but it will push regular dynamic actors out of the way when moved.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.Initialize">
+            <summary>Initializes the rigid body.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.Detached">
+            <summary>Performs clean up.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.AddForce(KS.Reactor.ksVector3,KS.Reactor.ksForceMode)">
+            <summary>Adds a force to the rigidbody.</summary>
+            <param name="force">Force to add.</param>
+            <param name="mode">Determines how the force is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.AddForceRelative(KS.Reactor.ksVector3,KS.Reactor.ksForceMode)">
+            <summary>Adds a force to the rigidbody relative to the entity's rotation.</summary>
+            <param name="force">Force to add.</param>
+            <param name="mode">Determines how the force is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.AddTorque(KS.Reactor.ksVector3,KS.Reactor.ksForceMode)">
+            <summary>Adds a torque to the rigidbody.</summary>
+            <param name="torque">Torque to add.</param>
+            <param name="mode">Determines how the torque is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.AddTorqueRelative(KS.Reactor.ksVector3,KS.Reactor.ksForceMode)">
+            <summary>Adds a torque to the rigidbody relative to the entity's rotation.</summary>
+            <param name="torque">Torque to add.</param>
+            <param name="mode">Determines how the torque is applied.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody.Velocity">
+            <summary>Velocity.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody.AngularVelocity">
+            <summary>Angular velocity in degrees.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody.KinematicMovement">
+            <summary>
+            Amount of movement that will be applied to a kinematic rigid body entity 
+            during the next physics simulation step. After the simulation step this 
+            value will be reset to <see cref="P:KS.Reactor.ksVector3.Zero"/>.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody.KinematicRotation">
+            <summary>
+            Amount of rotation that will be applied to a kinematic rigid body entity 
+            during the next physics simulation step. After the simulation step this 
+            value will be reset to <see cref="P:KS.Reactor.ksQuaternion.Identity"/>.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.ClearKinematicMotion">
+            <summary>Clear the Kinematic movement and rotation values.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody.ApplyKinematicMotion">
+            <summary>Applies kinematic motion.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksRigidBody2DView">
+            <summary>
+            A 3D rigid body with movement constrained to 2D using a 2D API. When attached to entities, it allows the
+            entity to be controlled by the physics simulation with its properties such as mass, drag, and velocity. If
+            isKinematic is enabled, forces, collisions or joints will not affect the rigidbody, but it will push regular
+            dynamic actors out of the way when moved.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.Initialize">
+            <summary>Initializes the rigid body.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.Detached">
+            <summary>Performs clean up.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.AddForce(KS.Reactor.ksVector2,KS.Reactor.ksForceMode)">
+            <summary>Adds a force to the rigidbody.</summary>
+            <param name="force">Force to add.</param>
+            <param name="mode">Determines how the force is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.AddForceRelative(KS.Reactor.ksVector2,KS.Reactor.ksForceMode)">
+            <summary>Adds a force to the rigidbody relative to the entity's rotation.</summary>
+            <param name="force">Force to add.</param>
+            <param name="mode">Determines how the force is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.AddForceAtPosition(KS.Reactor.ksVector2,KS.Reactor.ksVector2,KS.Reactor.ksForceMode)">
+            <summary>Adds a force to the rigidbody at a position in world space.</summary>
+            <param name="force">Force to add.</param>
+            <param name="position">Position in world space.</param>
+            <param name="mode">Determines how the force is applied.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.AddTorque(System.Single,KS.Reactor.ksForceMode)">
+            <summary>Adds a torque to the rigidbody.</summary>
+            <param name="torque">Torque to add.</param>
+            <param name="mode">Determines how the torque is applied.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.Constraints">
+            <summary>
+            Controls which degrees of freedom are allowed for the simulation of this rigidbody.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.Velocity">
+            <summary>Velocity.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.AngularVelocity">
+            <summary>Angular velocity in degrees.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.KinematicMovement">
+            <summary>
+            Amount of movement that will be applied to a kinematic rigid body entity 
+            during the next physics simulation step. After the simulation step this 
+            value will be reset to <see cref="P:KS.Reactor.ksVector2.Zero"/>.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.KinematicRotation">
+            <summary>
+            Amount of rotation in degrees that will be applied to a kinematic rigid body entity 
+            during the next physics simulation step. After the simulation step this 
+            value will be reset to zero.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.KinematicRotationRadians">
+            <summary>
+            Amount of rotation in radians that will be applied to a kinematic rigid body entity 
+            during the next physics simulation step. After the simulation step this 
+            value will be reset to zero.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.ClearKinematicMotion">
+            <summary>Clear the Kinematic movement and rotation values.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksRigidBody2DView.ApplyKinematicMotion">
+            <summary>Applies kinematic motion.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.CenterOfMass">
+            <summary>
+            The rigidbody's center of mass in local space.
+            
+            If <see cref="!:kseBaseRigidBody.AutoCalculateCenterOfMass"/> is true, this is automatically calculated from
+            the attached colliders.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksRigidBody2DView.WorldCenterOfMass">
+            <summary>The center of mass of the rigidbody in world space.</summary>
+        </member>
+        <member name="T:KS.Reactor.Server.ksShapeCollider">
+            <summary>The base class of all shape colliders.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.PhysXShape">
+            <summary>PhysX shape.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.UseEntityPhysicsMaterial">
+            <summary>
+            Does this collider use the entity's physics material? 
+            Changing the entity's <see cref="P:KS.Reactor.Server.ksIServerEntity.PhysicsMaterial"/> when this is true will change the
+            collider's <see cref="P:KS.Reactor.Server.ksShapeCollider.Material"/>. Setting this to true will set the collider's material to the entity's.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.Material">
+            <summary>
+            The physics material that determines the friction and restitution of the collider for collisions. If you
+            set this to null, it will set it to <see cref="P:KS.Reactor.Server.ksIServerEntity.PhysicsMaterial"/> and set
+            <see cref="P:KS.Reactor.Server.ksShapeCollider.UseEntityPhysicsMaterial"/> to true. If you set it to anything but null, it will set
+            <see cref="P:KS.Reactor.Server.ksShapeCollider.UseEntityPhysicsMaterial"/> to false.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.IsQueryCollider">
+            <summary>If true, the collider will partake in scene queries.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.IsSimulationCollider">
+            <summary>If true, the collider will partake in collisions in the physical simulation.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.IsTrigger">
+            <summary>
+            If true, the collider will not partake in collisions in the physical simulation. Instead, it raises
+            <see cref="E:KS.Reactor.Server.ksIServerEntity.OnOverlapStart"/> and <see cref="E:KS.Reactor.Server.ksIServerEntity.OnOverlapEnd"/> events.
+            The <see cref="P:KS.Reactor.Server.ksShapeCollider.CollisionFilter"/>'s Collide flag will be ignored if this is true.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.UpdateFlags">
+            <summary>Updates the PhysX shape's flags.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.CollisionFilter">
+            <summary>
+            Gets/Sets the collider's collision filter which determines which entities to collide with
+            and notify of collision/overlap events. If you set this to null, it will set it to
+            <see cref="P:KS.Reactor.Server.ksIServerEntity.CollisionFilter"/> and set <see cref="P:KS.Reactor.Server.ksCollider.UseEntityCollisionFilter"/> to
+            true. If you set it to anything but null, it will set <see cref="P:KS.Reactor.Server.ksCollider.UseEntityCollisionFilter"/> to
+            false.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.Bounds">
+            <summary>
+            Get the bounds of a collider at the position of its attached entity or at the origin
+            if the collider is not attached to an entity.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.IsEnabled">
+            <summary>
+            Gets/Sets the enabled state of the collider. If false, the collider won't collide with other colliders.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.ContactOffset">
+            <summary>
+            Gets/Sets the contact offset of the collider.
+            Colliders whose distance is less than the sum of their contact offset values will generate contacts.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.RestOffset">
+            <summary>
+            Gets/Sets the rest offset of the collider. Two shapes will come to rest at a distance equal to the sum of
+            their restOffset values. If the restOffset is 0, they should converge to touching exactly.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:KS.Reactor.Server.ksShapeCollider.MinTorsionalPatchRadius" -->
+        <member name="P:KS.Reactor.Server.ksShapeCollider.TorsionalPatchRadius">
+            <summary>
+            Gets/Sets torsional patch radius. This defines the radius of the contact patch used to apply torsional
+            friction. If the radius is 0, no torsional friction will be applied. If the radius is > 0, some torsional
+            friction will be applied.
+            </summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.Offset">
+            <summary>Gets/Sets the offset from the entity position.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.Rotation">
+            <summary>Gets/Sets the rotation.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.ScaledOffset">
+            <summary>Gets the scaled offset from the entity position.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksShapeCollider.ShapeType">
+            <summary>Gets the shape type.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.Initialize">
+            <summary>Initializes the collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.Detached">
+            <summary>Cleans up the collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.AttachShape(KS.Reactor.Server.PhysX.pxRigidActor)">
+            <summary>Attaches the shape to the actor.</summary>
+            <param name="actor">Actor to attach the shape to.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.DetachShape">
+            <summary>Detaches the shape from the actor.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.UpdateInertiaTensor">
+            <summary>Updates the interia tensor on the attached actor.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.MarkMassPropertiesDirty">
+            <summary>
+            Looks for a rigid body to mark dirty so its inertia tensor and center of mass are recalculated before the
+            next physics update.
+            </summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksShapeCollider.Clone">
+            <summary>Creates a copy of the collider.</summary>
+            <returns>Cloned collider.</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksSphereCollider">
+            <summary>A sphere-shaped primitive collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksSphereCollider.#ctor(System.Single)">
+            <summary>Constructor.</summary>
+            <param name="radius">Radius of the sphere.</param>
+        </member>
+        <member name="M:KS.Reactor.Server.ksSphereCollider.#ctor(KS.Reactor.Server.PhysX.pxSphere)">
+            <summary>Constructor.</summary>
+            <param name="sphere">PhysX sphere geometry to create the sphere collider with.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksSphereCollider.Radius">
+            <summary>Gets/Sets the radius of the sphere.</summary>
+        </member>
+        <member name="P:KS.Reactor.Server.ksSphereCollider.ScaledRadius">
+            <summary>Radius of the sphere after applying the attached entity transform scale.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksSphereCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksSphereCollider.ConstructClone">
+            <summary>Constructs a new instance of this type. Used for cloning.</summary>
+            <returns>Constructed instance</returns>
+        </member>
+        <member name="T:KS.Reactor.Server.ksTriangleMeshCollider">
+            <summary>A triangle mesh collider.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksTriangleMeshCollider.#ctor(KS.Reactor.Server.PhysX.pxTriangleMesh)">
+            <summary>Constructor.</summary>
+            <param name="triangleMesh">PhysX triangle mesh geometry to create the triangle mesh collider with.</param>
+        </member>
+        <member name="P:KS.Reactor.Server.ksTriangleMeshCollider.MeshData">
+            <summary>PhysX triangle mesh data.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksTriangleMeshCollider.ScaleGeometry">
+            <summary>Creates new geometry for the shape with entity scaling applied.</summary>
+        </member>
+        <member name="M:KS.Reactor.Server.ksTriangleMeshCollider.ConstructClone">
+            <summary>Constructs a new instance of this type. Used for cloning.</summary>
+            <returns>Constructed instance</returns>
+        </member>
+    </members>
+</doc>

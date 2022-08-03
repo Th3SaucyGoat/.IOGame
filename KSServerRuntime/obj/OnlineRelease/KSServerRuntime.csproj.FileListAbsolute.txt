@@ -1,0 +1,7 @@
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\Reactor\KSServerRuntime\KSServerRuntime.dll
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\Reactor\KSServerRuntime\KSServerRuntime.pdb
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\OnlineRelease\KSServerRuntime.csproj.AssemblyReference.cache
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\OnlineRelease\KSServerRuntime.csproj.CoreCompileInputs.cache
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\OnlineRelease\KSServerRuntime.csproj.CopyComplete
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\OnlineRelease\KSServerRuntime.dll
+C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\OnlineRelease\KSServerRuntime.pdb
