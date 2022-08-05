@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 
-public class Hivemind : PlayerMovement, IFoodPickup , IDamagable
+public class Hivemind : PlayerMovement
 {
 
     public TextMeshProUGUI foodText;

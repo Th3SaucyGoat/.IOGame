@@ -31,8 +31,12 @@ public class ServerFood : ksServerEntityScript
     {
         IFoodPickup otherEntityFood = other.Entity.Scripts.Get<IFoodPickup>();
 
-        otherEntityFood.food += foodValue;
+        if (otherEntityFood.food < otherEntityFood.foodCapacity)
+        {
+            otherEntityFood.food += foodValue;
+            Entity.Destroy();
 
-        Entity.Destroy();
+        }
+
     }
 }

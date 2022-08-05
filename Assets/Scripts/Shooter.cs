@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : PlayerMovement , IDamagable , ICommandable
+public class Shooter : PlayerMovement
 {
 
     public int MaxHealth { get; }
@@ -209,8 +209,8 @@ public class Shooter : PlayerMovement , IDamagable , ICommandable
     {
         ROFTimer.Start();
         canShoot = false;
-        GameObject bullet = Instantiate(projectile, EOG.position, EOG.rotation);
-        bullet.GetComponent<Projectile>().direction = ((Vector2) EOG.position - (Vector2) gameObject.transform.position).normalized;
+        //GameObject bullet = Instantiate(projectile, EOG.position, EOG.rotation);
+        //bullet.GetComponent<Projectile>().direction = ((Vector2) EOG.position - (Vector2) gameObject.transform.position).normalized;
         //bullet.GetComponent<Rigidbody2D>().AddForce(EOG.right * bulletForce, ForceMode2D.Impulse);
     }
 

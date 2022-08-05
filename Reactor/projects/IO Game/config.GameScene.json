@@ -57,21 +57,18 @@
 				16.8383,
 				1.0
 			],
+			"collision filter": {
+				"asset": 7
+			},
 			"scripts": [
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"is kinematic": true,
-						"rigid body type": 1
-					}
-				},
 				{
 					"name": ".ksBoxCollider",
 					"params": {
-						"shape id": -1,
+						"shape id": 8,
 						"material": null,
-						"filter": null,
+						"filter": {
+							"asset": 7
+						},
 						"offset": [
 							0.0,
 							0.0,
@@ -81,6 +78,14 @@
 						"simulation flag": true,
 						"query flag": true,
 						"enabled": true
+					}
+				},
+				{
+					"name": ".ksBaseRigidBody",
+					"params": {
+						"use gravity": false,
+						"constraints": 126,
+						"rigid body type": 1
 					}
 				}
 			]
@@ -96,19 +101,15 @@
 				0.8408386,
 				1.0
 			],
+			"is permanent": 1,
+			"collision filter": {
+				"asset": 7
+			},
 			"scripts": [
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"is kinematic": true,
-						"rigid body type": 1
-					}
-				},
 				{
 					"name": ".ksBoxCollider",
 					"params": {
-						"shape id": -2,
+						"shape id": -1,
 						"material": null,
 						"filter": null,
 						"offset": [
@@ -135,11 +136,15 @@
 				16.8383,
 				1.0
 			],
+			"is permanent": 1,
+			"collision filter": {
+				"asset": 7
+			},
 			"scripts": [
 				{
 					"name": ".ksBoxCollider",
 					"params": {
-						"shape id": -1,
+						"shape id": 8,
 						"material": null,
 						"filter": null,
 						"offset": [
@@ -151,14 +156,6 @@
 						"simulation flag": true,
 						"query flag": true,
 						"enabled": true
-					}
-				},
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"is kinematic": true,
-						"rigid body type": 1
 					}
 				}
 			]
@@ -174,11 +171,15 @@
 				0.8409613,
 				1.0
 			],
+			"is permanent": 1,
+			"collision filter": {
+				"asset": 7
+			},
 			"scripts": [
 				{
 					"name": ".ksBoxCollider",
 					"params": {
-						"shape id": -3,
+						"shape id": -2,
 						"material": null,
 						"filter": null,
 						"offset": [
@@ -190,15 +191,6 @@
 						"simulation flag": true,
 						"query flag": true,
 						"enabled": true
-					}
-				},
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"is kinematic": true,
-						"constraints": 126,
-						"rigid body type": 1
 					}
 				}
 			]

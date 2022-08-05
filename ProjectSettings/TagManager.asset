@@ -8,6 +8,7 @@ TagManager:
   - Collector
   - Enemy
   - Ally
+  - CineMachine
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - FoodLocator
   - EntityLocator
   - Hitbox
-  - 
+  - UnitSelection
   - 
   - 
   - 

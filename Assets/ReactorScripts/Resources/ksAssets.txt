@@ -1,6 +1,13 @@
+8|*ReactorScripts/ksCollisionFilters/Collector
+13|*ReactorScripts/ksCollisionFilters/EntityLocator
 2|*ReactorScripts/ksCollisionFilters/Food
 4|*ReactorScripts/ksCollisionFilters/Hivemind
 6|*ReactorScripts/ksCollisionFilters/Locator
+7|*ReactorScripts/ksCollisionFilters/Obstacles
+12|*ReactorScripts/ksCollisionFilters/Projectile
+11|*ReactorScripts/ksCollisionFilters/Shooter
 5|Collector
 3|Food
 1|Hivemind
+10|Projectile
+9|Shooter

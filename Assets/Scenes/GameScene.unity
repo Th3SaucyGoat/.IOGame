@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 38521805}
   m_Layer: 0
   m_Name: CM vcam1
-  m_TagString: MainCamera
+  m_TagString: CineMachine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6004963, y: 1}
+    m_SensorSize: {x: 1.5993485, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -593,8 +593,8 @@ GameObject:
   - component: {fileID: 392428698}
   - component: {fileID: 392428701}
   - component: {fileID: 392428702}
-  - component: {fileID: 392428704}
   - component: {fileID: 392428703}
+  - component: {fileID: 392428704}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
-  CollisionFilter: {fileID: 0}
+  CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
   - Collider: {fileID: 392428703}
@@ -691,7 +691,7 @@ MonoBehaviour:
     IsSimulation: 1
     IsQuery: 1
     Flag: 0
-    Filter: {fileID: 0}
+    Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -739,9 +739,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &464061455
 GameObject:
@@ -754,7 +754,6 @@ GameObject:
   - component: {fileID: 464061456}
   - component: {fileID: 464061459}
   - component: {fileID: 464061460}
-  - component: {fileID: 464061462}
   - component: {fileID: 464061461}
   m_Layer: 0
   m_Name: Bottom
@@ -844,7 +843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
-  CollisionFilter: {fileID: 0}
+  CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
   - Collider: {fileID: 464061461}
@@ -874,7 +873,7 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0, z: 0}
   PhysicsEnabled: 0
   Type: 
-  IsStatic: 0
+  IsStatic: 1
 --- !u!65 &464061461
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -888,22 +887,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &464061462
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464061455}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &727952541
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +949,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 303642196}
   m_HandleRect: {fileID: 303642194}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1222,7 +1205,6 @@ GameObject:
   - component: {fileID: 942403961}
   - component: {fileID: 942403962}
   - component: {fileID: 942403964}
-  - component: {fileID: 942403963}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -1311,7 +1293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
-  CollisionFilter: {fileID: 0}
+  CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
   - Collider: {fileID: 942403964}
@@ -1341,23 +1323,7 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0, z: 0}
   PhysicsEnabled: 0
   Type: 
-  IsStatic: 0
---- !u!54 &942403963
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942403957}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  IsStatic: 1
 --- !u!65 &942403964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2108,7 +2074,6 @@ GameObject:
   - component: {fileID: 1447805371}
   - component: {fileID: 1447805372}
   - component: {fileID: 1447805374}
-  - component: {fileID: 1447805373}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -2197,7 +2162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
-  CollisionFilter: {fileID: 0}
+  CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
   - Collider: {fileID: 1447805374}
@@ -2227,23 +2192,7 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0, z: 0}
   PhysicsEnabled: 0
   Type: 
-  IsStatic: 0
---- !u!54 &1447805373
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447805367}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  IsStatic: 1
 --- !u!65 &1447805374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2882,7 +2831,7 @@ GameObject:
   - component: {fileID: 1810825650}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3173,6 +3122,8 @@ GameObject:
   - component: {fileID: 2078771115}
   - component: {fileID: 2078771114}
   - component: {fileID: 2078771119}
+  - component: {fileID: 2078771120}
+  - component: {fileID: 2078771122}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -3301,6 +3252,37 @@ MonoBehaviour:
   m_maxDepenetrationSpeed: 0
   m_positionIterations: 0
   m_velocityIterations: 0
+--- !u!114 &2078771120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078771113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e2313bff5aa2746aa3c63bcd843730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_addToScriptList: 1
+  m_playerType: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &2078771122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078771113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8d9717d944b7d4d86381a052c86229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_addToScriptList: 1
+  prefab: {fileID: 9142138164355128978, guid: f3c51bf4ec54be24e96d497b1f117a97, type: 3}
 --- !u!1 &2088026326
 GameObject:
   m_ObjectHideFlags: 0

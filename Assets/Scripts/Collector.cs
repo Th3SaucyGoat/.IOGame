@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collector : PlayerMovement , IFoodPickup , IDamagable , ICommandable
+public class Collector : PlayerMovement
 {
     public int food {get {return _food;} 
    
