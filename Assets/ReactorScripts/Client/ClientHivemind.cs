@@ -6,6 +6,7 @@ using KS.Reactor.Client.Unity;
 using KS.Reactor.Client;
 using KS.Reactor;
 using Cinemachine;
+using TMPro;
 
 public class ClientHivemind : ksEntityScript
 {
@@ -51,15 +52,6 @@ public class ClientHivemind : ksEntityScript
     // Called every frame.
     private void Update()
     {
-
-        if (Entity.PlayerController != null)
-        {
-
-        if (Input.GetKeyDown("1"))
-        {
-               
-        }
-        }
     }
 
     [ksRPC(RPC.SENDINFO)]
@@ -67,8 +59,11 @@ public class ClientHivemind : ksEntityScript
     {
         player["Username"] = a[0];
         player["Id"] = a[1];
-        Transform label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1], a[0]);
-        UsernameLabels.SetEntity(label.transform, transform);
+        UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
+        UsernameLabels.SetEntity(label, transform);
+        //label.transform.SetParent(Room.GameObject.transform);
+        print(label.gameObject.GetComponent<TextMeshPro>().text);
+
         if (Room.LocalPlayer.Properties[Prop.TEAMID].Int == Entity.Properties[Prop.TEAMID].Int)
         {
             Room.LocalPlayer.GameObject.GetComponent<PlayerClient>().HiveId = Entity.Id;

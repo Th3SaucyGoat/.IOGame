@@ -9,29 +9,32 @@ using TMPro;
 
 public class UsernameLabels : ksRoomScript
 {
-    public Transform prefab;
+    public UsernameLabel prefab;
 
-    public static Dictionary<uint, Transform> currentLabels;
+    public static Dictionary<uint, UsernameLabel> currentLabels;
 
     private void Start()
     {
-        currentLabels = new Dictionary<uint, Transform>();
+        currentLabels = new Dictionary<uint, UsernameLabel>();
     }
 
-    public static void SetEntity(Transform labelTransform, Transform entityTransform)
+    public static void SetEntity(UsernameLabel label, Transform entityTransform)
     {
-        SetLabelPosition(labelTransform, entityTransform);
-        labelTransform.SetParent(entityTransform);
+
+        entityTransform.GetComponent<Unit>().usernameLabel = label;
+
+        SetLabelOffset(label.transform, entityTransform);
+        //labelTransform.SetParent(entityTransform);
     }
 
-    public static void SetLabelPosition(Transform labelTransform, Transform entityTransform)
+    public static void SetLabelOffset(Transform labelTransform, Transform entityTransform)
     {
-        labelTransform.position = new Vector3(entityTransform.position.x, entityTransform.position.y-1.0f, 0f);
+        labelTransform.gameObject.GetComponent<UsernameLabel>().Offset = new Vector3(0f, -1.0f, 0f);
     }
 
-    public Transform CreateUserLabel(uint Id, string Username)
+    public UsernameLabel CreateUserLabel(uint Id, string Username)
     {
-        Transform label = Instantiate(prefab);
+        UsernameLabel label = (UsernameLabel) Instantiate(prefab);
         currentLabels.Add(Id, label);
         label.gameObject.GetComponent<TextMeshPro>().text = Username;
         return label;

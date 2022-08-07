@@ -8,6 +8,11 @@ using KS.Reactor;
 
 public class ShooterClient : ksEntityScript
 {
+    private int frameNum = 0;
+
+    private bool isFiring = false;
+
+
     public override void Initialize()
     {
     }
@@ -21,16 +26,24 @@ public class ShooterClient : ksEntityScript
     {
         if (Entity.PlayerController != null)
         {
-                if (Entity.Properties[Prop.FIRING] == false)
-                {
-                    Entity.CallRPC(RPC.FIRING, true);
-
-
-                }
-            else if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonDown(0) && isFiring == false)
+            {
+                Entity.CallRPC(RPC.FIRING, true);
+                isFiring = true;
+            }
+            else if (Input.GetMouseButtonUp(0) && isFiring == true)
             {
                     Entity.CallRPC(RPC.FIRING, false);
+                isFiring = false;
             }
+            if (frameNum == 10)
+            {
+                frameNum = 0;
+                ksMultiType pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Entity.CallRPC(RPC.RELAYMOUSEINFO, pos);
+            }
+            frameNum++;
+            
         }
     }
 }

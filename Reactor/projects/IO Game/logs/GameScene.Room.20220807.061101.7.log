@@ -1,0 +1,32 @@
+2022-08-07 06:11:01.8626 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-07 06:11:01.8711 [INFO; Root]  Loaded config.json
+2022-08-07 06:11:01.8711 [INFO; Root]  Loaded config.GameScene.json
+2022-08-07 06:11:01.8766 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-07 06:11:01.8766 [INFO; Root]  Reactor Server v0.10.0
+2022-08-07 06:11:01.8766 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-07 06:11:01.8776 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-07 06:11:01.8861 [DEBUG; Root]  Loading Asset Scripts
+2022-08-07 06:11:01.8886 [DEBUG; Root]  Loading Room Configs
+2022-08-07 06:11:01.8926 [DEBUG; Root]  Initializing PhysX
+2022-08-07 06:11:01.9046 [DEBUG; Root]  Loading PhysX geometry
+2022-08-07 06:11:01.9146 [INFO; Root]  Loaded 7 geometries
+2022-08-07 06:11:01.9151 [INFO; Root]  Loaded 2 geometries
+2022-08-07 06:11:01.9151 [DEBUG; Root]  Loading entity prefabs
+2022-08-07 06:11:01.9281 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-07 06:11:01.9281 [DEBUG; Root]  Loading entity instances
+2022-08-07 06:11:01.9446 [DEBUG; Root]  Initializing scripts
+2022-08-07 06:11:01.9521 [DEBUG; Root]  Room setup complete
+2022-08-07 06:11:01.9526 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-07 06:11:01.9526 [INFO; Root]  Sending client updates every 2 frames
+2022-08-07 06:11:01.9526 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-07 06:11:01.9531 [INFO; Root]  Opening TCP port 8000
+2022-08-07 06:11:05.8710 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-07 06:11:05.8735 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-07 06:11:05.8875 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-07 06:11:05.9085 [INFO; Root]  Player False joined
+2022-08-07 06:11:06.6935 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-07 06:11:06.6935 [INFO; Root]  HeheTrue
+2022-08-07 06:11:06.6970 [INFO; Root]  Start Match!
+2022-08-07 06:11:06.7015 [INFO; Root]  5
+2022-08-07 06:12:02.5264 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 10054-An existing connection was forcibly closed by the remote host.
+2022-08-07 06:12:02.5383 [INFO; Root]  Player 1 left

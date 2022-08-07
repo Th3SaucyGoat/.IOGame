@@ -9,6 +9,16 @@ using Cinemachine;
 
 public class Unit : ksEntityScript
 {
+    public UsernameLabel usernameLabel;
+
+    private void Update()
+    {
+        if (usernameLabel != null)
+        {
+            usernameLabel.Position = transform.position;
+        }
+    }
+
     [ksRPC(RPC.TAKECONTROL)]
     private void TakeControl(uint pId)
     {
@@ -22,7 +32,9 @@ public class Unit : ksEntityScript
             cine.Follow = transform;
         }
         // Regardless, display the username of the player underneath this entity
-        Transform labelForThisPlayer = UsernameLabels.currentLabels[pId];
+        UsernameLabel labelForThisPlayer = UsernameLabels.currentLabels[pId];
         UsernameLabels.SetEntity(labelForThisPlayer, transform);
     }
+
+
 }

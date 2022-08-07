@@ -34,6 +34,8 @@ public class ShooterServer : ksServerEntityScript , IDamagable
 
     private Timer ROFTimer;
 
+    private bool playerFiring = false;
+
     List<ksIServerEntity> enemiesInRange = new List<ksIServerEntity> { };
     private ksVector2 direction;
 
@@ -73,7 +75,7 @@ public class ShooterServer : ksServerEntityScript , IDamagable
     // Called during the update cycle
     private void Update()
     {
-        if (Entity.PlayerController != null && Entity.Properties[Prop.FIRING].Bool == true)
+        if (Entity.PlayerController != null && playerFiring == true)
         {
             if (canShoot)
             {
@@ -147,17 +149,6 @@ public class ShooterServer : ksServerEntityScript , IDamagable
             {
                 Shoot();
             }
-        }
-        num++;
-        if (num == 100)
-        {
-            //ksLog.Info("Here " + IsTargetValid(target).ToString());
-            if (Checks.IsTargetValid(target))
-            {
-                //ksLog.Info("  " + target.IsDestroyed.ToString()) ;
-                //ksLog.Info((target == null).ToString());
-            }
-            num = 0;
         }
     }
 
@@ -257,7 +248,13 @@ public class ShooterServer : ksServerEntityScript , IDamagable
     private void ChangeFiringStatus(ksIServerPlayer player, bool isFiring)
     {
         ksLog.Info("Received " + num.ToString());
-        Entity.Properties[Prop.FIRING] = isFiring;
+        playerFiring = isFiring;
         num++;
+    }
+
+    [ksRPC(RPC.RELAYMOUSEINFO)]
+    private void Rotate(ksIServerPlayer player, ksMultiType point)
+    {
+        LookAtPoint(point);
     }
 }

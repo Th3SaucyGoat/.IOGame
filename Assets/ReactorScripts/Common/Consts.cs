@@ -23,4 +23,5 @@ public class RPC
     public const uint REQUESTCONTROL = 5;
     public const uint TAKECONTROL = 6;
     public const uint FIRING = 7;
+    public const uint RELAYMOUSEINFO = 8;
 }
