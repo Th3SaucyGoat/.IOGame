@@ -16,6 +16,7 @@ public class PlayerClient : ksPlayerScript
     private bool switchtoAlly;
     [SerializeField]
     private LayerMask layerMask;
+    private bool spawnMenuActive;
 
     public uint HiveId
     {
@@ -42,11 +43,26 @@ public class PlayerClient : ksPlayerScript
     {
         if (Input.GetKeyDown("1"))
         {
-            spawnRequester("Collector");
+            if (spawnMenuActive == true)
+            {
+                spawnRequester("Collector");
+            }
+            else
+            {
+                // Issue command to follow +1
+                
+            }
         }
         if (Input.GetKeyDown("2"))
         {
-            spawnRequester("Shooter");
+            if (spawnMenuActive == true)
+            {
+                spawnRequester("Shooter");
+            }
+            else
+            {
+                // Isee command to dismiss
+            }
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -72,6 +88,12 @@ public class PlayerClient : ksPlayerScript
                 // Give player feedback selection failed
             }
         }
+        if (Input.GetKeyDown(KeyCode.CapsLock))
+        {
+            // pull up the spawn menu
+            spawnMenuActive = true ? false : true; 
+
+        }
     }
 
     private bool HandleSwitchControl(Collider result)
@@ -83,7 +105,6 @@ public class PlayerClient : ksPlayerScript
          //Verify the switch can be valid
         if (Player.Properties[Prop.TEAMID].Int == ally.Properties[Prop.TEAMID] && ally.Properties[Prop.CONTROLLEDPLAYERID] == "")
         {
-            print(allyId);
             Room.CallRPC(RPC.REQUESTCONTROL, allyId);
             
             return true;
@@ -96,4 +117,59 @@ public class PlayerClient : ksPlayerScript
         myHivemind = Room.GetEntity(newV).GameObject;
         spawnRequester = myHivemind.GetComponent<ClientHivemind>().HandleSpawnRequestFromPlayer;
     }
+
+    private ksEntity FindClosestAlly()
+    {
+        var validAllies = new List<ksEntity> { };
+        foreach (ksEntity entity in Room.Entities)
+        {
+            // Check if it is a Unit, that is on the same team, that is not controlled, that is not already following a player.
+            if (entity.GameObject.TryGetComponent(out Unit unit))
+            {
+                if (entity.Properties[Prop.TEAMID] == Player.Properties[Prop.TEAMID])
+                {
+                    if (entity.Properties[Prop.CONTROLLEDPLAYERID] == "")
+                    {
+                        if (entity.Properties[Prop.PLAYERFOLLOWINGID] == "")
+                        {
+                            validAllies.Add(entity);
+                        }
+                    }
+                }
+            }
+        }
+        print(validAllies.Count);
+        float closestDistance = 999999f;
+        ksEntity closestTarget = null;
+        foreach (ksEntity ally in validAllies)
+        {
+            if (ally == null)
+            {
+                print("Ally threw null reference during issuing command");
+                continue;
+            }
+            ksEntity currentControlledEntity = Room.GetEntity(Player.Properties[Prop.CONTROLLEDENTITYID]);
+            Vector2 diff = currentControlledEntity.Position2D - ally.Position2D;
+            float distance = diff.magnitude;
+            if (distance < closestDistance)
+            {
+                closestTarget = ally;
+                closestDistance = distance;
+            }
+        }
+        if (closestDistance < 9999f)
+        {
+            return closestTarget;
+        }
+        else
+        {
+            return null;
+        }
+    }
+}
+
+public class ClosestAlly : ksPlayerScript
+{
+
+
 }

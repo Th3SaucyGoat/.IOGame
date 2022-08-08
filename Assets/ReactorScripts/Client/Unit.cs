@@ -15,7 +15,6 @@ public class Unit : ksEntityScript
         if (usernameLabel != null)
         {
             usernameLabel.Position = transform.position;
-            print("has reference" + gameObject.name);
         }
     }
 

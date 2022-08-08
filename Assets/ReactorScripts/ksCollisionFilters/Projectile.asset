@@ -15,4 +15,4 @@ MonoBehaviour:
   __ksAssetId: 12
   m_group: 64
   m_notify: 58
-  m_collide: 0
+  m_collide: 8

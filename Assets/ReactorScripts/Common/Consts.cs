@@ -10,6 +10,7 @@ public class Prop
     public const uint TEAMID = 4;             // Used by player and entites
     public const uint CONTROLLEDPLAYERID = 5; // Used by entities
     public const uint CONTROLLEDENTITYID = 6; // Used by player
+    public const uint PLAYERFOLLOWINGID = 7;  // Used by entites
     public const uint FIRING = 7;             // Used by certain entities
 }
 

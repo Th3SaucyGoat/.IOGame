@@ -23,7 +23,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     public int MaxHealth { get; }
     public int foodCapacity { get; } = 5;
 
-    public float Speed { set; get; } = 3f;
+    public float Speed { set; get; } = 3;
     public float Acceleration { set; get; } = 10f;
 
     private int _food;

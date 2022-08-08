@@ -34,6 +34,7 @@ public class ProjectileServer : ksServerEntityScript
     private void OnOverlapStart(ksCollider ours, ksCollider other)
     {
         // Check if is Obstacle
+        ksLog.Info(other.Entity.CollisionFilter.AssetName);
         if ((other.Entity.CollisionFilter.AssetName == "Obstacles"))
         {
             Entity.Destroy();

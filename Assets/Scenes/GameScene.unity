@@ -169,7 +169,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5987096, y: 1}
+    m_SensorSize: {x: 1.6004057, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -852,7 +852,7 @@ MonoBehaviour:
     IsSimulation: 1
     IsQuery: 1
     Flag: 0
-    Filter: {fileID: 0}
+    Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -874,7 +874,7 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0, z: 0}
   PhysicsEnabled: 0
   Type: 
-  IsStatic: 1
+  IsStatic: 0
 --- !u!65 &464061461
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &727952541
 GameObject:
@@ -1319,7 +1319,7 @@ MonoBehaviour:
     IsSimulation: 1
     IsQuery: 1
     Flag: 0
-    Filter: {fileID: 0}
+    Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -1341,7 +1341,7 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0, z: 0}
   PhysicsEnabled: 0
   Type: 
-  IsStatic: 1
+  IsStatic: 0
 --- !u!65 &942403964
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1369,7 +1369,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &1015972887
 GameObject:
@@ -2205,7 +2205,7 @@ MonoBehaviour:
     IsSimulation: 1
     IsQuery: 1
     Flag: 0
-    Filter: {fileID: 0}
+    Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -2227,7 +2227,7 @@ MonoBehaviour:
   CenterOfMass: {x: 0, y: 0, z: 0}
   PhysicsEnabled: 0
   Type: 
-  IsStatic: 1
+  IsStatic: 0
 --- !u!65 &1447805374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2255,7 +2255,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &1498520202
 GameObject:
