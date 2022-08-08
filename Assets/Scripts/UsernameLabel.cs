@@ -43,7 +43,7 @@ public class UsernameLabel : MonoBehaviour
         set
         {
             _position = value;
-            transform.position = value - Offset;
+            transform.position = value + Offset;
         }
         get { return _position; }
     }

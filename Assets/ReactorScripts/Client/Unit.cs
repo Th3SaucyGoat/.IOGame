@@ -10,19 +10,18 @@ using Cinemachine;
 public class Unit : ksEntityScript
 {
     public UsernameLabel usernameLabel;
-
     private void Update()
     {
         if (usernameLabel != null)
         {
             usernameLabel.Position = transform.position;
+            print("has reference" + gameObject.name);
         }
     }
 
     [ksRPC(RPC.TAKECONTROL)]
     private void TakeControl(uint pId)
     {
-        print("here");
         // Figure out if this pId is the local player's
         if (Room.LocalPlayerId == pId)
         {
@@ -31,9 +30,11 @@ public class Unit : ksEntityScript
             cine.LookAt = transform;
             cine.Follow = transform;
         }
-        // Regardless, display the username of the player underneath this entity
-        UsernameLabel labelForThisPlayer = UsernameLabels.currentLabels[pId];
-        UsernameLabels.SetEntity(labelForThisPlayer, transform);
+        // Remove previous label reference
+        // Room.GetEntity(Room.GetPlayer(pId).Properties[Prop.CONTROLLEDENTITYID]).GameObject.GetComponent<Unit>().usernameLabel = null;
+        print(Room.GetEntity(Room.GetPlayer(pId).Properties[Prop.CONTROLLEDENTITYID]).GameObject);
+        // Display the username of the player underneath this entity
+        UsernameLabels.SetEntity(pId, Entity);
     }
 
 

@@ -4,8 +4,11 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable
+public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement
 {
+    public float Speed { set; get; } = 2f;
+    public float Acceleration { set; get; } = 5f;
+
     private int _food;
 
     public int food {

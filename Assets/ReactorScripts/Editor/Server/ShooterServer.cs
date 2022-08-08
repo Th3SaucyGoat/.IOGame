@@ -5,10 +5,10 @@ using KS.Reactor.Server;
 using KS.Reactor;
 using Example;
 
-public class ShooterServer : ksServerEntityScript , IDamagable
+public class ShooterServer : ksServerEntityScript , IDamagable , IMovement
 {
-    private float speed = 2f;
-    private float ACCELERATION = 4f;
+    public float Speed { set; get; } = 2f;
+    public float Acceleration { set; get; } = 4f;
 
     private ksRigidBody2DView rb;
 
@@ -75,14 +75,15 @@ public class ShooterServer : ksServerEntityScript , IDamagable
     // Called during the update cycle
     private void Update()
     {
-        if (Entity.PlayerController != null && playerFiring == true)
+        ROFTimer.Tick(Time.Delta);
+        if (Entity.PlayerController != null)
         {
-            if (canShoot)
+            if (canShoot && playerFiring == true)
             {
                 Shoot();
             }
+            return;
         }
-        ROFTimer.Tick(Time.Delta);
         //ksLog.Info(target.ToString() + "  " + target.IsDestroyed.ToString() + "  " + (target == null).ToString());
         //ksLog.Info(behaviour.ToString());
         if (behaviour == BEHAVIOUR.Protect)
@@ -155,7 +156,7 @@ public class ShooterServer : ksServerEntityScript , IDamagable
     private void MoveTowardsPoint(ksVector2 point)
     {
         ksVector2 direction = point - Entity.Position2D;
-        rb.Velocity = ksVector2.MoveTowards(rb.Velocity, direction.Normalized() * speed, Time.Delta * ACCELERATION);
+        rb.Velocity = ksVector2.MoveTowards(rb.Velocity, direction.Normalized() * Speed, Time.Delta * Acceleration);
     }
     private void LookAtPoint(ksVector2 point)
     {

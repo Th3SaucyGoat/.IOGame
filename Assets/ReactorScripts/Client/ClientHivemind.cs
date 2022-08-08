@@ -32,10 +32,7 @@ public class ClientHivemind : ksEntityScript
             //Entity.OnPropertyChange[]
 
         }
-        else
-        {
-            
-        }
+       // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
     }
 
     private void Start()
@@ -60,9 +57,7 @@ public class ClientHivemind : ksEntityScript
         player["Username"] = a[0];
         player["Id"] = a[1];
         UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
-        UsernameLabels.SetEntity(label, transform);
-        //label.transform.SetParent(Room.GameObject.transform);
-        print(label.gameObject.GetComponent<TextMeshPro>().text);
+        UsernameLabels.SetEntity(a[1], Entity);
 
         if (Room.LocalPlayer.Properties[Prop.TEAMID].Int == Entity.Properties[Prop.TEAMID].Int)
         {

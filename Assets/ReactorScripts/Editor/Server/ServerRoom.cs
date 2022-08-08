@@ -145,7 +145,8 @@ public class ServerRoom : ksServerRoomScript
             entity.Properties[Prop.CONTROLLEDPLAYERID] = p.Id;
             // Get rid of unit controller on previously controlled entity. Add unit controller to new entity.
             previousEntity.RemoveController();
-            entity.SetController(new UnitController(), p);
+            IMovement movementValues = entity.Scripts.Get<IMovement>();
+            entity.SetController(new UnitController(movementValues.Speed, movementValues.Acceleration), p);
 
             // Send RPC to inform others. Pass Id which can be used to reference the player's name.
             entity.CallRPC(RPC.TAKECONTROL, p.Id);

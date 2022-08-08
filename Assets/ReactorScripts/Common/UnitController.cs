@@ -16,9 +16,9 @@ public class Buttons
 
 public class UnitController : ksPlayerController
 {
-    private const float SPEED = 2f;
+    private float SPEED = 2f;
 
-    private const float ACCELERATION = 7f;
+    private float ACCELERATION = 7f;
 
     private ksVector2 velocity;
 
@@ -26,6 +26,12 @@ public class UnitController : ksPlayerController
     public override uint Type
     {
         get { return 1; }
+    }
+
+    public UnitController(float speed = 2f, float acc = 7f)
+    {
+        this.SPEED = speed;
+        this.ACCELERATION = acc;
     }
 
     // Register all buttons and axes you will be using here.

@@ -5,3 +5,4 @@ C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\L
 C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.csproj.CopyComplete
 C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.dll
 C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.pdb
+C:\Users\mgantar\Videos\Other\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.dll

@@ -4,7 +4,7 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable
+public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement
 {
     private int health;
     public int Health
@@ -23,11 +23,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable
     public int MaxHealth { get; }
     public int foodCapacity { get; } = 5;
 
-    private float ACCELERATION = 6;
-
-    private ksRigidBody2DView rb;
-
-    private float speed = 3;
+    public float Speed { set; get; } = 3f;
+    public float Acceleration { set; get; } = 10f;
 
     private int _food;
     public int food
@@ -54,6 +51,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable
         get { return _food; }
     }
 
+    private ksRigidBody2DView rb;
 
     public ksIServerEntity EntityToFollow;
 
@@ -111,8 +109,13 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable
     // Called during the update cycle
     private void Update()
     {
-        //ksLog.Info(behaviour.ToString());
-        if (behaviour == BEHAVIOUR.Collect)
+        if (Entity.PlayerController != null)
+        {
+            return;
+        }
+
+            //ksLog.Info(behaviour.ToString());
+            if (behaviour == BEHAVIOUR.Collect)
         {
             //ksLog.Info(foodInRange.Count.ToString());
             if (foodTarget == null || foodTarget.IsDestroyed)
@@ -286,6 +289,6 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable
     private void moveTowardsPoint(ksVector2 point)
     {
         ksVector2 direction = point - Entity.Position2D;
-        rb.Velocity = ksVector2.MoveTowards(rb.Velocity, direction.Normalized() * speed, Time.Delta * ACCELERATION);
+        rb.Velocity = ksVector2.MoveTowards(rb.Velocity, direction.Normalized() * Speed, Time.Delta * Acceleration);
     }
 }

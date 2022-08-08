@@ -169,7 +169,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5993485, y: 1}
+    m_SensorSize: {x: 1.5979382, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 303642196}
   m_HandleRect: {fileID: 303642194}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3282,7 +3282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
-  prefab: {fileID: 9142138164355128978, guid: f3c51bf4ec54be24e96d497b1f117a97, type: 3}
+  prefab: {fileID: 6994301373608587823, guid: f3c51bf4ec54be24e96d497b1f117a97, type: 3}
 --- !u!1 &2088026326
 GameObject:
   m_ObjectHideFlags: 0
