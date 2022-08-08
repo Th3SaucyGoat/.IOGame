@@ -1,0 +1,39 @@
+2022-08-07 20:05:23.3461 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-07 20:05:23.3689 [INFO; Root]  Loaded config.json
+2022-08-07 20:05:23.3689 [INFO; Root]  Loaded config.GameScene.json
+2022-08-07 20:05:23.3811 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-07 20:05:23.3811 [INFO; Root]  Reactor Server v0.10.0
+2022-08-07 20:05:23.3811 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-07 20:05:23.3831 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-07 20:05:23.4006 [DEBUG; Root]  Loading Asset Scripts
+2022-08-07 20:05:23.4046 [DEBUG; Root]  Loading Room Configs
+2022-08-07 20:05:23.4126 [DEBUG; Root]  Initializing PhysX
+2022-08-07 20:05:23.4460 [DEBUG; Root]  Loading PhysX geometry
+2022-08-07 20:05:23.4655 [INFO; Root]  Loaded 7 geometries
+2022-08-07 20:05:23.4655 [INFO; Root]  Loaded 2 geometries
+2022-08-07 20:05:23.4655 [DEBUG; Root]  Loading entity prefabs
+2022-08-07 20:05:23.4894 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-07 20:05:23.4894 [DEBUG; Root]  Loading entity instances
+2022-08-07 20:05:23.5201 [DEBUG; Root]  Initializing scripts
+2022-08-07 20:05:23.5337 [DEBUG; Root]  Room setup complete
+2022-08-07 20:05:23.5339 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-07 20:05:23.5339 [INFO; Root]  Sending client updates every 2 frames
+2022-08-07 20:05:23.5339 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-07 20:05:23.5349 [INFO; Root]  Opening TCP port 8000
+2022-08-07 20:05:30.2807 [INFO; Root]  Client(id = 1, address = 192.168.0.133) connected
+2022-08-07 20:05:30.2890 [DEBUG; Root]  Client(id = 1, address = 192.168.0.133) model validated
+2022-08-07 20:05:30.3379 [DEBUG; Root]  Client(id = 1, address = 192.168.0.133) authenticated
+2022-08-07 20:05:30.3640 [INFO; Root]  Player False joined
+2022-08-07 20:05:31.3388 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-07 20:05:31.3388 [INFO; Root]  HeheTrue
+2022-08-07 20:05:31.3528 [INFO; Root]  Start Match!
+2022-08-07 20:05:31.3703 [INFO; Root]  5
+2022-08-07 20:05:34.3438 [INFO; Root]  server received request to spawn = 1
+2022-08-07 20:05:34.3498 [INFO; Root]  server received request to spawn = 0
+2022-08-07 20:05:35.2534 [INFO; Root]  Request to take control of unit passed
+2022-08-07 20:05:35.6521 [INFO; Root]  Received 0
+2022-08-07 20:05:35.7194 [INFO; Root]  Received 1
+2022-08-07 20:05:36.1026 [INFO; Root]  Received 2
+2022-08-07 20:05:47.6020 [INFO; Root]  Received 3
+2022-08-07 20:05:49.2714 [INFO; Root]  Client(id = 1, address = 192.168.0.133) disconnected: 2-End of file
+2022-08-07 20:05:49.2862 [INFO; Root]  Player 1 left

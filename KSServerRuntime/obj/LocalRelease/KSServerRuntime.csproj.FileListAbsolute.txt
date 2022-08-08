@@ -6,3 +6,9 @@ C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\L
 C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.dll
 C:\Users\MAXGa\Documents\Programming\UnityProjects\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.pdb
 C:\Users\mgantar\Videos\Other\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.dll
+C:\Users\mgantar\Videos\Other\.IOGame\Reactor\KSServerRuntime\KSServerRuntime.Local.dll
+C:\Users\mgantar\Videos\Other\.IOGame\Reactor\KSServerRuntime\KSServerRuntime.Local.pdb
+C:\Users\mgantar\Videos\Other\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.csproj.AssemblyReference.cache
+C:\Users\mgantar\Videos\Other\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.csproj.CoreCompileInputs.cache
+C:\Users\mgantar\Videos\Other\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.csproj.CopyComplete
+C:\Users\mgantar\Videos\Other\.IOGame\KSServerRuntime\obj\LocalRelease\KSServerRuntime.Local.pdb

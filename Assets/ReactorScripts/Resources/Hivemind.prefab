@@ -203,3 +203,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
+  usernameLabel: {fileID: 0}
