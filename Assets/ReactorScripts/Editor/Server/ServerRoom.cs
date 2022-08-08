@@ -99,7 +99,8 @@ public class ServerRoom : ksServerRoomScript
             foreach (ksIServerPlayer p in Room.Players)
             {
                 ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(10f, -5f));
-                hivemind.SetController(new UnitController(), p);
+                IMovement movementValues = hivemind.Scripts.Get<IMovement>();
+                hivemind.SetController(new UnitController(movementValues.Speed, movementValues.Acceleration), p);
                 hivemind.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.CONTROLLEDENTITYID] = hivemind.Id;
