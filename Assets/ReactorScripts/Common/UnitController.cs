@@ -34,6 +34,12 @@ public class UnitController : ksPlayerController
         this.ACCELERATION = acc;
     }
 
+    public UnitController()
+    {
+        SPEED = 2f;
+        ACCELERATION = 7f;
+    }
+
     // Register all buttons and axes you will be using here.
     public override void RegisterInputs(ksInputRegistrar registrar)
     {
