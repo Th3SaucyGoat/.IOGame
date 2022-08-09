@@ -9,6 +9,7 @@ using Cinemachine;
 
 public class Unit : ksEntityScript
 {
+    [HideInInspector]
     public UsernameLabel usernameLabel;
     private void Update()
     {

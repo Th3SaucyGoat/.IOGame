@@ -5,7 +5,7 @@ using KS.Reactor.Server;
 using KS.Reactor;
 using Example;
 
-public class ShooterServer : ksServerEntityScript , IDamagable , IMovement
+public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , IBehavior 
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 4f;
@@ -27,8 +27,17 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement
         get { return health; }
     }
 
-    public ksIServerEntity Hivemind;
-    private ksIServerEntity EntityToFollow { set; get; }
+    public ksIServerEntity Hivemind { set; get; }
+
+    private ksIServerEntity _EntityToFollow;
+    public ksIServerEntity EntityToFollow {
+        set
+        {
+            _EntityToFollow = value;
+            ksLog.Info("Went through Setter");
+        }
+        get { return _EntityToFollow; }
+    }
 
     private ksIServerEntity target;
 
@@ -88,8 +97,15 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement
         //ksLog.Info(behaviour.ToString());
         if (behaviour == BEHAVIOUR.Protect)
         {
+            
             ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
             float distance = pos.Magnitude();
+           
+            if (num == 50)
+            {
+                ksLog.Info(EntityToFollow.Type + " and " + distance.ToString());
+                num = 0;
+            }
             // Head back if too far away
             if (distance > 2.0f)
             {
@@ -151,6 +167,7 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement
                 Shoot();
             }
         }
+        num++;
     }
 
     private void MoveTowardsPoint(ksVector2 point)
@@ -257,5 +274,11 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement
     private void Rotate(ksIServerPlayer player, ksMultiType point)
     {
         LookAtPoint(point);
+    }
+
+    public void ChangeFollow()
+    {
+        ksLog.Info("Here Follow" + EntityToFollow.Type);
+        
     }
 }

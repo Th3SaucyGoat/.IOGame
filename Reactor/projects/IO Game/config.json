@@ -59,6 +59,9 @@
 							"query flag": true,
 							"enabled": true
 						}
+					},
+					{
+						"name": "UnitServer"
 					}
 				]
 			}
@@ -132,6 +135,9 @@
 							"constraints": 120,
 							"rigid body type": 1
 						}
+					},
+					{
+						"name": "UnitServer"
 					}
 				]
 			}
@@ -231,6 +237,9 @@
 							"query flag": true,
 							"enabled": true
 						}
+					},
+					{
+						"name": "UnitServer"
 					}
 				]
 			}

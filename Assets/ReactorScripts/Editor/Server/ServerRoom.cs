@@ -104,6 +104,8 @@ public class ServerRoom : ksServerRoomScript
                 hivemind.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.CONTROLLEDENTITYID] = hivemind.Id;
+                // Set the hivemind to be controlled by the player id. I will need to adjust this for 4 players.
+                hivemind.Properties[Prop.CONTROLLEDPLAYERID] = p.Id;
                 teamId++;
                 ksLog.Info(hivemind.Id.ToString());
 

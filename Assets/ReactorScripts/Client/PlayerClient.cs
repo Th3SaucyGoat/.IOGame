@@ -50,7 +50,7 @@ public class PlayerClient : ksPlayerScript
             else
             {
                 // Issue command to follow +1
-                
+                AllyFollow();
             }
         }
         if (Input.GetKeyDown("2"))
@@ -91,7 +91,8 @@ public class PlayerClient : ksPlayerScript
         if (Input.GetKeyDown(KeyCode.CapsLock))
         {
             // pull up the spawn menu
-            spawnMenuActive = true ? false : true; 
+            spawnMenuActive = spawnMenuActive ? false : true;
+            print("Spawn Menu Active? " + spawnMenuActive);
 
         }
     }
@@ -118,6 +119,23 @@ public class PlayerClient : ksPlayerScript
         spawnRequester = myHivemind.GetComponent<ClientHivemind>().HandleSpawnRequestFromPlayer;
     }
 
+    private void AllyFollow()
+    {
+        //Retrieve closest valid ally.
+        ksEntity ally = FindClosestAlly();
+        if (ally != null)
+        {
+            print("Here" + ally.GameObject.name);
+
+            ally.CallRPC(RPC.FOLLOW);
+        }
+        else
+        {
+            print("ally is null");
+        }
+
+    }
+
     private ksEntity FindClosestAlly()
     {
         var validAllies = new List<ksEntity> { };
@@ -126,19 +144,25 @@ public class PlayerClient : ksPlayerScript
             // Check if it is a Unit, that is on the same team, that is not controlled, that is not already following a player.
             if (entity.GameObject.TryGetComponent(out Unit unit))
             {
-                if (entity.Properties[Prop.TEAMID] == Player.Properties[Prop.TEAMID])
+                //print("a");
+                if (entity.Properties[Prop.TEAMID].Int == Player.Properties[Prop.TEAMID].Int)
                 {
+                    //print("b");
                     if (entity.Properties[Prop.CONTROLLEDPLAYERID] == "")
                     {
+                        //print("c");
+
                         if (entity.Properties[Prop.PLAYERFOLLOWINGID] == "")
                         {
+                            //print("d");
+
                             validAllies.Add(entity);
                         }
                     }
                 }
             }
         }
-        print(validAllies.Count);
+        print("Valid Allies Count = " + validAllies.Count);
         float closestDistance = 999999f;
         ksEntity closestTarget = null;
         foreach (ksEntity ally in validAllies)

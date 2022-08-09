@@ -4,10 +4,13 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement
+public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement , IBehavior
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 5f;
+
+    public ksIServerEntity EntityToFollow { set; get; }
+    public ksIServerEntity Hivemind { set; get; }
 
     private int _food;
 
@@ -89,6 +92,10 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
         // The collector needs to know it is of that unique team/player.
 
         //ksLog.Info("IS ASSIGNED? = "+ hive.Scripts.Get<CollectorServer>().Hivemind.ToString());
+    }
+    public void ChangeFollow()
+    {
+        ksLog.Info("Here Follow");
     }
 
 }

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6285775695582080744}
   - component: {fileID: 2997236792550911447}
   - component: {fileID: -8024558047470555750}
+  - component: {fileID: 347854450265116815}
   m_Layer: 10
   m_Name: Hivemind
   m_TagString: Untagged
@@ -204,3 +205,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
   usernameLabel: {fileID: 0}
+--- !u!114 &347854450265116815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2045134037775651393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4315a6043588a004998fbb22c901fff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

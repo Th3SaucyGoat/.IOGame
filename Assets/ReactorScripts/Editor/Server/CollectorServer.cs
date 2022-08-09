@@ -4,7 +4,7 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement
+public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement , IBehavior
 {
     private int health;
     public int Health
@@ -53,9 +53,9 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
 
     private ksRigidBody2DView rb;
 
-    public ksIServerEntity EntityToFollow;
+    public ksIServerEntity EntityToFollow { set; get; }
 
-    public ksIServerEntity Hivemind;
+    public ksIServerEntity Hivemind { set; get; }
 
     private IFoodPickup hivemindFood;
 
@@ -290,5 +290,9 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     {
         ksVector2 direction = point - Entity.Position2D;
         rb.Velocity = ksVector2.MoveTowards(rb.Velocity, direction.Normalized() * Speed, Time.Delta * Acceleration);
+    }
+    public void ChangeFollow()
+    {
+        ksLog.Info("Here Follow");
     }
 }
