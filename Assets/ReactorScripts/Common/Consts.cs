@@ -26,4 +26,5 @@ public class RPC
     public const uint FIRING = 7;
     public const uint RELAYMOUSEINFO = 8;
     public const uint FOLLOW = 9;
+    public const uint DISMISS = 10;
 }

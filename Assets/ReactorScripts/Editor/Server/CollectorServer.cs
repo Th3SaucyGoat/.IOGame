@@ -4,7 +4,7 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement , IBehavior
+public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement , ICommandable
 {
     private int health;
     public int Health
@@ -42,7 +42,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
                 }
                 else
                 {
-                    behaviour = BEHAVIOUR.Idle;
+                    behavior = BEHAVIOR.Idle;
                 }
             }
             Entity.Properties[Prop.FOOD] = _food;
@@ -63,8 +63,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
 
     private bool attached = false;
 
-    enum BEHAVIOUR { Idle, Collect, Return }
-    BEHAVIOUR behaviour;
+    enum BEHAVIOR { Idle, Collect, Return }
+    BEHAVIOR behavior;
     private ksIServerEntity foodTarget;
     private ksVector2 attachedOffset;
     private int feedNum;
@@ -78,7 +78,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     {
         food = 0;
 
-        behaviour = BEHAVIOUR.Idle;
+        behavior = BEHAVIOR.Idle;
         EntityToFollow = Hivemind;
         hivemindFood = Hivemind.Scripts.Get<IFoodPickup>();
         // Get rigidBody. Will it be 2D or 3D?
@@ -114,15 +114,15 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             return;
         }
 
-            //ksLog.Info(behaviour.ToString());
-            if (behaviour == BEHAVIOUR.Collect)
+            //ksLog.Info(behavior.ToString());
+            if (behavior == BEHAVIOR.Collect)
         {
             //ksLog.Info(foodInRange.Count.ToString());
-            if (foodTarget == null || foodTarget.IsDestroyed)
+            if (!Checks.IsTargetValid(foodTarget))
             {
                 if (foodInRange.Count == 0)
                 {
-                    behaviour = BEHAVIOUR.Idle;
+                    behavior = BEHAVIOR.Idle;
                     return;
                 }
                 foodTarget = FindClosestFood();
@@ -133,7 +133,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             }
         }
 
-        else if (behaviour == BEHAVIOUR.Return)
+        else if (behavior == BEHAVIOR.Return)
         {
             if (attached)
             {
@@ -160,7 +160,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         }
 
         //No food recognized nearby and can't feed. Stay at a certain distance away from entity following
-        else if (behaviour == BEHAVIOUR.Idle)
+        else if (behavior == BEHAVIOR.Idle)
         {
             ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
             float distance = pos.Magnitude();
@@ -171,7 +171,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             }
             else if (foodInRange.Count >= 1 && food < foodCapacity)
             {
-                behaviour = BEHAVIOUR.Collect;
+                behavior = BEHAVIOR.Collect;
                 foodTarget = FindClosestFood();
             }
             //Seek food if detects food
@@ -180,7 +180,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
 
     private void Detach()
     {
-        behaviour = BEHAVIOUR.Idle;
+        behavior = BEHAVIOR.Idle;
         attached = false;
         attachedOffset = ksVector2.Zero;
         //rb.mass = 1;
@@ -193,7 +193,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         var foodToRemove = new List<ksIServerEntity> { };
         foreach (ksIServerEntity f in foodInRange)
         {
-            if (f == null || f.IsDestroyed)
+            if (!Checks.IsTargetValid(foodTarget))
             {
                 //ksLog.Info("FOOD IN RANGE HAS A DESTROYED FOOD");
                 foodToRemove.Add(f);
@@ -232,11 +232,11 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
             var distance = pos.Magnitude();
             // Too far away, return to entity to follow
-            if (behaviour != BEHAVIOUR.Return)
+            if (behavior != BEHAVIOR.Return)
             {
                 if (distance> 3.5 || foodInRange.Count == 0)
                 {
-                    behaviour = BEHAVIOUR.Idle;
+                    behavior = BEHAVIOR.Idle;
                 }
             }
         }
@@ -252,16 +252,16 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
 
             foodInRange.Remove(other.Entity);
   
-            if (foodInRange.Count == 0 && behaviour != BEHAVIOUR.Return)
+            if (foodInRange.Count == 0 && behavior != BEHAVIOR.Return)
             {
-                behaviour = BEHAVIOUR.Idle;
+                behavior = BEHAVIOR.Idle;
             }
         }
     }
 
     private void Feed()
     {
-        behaviour = BEHAVIOUR.Return;
+        behavior = BEHAVIOR.Return;
     }
 
     private void OnCollisionStart(ksContact contact)
@@ -272,7 +272,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             //ksLog.Info("Collector registered a collision event that was not the Hivemind");
         }
         // Handles attach logic when returning.
-        if (behaviour == BEHAVIOUR.Return && contact.Collider1.Entity == Hivemind)
+        if (behavior == BEHAVIOR.Return && contact.Collider1.Entity == Hivemind)
             
         {
 

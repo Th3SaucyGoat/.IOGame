@@ -5,7 +5,7 @@ using KS.Reactor.Server;
 using KS.Reactor;
 using Example;
 
-public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , IBehavior 
+public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICommandable 
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 4f;

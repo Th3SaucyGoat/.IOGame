@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af7c2b923e0887143a8f52e243a38955, type: 3}
-  m_Name: Locator
+  m_Name: FoodLocator
   m_EditorClassIdentifier: 
   __ksAssetId: 6
   m_group: 4

@@ -4,7 +4,7 @@ using KS.Reactor;
 using KS.Reactor.Server;
 
 
-public interface IBehavior
+public interface ICommandable
 {
     ksIServerEntity EntityToFollow { set; get; }
     ksIServerEntity Hivemind { set; get; }

@@ -61,7 +61,8 @@ public class PlayerClient : ksPlayerScript
             }
             else
             {
-                // Isee command to dismiss
+                // I see command to dismiss
+                DismissFollowingAllies();
             }
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -97,6 +98,7 @@ public class PlayerClient : ksPlayerScript
         }
     }
 
+
     private bool HandleSwitchControl(Collider result)
     {
         // Convert to ksIEntity
@@ -117,6 +119,19 @@ public class PlayerClient : ksPlayerScript
     {
         myHivemind = Room.GetEntity(newV).GameObject;
         spawnRequester = myHivemind.GetComponent<ClientHivemind>().HandleSpawnRequestFromPlayer;
+    }
+    private void DismissFollowingAllies()
+    {
+        // Retrieve all following allies. Could Loop through all the allies and check their player following property, or store an array.
+        var alliesFollowing = new List<ksEntity> { };
+        foreach (ksEntity entity in Room.Entities)
+        {
+            if (entity.Properties[Prop.CONTROLLEDPLAYERID].Int == Player.Id)
+            {
+
+            }
+        }
+        
     }
 
     private void AllyFollow()
@@ -190,10 +205,4 @@ public class PlayerClient : ksPlayerScript
             return null;
         }
     }
-}
-
-public class ClosestAlly : ksPlayerScript
-{
-
-
 }

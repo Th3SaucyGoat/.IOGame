@@ -1,8 +1,8 @@
 8|*ReactorScripts/ksCollisionFilters/Collector
 13|*ReactorScripts/ksCollisionFilters/EntityLocator
 2|*ReactorScripts/ksCollisionFilters/Food
+6|*ReactorScripts/ksCollisionFilters/FoodLocator
 4|*ReactorScripts/ksCollisionFilters/Hivemind
-6|*ReactorScripts/ksCollisionFilters/Locator
 7|*ReactorScripts/ksCollisionFilters/Obstacles
 12|*ReactorScripts/ksCollisionFilters/Projectile
 11|*ReactorScripts/ksCollisionFilters/Shooter

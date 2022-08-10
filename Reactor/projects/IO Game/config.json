@@ -138,6 +138,25 @@
 					},
 					{
 						"name": "UnitServer"
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 5,
+							"material": null,
+							"filter": {
+								"asset": 6
+							},
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": true,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
 					}
 				]
 			}
@@ -273,6 +292,15 @@
 				"m_collide": 0
 			}
 		},
+		"ReactorScripts/ksCollisionFilters/FoodLocator": {
+			"asset id": 6,
+			"name": "/ksCollisionFilter",
+			"fields": {
+				"m_group": 4,
+				"m_notify": 1,
+				"m_collide": 0
+			}
+		},
 		"ReactorScripts/ksCollisionFilters/Hivemind": {
 			"asset id": 4,
 			"name": "/ksCollisionFilter",
@@ -280,15 +308,6 @@
 				"m_group": 2,
 				"m_notify": 1,
 				"m_collide": 58
-			}
-		},
-		"ReactorScripts/ksCollisionFilters/Locator": {
-			"asset id": 6,
-			"name": "/ksCollisionFilter",
-			"fields": {
-				"m_group": 4,
-				"m_notify": 1,
-				"m_collide": 0
 			}
 		},
 		"ReactorScripts/ksCollisionFilters/Obstacles": {
