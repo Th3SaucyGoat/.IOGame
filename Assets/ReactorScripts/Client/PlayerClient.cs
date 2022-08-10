@@ -126,12 +126,16 @@ public class PlayerClient : ksPlayerScript
         var alliesFollowing = new List<ksEntity> { };
         foreach (ksEntity entity in Room.Entities)
         {
-            if (entity.Properties[Prop.CONTROLLEDPLAYERID].Int == Player.Id)
+            if (entity.Properties[Prop.PLAYERFOLLOWINGID].Int == Player.Id)
             {
-
+                alliesFollowing.Add(entity);
             }
         }
-        
+        // Determine whether to use batch rpc or single rpc
+        foreach (ksEntity entity in alliesFollowing)
+        {
+            entity.CallRPC(RPC.DISMISS);
+        }
     }
 
     private void AllyFollow()

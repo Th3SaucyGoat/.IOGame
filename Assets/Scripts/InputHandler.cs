@@ -125,8 +125,8 @@ public class InputHandler : MonoBehaviour
                         return;
                     }
                 }
-                closestAlly.GetComponent<ICommandable>().EntityToFollow = currentControlledEntity;
-                closestAlly.GetComponent<ICommandable>().determineFollowState();
+                //closestAlly.GetComponent<ICommandable>().EntityToFollow = currentControlledEntity;
+                //closestAlly.GetComponent<ICommandable>().determineFollowState();
 
 
                 alliesFollowing.Add(closestAlly);
@@ -142,8 +142,8 @@ public class InputHandler : MonoBehaviour
             {
                 foreach (GameObject ally in alliesFollowing)
                 {
-                    ally.GetComponent<ICommandable>().EntityToFollow = hive;
-                    ally.GetComponent<ICommandable>().determineDismissState();
+                    //ally.GetComponent<ICommandable>().EntityToFollow = hive;
+                    //ally.GetComponent<ICommandable>().determineDismissState();
                 }
                 alliesFollowing.Clear();
             }

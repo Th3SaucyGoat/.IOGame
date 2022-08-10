@@ -78,7 +78,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     {
         food = 0;
 
-        behavior = BEHAVIOR.Idle;
+        behavior = BEHAVIOR.Collect;
         EntityToFollow = Hivemind;
         hivemindFood = Hivemind.Scripts.Get<IFoodPickup>();
         // Get rigidBody. Will it be 2D or 3D?
@@ -109,6 +109,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     // Called during the update cycle
     private void Update()
     {
+        //ksLog.Info(behavior.ToString());
         if (Entity.PlayerController != null)
         {
             return;
@@ -120,6 +121,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             //ksLog.Info(foodInRange.Count.ToString());
             if (!Checks.IsTargetValid(foodTarget))
             {
+                //ksLog.Info("Here = " + foodInRange.Count.ToString() + !Checks.IsTargetValid(foodTarget));
                 if (foodInRange.Count == 0)
                 {
                     behavior = BEHAVIOR.Idle;
@@ -193,9 +195,9 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         var foodToRemove = new List<ksIServerEntity> { };
         foreach (ksIServerEntity f in foodInRange)
         {
-            if (!Checks.IsTargetValid(foodTarget))
+            if (!Checks.IsTargetValid(f))
             {
-                //ksLog.Info("FOOD IN RANGE HAS A DESTROYED FOOD");
+                ksLog.Info("FOOD IN RANGE HAS A DESTROYED FOOD");
                 foodToRemove.Add(f);
                 continue;
             }
@@ -221,6 +223,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         if (ours.IsTrigger)
         {
             foodInRange.Add(other.Entity);
+            ksLog.Info("adding = "+ foodInRange.Count.ToString());
             //ksLog.Info("Yes ");
         }
         // Just collided with the food. Determine next AI logic.
@@ -251,6 +254,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         {
 
             foodInRange.Remove(other.Entity);
+            ksLog.Info("removing = " + foodInRange.Count.ToString());
   
             if (foodInRange.Count == 0 && behavior != BEHAVIOR.Return)
             {
@@ -293,6 +297,17 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     }
     public void ChangeFollow()
     {
-        ksLog.Info("Here Follow");
+        if (food == foodCapacity)
+        {
+            behavior = BEHAVIOR.Return;
+        }
+        else if (Checks.DetermineDistance(Entity, EntityToFollow) > 2)
+        {
+            behavior = BEHAVIOR.Idle;
+        }
+        else if ( food < foodCapacity && foodInRange.Count >0)
+        {
+            behavior = BEHAVIOR.Collect;
+        }
     }
 }

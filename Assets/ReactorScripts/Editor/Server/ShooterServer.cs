@@ -34,7 +34,6 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
         set
         {
             _EntityToFollow = value;
-            ksLog.Info("Went through Setter");
         }
         get { return _EntityToFollow; }
     }

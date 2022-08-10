@@ -8,9 +8,27 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 5f;
-
-    public ksIServerEntity EntityToFollow { set; get; }
-    public ksIServerEntity Hivemind { set; get; }
+    private ksIServerEntity _EntityToFollow;
+    public ksIServerEntity EntityToFollow
+    {
+        set
+        {
+            _EntityToFollow = value;
+            if (value == null)
+            {
+                behavior = BEHAVIOR.Collect;
+            }
+            else
+            {
+                behavior = BEHAVIOR.Follow;
+            }
+        }
+        get
+        {
+            return _EntityToFollow;
+        }
+    }
+    public ksIServerEntity Hivemind { set; get; } = null;
 
     private int _food;
 
@@ -45,7 +63,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
     BEHAVIOR behavior = BEHAVIOR.Collect;
 
     private ksIServerEntity foodTarget;
-    private List<ksIServerEntity> foodInRange;
+    private List<ksIServerEntity> foodInRange = new List<ksIServerEntity> { };
     private int foodSearchDelay;
 
     private ksRigidBody2DView rb;
@@ -73,11 +91,32 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
     // Called during the update cycle
     private void Update()
     {
-        if (behavior == BEHAVIOR.Collect)
+        if (EntityToFollow != null)
+        {
+            ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
+            float distance = pos.Magnitude();
+            // Stay at a distance from player
+            if (distance > 3f)
+            {
+                moveTowardsPoint(EntityToFollow.Position2D);
+            }
+            else if (foodInRange.Count >= 1 && food < foodCapacity)
+            {
+                foodTarget = FindClosestFood();
+                behavior = BEHAVIOR.Collect;
+
+            }
+        }
+
+        else if (behavior == BEHAVIOR.Collect)
         {
             // if have foodTarget, and it is in range of hivemind, follow
             if (!Checks.IsTargetValid(foodTarget))
             {
+                if (EntityToFollow != null)
+                {
+                    behavior = BEHAVIOR.Follow;
+                }
                 foodSearchDelay++;
                 if (foodSearchDelay == 200)
                 {
@@ -90,6 +129,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
                 moveTowardsPoint(foodTarget.Position2D);
             }
         }
+        
     }
 
     private void moveTowardsPoint(ksVector2 point)

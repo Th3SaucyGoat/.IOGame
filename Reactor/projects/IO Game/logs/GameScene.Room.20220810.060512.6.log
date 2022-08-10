@@ -1,0 +1,100 @@
+2022-08-10 06:05:12.7536 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-10 06:05:12.7631 [INFO; Root]  Loaded config.json
+2022-08-10 06:05:12.7636 [INFO; Root]  Loaded config.GameScene.json
+2022-08-10 06:05:12.7686 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-10 06:05:12.7686 [INFO; Root]  Reactor Server v0.10.0
+2022-08-10 06:05:12.7691 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-10 06:05:12.7701 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-10 06:05:12.7796 [DEBUG; Root]  Loading Asset Scripts
+2022-08-10 06:05:12.7826 [DEBUG; Root]  Loading Room Configs
+2022-08-10 06:05:12.7881 [DEBUG; Root]  Initializing PhysX
+2022-08-10 06:05:12.8036 [DEBUG; Root]  Loading PhysX geometry
+2022-08-10 06:05:12.8156 [INFO; Root]  Loaded 8 geometries
+2022-08-10 06:05:12.8161 [INFO; Root]  Loaded 2 geometries
+2022-08-10 06:05:12.8161 [DEBUG; Root]  Loading entity prefabs
+2022-08-10 06:05:12.8321 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-10 06:05:12.8321 [DEBUG; Root]  Loading entity instances
+2022-08-10 06:05:12.8516 [DEBUG; Root]  Initializing scripts
+2022-08-10 06:05:12.8616 [DEBUG; Root]  Room setup complete
+2022-08-10 06:05:12.8621 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-10 06:05:12.8621 [INFO; Root]  Sending client updates every 2 frames
+2022-08-10 06:05:12.8621 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-10 06:05:12.8626 [INFO; Root]  Opening TCP port 8000
+2022-08-10 06:05:17.2621 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-10 06:05:17.2661 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-10 06:05:17.2851 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-10 06:05:17.3016 [INFO; Root]  Player False joined
+2022-08-10 06:05:18.7157 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-10 06:05:18.7157 [INFO; Root]  HeheTrue
+2022-08-10 06:05:18.7217 [INFO; Root]  Start Match!
+2022-08-10 06:05:18.7312 [INFO; Root]  5
+2022-08-10 06:05:22.8940 [INFO; Root]  server received request to spawn = 1
+2022-08-10 06:05:22.8975 [INFO; Root]  adding = 1
+2022-08-10 06:05:22.8975 [INFO; Root]  adding = 2
+2022-08-10 06:05:22.8975 [INFO; Root]  adding = 3
+2022-08-10 06:05:22.8995 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:22.8995 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:22.8995 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:24.0541 [INFO; Root]  adding = 1
+2022-08-10 06:05:24.0846 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:24.2086 [INFO; Root]  adding = 1
+2022-08-10 06:05:24.2086 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:24.2866 [INFO; Root]  removing = 0
+2022-08-10 06:05:24.3016 [INFO; Root]  adding = 1
+2022-08-10 06:05:24.3016 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:24.5496 [INFO; Root]  adding = 1
+2022-08-10 06:05:24.5496 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:28.4714 [INFO; Root]  removing = 0
+2022-08-10 06:05:28.4869 [INFO; Root]  removing = 0
+2022-08-10 06:05:28.6729 [INFO; Root]  removing = 0
+2022-08-10 06:05:28.6884 [INFO; Root]  adding = 1
+2022-08-10 06:05:28.6884 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:29.2310 [INFO; Root]  adding = 1
+2022-08-10 06:05:29.2310 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:29.6340 [INFO; Root]  removing = 0
+2022-08-10 06:05:29.8820 [INFO; Root]  adding = 1
+2022-08-10 06:05:29.8820 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:30.2075 [INFO; Root]  adding = 1
+2022-08-10 06:05:30.2075 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:31.7266 [INFO; Root]  adding = 1
+2022-08-10 06:05:31.7266 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:31.8971 [INFO; Root]  adding = 1
+2022-08-10 06:05:31.8971 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:33.0907 [INFO; Root]  adding = 1
+2022-08-10 06:05:33.0907 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:33.1992 [INFO; Root]  adding = 1
+2022-08-10 06:05:33.1992 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:33.4008 [INFO; Root]  removing = 0
+2022-08-10 06:05:33.4473 [INFO; Root]  adding = 1
+2022-08-10 06:05:33.4473 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:33.8658 [INFO; Root]  adding = 1
+2022-08-10 06:05:33.8658 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:34.2688 [INFO; Root]  adding = 1
+2022-08-10 06:05:34.2688 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:34.3773 [INFO; Root]  removing = 0
+2022-08-10 06:05:34.5323 [INFO; Root]  removing = 0
+2022-08-10 06:05:34.7494 [INFO; Root]  removing = 0
+2022-08-10 06:05:34.8269 [INFO; Root]  removing = 0
+2022-08-10 06:05:34.9044 [INFO; Root]  adding = 1
+2022-08-10 06:05:34.9044 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:35.2144 [INFO; Root]  adding = 1
+2022-08-10 06:05:35.2144 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:35.4314 [INFO; Root]  removing = 0
+2022-08-10 06:05:35.4624 [INFO; Root]  adding = 1
+2022-08-10 06:05:35.4624 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:35.5769 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-10 06:05:35.5874 [INFO; Root]  Player 1 left
+2022-08-10 06:05:35.7419 [INFO; Root]  removing = 0
+2022-08-10 06:05:35.7884 [INFO; Root]  removing = 0
+2022-08-10 06:05:36.3925 [INFO; Root]  adding = 1
+2022-08-10 06:05:36.3925 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:37.0124 [INFO; Root]  adding = 1
+2022-08-10 06:05:37.0124 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:39.0317 [INFO; Root]  adding = 1
+2022-08-10 06:05:39.0322 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:39.2323 [INFO; Root]  adding = 1
+2022-08-10 06:05:39.2323 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:45.1433 [INFO; Root]  adding = 1
+2022-08-10 06:05:45.1433 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
+2022-08-10 06:05:54.2839 [INFO; Root]  adding = 1
+2022-08-10 06:05:54.2839 [INFO; Root]  FOOD IN RANGE HAS A DESTROYED FOOD
