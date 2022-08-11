@@ -11,6 +11,7 @@ public class GameEvents : MonoBehaviour
     public Action StartMatch;
     public Action<Transform> ChangeCamera;
     public Action<int> FoodChanged;
+    public Action<bool> GameOver;
     public static GameEvents current;
 
     private void Awake()

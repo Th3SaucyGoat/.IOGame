@@ -20,6 +20,7 @@ public class Connect : MonoBehaviour
         ksReactor.InputManager.BindAxis(Axes.X, "Horizontal");
         ksReactor.InputManager.BindAxis(Axes.Y, "Vertical");
         ksReactor.InputManager.BindButton(Buttons.SpawnCollector, "Fire3");
+        GameEvents.current.Disconnected += matchLeft;
     }
 
     // Run when the game starts.
@@ -103,9 +104,15 @@ public class Connect : MonoBehaviour
     // Handle a ksRoom disconnect event.
     private void HandleDisconnect(ksRoom.DisconnectError status)
     {
+        print("here");
         ksLog.Info("Disconnected from " + m_room + " (" + status + ")");
         m_room.CleanUp();
         m_room = null;
+    }
+
+    private void matchLeft()
+    {
+        m_room.Disconnect();
     }
 
     public void setUsername(TMP_InputField input)

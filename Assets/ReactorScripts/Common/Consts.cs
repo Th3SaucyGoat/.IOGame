@@ -12,6 +12,8 @@ public class Prop
     public const uint CONTROLLEDENTITYID = 6; // Used by player
     public const uint PLAYERFOLLOWINGID = 7;  // Used by entites
     public const uint FIRING = 7;             // Used by certain entities
+    public const uint LISTOFPLAYERS = 8;
+
 }
 
 public class RPC
@@ -28,4 +30,5 @@ public class RPC
     public const uint FOLLOW = 9;
     public const uint DISMISS = 10;
     public const uint PLAYERCONTROLLEDENTITYDESTROYED = 11;  // Called by entities sometimes when they are destroyed
+    public const uint ENDGAME = 12;
 }

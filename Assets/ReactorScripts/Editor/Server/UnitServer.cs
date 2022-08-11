@@ -21,7 +21,6 @@ public class UnitServer : ksServerEntityScript , IDamagable
                     Room.CallRPC(RPC.PLAYERCONTROLLEDENTITYDESTROYED, Entity.Properties[Prop.CONTROLLEDPLAYERID].UInt);
                     Room.GetPlayer(Entity.Properties[Prop.CONTROLLEDPLAYERID].UInt).Properties[Prop.CONTROLLEDENTITYID] = "";
                 }
-
             }
         }
         get { return health; }

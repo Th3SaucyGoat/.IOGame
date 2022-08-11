@@ -36,6 +36,7 @@ public class ClientRoom : ksRoomScript
     {
         //players.Add(player);
         //print(player.Properties[Prop.NAME]);
+        print("Joined");
         Transform label =  Instantiate(playerReadyLabel);
         label.SetParent(playerReadyLabelContainer);
         PlayerReadyLabel readyLabel = label.GetComponent<PlayerReadyLabel>();
@@ -91,6 +92,13 @@ public class ClientRoom : ksRoomScript
     [ksRPC(RPC.STARTMATCH)]
     private void StartMatch()
     {
+        // Delete all ready labels in container
+        foreach (Transform trans in playerReadyLabelContainer)
+        {
+            print(trans.name);
+            Destroy(trans.gameObject);
+        }
+        // Signal start match event
         GameEvents.current.StartMatch?.Invoke();
     }
 
@@ -108,11 +116,21 @@ public class ClientRoom : ksRoomScript
         }
         else
         {
+            print(Room.LocalPlayer.Properties[Prop.HIVEMINDID]);
+            // Check if has hivemind. Else, show game over screen.
+            if (Room.LocalPlayer.Properties[Prop.HIVEMINDID] == "")
+            {
+                // Show Game over screen
+                GameEvents.current.GameOver(false);
+            }
             // Mine. Initiate Respawn Sequence
-            print("My unit died");
-            Room.GameObject.GetComponent<RespawnHandler>().StartRespawn();
-            // Reset entity reference for this username label
+            else
+            {
+                
+                Room.GameObject.GetComponent<RespawnHandler>().StartRespawn();
+            }
         }
+        // Reset entity reference for this username label
         UsernameLabels.entityReference[pId] = null;
         
     }
@@ -135,4 +153,20 @@ public class ClientRoom : ksRoomScript
         frameNum++;
     }
 
+    [ksRPC(RPC.ENDGAME)]
+    private void InitiateGameOver(bool isVictory)
+    {
+        print(isVictory);
+        //// If they are controlling a unit, allow them to keep doing so
+        //if (Room.LocalPlayer.Properties[Prop.CONTROLLEDENTITYID] != "" )
+        //{
+
+        //}
+        //// Show the Game Over screen which absorbs inputs
+        //else
+        //{
+        //    GameEvents.current.GameOver(isVictory);
+        //}
+        GameEvents.current.GameOver(isVictory);
+    }
 }

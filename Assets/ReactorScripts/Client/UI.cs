@@ -5,23 +5,55 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    private TextMeshProUGUI foodText;
-    private void Start()
+    GameObject mainMenu;
+    GameObject gameUi;
+    GameObject gameOver;
+    void Start()
+    {
+        mainMenu = transform.Find("MainMenu").gameObject;
+        gameUi = transform.Find("GameUI").gameObject;
+        gameOver = transform.Find("GameOver").gameObject;
+        reset();
+        SubscribeToEvents();
+    }
+
+    private void reset()
+    {
+        mainMenu.SetActive(true);
+        gameUi.SetActive(false);
+        gameOver.SetActive(false);
+    }
+
+    private void SubscribeToEvents()
     {
         GameEvents.current.StartMatch += OnStartMatch;
-        foodText = transform.Find("FoodLabel").GetComponent<TextMeshProUGUI>();
-        gameObject.SetActive(false);
-        
+        GameEvents.current.GameOver += OnGameOver;
+        GameEvents.current.Disconnected += OnDisconnected;
     }
 
     private void OnStartMatch()
     {
-        gameObject.SetActive(true);
-        GameEvents.current.FoodChanged += OnFoodChanged;
+        mainMenu.SetActive(false);
+        gameUi.SetActive(true);
     }
 
-    private void OnFoodChanged(int value)
+    private void OnGameOver(bool isVictory)
     {
-        foodText.text = $"Food = {value}";
+        gameUi.SetActive(false);
+        gameOver.SetActive(true);
+        if (isVictory)
+        {
+            gameOver.transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text = "Victory";
+        }
+    }
+
+    private void OnDisconnected()
+    {
+        reset();
+    }
+
+    public void Disconnect()
+    {
+        GameEvents.current.Disconnected();
     }
 }

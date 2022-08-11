@@ -14,7 +14,6 @@ public class MainMenuUI : MonoBehaviour
     {
         GameEvents.current.RoomFound += OnRoomFound;
         GameEvents.current.Disconnected += BackToMainMenu;
-        GameEvents.current.StartMatch += OnStartMatch;
 
         foreach (Transform child in transform)
         {
@@ -54,10 +53,5 @@ public class MainMenuUI : MonoBehaviour
         input.SetActive(true);
         readyButton.SetActive(false);
         playerReadyLabelContainer.SetActive(false);
-    }
-
-    private void OnStartMatch()
-    {
-        gameObject.SetActive(false);
     }
 }

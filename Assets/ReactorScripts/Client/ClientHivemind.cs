@@ -26,6 +26,7 @@ public class ClientHivemind : ksEntityScript
             GameEvents.current.ChangeCamera(transform);
             GameEvents.current.StartMatch?.Invoke();
             Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
+            FoodChanged(0, 0);
             // Make username label a child of this entity
             //Entity.OnPropertyChange[]
             var entity = Room.GetEntity(99999);
@@ -42,7 +43,7 @@ public class ClientHivemind : ksEntityScript
     // Called when the script is detached.
     public override void Detached()
     {
-        
+        Entity.OnPropertyChange[Prop.FOOD] -= FoodChanged;
     }
 
     // Called every frame.

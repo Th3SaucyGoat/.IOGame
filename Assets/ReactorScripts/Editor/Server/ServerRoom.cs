@@ -8,13 +8,17 @@ public class ServerRoom : ksServerRoomScript
 
     private int num = 0;
     private float[] xBounds = new float[] { -8.54f, 12.73f };
-    private float[] yBounds = new float[] { -6.17f , 7.04f  };
+    private float[] yBounds = new float[] { -6.17f, 7.04f };
 
     private ksRandom random;
     private Timer foodTimer;
     private delegate void OnTimerEnd();
 
     private int teamId = 1;
+
+    private List<int> activeTeams = new List<int> { };
+
+    //private Dictionary<uint, List<uint>> hivemindPlayers = new Dictionary<uint, List<uint>> { };
 
     // Initialize the script. Called once when the script is loaded.
     public override void Initialize()
@@ -65,8 +69,15 @@ public class ServerRoom : ksServerRoomScript
     private void PlayerLeave(ksIServerPlayer player)
     {
         ksLog.Info("Player " + player.Id + " left");
-  
-    
+        if (Room.ConnectedPlayerCount == 0)
+        {
+            // Handle Room Cleanup
+            foreach (ksIServerEntity entity in Room.Entities)
+            {
+                entity.Destroy();
+            }
+            foodTimer.Stop();
+        }
     }
     private void Update()
     {
@@ -102,7 +113,11 @@ public class ServerRoom : ksServerRoomScript
                 IMovement movementValues = hivemind.Scripts.Get<IMovement>();
                 hivemind.SetController(new UnitController(movementValues.Speed, movementValues.Acceleration), p);
                 hivemind.Properties[Prop.TEAMID] = teamId;
+                activeTeams.Add(teamId);
+                Room.OnDestroyEntity += OnEntityDestroyed;
+                //ksLog.Info("THE ID = " + hivemind.Id.ToString());
                 p.Properties[Prop.TEAMID] = teamId;
+                p.Properties[Prop.HIVEMINDID] = hivemind.Id;
                 p.Properties[Prop.CONTROLLEDENTITYID] = hivemind.Id;
                 // Set the hivemind to be controlled by the player id. I will need to adjust this for 4 players.
                 hivemind.Properties[Prop.CONTROLLEDPLAYERID] = p.Id;
@@ -113,6 +128,7 @@ public class ServerRoom : ksServerRoomScript
                 hivemind.CallRPC(RPC.SENDINFO, new ksMultiType[] { p.Properties[Prop.NAME], p.Id });
                 // Send player username and id to this entity to all clients.
             }
+            Room.CallRPC(RPC.STARTMATCH);
 
             // Initial food spawn in
             for (int i = 0; i < 50; i++)
@@ -149,6 +165,7 @@ public class ServerRoom : ksServerRoomScript
                 ksIServerEntity previousEntity = Room.GetEntity(p.Properties[Prop.CONTROLLEDENTITYID]);
                 previousEntity.Properties[Prop.CONTROLLEDPLAYERID] = "";
                 previousEntity.RemoveController();
+                previousEntity.Scripts.Get<ICommandable>().DetermineState();
             }
             p.Properties[Prop.CONTROLLEDENTITYID] = entityId;
             entity.Properties[Prop.CONTROLLEDPLAYERID] = p.Id;
@@ -162,5 +179,51 @@ public class ServerRoom : ksServerRoomScript
         }
     }
 
+    private void OnEntityDestroyed(ksIServerEntity entity)
+    {
+        if (entity.Type != "Hivemind")
+        {
+            return;
+        }
+        // Access the players on this hivemind's team. 
+        // Set Hivemind id to empty, send rpc to all those players
+        List<ksIServerPlayer> players = new List<ksIServerPlayer> { };
+        foreach (ksIServerPlayer player in Room.Players)
+        {
+            if (ServerUtils.CheckTeam(player, entity))
+            {
+                player.Properties[Prop.HIVEMINDID] = "";
+                players.Add(player);
+            }
+        }
+        Room.CallRPC(players, RPC.ENDGAME, false);
+        // Destroy all entities on the same team.
+        foreach (ksIServerEntity e in Room.Entities)
+        {
+            if (ServerUtils.CheckTeam(e, entity))
+            {
+                e.Destroy();
+            }
+        }
+        activeTeams.Remove(entity.Properties[Prop.TEAMID]);
+        if (activeTeams.Count == 1)
+        {
 
+            // Send Victory RPC to those players
+            players = new List<ksIServerPlayer> { };
+            foreach (ksIServerPlayer player in Room.Players)
+            {
+                if (player.Properties[Prop.TEAMID].Int == activeTeams[0])
+                {
+                    players.Add(player);
+                }
+            }
+            Room.CallRPC(players, RPC.ENDGAME, true);
+            foreach (ksIServerPlayer player in players)
+            {
+                ksLog.Info("here" + player.Properties[Prop.NAME].ToString());
+
+            }
+        }
+    }
 }

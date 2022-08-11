@@ -19,6 +19,7 @@ public class UsernameLabels : ksRoomScript
     {
         currentLabels = new Dictionary<uint, UsernameLabel>();
         entityReference = new Dictionary<uint, ksEntity>();
+        GameEvents.current.Disconnected += Disconnected;
     }
 
     //  public static void SetEntity(UsernameLabel label, Transform entityTransform)
@@ -53,5 +54,19 @@ public class UsernameLabels : ksRoomScript
         label.gameObject.GetComponent<TextMeshPro>().text = Username;
         label.gameObject.GetComponent<UsernameLabel>().Offset = new Vector3(0f, -1.0f, 0f);
         return label;
+    }
+
+    private void Disconnected()
+    {
+        // Destroy previous username labels
+        foreach (uint key in currentLabels.Keys)
+        {
+
+            Destroy(currentLabels[key].gameObject);
+            print(currentLabels[key].gameObject);
+        }
+        // Reset variables
+        currentLabels = new Dictionary<uint, UsernameLabel>();
+        entityReference = new Dictionary<uint, ksEntity>();
     }
 }

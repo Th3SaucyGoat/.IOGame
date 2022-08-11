@@ -93,7 +93,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
     // Called during the update cycle
     private void Update()
     {
-        ksLog.Info(behavior.ToString() + " " + foodInRange.Count.ToString());
+        //ksLog.Info(behavior.ToString() + " " + foodInRange.Count.ToString());
         if (Entity.PlayerController != null)
         {
             return;

@@ -61,7 +61,7 @@
 						"name": "UnitServer"
 					},
 					{
-						"name": "tEST2"
+						"name": "CollectorServer"
 					}
 				]
 			}
@@ -258,7 +258,7 @@
 						"name": "UnitServer"
 					},
 					{
-						"name": "Test"
+						"name": "ShooterServer"
 					}
 				]
 			}

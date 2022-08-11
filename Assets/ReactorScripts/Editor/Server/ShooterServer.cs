@@ -15,7 +15,6 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
     public int MaxHealth { get; } = 1;
 
 
-    private Timer DebugTimer;
 
     public ksIServerEntity Hivemind { set; get; }
 
@@ -54,7 +53,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
         ROFTimer = new Timer(0.8f, OnROFTimerTimeout, false);
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Scripts.Get<UnitServer>().Health = MaxHealth;
-        DebugTimer = new Timer(2f, DebugDestroy, false);
+        //DebugTimer = new Timer(2f, DebugDestroy, false);
     }
 
     public void DelayedStart()
@@ -74,19 +73,14 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
     // Called during the update cycle
     private void Update()
     {
-        ksLog.Info("he");
         ROFTimer.Tick(Time.Delta);
-        DebugTimer.Tick(Time.Delta);
         if (Entity.PlayerController != null)
         {
             if (canShoot && playerFiring == true)
             {
                 Shoot();
             }
-            if (DebugTimer.RemainingSeconds ==0)
-            {
-                DebugTimer.Start();
-            }
+
             return;
         }
         //ksLog.Info(target.ToString() + "  " + target.IsDestroyed.ToString() + "  " + (target == null).ToString());

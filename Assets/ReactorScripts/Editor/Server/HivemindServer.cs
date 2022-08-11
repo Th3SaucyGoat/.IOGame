@@ -30,16 +30,17 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     }
     public ksIServerEntity Hivemind { set; get; } = null;
 
-    private int _food;
-
     public int food {
         set
         {
             ksRange range = new ksRange(0, foodCapacity);
-            _food = (int) range.Clamp(value);
-            Entity.Properties[Prop.FOOD] = _food;
+            Entity.Properties[Prop.FOOD] = (int) range.Clamp(value);
+            //if (Entity.Properties[Prop.FOOD] == 10)
+            //{
+            //    Scripts.Get<IDamagable>().Health -= 20;
+            //}
         }
-        get { return _food; }
+        get { return Entity.Properties[Prop.FOOD]; }
     }
 
     public int MaxHealth { get; } = 5;
@@ -59,11 +60,13 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     public override void Initialize()
     {
         Room.OnUpdate[0] += Update;
-        food = 0;
         Scripts.Get<UnitServer>().Health = MaxHealth;
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
+        Entity.OnDestroy += OnDestroy;
+        food = 0;
+        ksLog.Info("Property Set");
     }
 
     // Called when the script is detached.
@@ -126,7 +129,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     public void SpawnCollector(ksIServerPlayer player, string type)
     {
         ksLog.Info("server received request to spawn = " + Entity.Properties[Prop.FOOD]);
-        if (Entity.Properties[Prop.FOOD] < 0)
+        if (Entity.Properties[Prop.FOOD] < 1)
         {
             return;
         }
@@ -184,5 +187,10 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     public void DetermineState()
     {
         foodTarget = FindClosestFood();
+    }
+
+    private void OnDestroy()
+    {
+
     }
 }

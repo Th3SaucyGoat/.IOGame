@@ -48,6 +48,9 @@ public class RespawnHandler : ksRoomScript
     {
         respawnTimer = FunctionTimer.Create(InitiateRespawn, 5f, false);
         refreshRespawnList = FunctionTimer.Create(RefreshRespawnList, 0.5f, false);
+        respawnTimer.gameObject.transform.SetParent(gameObject.transform);
+        refreshRespawnList.gameObject.transform.SetParent(gameObject.transform);
+        GameEvents.current.GameOver += OnGameOver;
     }
 
     // Update is called once per frame
@@ -111,12 +114,23 @@ public class RespawnHandler : ksRoomScript
 
     public void InitiateRespawn()
     {
-        // 
-        Room.CallRPC(RPC.REQUESTCONTROL, respawnEntity.Id);
-        respawning = false;
+        // Check if there 
+        if (respawning == true)
+        {
+            Room.CallRPC(RPC.REQUESTCONTROL, respawnEntity.Id);
+            respawning = false;
+        }
+
 
         // If entity that you are currently on is null. Allow for viewing of other non-valid team entities.
         // Immediately respawn when able based off the refreshing of the list.
+    }
+
+    public void OnGameOver(bool isVictory)
+    {
+        // Make initiate respawn impossible
+        respawning = false;
+        // Maybe allow for viewing of other teams units, if there is any
     }
 }
 

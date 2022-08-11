@@ -33,7 +33,6 @@ public class PlayerClient : ksPlayerScript
     }
     public override void Initialize()
     {
-
     }
 
     public override void Detached()
