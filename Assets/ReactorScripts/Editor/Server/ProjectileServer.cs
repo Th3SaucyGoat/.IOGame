@@ -40,7 +40,7 @@ public class ProjectileServer : ksServerEntityScript
             Entity.Destroy();
         }
         // Check if is Enemy. If not, don't destroy.
-        else if (!Checks.CheckTeam(Entity, other.Entity))
+        else if (!ServerUtils.CheckTeam(Entity, other.Entity))
         {
             IDamagable hitbox = other.Entity.Scripts.Get<IDamagable>();
             if (hitbox != null)

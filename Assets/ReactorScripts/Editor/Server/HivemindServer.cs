@@ -4,7 +4,7 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement , ICommandable
+public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , ICommandable
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 5f;
@@ -42,20 +42,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
         get { return _food; }
     }
 
-    public int MaxHealth { get; }
-    private int health;
-    public int Health
-    {
-        set
-        {
-            health = value;
-            if (health <= 0)
-            {
-                Entity.Destroy();
-            }
-        }
-        get { return health; }
-    }
+    public int MaxHealth { get; } = 5;
 
     public int foodCapacity { set; get; } = 200;
 
@@ -73,7 +60,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
     {
         Room.OnUpdate[0] += Update;
         food = 0;
-        Health = 20;
+        Scripts.Get<UnitServer>().Health = MaxHealth;
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
@@ -93,10 +80,8 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
     {
         if (EntityToFollow != null)
         {
-            ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
-            float distance = pos.Magnitude();
             // Stay at a distance from player
-            if (distance > 3f)
+            if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 3f)
             {
                 moveTowardsPoint(EntityToFollow.Position2D);
             }
@@ -111,7 +96,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
         else if (behavior == BEHAVIOR.Collect)
         {
             // if have foodTarget, and it is in range of hivemind, follow
-            if (!Checks.IsTargetValid(foodTarget))
+            if (!ServerUtils.IsTargetValid(foodTarget))
             {
                 if (EntityToFollow != null)
                 {
@@ -129,7 +114,6 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
                 moveTowardsPoint(foodTarget.Position2D);
             }
         }
-        
     }
 
     private void moveTowardsPoint(ksVector2 point)
@@ -188,30 +172,8 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
 
     private ksIServerEntity FindClosestFood()
     {
-        float closestDistance = 999999f;
-        ksIServerEntity closestTarget = null;
-        var foodToRemove = new List<ksIServerEntity> { };
-        foreach (ksIServerEntity f in foodInRange)
-        {
-            if (!Checks.IsTargetValid(foodTarget))
-            {
-                //ksLog.Info("FOOD IN RANGE HAS A DESTROYED FOOD");
-                foodToRemove.Add(f);
-                continue;
-            }
-            ksVector2 position = Entity.Position2D - f.Position2D;
-            float distance = position.Magnitude();
-            if (distance < closestDistance)
-            {
-                closestTarget = f;
-                closestDistance = distance;
-            }
-        }
-        foreach (ksIServerEntity f in foodToRemove)
-        {
-            foodInRange.Remove(f);
-        }
-        return closestTarget;
+        foodInRange = ServerUtils.UpdateEntityList(foodInRange);
+        return ServerUtils.FindClosestEntity(Entity, foodInRange);
     }
 
     public void ChangeFollow()
@@ -219,4 +181,8 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IDamagable , 
         ksLog.Info("Here Follow");
     }
 
+    public void DetermineState()
+    {
+        foodTarget = FindClosestFood();
+    }
 }

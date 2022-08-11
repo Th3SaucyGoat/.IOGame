@@ -39,9 +39,6 @@
 						}
 					},
 					{
-						"name": "CollectorServer"
-					},
-					{
 						"name": ".ksSphereCollider",
 						"params": {
 							"shape id": 4,
@@ -62,6 +59,9 @@
 					},
 					{
 						"name": "UnitServer"
+					},
+					{
+						"name": "tEST2"
 					}
 				]
 			}
@@ -211,9 +211,6 @@
 				},
 				"scripts": [
 					{
-						"name": "ShooterServer"
-					},
-					{
 						"name": ".ksBaseRigidBody",
 						"params": {
 							"drag": 0.8,
@@ -259,6 +256,9 @@
 					},
 					{
 						"name": "UnitServer"
+					},
+					{
+						"name": "Test"
 					}
 				]
 			}

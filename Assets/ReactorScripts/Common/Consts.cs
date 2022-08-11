@@ -27,4 +27,5 @@ public class RPC
     public const uint RELAYMOUSEINFO = 8;
     public const uint FOLLOW = 9;
     public const uint DISMISS = 10;
+    public const uint PLAYERCONTROLLEDENTITYDESTROYED = 11;  // Called by entities sometimes when they are destroyed
 }

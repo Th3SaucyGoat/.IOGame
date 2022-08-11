@@ -31,10 +31,13 @@ public class UsernameLabels : ksRoomScript
 
     public static void SetEntity(uint pId, ksEntity entity)
     {
-
         UsernameLabel labelForThisPlayer = UsernameLabels.currentLabels[pId];
-        // Remove the label reference from the previous entity, if there is one.
-        if (entityReference.ContainsKey(pId))
+        if (labelForThisPlayer.gameObject.activeSelf == false)
+        {
+            labelForThisPlayer.gameObject.SetActive(true);
+        }
+        // Remove the label reference from the previous entity, if there is one. And check if there is a reference
+        if (entityReference.ContainsKey(pId) && entityReference[pId] != null)
         {
             entityReference[pId].GameObject.GetComponent<Unit>().usernameLabel = null;
         }

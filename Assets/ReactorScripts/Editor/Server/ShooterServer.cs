@@ -5,27 +5,17 @@ using KS.Reactor.Server;
 using KS.Reactor;
 using Example;
 
-public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICommandable 
+public class ShooterServer : ksServerEntityScript , IMovement , ICommandable 
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 4f;
 
     private ksRigidBody2DView rb;
 
-    public int MaxHealth { get; }
-    private int health;
-    public int Health
-    {
-        set
-        {
-            health = value;
-            if (health <= 0)
-            {
-                Entity.Destroy();
-            }
-        }
-        get { return health; }
-    }
+    public int MaxHealth { get; } = 1;
+
+
+    private Timer DebugTimer;
 
     public ksIServerEntity Hivemind { set; get; }
 
@@ -63,7 +53,8 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
         Entity.OnOverlapEnd += OnOverlapEnd;
         ROFTimer = new Timer(0.8f, OnROFTimerTimeout, false);
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
-        Health = 10;
+        Scripts.Get<UnitServer>().Health = MaxHealth;
+        DebugTimer = new Timer(2f, DebugDestroy, false);
     }
 
     public void DelayedStart()
@@ -83,12 +74,18 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
     // Called during the update cycle
     private void Update()
     {
+        ksLog.Info("he");
         ROFTimer.Tick(Time.Delta);
+        DebugTimer.Tick(Time.Delta);
         if (Entity.PlayerController != null)
         {
             if (canShoot && playerFiring == true)
             {
                 Shoot();
+            }
+            if (DebugTimer.RemainingSeconds ==0)
+            {
+                DebugTimer.Start();
             }
             return;
         }
@@ -96,22 +93,18 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
         //ksLog.Info(behaviour.ToString());
         if (behaviour == BEHAVIOUR.Protect)
         {
-            
-            ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
-            float distance = pos.Magnitude();
-           
             if (num == 50)
             {
-                ksLog.Info(EntityToFollow.Type + " and " + distance.ToString());
+               // ksLog.Info(EntityToFollow.Type + " and " + distance.ToString());
                 num = 0;
             }
             // Head back if too far away
-            if (distance > 2.0f)
+            if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 2.0f)
             {
                 MoveTowardsPoint(EntityToFollow.Position2D);
             }
             // Ok to pursue a little bit if not too far away and there's an enemy
-            else if (Checks.IsTargetValid(target))
+            else if (ServerUtils.IsTargetValid(target))
             {
                 MoveTowardsPoint(target.Position2D);
             }
@@ -123,7 +116,7 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
         //Chase State where chases after enemies
         else if (behaviour == BEHAVIOUR.Chase)
         {
-            if (!Checks.IsTargetValid(target))
+            if (!ServerUtils.IsTargetValid(target))
             {
                 //ksLog.Info("Not Valid");
                 //Start Timer. At the end of timeout, put back into protect mode. Or can have him idle/pace back and forth in place
@@ -133,7 +126,7 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
                 }
                 else
                 {
-                    target = FindClosesetEnemy();
+                    target = FindClosestEnemy();
                 }
             }
             // Head towards target if far away. But don't get too close.
@@ -141,9 +134,7 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
             {
                 //ksLog.Info("Valid");
                 //ksLog.Info(target.Position2D);
-                ksVector2 pos = Entity.Position2D - target.Position2D;
-                float distance = pos.Magnitude();
-                if (distance > 2.0)
+                if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 2.0)
                 {
                     MoveTowardsPoint(target.Position2D);
                 }
@@ -153,9 +144,9 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
                 }
             }
         }
-        if (!Checks.IsTargetValid(target))
+        if (!ServerUtils.IsTargetValid(target))
         {
-            target = FindClosesetEnemy();
+            target = FindClosestEnemy();
         }
         else
         {
@@ -179,45 +170,18 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
         Entity.Transform2D.LookAt(point); 
     }
 
-
-    private ksIServerEntity FindClosesetEnemy()
+    private ksIServerEntity FindClosestEnemy()
     {
-        float closestDistance = 999999f;
-        ksIServerEntity closestTarget = null;
-        var enemiesToRemove = new List<ksIServerEntity> { };
-
-        foreach (ksIServerEntity enemy in enemiesInRange)
-        {
-            if (!Checks.IsTargetValid(enemy))
-            {
-                enemiesToRemove.Add(enemy);
-                //ksLog.Info("Enemy IN RANGE of Shooter Isn't Valid");
-                continue;
-            }
-            ksVector2 position = Entity.Position2D - enemy.Position2D;
-            float distance = position.Magnitude();
-            if (distance < closestDistance)
-            {
-                closestTarget = enemy;
-                closestDistance = distance;
-            }
-        }
-        foreach (ksIServerEntity e in enemiesToRemove)
-        {
-            enemiesInRange.Remove(e);
-        }
-        //ksLog.Info("Target found = " + closestTarget.ToString()) ;
-        return closestTarget;
+        enemiesInRange = ServerUtils.UpdateEntityList(enemiesInRange);
+        return ServerUtils.FindClosestEntity(Entity, enemiesInRange);
     }
 
     private void OnOverlapStart(ksCollider ours, ksCollider other)
     {
-        //ksLog.Info("Here ");
-
         // Check if locator. Add to enemies in range. Need to figure out way to isolate enemies from allies though.
         if (ours.IsTrigger)
         {
-            if (Entity.Properties[Prop.TEAMID].Int != other.Entity.Properties[Prop.TEAMID].Int)
+            if (!ServerUtils.CheckTeam(ours.Entity, other.Entity))
             {
                 enemiesInRange.Add(other.Entity);
                 if (enemiesInRange.Count == 1)
@@ -225,26 +189,16 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
                     target = other.Entity;
                 }
             }
-            //ksLog.Info("Triggered");
         }
     }
     private void OnOverlapEnd(ksCollider ours, ksCollider other)
     {
-        //var distance = (other.Entity.Position2D - Entity.Position2D).Magnitude();
-        //if (other.Entity == target && distance < 5.0)
-        //{
-        //    ksLog.Info("The Collider OnOverlapEnd picked up destroying something!");
-
-        //}
-        //else
-        //{
-        //}
         if (ours.IsTrigger)
         {
-            if (!Checks.CheckTeam(Entity, other.Entity))
+            if (!ServerUtils.CheckTeam(Entity, other.Entity))
             {
                 enemiesInRange.Remove(other.Entity);
-                target = FindClosesetEnemy();
+                target = FindClosestEnemy();
             }
         }
     }
@@ -275,9 +229,14 @@ public class ShooterServer : ksServerEntityScript , IDamagable , IMovement , ICo
         LookAtPoint(point);
     }
 
-    public void ChangeFollow()
+    private void DebugDestroy()
     {
-        ksLog.Info("Here Follow" + EntityToFollow.Type);
-        
+        ksLog.Info("Debug Destroyed");
+        Scripts.Get<IDamagable>().Health -= 10;
+    }
+
+    public void DetermineState()
+    {
+        target = FindClosestEnemy();
     }
 }

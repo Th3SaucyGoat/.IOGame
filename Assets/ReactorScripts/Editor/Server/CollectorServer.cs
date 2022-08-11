@@ -4,23 +4,9 @@ using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
 
-public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable , IMovement , ICommandable
+public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , ICommandable
 {
-    private int health;
-    public int Health
-    {
-        set
-        {
-            health = value;
-            if (health <= 0)
-            {
-                Entity.Destroy();
-            }
-        }
-        get { return health; }
-    }
-
-    public int MaxHealth { get; }
+    public int MaxHealth { get; } = 1;
     public int foodCapacity { get; } = 5;
 
     public float Speed { set; get; } = 3;
@@ -64,21 +50,19 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     private bool attached = false;
 
     enum BEHAVIOR { Idle, Collect, Return }
-    BEHAVIOR behavior;
+    BEHAVIOR behavior = BEHAVIOR.Collect;
     private ksIServerEntity foodTarget;
     private ksVector2 attachedOffset;
     private int feedNum;
 
     public override void Initialize()
     {
-        Health = 5;
+        Scripts.Get<UnitServer>().Health = MaxHealth;
     }
 
     public void DelayedStart()
     {
         food = 0;
-
-        behavior = BEHAVIOR.Collect;
         EntityToFollow = Hivemind;
         hivemindFood = Hivemind.Scripts.Get<IFoodPickup>();
         // Get rigidBody. Will it be 2D or 3D?
@@ -109,7 +93,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
     // Called during the update cycle
     private void Update()
     {
-        //ksLog.Info(behavior.ToString());
+        ksLog.Info(behavior.ToString() + " " + foodInRange.Count.ToString());
         if (Entity.PlayerController != null)
         {
             return;
@@ -119,7 +103,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             if (behavior == BEHAVIOR.Collect)
         {
             //ksLog.Info(foodInRange.Count.ToString());
-            if (!Checks.IsTargetValid(foodTarget))
+            if (!ServerUtils.IsTargetValid(foodTarget))
             {
                 //ksLog.Info("Here = " + foodInRange.Count.ToString() + !Checks.IsTargetValid(foodTarget));
                 if (foodInRange.Count == 0)
@@ -164,10 +148,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         //No food recognized nearby and can't feed. Stay at a certain distance away from entity following
         else if (behavior == BEHAVIOR.Idle)
         {
-            ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
-            float distance = pos.Magnitude();
             // Stay at a distance from player
-            if (distance > 1.5f)
+            if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 1.5f)
             {
                 moveTowardsPoint(EntityToFollow.Position2D);
             }
@@ -190,30 +172,9 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
 
     private ksIServerEntity FindClosestFood()
     {
-        float closestDistance = 999999f;
-        ksIServerEntity closestTarget = null;
-        var foodToRemove = new List<ksIServerEntity> { };
-        foreach (ksIServerEntity f in foodInRange)
-        {
-            if (!Checks.IsTargetValid(f))
-            {
-                ksLog.Info("FOOD IN RANGE HAS A DESTROYED FOOD");
-                foodToRemove.Add(f);
-                continue;
-            }
-            ksVector2 position = Entity.Position2D - f.Position2D;
-            float distance = position.Magnitude();
-            if (distance < closestDistance)
-            {
-                closestTarget = f;
-                closestDistance = distance;
-            }
-        }
-        foreach (ksIServerEntity f in foodToRemove)
-        {
-            foodInRange.Remove(f);
-        }
-        return closestTarget;
+        foodInRange = ServerUtils.UpdateEntityList(foodInRange);
+
+        return ServerUtils.FindClosestEntity(Entity, foodInRange);
     }
 
     private void OnOverlap(ksCollider ours, ksCollider other)
@@ -223,7 +184,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         if (ours.IsTrigger)
         {
             foodInRange.Add(other.Entity);
-            ksLog.Info("adding = "+ foodInRange.Count.ToString());
+            //ksLog.Info("adding = "+ foodInRange.Count.ToString());
             //ksLog.Info("Yes ");
         }
         // Just collided with the food. Determine next AI logic.
@@ -232,8 +193,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
             foodInRange.Remove(other.Entity);
 
             // Find distance from entity to follow
-            ksVector2 pos = Entity.Position2D - EntityToFollow.Position2D;
-            var distance = pos.Magnitude();
+            float distance = ServerUtils.DistanceTo(Entity, EntityToFollow);
             // Too far away, return to entity to follow
             if (behavior != BEHAVIOR.Return)
             {
@@ -254,7 +214,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         {
 
             foodInRange.Remove(other.Entity);
-            ksLog.Info("removing = " + foodInRange.Count.ToString());
+            //ksLog.Info("removing = " + foodInRange.Count.ToString());
   
             if (foodInRange.Count == 0 && behavior != BEHAVIOR.Return)
             {
@@ -295,13 +255,13 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IDamagable ,
         ksVector2 direction = point - Entity.Position2D;
         rb.Velocity = ksVector2.MoveTowards(rb.Velocity, direction.Normalized() * Speed, Time.Delta * Acceleration);
     }
-    public void ChangeFollow()
+    public void DetermineState()
     {
         if (food == foodCapacity)
         {
             behavior = BEHAVIOR.Return;
         }
-        else if (Checks.DetermineDistance(Entity, EntityToFollow) > 2)
+        else if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 2)
         {
             behavior = BEHAVIOR.Idle;
         }

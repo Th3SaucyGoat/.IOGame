@@ -127,13 +127,13 @@ GameObject:
   - component: {fileID: 8806138884908260071}
   - component: {fileID: 8806138884908260068}
   - component: {fileID: 8806138884908260069}
-  - component: {fileID: 8806138884908260065}
   - component: {fileID: 8806138884908260070}
   - component: {fileID: 8806138884908260067}
   - component: {fileID: 8806138884908260064}
   - component: {fileID: 3248906406670730459}
   - component: {fileID: -3954540579926292413}
   - component: {fileID: 4290396568523226245}
+  - component: {fileID: 8569460049223705243}
   m_Layer: 10
   m_Name: Shooter
   m_TagString: Untagged
@@ -260,18 +260,6 @@ MonoBehaviour:
   PhysicsEnabled: 0
   Type: Shooter
   IsStatic: 0
---- !u!114 &8806138884908260065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8806138884908260074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c294cd14c41e8a478b454f0361f688e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &8806138884908260070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -351,5 +339,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4315a6043588a004998fbb22c901fff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8569460049223705243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806138884908260074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c294cd14c41e8a478b454f0361f688e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

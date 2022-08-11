@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 38521806}
   - component: {fileID: 38521805}
+  - component: {fileID: 38521807}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: CineMachine
@@ -169,7 +170,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6004057, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -194,6 +195,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &38521807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38521804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fce7ce5e1239c54e8efff29bc116d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &55426647
 GameObject:
   m_ObjectHideFlags: 0
@@ -3175,6 +3188,7 @@ GameObject:
   - component: {fileID: 2078771119}
   - component: {fileID: 2078771120}
   - component: {fileID: 2078771122}
+  - component: {fileID: 2078771124}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -3195,7 +3209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
-  prefab: {fileID: 6994301373608587823, guid: f3c51bf4ec54be24e96d497b1f117a97, type: 3}
   playerReadyLabelContainer: {fileID: 1444805589}
   playerReadyLabel: {fileID: 750294033699288761, guid: b5bf4c19d54318a40957aad14f401dad, type: 3}
 --- !u!114 &2078771115
@@ -3334,6 +3347,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
   prefab: {fileID: 6994301373608587823, guid: f3c51bf4ec54be24e96d497b1f117a97, type: 3}
+--- !u!114 &2078771124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078771113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13a50d52ea462fb4a9e0b2b20fe7e1ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_addToScriptList: 1
 --- !u!1 &2088026326
 GameObject:
   m_ObjectHideFlags: 0

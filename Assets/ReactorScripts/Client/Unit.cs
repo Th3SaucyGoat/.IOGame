@@ -26,13 +26,8 @@ public class Unit : ksEntityScript
         if (Room.LocalPlayerId == pId)
         {
             // Hook up camera
-            CinemachineVirtualCamera cine = GameObject.FindGameObjectWithTag("CineMachine").GetComponent<CinemachineVirtualCamera>();
-            cine.LookAt = transform;
-            cine.Follow = transform;
+            GameEvents.current.ChangeCamera(transform);
         }
-        // Remove previous label reference
-        // Room.GetEntity(Room.GetPlayer(pId).Properties[Prop.CONTROLLEDENTITYID]).GameObject.GetComponent<Unit>().usernameLabel = null;
-        print(Room.GetEntity(Room.GetPlayer(pId).Properties[Prop.CONTROLLEDENTITYID]).GameObject);
         // Display the username of the player underneath this entity
         UsernameLabels.SetEntity(pId, Entity);
     }

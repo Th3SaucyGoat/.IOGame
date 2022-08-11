@@ -23,14 +23,13 @@ public class ClientHivemind : ksEntityScript
         player = new Dictionary<string, ksMultiType>();
         if (Entity.PlayerController != null)
         {
-            CinemachineVirtualCamera cine = GameObject.FindGameObjectWithTag("CineMachine").GetComponent<CinemachineVirtualCamera>();
-            cine.Follow = transform;
-            cine.LookAt = transform;
+            GameEvents.current.ChangeCamera(transform);
             GameEvents.current.StartMatch?.Invoke();
             Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
             // Make username label a child of this entity
             //Entity.OnPropertyChange[]
-
+            var entity = Room.GetEntity(99999);
+            print(ClientUtils.IsEntityValid(entity));
         }
        // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
     }
@@ -56,11 +55,14 @@ public class ClientHivemind : ksEntityScript
     {
         player["Username"] = a[0];
         player["Id"] = a[1];
-        UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
+        // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
+        //UsernameLabels.SetEntity(a[1], Entity);
+
         UsernameLabels.SetEntity(a[1], Entity);
 
-        if (Room.LocalPlayer.Properties[Prop.TEAMID].Int == Entity.Properties[Prop.TEAMID].Int)
-        {
+        if (ClientUtils.CheckTeam(Room.LocalPlayer, Entity))
+            {
+            // Player needs to know which hivemind spawn requests go to.
             Room.LocalPlayer.GameObject.GetComponent<PlayerClient>().HiveId = Entity.Id;
         }
     }

@@ -333,7 +333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10.836212, y: -13.706802}
+  m_AnchoredPosition: {x: 10.836182, y: -13.706726}
   m_SizeDelta: {x: -221.6724, y: -231.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &412332839
@@ -1709,7 +1709,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
-  prefab: {fileID: 0}
   playerReadyLabelContainer: {fileID: 1124962254}
   playerReadyLabel: {fileID: 750294033699288761, guid: b5bf4c19d54318a40957aad14f401dad, type: 3}
 --- !u!1 &1843112174

@@ -136,19 +136,25 @@ public class ServerRoom : ksServerRoomScript
     private void PlayerRequestControl(ksIServerPlayer p, uint entityId)
     {
         //ksLog.Info(Room.GetEntity(entityId).ToString());
+        ksLog.Info(Room.ToString());
         ksIServerEntity entity = Room.GetEntity(entityId);
         // Do same validity checks
-        if (Checks.CheckTeam(p, entity) && entity.Properties[Prop.CONTROLLEDPLAYERID] == "")
+        if (ServerUtils.CheckTeam(p, entity) && entity.Properties[Prop.CONTROLLEDPLAYERID] == "")
         {
             ksLog.Info("Request to take control of unit passed");
-            // The previous unit that was controlled by this player needs to set its value to not controlled.
-            ksIServerEntity previousEntity = Room.GetEntity(p.Properties[Prop.CONTROLLEDENTITYID]);
+
+            // Handle the previous entity
+            if (p.Properties[Prop.CONTROLLEDENTITYID] != "")
+            {
+                ksIServerEntity previousEntity = Room.GetEntity(p.Properties[Prop.CONTROLLEDENTITYID]);
+                previousEntity.Properties[Prop.CONTROLLEDPLAYERID] = "";
+                previousEntity.RemoveController();
+            }
             p.Properties[Prop.CONTROLLEDENTITYID] = entityId;
-            previousEntity.Properties[Prop.CONTROLLEDPLAYERID] = "";
             entity.Properties[Prop.CONTROLLEDPLAYERID] = p.Id;
-            // Get rid of unit controller on previously controlled entity. Add unit controller to new entity.
-            previousEntity.RemoveController();
+            // Add unit controller to new entity.
             IMovement movementValues = entity.Scripts.Get<IMovement>();
+            entity.Scripts.Get<ICommandable>().DetermineState();
             entity.SetController(new UnitController(movementValues.Speed, movementValues.Acceleration), p);
 
             // Send RPC to inform others. Pass Id which can be used to reference the player's name.

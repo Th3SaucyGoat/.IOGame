@@ -9,12 +9,13 @@ public class GameEvents : MonoBehaviour
     public Action RoomFound;
     public Action Disconnected;
     public Action StartMatch;
+    public Action<Transform> ChangeCamera;
     public Action<int> FoodChanged;
     public static GameEvents current;
 
     private void Awake()
     {
-        current = this;   
+        current = this;
     }
 
     public void Ready()

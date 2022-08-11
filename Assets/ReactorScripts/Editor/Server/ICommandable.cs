@@ -9,5 +9,5 @@ public interface ICommandable
     ksIServerEntity EntityToFollow { set; get; }
     ksIServerEntity Hivemind { set; get; }
 
-    void ChangeFollow();
+    void DetermineState();
 }

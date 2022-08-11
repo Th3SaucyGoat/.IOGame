@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 6667943187279010479}
   - component: {fileID: 6667943187279010478}
   - component: {fileID: 6667943187279010482}
-  - component: {fileID: 9007576411970293435}
   - component: {fileID: 8463670613325847758}
   - component: {fileID: 6026881746123737177}
   - component: {fileID: -4933724555773459531}
   - component: {fileID: 7026864367955897630}
+  - component: {fileID: 6932092381847905522}
   m_Layer: 10
   m_Name: Collector
   m_TagString: Untagged
@@ -172,18 +172,6 @@ MonoBehaviour:
   PhysicsEnabled: 0
   Type: Collector
   IsStatic: 0
---- !u!114 &9007576411970293435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6667943187279010477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11833ef6c6056040aecd6a3614c5e88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &8463670613325847758
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -234,5 +222,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4315a6043588a004998fbb22c901fff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6932092381847905522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6667943187279010477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11833ef6c6056040aecd6a3614c5e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

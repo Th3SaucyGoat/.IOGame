@@ -9,9 +9,6 @@ using UnityEngine;
 
 public class ClientRoom : ksRoomScript
 {
-    [SerializeField]
-    private UsernameLabel prefab;
-
 
     [SerializeField]
     private Transform playerReadyLabelContainer;
@@ -45,6 +42,9 @@ public class ClientRoom : ksRoomScript
         readyLabel.username = player.Properties[Prop.NAME];
         readyLabel.Id = player.Id;
         readyLabel.Ready = player.Properties[Prop.READY];
+        // Instantiate username labels. Set Inactive
+        UsernameLabel userlabel = GetComponent<UsernameLabels>().CreateUserLabel(player.Id, player.Properties[Prop.NAME]);
+        userlabel.gameObject.SetActive(false);
         if (player.IsLocal)
         {
         }
@@ -92,6 +92,29 @@ public class ClientRoom : ksRoomScript
     private void StartMatch()
     {
         GameEvents.current.StartMatch?.Invoke();
+    }
+
+    [ksRPC(RPC.PLAYERCONTROLLEDENTITYDESTROYED)]
+    private void PlayerControlledEntityDestroyed(uint pId)
+    {
+        ksEntity entity = null;
+        // See if the current entity the player is controlling is still valid.
+        entity = Room.GetEntity(Room.LocalPlayer.Properties[Prop.CONTROLLEDENTITYID]);
+        // Get rid of username tag
+        UsernameLabels.currentLabels[pId].gameObject.SetActive(false);
+        if (ClientUtils.IsEntityValid(entity))
+        {
+            // Someone elses
+        }
+        else
+        {
+            // Mine. Initiate Respawn Sequence
+            print("My unit died");
+            Room.GameObject.GetComponent<RespawnHandler>().StartRespawn();
+            // Reset entity reference for this username label
+        }
+        UsernameLabels.entityReference[pId] = null;
+        
     }
 
     private void changeScore(ksMultiType oldValue, ksMultiType newValue)
