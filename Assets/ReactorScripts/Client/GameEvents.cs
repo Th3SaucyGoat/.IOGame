@@ -12,6 +12,9 @@ public class GameEvents : MonoBehaviour
     public Action<Transform> ChangeCamera;
     public Action<int> FoodChanged;
     public Action<bool> GameOver;
+    public Action<bool> SpawnMenuOpen;
+    public Action StartRespawn;
+    public Action EndRespawn;
     public static GameEvents current;
 
     private void Awake()

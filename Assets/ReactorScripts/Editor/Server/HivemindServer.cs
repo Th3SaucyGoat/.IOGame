@@ -64,9 +64,8 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
-        Entity.OnDestroy += OnDestroy;
+        //Entity.OnDestroy += OnDestroy;
         food = 0;
-        ksLog.Info("Property Set");
     }
 
     // Called when the script is detached.
@@ -81,6 +80,8 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     // Called during the update cycle
     private void Update()
     {
+        //Room.CallRPC(new List<ksIServerPlayer> { Room.GetPlayer(Entity.Properties[Prop.CONTROLLEDPLAYERID].UInt) }, RPC.ENDGAME, false);
+        //Entity.Destroy();
         if (EntityToFollow != null)
         {
             // Stay at a distance from player
@@ -191,6 +192,6 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
 
     private void OnDestroy()
     {
-
+        Room.Scripts.Get<ServerRoom>().OnEntityDestroyed(Entity);
     }
 }

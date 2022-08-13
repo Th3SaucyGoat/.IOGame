@@ -100,8 +100,7 @@ public class PlayerClient : ksPlayerScript
         {
             // pull up the spawn menu
             spawnMenuActive = spawnMenuActive ? false : true;
-            print("Spawn Menu Active? " + spawnMenuActive);
-
+            GameEvents.current.SpawnMenuOpen(spawnMenuActive);
         }
     }
 

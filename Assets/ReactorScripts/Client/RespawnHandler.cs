@@ -41,7 +41,7 @@ public class RespawnHandler : ksRoomScript
         }
         get { return _respawnIndex; }
     }
-    private List<ksEntity> respawnEntityList = new() { };
+    private List<ksEntity> respawnEntityList = new List<ksEntity> { };
     private ksEntity respawnEntity;
 
     void Start()
@@ -51,6 +51,7 @@ public class RespawnHandler : ksRoomScript
         respawnTimer.gameObject.transform.SetParent(gameObject.transform);
         refreshRespawnList.gameObject.transform.SetParent(gameObject.transform);
         GameEvents.current.GameOver += OnGameOver;
+        GameEvents.current.StartRespawn += StartRespawn;
     }
 
     // Update is called once per frame
@@ -114,11 +115,12 @@ public class RespawnHandler : ksRoomScript
 
     public void InitiateRespawn()
     {
-        // Check if there 
+        // Check if game allows for respawning still
         if (respawning == true)
         {
             Room.CallRPC(RPC.REQUESTCONTROL, respawnEntity.Id);
             respawning = false;
+            GameEvents.current.EndRespawn?.Invoke();
         }
 
 

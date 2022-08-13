@@ -110,11 +110,11 @@ public class ServerRoom : ksServerRoomScript
             foreach (ksIServerPlayer p in Room.Players)
             {
                 ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(10f, -5f));
+                ksLog.Info("Here ");
                 IMovement movementValues = hivemind.Scripts.Get<IMovement>();
                 hivemind.SetController(new UnitController(movementValues.Speed, movementValues.Acceleration), p);
                 hivemind.Properties[Prop.TEAMID] = teamId;
                 activeTeams.Add(teamId);
-                Room.OnDestroyEntity += OnEntityDestroyed;
                 //ksLog.Info("THE ID = " + hivemind.Id.ToString());
                 p.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.HIVEMINDID] = hivemind.Id;
@@ -179,12 +179,8 @@ public class ServerRoom : ksServerRoomScript
         }
     }
 
-    private void OnEntityDestroyed(ksIServerEntity entity)
+    public void OnEntityDestroyed(ksIServerEntity entity)
     {
-        if (entity.Type != "Hivemind")
-        {
-            return;
-        }
         // Access the players on this hivemind's team. 
         // Set Hivemind id to empty, send rpc to all those players
         List<ksIServerPlayer> players = new List<ksIServerPlayer> { };

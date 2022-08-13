@@ -38,6 +38,8 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
 
     private float EOGLength;
 
+    private Timer DebugTimer;
+
     public enum BEHAVIOUR { Protect, Chase }
     public BEHAVIOUR behaviour = BEHAVIOUR.Protect;
 
@@ -53,7 +55,8 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
         ROFTimer = new Timer(0.8f, OnROFTimerTimeout, false);
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Scripts.Get<UnitServer>().Health = MaxHealth;
-        //DebugTimer = new Timer(2f, DebugDestroy, false);
+        DebugTimer = new Timer(2f, DebugDestroy, false);
+        DebugTimer.Start();
     }
 
     public void DelayedStart()
@@ -73,6 +76,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
     // Called during the update cycle
     private void Update()
     {
+        DebugTimer.Tick(Time.Delta);
         ROFTimer.Tick(Time.Delta);
         if (Entity.PlayerController != null)
         {
@@ -182,6 +186,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
                 {
                     target = other.Entity;
                 }
+                Room.Scripts.Get<ServerRoom>();
             }
         }
     }

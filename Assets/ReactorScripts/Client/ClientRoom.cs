@@ -95,7 +95,6 @@ public class ClientRoom : ksRoomScript
         // Delete all ready labels in container
         foreach (Transform trans in playerReadyLabelContainer)
         {
-            print(trans.name);
             Destroy(trans.gameObject);
         }
         // Signal start match event
@@ -126,8 +125,9 @@ public class ClientRoom : ksRoomScript
             // Mine. Initiate Respawn Sequence
             else
             {
-                
-                Room.GameObject.GetComponent<RespawnHandler>().StartRespawn();
+
+                //Room.GameObject.GetComponent<RespawnHandler>().StartRespawn();
+                GameEvents.current.StartRespawn();
             }
         }
         // Reset entity reference for this username label

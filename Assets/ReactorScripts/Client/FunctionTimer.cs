@@ -113,4 +113,6 @@ public class FunctionTimer {
     {
         timer = time_value;
     }
+
+    public bool IsStopped() { return !(timer > 0); }
 }
