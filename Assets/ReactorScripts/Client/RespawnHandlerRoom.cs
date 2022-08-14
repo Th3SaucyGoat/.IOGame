@@ -6,7 +6,7 @@ using KS.Reactor.Client.Unity;
 using KS.Reactor.Client;
 using KS.Reactor;
 
-public class RespawnHandler : ksRoomScript
+public class RespawnHandlerRoom : ksRoomScript
 {
     public FunctionTimer respawnTimer;
     private FunctionTimer refreshRespawnList;
@@ -41,22 +41,37 @@ public class RespawnHandler : ksRoomScript
         }
         get { return _respawnIndex; }
     }
-    private List<ksEntity> respawnEntityList = new List<ksEntity> { };
+    private List<ksEntity> respawnEntityList;
     private ksEntity respawnEntity;
 
-    void Start()
+    public override void Initialize()
+
     {
+        // Room not getting disabled on the initial room object - throwing errors because.
+        // Need to return if it is on that initial object.
+        if (Room == null)
+        {
+            // Disable this script
+            //gameObject.GetComponent<RespawnHandler>().enabled = false;
+            return;
+        }
         respawnTimer = FunctionTimer.Create(InitiateRespawn, 5f, false);
         refreshRespawnList = FunctionTimer.Create(RefreshRespawnList, 0.5f, false);
         respawnTimer.gameObject.transform.SetParent(gameObject.transform);
         refreshRespawnList.gameObject.transform.SetParent(gameObject.transform);
+        respawnEntityList = new List<ksEntity> { };
         GameEvents.current.GameOver += OnGameOver;
         GameEvents.current.StartRespawn += StartRespawn;
     }
 
+    public override void Detached()
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
+        //print(Room.GameObject);
         if (respawning)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -78,11 +93,13 @@ public class RespawnHandler : ksRoomScript
         // Start countdown. Show UI item. Should be hooked up to the time remaining on the timer.
         respawnTimer.Start();
         respawning = true;
-
+        print(Room.Players);
         // Retrieve List of all valid allies
+
         respawnEntityList = ClientUtils.RetrieveControllableAllies(Room.LocalPlayer, Room.Entities);
         respawnIndex = 0;
-        print("Starting Respawn!");
+        refreshRespawnList.Start();
+        print(respawnEntityList);
     }
 
 

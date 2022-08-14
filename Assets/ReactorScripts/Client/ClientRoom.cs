@@ -125,7 +125,7 @@ public class ClientRoom : ksRoomScript
             // Mine. Initiate Respawn Sequence
             else
             {
-
+                // Emit event for UI. 
                 //Room.GameObject.GetComponent<RespawnHandler>().StartRespawn();
                 GameEvents.current.StartRespawn();
             }

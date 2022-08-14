@@ -41,16 +41,22 @@ public class ClientUtils : MonoBehaviour
 
     public static List<ksEntity> RetrieveControllableAllies(ksPlayer player, ksConstList<ksEntity> entities)
     {
+        print("starting");
         var list = new List<ksEntity> { };
         foreach (ksEntity entity in entities)
         {
             // Check if it is a Unit, that is on the same team, that is not controlled.
             if (entity.GameObject.TryGetComponent(out Unit unit))
             {
+                print("1");
                 if (CheckTeam(player, entity))
                 {
+                    print("2");
+
                     if (entity.Properties[Prop.CONTROLLEDPLAYERID] == "")
                     {
+                        print("3");
+
                         list.Add(entity);
                     }
                 }

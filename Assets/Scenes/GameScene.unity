@@ -5005,10 +5005,10 @@ GameObject:
   - component: {fileID: 2078771117}
   - component: {fileID: 2078771116}
   - component: {fileID: 2078771115}
-  - component: {fileID: 2078771114}
   - component: {fileID: 2078771119}
   - component: {fileID: 2078771120}
   - component: {fileID: 2078771122}
+  - component: {fileID: 2078771123}
   - component: {fileID: 2078771124}
   m_Layer: 0
   m_Name: Room
@@ -5017,21 +5017,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2078771114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2078771113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffaee0a729949a04ab745ca6b1c45274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_addToScriptList: 1
-  playerReadyLabelContainer: {fileID: 1444805589}
-  playerReadyLabel: {fileID: 750294033699288761, guid: b5bf4c19d54318a40957aad14f401dad, type: 3}
 --- !u!114 &2078771115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5168,6 +5153,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
   prefab: {fileID: 6994301373608587823, guid: f3c51bf4ec54be24e96d497b1f117a97, type: 3}
+--- !u!114 &2078771123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078771113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd2a54d69bcd1d439099ab1ed868cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_addToScriptList: 1
 --- !u!114 &2078771124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5177,10 +5175,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2078771113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13a50d52ea462fb4a9e0b2b20fe7e1ab, type: 3}
+  m_Script: {fileID: 11500000, guid: ffaee0a729949a04ab745ca6b1c45274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_addToScriptList: 1
+  playerReadyLabelContainer: {fileID: 1444805589}
+  playerReadyLabel: {fileID: 750294033699288761, guid: b5bf4c19d54318a40957aad14f401dad, type: 3}
 --- !u!1 &2088026326
 GameObject:
   m_ObjectHideFlags: 0
