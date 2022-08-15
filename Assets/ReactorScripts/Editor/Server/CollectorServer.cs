@@ -148,6 +148,11 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         //No food recognized nearby and can't feed. Stay at a certain distance away from entity following
         else if (behavior == BEHAVIOR.Idle)
         {
+            if (!ServerUtils.IsTargetValid(EntityToFollow))
+            {
+                EntityToFollow = Hivemind;
+                return;
+            }
             // Stay at a distance from player
             if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 1.5f)
             {

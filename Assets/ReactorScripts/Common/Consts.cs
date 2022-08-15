@@ -13,7 +13,7 @@ public class Prop
     public const uint PLAYERFOLLOWINGID = 7;  // Used by entites
     public const uint FIRING = 7;             // Used by certain entities
     public const uint LISTOFPLAYERS = 8;
-
+    public const uint HEALTH = 9;
 }
 
 public class RPC

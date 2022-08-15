@@ -12,7 +12,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
 
     private ksRigidBody2DView rb;
 
-    public int MaxHealth { get; } = 1;
+    public int MaxHealth { get; } = 5;
 
 
 
@@ -56,7 +56,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Scripts.Get<UnitServer>().Health = MaxHealth;
         DebugTimer = new Timer(2f, DebugDestroy, false);
-        DebugTimer.Start();
+        //DebugTimer.Start();
     }
 
     public void DelayedStart()
@@ -91,10 +91,10 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
         //ksLog.Info(behaviour.ToString());
         if (behaviour == BEHAVIOUR.Protect)
         {
-            if (num == 50)
+            if (!ServerUtils.IsTargetValid(EntityToFollow))
             {
-               // ksLog.Info(EntityToFollow.Type + " and " + distance.ToString());
-                num = 0;
+                EntityToFollow = Hivemind;
+                return;
             }
             // Head back if too far away
             if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 2.0f)

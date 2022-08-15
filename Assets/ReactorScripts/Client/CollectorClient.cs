@@ -9,10 +9,20 @@ using Cinemachine;
 
 public class CollectorClient : ksEntityScript
 {
-    // Called after properties are initialized.
+    // This likely needs to be changed in the future, use a new property or rpc to send 
+    // info about stats of the unit.
+    private int foodCapacity = 5;
+
+    private Color startingColor = new Color(0, 1, 1);
+    private Color fullColor = new Color(0, 0.3f, 1);
+
+    private SpriteRenderer sprite;
+
     public override void Initialize()
     {
-        
+        Entity.OnPropertyChange[Prop.FOOD] += OnFoodChanged;
+        sprite = GetComponent<SpriteRenderer>();
+        sprite.color = startingColor;
     }
 
     // Called when the script is detached.
@@ -25,5 +35,17 @@ public class CollectorClient : ksEntityScript
     private void Update()
     {
         
+    }
+
+    private void OnFoodChanged(ksMultiType oldV, ksMultiType newV)
+    {
+        if (newV == foodCapacity)
+        {
+            sprite.color = fullColor;
+        }
+        else if (newV < foodCapacity)
+        {
+            sprite.color = startingColor;
+        }
     }
 }

@@ -13,6 +13,7 @@ public class UnitServer : ksServerEntityScript , IDamagable
         set
         {
             health = value;
+            Entity.Properties[Prop.HEALTH] = value;
             if (health <= 0)
             {
                 Entity.Destroy();

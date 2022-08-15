@@ -1,0 +1,138 @@
+2022-08-15 06:10:13.0905 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-15 06:10:13.0985 [INFO; Root]  Loaded config.json
+2022-08-15 06:10:13.0990 [INFO; Root]  Loaded config.GameScene.json
+2022-08-15 06:10:13.1035 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-15 06:10:13.1035 [INFO; Root]  Reactor Server v0.10.0
+2022-08-15 06:10:13.1035 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-15 06:10:13.1045 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-15 06:10:13.1130 [DEBUG; Root]  Loading Asset Scripts
+2022-08-15 06:10:13.1155 [DEBUG; Root]  Loading Room Configs
+2022-08-15 06:10:13.1190 [DEBUG; Root]  Initializing PhysX
+2022-08-15 06:10:13.1315 [DEBUG; Root]  Loading PhysX geometry
+2022-08-15 06:10:13.1405 [INFO; Root]  Loaded 8 geometries
+2022-08-15 06:10:13.1410 [INFO; Root]  Loaded 2 geometries
+2022-08-15 06:10:13.1410 [DEBUG; Root]  Loading entity prefabs
+2022-08-15 06:10:13.1535 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-15 06:10:13.1535 [DEBUG; Root]  Loading entity instances
+2022-08-15 06:10:13.1695 [DEBUG; Root]  Initializing scripts
+2022-08-15 06:10:13.1785 [DEBUG; Root]  Room setup complete
+2022-08-15 06:10:13.1785 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-15 06:10:13.1785 [INFO; Root]  Sending client updates every 2 frames
+2022-08-15 06:10:13.1785 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-15 06:10:13.1790 [INFO; Root]  Opening TCP port 8000
+2022-08-15 06:10:14.8682 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-15 06:10:14.8707 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-15 06:10:14.8847 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-15 06:10:14.9007 [INFO; Root]  Player False joined
+2022-08-15 06:10:17.1942 [INFO; Root]  Client(id = 2, address = 127.0.0.1) connected
+2022-08-15 06:10:17.1972 [DEBUG; Root]  Client(id = 2, address = 127.0.0.1) model validated
+2022-08-15 06:10:17.2002 [DEBUG; Root]  Client(id = 2, address = 127.0.0.1) authenticated
+2022-08-15 06:10:17.2132 [INFO; Root]  Player False joined
+2022-08-15 06:10:17.7867 [INFO; Root]  RPC RECEIVED True and 2
+2022-08-15 06:10:17.7867 [INFO; Root]  HeheTrue
+2022-08-15 06:10:18.9167 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-15 06:10:18.9167 [INFO; Root]  HeheTrue
+2022-08-15 06:10:18.9167 [INFO; Root]  Start Match!
+2022-08-15 06:10:18.9247 [INFO; Root]  Here 
+2022-08-15 06:10:18.9262 [INFO; Root]  5
+2022-08-15 06:10:18.9267 [INFO; Root]  Here 
+2022-08-15 06:10:18.9272 [INFO; Root]  6
+2022-08-15 06:10:21.4002 [INFO; Root]  server received request to spawn = 1
+2022-08-15 06:10:22.3267 [INFO; Root]  server received request to spawn = 2
+2022-08-15 06:10:24.1712 [INFO; Root]  server received request to spawn = 3
+2022-08-15 06:10:26.3102 [INFO; Root]  server received request to spawn = 0
+2022-08-15 06:10:27.1472 [INFO; Root]  server received request to spawn = 0
+2022-08-15 06:10:29.4722 [INFO; Root]  server received request to spawn = 1
+2022-08-15 06:10:33.1147 [INFO; Root]  server received request to spawn = 3
+2022-08-15 06:10:33.6107 [INFO; Root]  server received request to spawn = 2
+2022-08-15 06:10:36.4162 [INFO; Root]  server received request to spawn = 15
+2022-08-15 06:10:37.0372 [INFO; Root]  Reactor.ServerRoom
+2022-08-15 06:10:37.0377 [INFO; Root]  Request to take control of unit passed
+2022-08-15 06:10:37.4237 [INFO; Root]  Received 37
+2022-08-15 06:10:37.4402 [INFO; Root]  Shooter
+2022-08-15 06:10:38.2607 [INFO; Root]  Shooter
+2022-08-15 06:10:38.6637 [INFO; Root]  Hivemind
+2022-08-15 06:10:39.0512 [INFO; Root]  Received 38
+2022-08-15 06:10:39.1752 [INFO; Root]  Collector
+2022-08-15 06:10:39.3767 [INFO; Root]  Received 39
+2022-08-15 06:10:39.3922 [INFO; Root]  Shooter
+2022-08-15 06:10:40.0277 [INFO; Root]  Received 40
+2022-08-15 06:10:40.5082 [INFO; Root]  Shooter
+2022-08-15 06:10:40.6167 [INFO; Root]  Received 41
+2022-08-15 06:10:40.6327 [INFO; Root]  Shooter
+2022-08-15 06:10:40.7562 [INFO; Root]  Received 42
+2022-08-15 06:10:41.3142 [INFO; Root]  Received 43
+2022-08-15 06:10:41.4537 [INFO; Root]  Shooter
+2022-08-15 06:10:41.9807 [INFO; Root]  Received 44
+2022-08-15 06:10:42.1667 [INFO; Root]  Received 45
+2022-08-15 06:10:42.2752 [INFO; Root]  Shooter
+2022-08-15 06:10:42.3062 [INFO; Root]  Shooter
+2022-08-15 06:10:42.4302 [INFO; Root]  Hivemind
+2022-08-15 06:10:42.5387 [INFO; Root]  Obstacles
+2022-08-15 06:10:42.6317 [INFO; Root]  Received 46
+2022-08-15 06:10:42.9262 [INFO; Root]  Received 47
+2022-08-15 06:10:43.0657 [INFO; Root]  Shooter
+2022-08-15 06:10:43.0812 [INFO; Root]  Shooter
+2022-08-15 06:10:43.1277 [INFO; Root]  Shooter
+2022-08-15 06:10:43.1282 [INFO; Root]  Hivemind
+2022-08-15 06:10:43.2827 [INFO; Root]  Shooter
+2022-08-15 06:10:43.3602 [INFO; Root]  Received 48
+2022-08-15 06:10:43.4687 [INFO; Root]  Received 49
+2022-08-15 06:10:43.7322 [INFO; Root]  Hivemind
+2022-08-15 06:10:43.9027 [INFO; Root]  Shooter
+2022-08-15 06:10:43.9337 [INFO; Root]  Shooter
+2022-08-15 06:10:44.2747 [INFO; Root]  Shooter
+2022-08-15 06:10:44.7242 [INFO; Root]  Shooter
+2022-08-15 06:10:44.7552 [INFO; Root]  Shooter
+2022-08-15 06:10:45.5302 [INFO; Root]  Shooter
+2022-08-15 06:10:45.5767 [INFO; Root]  Shooter
+2022-08-15 06:10:45.7162 [INFO; Root]  Received 50
+2022-08-15 06:10:45.8867 [INFO; Root]  Received 51
+2022-08-15 06:10:46.3517 [INFO; Root]  Shooter
+2022-08-15 06:10:46.3827 [INFO; Root]  Shooter
+2022-08-15 06:10:46.6932 [INFO; Root]  Shooter
+2022-08-15 06:10:46.7082 [INFO; Root]  Obstacles
+2022-08-15 06:10:47.1732 [INFO; Root]  Shooter
+2022-08-15 06:10:47.2042 [INFO; Root]  Shooter
+2022-08-15 06:10:47.2817 [INFO; Root]  Shooter
+2022-08-15 06:10:47.4677 [INFO; Root]  Obstacles
+2022-08-15 06:10:47.4987 [INFO; Root]  Shooter
+2022-08-15 06:10:47.6077 [INFO; Root]  Obstacles
+2022-08-15 06:10:47.7007 [INFO; Root]  Shooter
+2022-08-15 06:10:47.9017 [INFO; Root]  Obstacles
+2022-08-15 06:10:47.9327 [INFO; Root]  Obstacles
+2022-08-15 06:10:47.9797 [INFO; Root]  Shooter
+2022-08-15 06:10:48.0257 [INFO; Root]  Shooter
+2022-08-15 06:10:48.1497 [INFO; Root]  Shooter
+2022-08-15 06:10:48.2427 [INFO; Root]  Shooter
+2022-08-15 06:10:48.3202 [INFO; Root]  Shooter
+2022-08-15 06:10:48.4757 [INFO; Root]  Hivemind
+2022-08-15 06:10:48.7697 [INFO; Root]  Obstacles
+2022-08-15 06:10:48.8007 [INFO; Root]  Shooter
+2022-08-15 06:10:48.8317 [INFO; Root]  Shooter
+2022-08-15 06:10:49.0022 [INFO; Root]  Obstacles
+2022-08-15 06:10:49.1417 [INFO; Root]  Shooter
+2022-08-15 06:10:49.1417 [INFO; Root]  Collector
+2022-08-15 06:10:49.2657 [INFO; Root]  Hivemind
+2022-08-15 06:10:49.6222 [INFO; Root]  Shooter
+2022-08-15 06:10:49.6997 [INFO; Root]  Hivemind
+2022-08-15 06:10:50.0562 [INFO; Root]  Received 52
+2022-08-15 06:10:50.0562 [INFO; Root]  Received 53
+2022-08-15 06:10:50.0872 [INFO; Root]  Received 54
+2022-08-15 06:10:50.2422 [INFO; Root]  Obstacles
+2022-08-15 06:10:50.3817 [INFO; Root]  Received 55
+2022-08-15 06:10:50.4442 [INFO; Root]  Shooter
+2022-08-15 06:10:50.5987 [INFO; Root]  Obstacles
+2022-08-15 06:10:50.6297 [INFO; Root]  Obstacles
+2022-08-15 06:10:50.7847 [INFO; Root]  Received 56
+2022-08-15 06:10:50.8002 [INFO; Root]  Received 57
+2022-08-15 06:10:50.8157 [INFO; Root]  Received 58
+2022-08-15 06:10:50.9242 [INFO; Root]  Received 59
+2022-08-15 06:10:51.1257 [INFO; Root]  Received 60
+2022-08-15 06:10:51.1722 [INFO; Root]  Obstacles
+2022-08-15 06:10:51.2652 [INFO; Root]  Obstacles
+2022-08-15 06:10:52.1272 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-15 06:10:52.1342 [INFO; Root]  Player 1 left
+2022-08-15 06:10:52.5057 [INFO; Root]  Obstacles
+2022-08-15 06:10:53.2112 [INFO; Root]  Client(id = 2, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-15 06:10:53.2182 [INFO; Root]  Player 2 left

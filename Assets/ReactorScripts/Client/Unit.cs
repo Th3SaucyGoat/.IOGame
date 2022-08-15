@@ -11,6 +11,18 @@ public class Unit : ksEntityScript
 {
     [HideInInspector]
     public UsernameLabel usernameLabel;
+
+    private SpriteRenderer sprite;
+    private Color startingColor;
+    
+
+    private void Start()
+    {
+        Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
+        sprite = GetComponent<SpriteRenderer>();
+        startingColor = sprite.material.color;
+    }
+
     private void Update()
     {
         if (usernameLabel != null)
@@ -32,5 +44,15 @@ public class Unit : ksEntityScript
         UsernameLabels.SetEntity(pId, Entity);
     }
 
+    private void OnHealthChanged(ksMultiType oldV, ksMultiType newV)
+    {
+        sprite.material.color = Color.red;
+        Invoke(nameof(EndFlash), 0.2f);
+    }
+
+    private void EndFlash()
+    {
+        sprite.material.color = startingColor;
+    }
 
 }

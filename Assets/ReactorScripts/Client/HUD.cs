@@ -18,8 +18,8 @@ public class HUD : MonoBehaviour
         respawningUI = transform.Find("Respawning").gameObject;
         GameEvents.current.FoodChanged += OnFoodChanged;
         GameEvents.current.SpawnMenuOpen += SpawnMenuOpen;
-        GameEvents.current.StartRespawn += () => respawningUI.SetActive(true);
-        GameEvents.current.EndRespawn += () => respawningUI.SetActive(false);
+        GameEvents.current.StartRespawn += StartRespawn;
+        GameEvents.current.EndRespawn += EndRespawn;
     }
 
     private void OnFoodChanged(int value)
@@ -39,5 +39,16 @@ public class HUD : MonoBehaviour
             spawnMenu.SetActive(false);
             commandMenu.SetActive(true);
         }
+    }
+
+    private void StartRespawn()
+    {
+        respawningUI.SetActive(true);
+
+    }
+
+    private void EndRespawn()
+    {
+        respawningUI.SetActive(false);
     }
 }

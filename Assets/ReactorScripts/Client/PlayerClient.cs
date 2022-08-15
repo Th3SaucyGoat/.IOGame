@@ -16,7 +16,7 @@ public class PlayerClient : ksPlayerScript
     private bool switchtoAlly;
     [SerializeField]
     private LayerMask layerMask;
-    private bool spawnMenuActive;
+    private bool spawnMenuActive = true;
 
  
 

@@ -1,0 +1,22 @@
+2022-08-15 06:09:41.1373 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-15 06:09:41.1453 [INFO; Root]  Loaded config.json
+2022-08-15 06:09:41.1458 [INFO; Root]  Loaded config.GameScene.json
+2022-08-15 06:09:41.1503 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-15 06:09:41.1503 [INFO; Root]  Reactor Server v0.10.0
+2022-08-15 06:09:41.1503 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-15 06:09:41.1513 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-15 06:09:41.1593 [DEBUG; Root]  Loading Asset Scripts
+2022-08-15 06:09:41.1613 [DEBUG; Root]  Loading Room Configs
+2022-08-15 06:09:41.1653 [DEBUG; Root]  Initializing PhysX
+2022-08-15 06:09:41.1763 [DEBUG; Root]  Loading PhysX geometry
+2022-08-15 06:09:41.1863 [INFO; Root]  Loaded 8 geometries
+2022-08-15 06:09:41.1863 [INFO; Root]  Loaded 2 geometries
+2022-08-15 06:09:41.1863 [DEBUG; Root]  Loading entity prefabs
+2022-08-15 06:09:41.1988 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-15 06:09:41.1988 [DEBUG; Root]  Loading entity instances
+2022-08-15 06:09:41.2153 [DEBUG; Root]  Initializing scripts
+2022-08-15 06:09:41.2228 [DEBUG; Root]  Room setup complete
+2022-08-15 06:09:41.2228 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-15 06:09:41.2228 [INFO; Root]  Sending client updates every 2 frames
+2022-08-15 06:09:41.2228 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-15 06:09:41.2233 [INFO; Root]  Opening TCP port 8000
