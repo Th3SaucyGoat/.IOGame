@@ -8,9 +8,6 @@
 					0.5,
 					1.0
 				],
-				"collision filter": {
-					"asset": 8
-				},
 				"scripts": [
 					{
 						"name": ".ksSphereCollider",
@@ -202,13 +199,10 @@
 			{
 				"asset id": 9,
 				"scale": [
-					0.6,
-					0.6,
+					0.7,
+					0.7,
 					1.0
 				],
-				"collision filter": {
-					"asset": 11
-				},
 				"scripts": [
 					{
 						"name": ".ksBaseRigidBody",
@@ -240,9 +234,7 @@
 						"params": {
 							"shape id": 7,
 							"material": null,
-							"filter": {
-								"asset": 13
-							},
+							"filter": null,
 							"offset": [
 								0.0,
 								0.0,

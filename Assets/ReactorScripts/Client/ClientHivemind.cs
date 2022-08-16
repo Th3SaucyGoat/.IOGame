@@ -54,17 +54,18 @@ public class ClientHivemind : ksEntityScript
     [ksRPC(RPC.SENDINFO)]
     public void RegisterInfo( ksMultiType[] a)
     {
-        player["Username"] = a[0];
-        player["Id"] = a[1];
+        print("Register Info Called");
+        //player["Username"] = a[0];
+        //player["Id"] = a[1];
         // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
         //UsernameLabels.SetEntity(a[1], Entity);
 
-        UsernameLabels.SetEntity(a[1], Entity);
 
         if (ClientUtils.CheckTeam(Room.LocalPlayer, Entity))
             {
             // Player needs to know which hivemind spawn requests go to.
             Room.LocalPlayer.GameObject.GetComponent<PlayerClient>().HiveId = Entity.Id;
+
         }
     }
 

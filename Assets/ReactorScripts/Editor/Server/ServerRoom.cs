@@ -111,21 +111,20 @@ public class ServerRoom : ksServerRoomScript
             {
                 ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(10f, -5f));
                 ksLog.Info("Here ");
-                IMovement movementValues = hivemind.Scripts.Get<IMovement>();
-                hivemind.SetController(new UnitController(movementValues.Speed, movementValues.Acceleration), p);
-                hivemind.Properties[Prop.TEAMID] = teamId;
+
                 activeTeams.Add(teamId);
                 //ksLog.Info("THE ID = " + hivemind.Id.ToString());
                 p.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.HIVEMINDID] = hivemind.Id;
-                p.Properties[Prop.CONTROLLEDENTITYID] = hivemind.Id;
+                PlayerRequestControl(p, hivemind.Id);
+                hivemind.Properties[Prop.TEAMID] = teamId;
+                hivemind.CallRPC(RPC.SENDINFO, teamId);
                 // Set the hivemind to be controlled by the player id. I will need to adjust this for 4 players.
-                hivemind.Properties[Prop.CONTROLLEDPLAYERID] = p.Id;
                 teamId++;
                 ksLog.Info(hivemind.Id.ToString());
 
                 // Send RPC telling all clients to start match. UI Changes. Send Username for hiveminds
-                hivemind.CallRPC(RPC.SENDINFO, new ksMultiType[] { p.Properties[Prop.NAME], p.Id });
+                //hivemind.CallRPC(RPC.SENDINFO, new ksMultiType[] { p.Properties[Prop.NAME], p.Id });
                 // Send player username and id to this entity to all clients.
             }
             Room.CallRPC(RPC.STARTMATCH);

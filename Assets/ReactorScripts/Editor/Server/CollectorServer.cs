@@ -58,17 +58,18 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
     public override void Initialize()
     {
         Scripts.Get<UnitServer>().Health = MaxHealth;
+        food = 0;
+        rb = Entity.Scripts.Get<ksRigidBody2DView>();
+        SubscribeToEvents();
     }
 
     public void DelayedStart()
     {
-        food = 0;
+        // This is things that need to be set after the Initialize function,
+        // since the initialize function happens immediately on instantiation.
         EntityToFollow = Hivemind;
         hivemindFood = Hivemind.Scripts.Get<IFoodPickup>();
-        // Get rigidBody. Will it be 2D or 3D?
-        rb = Entity.Scripts.Get<ksRigidBody2DView>();
-
-        SubscribeToEvents();
+        Entity.CallRPC(RPC.SENDINFO, new ksMultiType[] { Entity.Properties[Prop.TEAMID] });
     }
 
     private void SubscribeToEvents()

@@ -13,18 +13,20 @@ public class Unit : ksEntityScript
     public UsernameLabel usernameLabel;
 
     private SpriteRenderer sprite;
-    private Color startingColor;
-    
+    public Color primaryColor;
+    public Color secondaryColor;
+
 
     private void Start()
     {
         Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
         sprite = GetComponent<SpriteRenderer>();
-        startingColor = sprite.material.color;
+        
     }
 
     private void Update()
     {
+        print(sprite);
         if (usernameLabel != null)
         {
             usernameLabel.Position = transform.position;
@@ -44,6 +46,16 @@ public class Unit : ksEntityScript
         UsernameLabels.SetEntity(pId, Entity);
     }
 
+    [ksRPC(RPC.SENDINFO)]
+    private void IdentifyTeam(ksMultiType[] teamId)
+    {
+        print("Identify Team Called");
+        // Set the color based on the teamId
+        Color[] colors = TeamColors.DetermineTeamColor(teamId[0]);
+        primaryColor = colors[0];
+        secondaryColor = colors[1];
+        sprite.color = primaryColor;
+    }
     private void OnHealthChanged(ksMultiType oldV, ksMultiType newV)
     {
         sprite.material.color = Color.red;
@@ -52,7 +64,7 @@ public class Unit : ksEntityScript
 
     private void EndFlash()
     {
-        sprite.material.color = startingColor;
+        sprite.material.color = primaryColor;
     }
 
 }
