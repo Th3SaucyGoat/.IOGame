@@ -20,7 +20,7 @@ public class TeamColors : MonoBehaviour
     private static readonly Color[] team3 = new Color[]
 {
         new Color(0.2f, 1, 0.2f),
-        new Color(0.5f, 1, 0.5f)
+        new Color(0.7f, 1, 0.7f)
 };
     // Yellow
     private static readonly Color[] team4 = new Color[]

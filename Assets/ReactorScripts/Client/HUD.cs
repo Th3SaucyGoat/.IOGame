@@ -10,16 +10,19 @@ public class HUD : MonoBehaviour
     private GameObject spawnMenu;
     private GameObject commandMenu;
     private GameObject respawningUI;
+    private GameObject shiftandClick;
     private void Start()
     {
         foodText = transform.Find("FoodLabel").GetComponent<TextMeshProUGUI>();
         spawnMenu = transform.Find("SpawnMenu").gameObject;
         commandMenu = transform.Find("CommandMenu").gameObject;
         respawningUI = transform.Find("Respawning").gameObject;
+        shiftandClick = transform.Find("Shift&Click").gameObject;
         GameEvents.current.FoodChanged += OnFoodChanged;
         GameEvents.current.SpawnMenuOpen += SpawnMenuOpen;
         GameEvents.current.StartRespawn += StartRespawn;
         GameEvents.current.EndRespawn += EndRespawn;
+        GameEvents.current.UnitTakenControl += UnitTakenControl;
     }
 
     private void OnFoodChanged(int value)
@@ -50,5 +53,13 @@ public class HUD : MonoBehaviour
     private void EndRespawn()
     {
         respawningUI.SetActive(false);
+    }
+    // For removing shift "tutorial" text
+    private void UnitTakenControl()
+    {
+        if (shiftandClick.activeSelf == true)
+        {
+            shiftandClick.SetActive(false);
+        }
     }
 }

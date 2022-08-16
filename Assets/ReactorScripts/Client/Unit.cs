@@ -21,12 +21,12 @@ public class Unit : ksEntityScript
     {
         Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
         sprite = GetComponent<SpriteRenderer>();
-        
+        print("Sprite Found " + sprite);
+        IdentifyTeam(Entity.Properties[Prop.TEAMID].UInt);
     }
 
     private void Update()
     {
-        print(sprite);
         if (usernameLabel != null)
         {
             usernameLabel.Position = transform.position;
@@ -46,15 +46,23 @@ public class Unit : ksEntityScript
         UsernameLabels.SetEntity(pId, Entity);
     }
 
-    [ksRPC(RPC.SENDINFO)]
-    private void IdentifyTeam(ksMultiType[] teamId)
+    private void IdentifyTeam(uint teamId)
     {
-        print("Identify Team Called");
-        // Set the color based on the teamId
-        Color[] colors = TeamColors.DetermineTeamColor(teamId[0]);
+        // Because this function is called before the entity's start function. 
+        if (sprite == null)
+        {
+            sprite = GetComponent<SpriteRenderer>();
+        }
+
+        Color[] colors = TeamColors.DetermineTeamColor(teamId);
         primaryColor = colors[0];
         secondaryColor = colors[1];
         sprite.color = primaryColor;
+        print(Entity.GameObject.name);
+        if (Entity.GameObject.name == "Collector")
+        {
+            sprite.color = secondaryColor;
+        }
     }
     private void OnHealthChanged(ksMultiType oldV, ksMultiType newV)
     {

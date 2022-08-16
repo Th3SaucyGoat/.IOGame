@@ -176,7 +176,8 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
 
     private void OnOverlapStart(ksCollider ours, ksCollider other)
     {
-        // Check if locator. Add to enemies in range. Need to figure out way to isolate enemies from allies though.
+        // Check if locator. Add to enemies in range.
+        ksLog.Info(other.Entity.ToString());
         if (ours.IsTrigger)
         {
             if (!ServerUtils.CheckTeam(ours.Entity, other.Entity))
@@ -186,7 +187,6 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
                 {
                     target = other.Entity;
                 }
-                Room.Scripts.Get<ServerRoom>();
             }
         }
     }

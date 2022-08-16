@@ -21,19 +21,9 @@ public class ClientHivemind : ksEntityScript
     public override void Initialize()
     {
         player = new Dictionary<string, ksMultiType>();
-        if (Entity.PlayerController != null)
-        {
-            GameEvents.current.ChangeCamera(transform);
-            GameEvents.current.StartMatch?.Invoke();
-            Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
-            FoodChanged(0, 0);
-            // Make username label a child of this entity
-            //Entity.OnPropertyChange[]
-            var entity = Room.GetEntity(99999);
-            print(ClientUtils.IsEntityValid(entity));
-        }
-       // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
+        // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
     }
+
 
     private void Start()
     {
@@ -65,8 +55,18 @@ public class ClientHivemind : ksEntityScript
             {
             // Player needs to know which hivemind spawn requests go to.
             Room.LocalPlayer.GameObject.GetComponent<PlayerClient>().HiveId = Entity.Id;
+            MatchStart();
 
         }
+    }
+    private void MatchStart()
+    {
+        GameEvents.current.StartMatch?.Invoke();
+        Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
+        FoodChanged(0, 0);
+        //Entity.OnPropertyChange[]
+        //var entity = Room.GetEntity(99999);
+        //print(ClientUtils.IsEntityValid(entity));
     }
 
     private void FoodChanged(ksMultiType old, ksMultiType newV)

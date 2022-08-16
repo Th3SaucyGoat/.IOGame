@@ -18,7 +18,8 @@ public class PlayerClient : ksPlayerScript
     private LayerMask layerMask;
     private bool spawnMenuActive = true;
 
- 
+    // For removing the tutorial text about shift
+    private bool takenControlBefore = false;
 
     public uint HiveId
     {
@@ -114,7 +115,13 @@ public class PlayerClient : ksPlayerScript
         if (ClientUtils.CheckTeam(Player, ally) && ally.Properties[Prop.CONTROLLEDPLAYERID] == "")
         {
             Room.CallRPC(RPC.REQUESTCONTROL, allyId);
-            
+            if (takenControlBefore == false)
+            {
+                takenControlBefore = true;
+                GameEvents.current.UnitTakenControl();
+            }
+
+
             return true;
         }
         return false;

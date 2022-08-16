@@ -14,7 +14,7 @@ public class ServerRoom : ksServerRoomScript
     private Timer foodTimer;
     private delegate void OnTimerEnd();
 
-    private int teamId = 1;
+    private int teamId = 3;
 
     private List<int> activeTeams = new List<int> { };
 
@@ -116,10 +116,10 @@ public class ServerRoom : ksServerRoomScript
                 //ksLog.Info("THE ID = " + hivemind.Id.ToString());
                 p.Properties[Prop.TEAMID] = teamId;
                 p.Properties[Prop.HIVEMINDID] = hivemind.Id;
-                PlayerRequestControl(p, hivemind.Id);
                 hivemind.Properties[Prop.TEAMID] = teamId;
                 hivemind.CallRPC(RPC.SENDINFO, teamId);
                 // Set the hivemind to be controlled by the player id. I will need to adjust this for 4 players.
+                PlayerRequestControl(p, hivemind.Id);
                 teamId++;
                 ksLog.Info(hivemind.Id.ToString());
 
@@ -150,9 +150,8 @@ public class ServerRoom : ksServerRoomScript
     [ksRPC(RPC.REQUESTCONTROL)]
     private void PlayerRequestControl(ksIServerPlayer p, uint entityId)
     {
-        //ksLog.Info(Room.GetEntity(entityId).ToString());
-        ksLog.Info(Room.ToString());
         ksIServerEntity entity = Room.GetEntity(entityId);
+        //ksLog.Info("Right Here "+ ServerUtils.CheckTeam(p, entity).ToString() + p.Properties[Prop.TEAMID].ToString() + " , " + entity.Properties[Prop.TEAMID].ToString());
         // Do same validity checks
         if (ServerUtils.CheckTeam(p, entity) && entity.Properties[Prop.CONTROLLEDPLAYERID] == "")
         {

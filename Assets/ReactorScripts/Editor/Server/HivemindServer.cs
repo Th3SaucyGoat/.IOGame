@@ -64,7 +64,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
-        //Entity.OnDestroy += OnDestroy;
+        Entity.OnDestroy += OnDestroy;
         food = 0;
     }
 
@@ -190,6 +190,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         foodTarget = FindClosestFood();
     }
 
+    // Notifies room when team's hivemind dies
     private void OnDestroy()
     {
         Room.Scripts.Get<ServerRoom>().OnEntityDestroyed(Entity);

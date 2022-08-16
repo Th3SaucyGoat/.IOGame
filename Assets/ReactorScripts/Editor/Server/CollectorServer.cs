@@ -125,7 +125,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
             if (attached)
             {
                 feedNum++;
-                if (feedNum == 5)
+                if (feedNum >= 5)
                 {
                     food -= 1;
                     // Give food to hivemind
@@ -239,13 +239,11 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         //ksLog.Info("Collision Started");
         if (contact.Collider1.Entity != Hivemind)
         {
-            //ksLog.Info("Collector registered a collision event that was not the Hivemind");
+            ksLog.Info("Collector registered a collision event that was not the Hivemind");
         }
         // Handles attach logic when returning.
         if (behavior == BEHAVIOR.Return && contact.Collider1.Entity == Hivemind)
-            
         {
-
             if (!attached)
             {
                 attachedOffset = Hivemind.Position2D - Entity.Position2D;

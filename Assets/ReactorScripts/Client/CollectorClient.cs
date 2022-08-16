@@ -24,6 +24,7 @@ public class CollectorClient : ksEntityScript
         Entity.OnPropertyChange[Prop.FOOD] += OnFoodChanged;
         sprite = GetComponent<SpriteRenderer>();
         unitScript = GetComponent<Unit>();
+        
     }
 
     // Called when the script is detached.
