@@ -10,19 +10,31 @@ public class HUD : MonoBehaviour
     private GameObject spawnMenu;
     private GameObject commandMenu;
     private GameObject respawningUI;
-    private GameObject shiftandClick;
+    private GameObject shiftandClicklabel;
+    private GameObject clickTofireLabel;
+    private GameObject spaceTofeedLabel;
+
+    public static bool shooterTutorialDone = false;
+
+    public static bool feedLabelShown = false;
+
+
     private void Start()
     {
         foodText = transform.Find("FoodLabel").GetComponent<TextMeshProUGUI>();
         spawnMenu = transform.Find("SpawnMenu").gameObject;
         commandMenu = transform.Find("CommandMenu").gameObject;
         respawningUI = transform.Find("Respawning").gameObject;
-        shiftandClick = transform.Find("Shift&Click").gameObject;
+        shiftandClicklabel = transform.Find("Shift&Click").gameObject;
+        clickTofireLabel = transform.Find("ClicktoFire").gameObject;
+        spaceTofeedLabel = transform.Find("SpacetoFeed").gameObject;
         GameEvents.current.FoodChanged += OnFoodChanged;
         GameEvents.current.SpawnMenuOpen += SpawnMenuOpen;
         GameEvents.current.StartRespawn += StartRespawn;
         GameEvents.current.EndRespawn += EndRespawn;
         GameEvents.current.UnitTakenControl += UnitTakenControl;
+        GameEvents.current.FiredasShooter += FiredAsShooter;
+        GameEvents.current.InRangeToFeed += InRangeToFeed;
     }
 
     private void OnFoodChanged(int value)
@@ -55,11 +67,50 @@ public class HUD : MonoBehaviour
         respawningUI.SetActive(false);
     }
     // For removing shift "tutorial" text
-    private void UnitTakenControl()
+    private void UnitTakenControl(string UnitName)
     {
-        if (shiftandClick.activeSelf == true)
+        if (shiftandClicklabel.activeSelf == true)
         {
-            shiftandClick.SetActive(false);
+            shiftandClicklabel.SetActive(false);
+        }
+        
+        switch (UnitName)
+        {
+            case "Collector":
+                break;
+            case "Shooter":
+                if (!shooterTutorialDone)
+                {
+                    // Start animation
+                    clickTofireLabel.GetComponent<Animator>().SetTrigger("FadeIn");
+                }
+                break;
         }
     }
+
+    public void FiredAsShooter()
+    {
+        clickTofireLabel.GetComponent<Animator>().SetTrigger("FadeOut");
+        shooterTutorialDone = true;
+    }
+
+    private void InRangeToFeed(bool inRange)
+    {
+        Animator animator = spaceTofeedLabel.GetComponent<Animator>();
+
+        if (inRange)
+        {
+            print("FadingIn");
+            animator.SetTrigger("FadeIn");
+            feedLabelShown = true;
+        }
+        else
+        {
+            print("FadingOut");
+            animator.SetTrigger("FadeOut");
+            feedLabelShown = false;
+        }
+    }
+
+
 }

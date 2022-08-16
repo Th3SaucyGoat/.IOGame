@@ -56,7 +56,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Scripts.Get<UnitServer>().Health = MaxHealth;
         DebugTimer = new Timer(2f, DebugDestroy, false);
-        //DebugTimer.Start();
+        DebugTimer.Start();
     }
 
     public void DelayedStart()
@@ -96,6 +96,7 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
                 EntityToFollow = Hivemind;
                 return;
             }
+            
             // Head back if too far away
             if (ServerUtils.DistanceTo(Entity, EntityToFollow) > 2.0f)
             {

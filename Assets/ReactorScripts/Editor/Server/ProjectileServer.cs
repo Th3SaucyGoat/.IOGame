@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
+using Example;
 
 public class ProjectileServer : ksServerEntityScript
 {
@@ -10,12 +11,14 @@ public class ProjectileServer : ksServerEntityScript
     private float speed = 5f;
     public uint TeamId;
 
-
+    private Timer LiftetimeTimer;
     // Called when the script is attached.
     public override void Initialize()
     {
         Room.OnUpdate[0] += Update;
         Entity.OnOverlapStart += OnOverlapStart;
+        LiftetimeTimer = new Timer(1.0f, Timeout, false);
+        LiftetimeTimer.Start();
     }
 
     // Called when the script is detached.
@@ -28,6 +31,7 @@ public class ProjectileServer : ksServerEntityScript
     // Called during the update cycle
     private void Update()
     {
+        LiftetimeTimer.Tick(Time.Delta);
         Entity.Transform2D.Move(speed * Transform2D.Forward() * Time.Delta);
     }
 
@@ -49,5 +53,10 @@ public class ProjectileServer : ksServerEntityScript
             }
             Entity.Destroy();
         }
+    }
+
+    private void Timeout()
+    {
+        Entity.Destroy();
     }
 }

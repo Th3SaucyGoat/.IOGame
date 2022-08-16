@@ -7,11 +7,17 @@ public class Respawning : MonoBehaviour
 {
     private TextMeshProUGUI tmp;
     private FunctionTimer updateTimer;
+
+    public static bool respawnTutorialComplete = false;
+
+    private Animator labelAnimator;
+
     private void Start()
     {
         updateTimer = FunctionTimer.Create(OnUpdateTimerTimeout, 0.4f, false, "RespawnUITimer");
         updateTimer.gameObject.transform.SetParent(transform);
         tmp = transform.Find("Title").GetComponent<TextMeshProUGUI>();
+        GameEvents.current.RespawnTutorialComplete += RespawnTutorialComplete;
     }
     void Update()
     {
@@ -39,6 +45,24 @@ public class Respawning : MonoBehaviour
         if (gameObject.activeInHierarchy == true)
         {
             updateTimer.Start();
+        }
+    }
+
+    private void OnEnable()
+    {
+        labelAnimator = transform.Find("ToggleLabel").gameObject.GetComponent<Animator>();
+        if (!respawnTutorialComplete)
+        {
+            labelAnimator.SetTrigger("FadeIn");
+        }
+    }
+
+    private void RespawnTutorialComplete(bool isComplete)
+    {
+        respawnTutorialComplete = isComplete;
+        if (isComplete)
+        {
+            labelAnimator.SetTrigger("FadeOut");
         }
     }
 }

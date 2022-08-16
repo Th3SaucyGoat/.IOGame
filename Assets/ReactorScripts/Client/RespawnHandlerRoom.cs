@@ -12,6 +12,7 @@ public class RespawnHandlerRoom : ksRoomScript
     private FunctionTimer refreshRespawnList;
     private bool respawning = false;
     private int _respawnIndex = 0;
+
     private int respawnIndex
     {
         set
@@ -74,15 +75,21 @@ public class RespawnHandlerRoom : ksRoomScript
         //print(Room.GameObject);
         if (respawning)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                // Put viable allies index down one
                 respawnIndex -= 1;
+                if (!Respawning.respawnTutorialComplete)
+                {
+                    GameEvents.current.RespawnTutorialComplete(true);
+                }
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                // Put viable allies index up one
                 respawnIndex += 1;
+                if (!Respawning.respawnTutorialComplete)
+                {
+                    GameEvents.current.RespawnTutorialComplete(true);
+                }
             }
             return;
         }

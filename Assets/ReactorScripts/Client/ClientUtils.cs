@@ -95,4 +95,10 @@ public class ClientUtils : MonoBehaviour
             return null;
         }
     }
+
+    public static float DistanceTo(ksEntity ours, ksEntity other)
+    {
+        ksVector2 pos = ours.Position2D - other.Position2D;
+        return pos.Magnitude();
+    }
 }

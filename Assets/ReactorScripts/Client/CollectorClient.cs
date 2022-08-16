@@ -19,12 +19,15 @@ public class CollectorClient : ksEntityScript
     private SpriteRenderer sprite;
     private Unit unitScript;
 
+    private ksEntity hivemind;
+    private bool feeding = false;
+
     public override void Initialize()
     {
         Entity.OnPropertyChange[Prop.FOOD] += OnFoodChanged;
         sprite = GetComponent<SpriteRenderer>();
         unitScript = GetComponent<Unit>();
-        
+        hivemind = Room.GetEntity(Entity.Properties[Prop.HIVEMINDID]);
     }
 
     // Called when the script is detached.
@@ -36,7 +39,27 @@ public class CollectorClient : ksEntityScript
     // Called every frame.
     private void Update()
     {
-        
+        if (Entity.PlayerController == null)
+        {
+            return;
+        }
+        if (ClientUtils.DistanceTo(hivemind, Entity) < 1.5f)
+        {
+            if (!HUD.feedLabelShown && Entity.Properties[Prop.FOOD] > 0 && !feeding)
+            {
+                GameEvents.current.InRangeToFeed(true);
+            }
+        }
+        else if (HUD.feedLabelShown)
+        {
+            GameEvents.current.InRangeToFeed(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && HUD.feedLabelShown)
+        {
+            Entity.CallRPC(RPC.RETURN);
+            GameEvents.current.InRangeToFeed(false);
+            feeding = true;
+         }
     }
 
     private void OnFoodChanged(ksMultiType oldV, ksMultiType newV)
@@ -48,6 +71,10 @@ public class CollectorClient : ksEntityScript
         else if (newV < foodCapacity)
         {
             sprite.color = unitScript.secondaryColor;
+        }
+        if (newV ==0)
+        {
+            feeding = false;
         }
     }
 }

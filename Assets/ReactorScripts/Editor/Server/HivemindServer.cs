@@ -139,6 +139,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
             case "Collector":
                 ksIServerEntity collector = Room.SpawnEntity("Collector", Entity.Position2D);
                 collector.Properties[Prop.TEAMID] = Entity.Properties[Prop.TEAMID];
+                collector.Properties[Prop.HIVEMINDID] = Entity.Id;
                 var colServe = collector.Scripts.Get<CollectorServer>();
                 colServe.Hivemind = Entity;
                 colServe.DelayedStart();

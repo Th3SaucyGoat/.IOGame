@@ -15,8 +15,13 @@ public class GameEvents : MonoBehaviour
     public Action<bool> SpawnMenuOpen;
     public Action StartRespawn;
     public Action EndRespawn;
-    public Action UnitTakenControl;
+    public Action<String> UnitTakenControl;
+    public Action FiredasShooter;
+    public Action<bool> InRangeToFeed;
+    public Action<bool> RespawnTutorialComplete;
+
     public static GameEvents current;
+
 
     private void Awake()
     {

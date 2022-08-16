@@ -30,6 +30,10 @@ public class ShooterClient : ksEntityScript
             {
                 Entity.CallRPC(RPC.FIRING, true);
                 isFiring = true;
+                if (!HUD.shooterTutorialDone)
+                {
+                    GameEvents.current.FiredasShooter();
+                }
             }
             else if (Input.GetMouseButtonUp(0) && isFiring == true)
             {

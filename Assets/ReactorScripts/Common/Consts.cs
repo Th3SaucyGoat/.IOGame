@@ -30,5 +30,6 @@ public class RPC
     public const uint FOLLOW = 9;
     public const uint DISMISS = 10;
     public const uint PLAYERCONTROLLEDENTITYDESTROYED = 11;  // Called by entities sometimes when they are destroyed
-    public const uint ENDGAME = 12;
+    public const uint ENDGAME = 12; // Used by Room to players
+    public const uint RETURN = 13;  // Used by Collector
 }

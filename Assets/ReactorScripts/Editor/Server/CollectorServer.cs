@@ -79,6 +79,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
         Entity.OnCollision += OnCollisionStart;
+        Entity.OnContactUpdate += OnCollisionUpdate;
     }
 
     public override void Detached()
@@ -87,6 +88,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         Entity.OnOverlapStart -= OnOverlap;
         Entity.OnOverlapEnd -= OnOverlapExit;
         Entity.OnCollision -= OnCollisionStart;
+        Entity.OnContactUpdate -= OnCollisionUpdate;
+
 
 
     }
@@ -138,6 +141,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
                 if (food == 0)
                 {
                     Detach();
+                    
                 }
             }
             else
@@ -173,7 +177,15 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         behavior = BEHAVIOR.Idle;
         attached = false;
         attachedOffset = ksVector2.Zero;
-        //rb.mass = 1;
+        // Need unique logic for if a player is controlling.
+        if (Entity.Properties[Prop.CONTROLLEDPLAYERID] != "")
+        {
+
+            Entity.SetController(
+                new UnitController(Speed, Acceleration),
+                Room.GetPlayer(Entity.Properties[Prop.CONTROLLEDPLAYERID].UInt)
+                );
+        }
     }
 
     private ksIServerEntity FindClosestFood()
@@ -236,7 +248,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
 
     private void OnCollisionStart(ksContact contact)
     {
-        //ksLog.Info("Collision Started");
+        
+        ksLog.Info("Collision Started" + (contact.Collider1.Entity == Hivemind).ToString() + "   "+ attached.ToString());
         if (contact.Collider1.Entity != Hivemind)
         {
             ksLog.Info("Collector registered a collision event that was not the Hivemind");
@@ -252,6 +265,31 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
 
             }
         }
+    }
+
+    private void OnCollisionUpdate(ksContact contact)
+    {
+        ksLog.Info("Collision Updated");
+        if (contact.Collider1.Entity != Hivemind)
+        {
+            ksLog.Info("Collector registered a collision event that was not the Hivemind");
+        }
+        // Handles attach logic when returning.
+        if (!attached)
+        {
+
+        if (behavior == BEHAVIOR.Return && contact.Collider1.Entity == Hivemind)
+        {
+            if (!attached)
+            {
+                attachedOffset = Hivemind.Position2D - Entity.Position2D;
+                attached = true;
+                //rb.mass = 0.1f;
+
+            }
+        }
+        }
+
     }
 
     private void moveTowardsPoint(ksVector2 point)
@@ -273,5 +311,14 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         {
             behavior = BEHAVIOR.Collect;
         }
+    }
+
+    [ksRPC(RPC.RETURN)]
+    private void PlayerInitiateReturn()
+    {
+        behavior = BEHAVIOR.Return;
+        // Need to disable the player controller in order for AI behaviour to take over.
+        ksLog.Info("Feed initiated");
+        Entity.RemoveController();
     }
 }

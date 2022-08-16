@@ -61,12 +61,10 @@ public class ClientHivemind : ksEntityScript
     }
     private void MatchStart()
     {
-        GameEvents.current.StartMatch?.Invoke();
+        
+        GameEvents.current.StartMatch?.Invoke(); // For changing UI.
         Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
         FoodChanged(0, 0);
-        //Entity.OnPropertyChange[]
-        //var entity = Room.GetEntity(99999);
-        //print(ClientUtils.IsEntityValid(entity));
     }
 
     private void FoodChanged(ksMultiType old, ksMultiType newV)
@@ -87,7 +85,6 @@ public class ClientHivemind : ksEntityScript
             case "Shooter":
                 if (Entity.Properties[Prop.FOOD] >= 0)
                 {
-                     //call shooter rpc
                     Entity.CallRPC(RPC.SPAWNUNIT, type);
                 }
                 break;
