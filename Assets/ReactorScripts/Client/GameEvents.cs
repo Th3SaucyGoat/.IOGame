@@ -19,6 +19,7 @@ public class GameEvents : MonoBehaviour
     public Action FiredasShooter;
     public Action<bool> InRangeToFeed;
     public Action<bool> RespawnTutorialComplete;
+    public Action FirstUnitSpawned;
 
     public static GameEvents current;
 

@@ -7,6 +7,7 @@ using KS.Reactor.Client;
 using KS.Reactor;
 using Cinemachine;
 using TMPro;
+using Example;
 
 public class ClientHivemind : ksEntityScript
 {
@@ -77,15 +78,23 @@ public class ClientHivemind : ksEntityScript
         switch (type)
         {
             case "Collector":
-                if (Entity.Properties[Prop.FOOD] >= 0)
+                if (Entity.Properties[Prop.FOOD] >= Stats.CollectorCost)
                 {
                     Entity.CallRPC(RPC.SPAWNUNIT, type);
+                    if (!HUD.firstUnitSpawned)
+                    {
+                        GameEvents.current.FirstUnitSpawned();
+                    }
                 }
                 break;
             case "Shooter":
-                if (Entity.Properties[Prop.FOOD] >= 0)
+                if (Entity.Properties[Prop.FOOD] >= Stats.ShooterCost)
                 {
                     Entity.CallRPC(RPC.SPAWNUNIT, type);
+                    if (!HUD.firstUnitSpawned)
+                    {
+                        GameEvents.current.FirstUnitSpawned();
+                    }
                 }
                 break;
         }

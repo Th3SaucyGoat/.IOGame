@@ -9,25 +9,42 @@ public class HUD : MonoBehaviour
 
     private GameObject spawnMenu;
     private GameObject commandMenu;
+
+    [SerializeField]
+    private GameObject EnabledTutorialContainer;
+
+    [SerializeField]
+    private GameObject DisabledTutorialContainer;
+
+    [SerializeField]
     private GameObject respawningUI;
+    [SerializeField]
     private GameObject shiftandClicklabel;
+    [SerializeField]
     private GameObject clickTofireLabel;
+    [SerializeField]
     private GameObject spaceTofeedLabel;
 
+    [SerializeField]
+    private GameObject aliveUIContainer;
+    
+
     public static bool shooterTutorialDone = false;
+    public static bool firstUnitSpawned = false;
 
     public static bool feedLabelShown = false;
 
 
     private void Start()
     {
-        foodText = transform.Find("FoodLabel").GetComponent<TextMeshProUGUI>();
-        spawnMenu = transform.Find("SpawnMenu").gameObject;
-        commandMenu = transform.Find("CommandMenu").gameObject;
-        respawningUI = transform.Find("Respawning").gameObject;
-        shiftandClicklabel = transform.Find("Shift&Click").gameObject;
-        clickTofireLabel = transform.Find("ClicktoFire").gameObject;
-        spaceTofeedLabel = transform.Find("SpacetoFeed").gameObject;
+        foodText = aliveUIContainer.transform.Find("FoodLabel").GetComponent<TextMeshProUGUI>();
+        spawnMenu = aliveUIContainer.transform.Find("SpawnMenu").gameObject;
+        commandMenu = aliveUIContainer.transform.Find("CommandMenu").gameObject;
+        SubscribeToEvents();
+    }
+
+    private void SubscribeToEvents()
+    {
         GameEvents.current.FoodChanged += OnFoodChanged;
         GameEvents.current.SpawnMenuOpen += SpawnMenuOpen;
         GameEvents.current.StartRespawn += StartRespawn;
@@ -35,6 +52,7 @@ public class HUD : MonoBehaviour
         GameEvents.current.UnitTakenControl += UnitTakenControl;
         GameEvents.current.FiredasShooter += FiredAsShooter;
         GameEvents.current.InRangeToFeed += InRangeToFeed;
+        GameEvents.current.FirstUnitSpawned += FirstUnitSpawned;
     }
 
     private void OnFoodChanged(int value)
@@ -58,32 +76,33 @@ public class HUD : MonoBehaviour
 
     private void StartRespawn()
     {
-        respawningUI.SetActive(true);
-
+        EnableTutorial(respawningUI.transform);
+        aliveUIContainer.SetActive(false);
     }
 
     private void EndRespawn()
     {
-        respawningUI.SetActive(false);
+        aliveUIContainer.SetActive(true);
     }
     // For removing shift "tutorial" text
     private void UnitTakenControl(string UnitName)
     {
-        if (shiftandClicklabel.activeSelf == true)
-        {
-            shiftandClicklabel.SetActive(false);
-        }
-        
+        // Always need to enable a tutorial, in order to avoid errors.
+        // Tutorials that are already done won't show anyways.
         switch (UnitName)
         {
             case "Collector":
+                EnableTutorial(spaceTofeedLabel.transform);
                 break;
             case "Shooter":
+                EnableTutorial(clickTofireLabel.transform);
                 if (!shooterTutorialDone)
                 {
-                    // Start animation
                     clickTofireLabel.GetComponent<Animator>().SetTrigger("FadeIn");
                 }
+                break;
+            case "Hivemind":
+                EnableTutorial(shiftandClicklabel.transform);
                 break;
         }
     }
@@ -112,5 +131,19 @@ public class HUD : MonoBehaviour
         }
     }
 
+    private void EnableTutorial(Transform newLabel)
+    {
+        if (EnabledTutorialContainer.transform.childCount == 1)
+        {
+            Transform previousLabel = EnabledTutorialContainer.transform.GetChild(0);
+            previousLabel.SetParent(DisabledTutorialContainer.transform);
+        }
+        newLabel.SetParent(EnabledTutorialContainer.transform);
+    }
 
+    private void FirstUnitSpawned()
+    {
+        firstUnitSpawned = true;
+        shiftandClicklabel.GetComponent<Animator>().SetTrigger("FadeIn");
+    }
 }

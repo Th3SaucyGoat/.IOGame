@@ -32,8 +32,10 @@
 					{
 						"name": ".ksBaseRigidBody",
 						"params": {
+							"mass": 20.0,
 							"use gravity": false,
-							"drag": 0.5,
+							"drag": 2.0,
+							"collision detection": 1,
 							"constraints": 112,
 							"rigid body type": 1
 						}
@@ -131,7 +133,10 @@
 					{
 						"name": ".ksBaseRigidBody",
 						"params": {
-							"drag": 0.5,
+							"mass": 1000.0,
+							"use gravity": false,
+							"drag": 1.0,
+							"collision detection": 1,
 							"constraints": 120,
 							"rigid body type": 1
 						}
@@ -213,7 +218,8 @@
 					{
 						"name": ".ksBaseRigidBody",
 						"params": {
-							"drag": 0.8,
+							"mass": 50.0,
+							"drag": 2.0,
 							"constraints": 120,
 							"rigid body type": 1
 						}

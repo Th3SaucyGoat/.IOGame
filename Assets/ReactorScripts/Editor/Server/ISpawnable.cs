@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public interface IDamagable
+public interface ISpawnable
 {
-    uint Health { set; get; }
+    void DelayedStart();
 }

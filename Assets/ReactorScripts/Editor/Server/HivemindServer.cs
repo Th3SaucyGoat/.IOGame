@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
+using Example;
 
 public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , ICommandable
 {
@@ -35,15 +36,11 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         {
             ksRange range = new ksRange(0, foodCapacity);
             Entity.Properties[Prop.FOOD] = (int) range.Clamp(value);
-            //if (Entity.Properties[Prop.FOOD] == 10)
-            //{
-            //    Scripts.Get<IDamagable>().Health -= 20;
-            //}
         }
         get { return Entity.Properties[Prop.FOOD]; }
     }
 
-    public int MaxHealth { get; } = 5;
+    public uint MaxHealth { get; } = Stats.HivemindMaxHealth;
 
     public int foodCapacity { set; get; } = 200;
 
@@ -53,6 +50,8 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     private ksIServerEntity foodTarget;
     private List<ksIServerEntity> foodInRange = new List<ksIServerEntity> { };
     private int foodSearchDelay;
+
+    private Timer debugTimer;
 
     private ksRigidBody2DView rb;
 
@@ -65,7 +64,9 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
         Entity.OnDestroy += OnDestroy;
-        food = 0;
+        food = 100;
+        debugTimer = new Timer(2.0f, OnDebugTimeout, false);
+        //debugTimer.Start();
     }
 
     // Called when the script is detached.
@@ -80,6 +81,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     // Called during the update cycle
     private void Update()
     {
+        debugTimer.Tick(Time.Delta);
         //Room.CallRPC(new List<ksIServerPlayer> { Room.GetPlayer(Entity.Properties[Prop.CONTROLLEDPLAYERID].UInt) }, RPC.ENDGAME, false);
         //Entity.Destroy();
         if (EntityToFollow != null)
@@ -130,35 +132,48 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     public void SpawnCollector(ksIServerPlayer player, string type)
     {
         ksLog.Info("server received request to spawn = " + Entity.Properties[Prop.FOOD]);
-        if (Entity.Properties[Prop.FOOD] < 1)
-        {
-            return;
-        }
+        //if (Entity.Properties[Prop.FOOD] < Stats.GetType().GetField(type))
+        //{
+        //    return;
+        //}
         switch (type)
         {
             case "Collector":
+                if (Entity.Properties[Prop.FOOD] < Stats.CollectorCost)
+                {
+                    return;
+                }
                 ksIServerEntity collector = Room.SpawnEntity("Collector", Entity.Position2D);
-                collector.Properties[Prop.TEAMID] = Entity.Properties[Prop.TEAMID];
-                collector.Properties[Prop.HIVEMINDID] = Entity.Id;
-                var colServe = collector.Scripts.Get<CollectorServer>();
-                colServe.Hivemind = Entity;
-                colServe.DelayedStart();
+                InitializeEntity(collector);
+                Entity.Properties[Prop.FOOD] -= Stats.CollectorCost;
                 break;
             case "Shooter":
+                if (Entity.Properties[Prop.FOOD] < Stats.ShooterCost)
+                {
+                    return;
+                }
                 ksIServerEntity shooter = Room.SpawnEntity("Shooter", Entity.Position2D);
-                shooter.Properties[Prop.TEAMID] = Entity.Properties[Prop.TEAMID];
-                var shoot = shooter.Scripts.Get<ShooterServer>();
-                shoot.Hivemind = Entity;
-                shoot.DelayedStart();
+                InitializeEntity(shooter);
+                Entity.Properties[Prop.FOOD] -= Stats.ShooterCost;
                 break;
         }
-        Entity.Properties[Prop.FOOD] -= 1;
         // Find the player's hivemind. Retrieve the position of the hivemind.
 
         // The collector needs to know it is of that unique team/player.
 
         //ksLog.Info("IS ASSIGNED? = "+ hive.Scripts.Get<CollectorServer>().Hivemind.ToString());
     }
+
+    private void InitializeEntity(ksIServerEntity entity)
+    {
+        entity.Properties[Prop.TEAMID]= Entity.Properties[Prop.TEAMID];
+        entity.Properties[Prop.HIVEMINDID] = Entity.Id;
+        ICommandable command = entity.Scripts.Get<ICommandable>();
+        command.Hivemind = Entity;
+        ISpawnable delay = entity.Scripts.Get<ISpawnable>();
+        delay.DelayedStart();
+    }
+
     private void OnOverlap(ksCollider ours, ksCollider other)
     {
         if (ours.IsTrigger)
@@ -166,7 +181,10 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
             foodInRange.Add(other.Entity);
         }
     }
-
+    private void OnDebugTimeout()
+    {
+        Scripts.Get<UnitServer>().Health = 0;
+    }
     private void OnOverlapExit(ksCollider ours, ksCollider other)
     {
         if (ours.IsTrigger)
@@ -179,11 +197,6 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     {
         foodInRange = ServerUtils.UpdateEntityList(foodInRange);
         return ServerUtils.FindClosestEntity(Entity, foodInRange);
-    }
-
-    public void ChangeFollow()
-    {
-        ksLog.Info("Here Follow");
     }
 
     public void DetermineState()

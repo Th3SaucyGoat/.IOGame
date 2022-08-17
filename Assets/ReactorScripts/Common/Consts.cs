@@ -33,3 +33,4 @@ public class RPC
     public const uint ENDGAME = 12; // Used by Room to players
     public const uint RETURN = 13;  // Used by Collector
 }
+

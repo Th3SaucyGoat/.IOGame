@@ -1684,6 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UseLocalServer: 1
   UserName: 
+  walls: {fileID: 0}
 --- !u!114 &1816837417
 MonoBehaviour:
   m_ObjectHideFlags: 0

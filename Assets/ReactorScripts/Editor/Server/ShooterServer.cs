@@ -5,14 +5,14 @@ using KS.Reactor.Server;
 using KS.Reactor;
 using Example;
 
-public class ShooterServer : ksServerEntityScript , IMovement , ICommandable 
+public class ShooterServer : ksServerEntityScript , IMovement , ICommandable , ISpawnable
 {
     public float Speed { set; get; } = 2f;
     public float Acceleration { set; get; } = 4f;
 
     private ksRigidBody2DView rb;
 
-    public int MaxHealth { get; } = 5;
+    public uint MaxHealth { get; } = Stats.ShooterMaxHealth;
 
 
 
@@ -61,7 +61,6 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable
 
     public void DelayedStart()
     {
-
         EntityToFollow = Hivemind;
     }
 

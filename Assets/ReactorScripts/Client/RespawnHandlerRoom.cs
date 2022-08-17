@@ -78,18 +78,12 @@ public class RespawnHandlerRoom : ksRoomScript
             if (Input.GetKeyDown(KeyCode.A))
             {
                 respawnIndex -= 1;
-                if (!Respawning.respawnTutorialComplete)
-                {
-                    GameEvents.current.RespawnTutorialComplete(true);
-                }
+
             }
             if (Input.GetKeyDown(KeyCode.D))
             {
                 respawnIndex += 1;
-                if (!Respawning.respawnTutorialComplete)
-                {
-                    GameEvents.current.RespawnTutorialComplete(true);
-                }
+
             }
             return;
         }

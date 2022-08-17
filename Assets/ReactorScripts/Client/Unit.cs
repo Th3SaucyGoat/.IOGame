@@ -13,16 +13,18 @@ public class Unit : ksEntityScript
     public UsernameLabel usernameLabel;
 
     private SpriteRenderer sprite;
-    public Color primaryColor;
-    public Color secondaryColor;
+    public Color primaryColor = new Color();
+    public Color secondaryColor = new Color();
+
+    public Color previousColor = new();
 
 
     private void Start()
     {
         Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
         sprite = GetComponent<SpriteRenderer>();
-        print("Sprite Found " + sprite);
         IdentifyTeam(Entity.Properties[Prop.TEAMID].UInt);
+        OnHealthChanged(0, 0);
     }
 
     private void Update()
@@ -31,6 +33,7 @@ public class Unit : ksEntityScript
         {
             usernameLabel.Position = transform.position;
         }
+
     }
 
     [ksRPC(RPC.TAKECONTROL)]
@@ -41,6 +44,9 @@ public class Unit : ksEntityScript
         {
             // Hook up camera
             GameEvents.current.ChangeCamera(transform);
+
+            // Emitted for UI changes.
+            GameEvents.current.UnitTakenControl(Entity.GameObject.name);
         }
         // Display the username of the player underneath this entity
         UsernameLabels.SetEntity(pId, Entity);
@@ -55,10 +61,10 @@ public class Unit : ksEntityScript
         }
 
         Color[] colors = TeamColors.DetermineTeamColor(teamId);
+        print(colors[0] + colors[1]);
         primaryColor = colors[0];
         secondaryColor = colors[1];
         sprite.color = primaryColor;
-        print(Entity.GameObject.name);
         if (Entity.GameObject.name == "Collector")
         {
             sprite.color = secondaryColor;
@@ -66,13 +72,14 @@ public class Unit : ksEntityScript
     }
     private void OnHealthChanged(ksMultiType oldV, ksMultiType newV)
     {
-        sprite.material.color = Color.red;
-        Invoke(nameof(EndFlash), 0.2f);
+        previousColor = sprite.color;
+        sprite.color = Color.white;
+        Invoke(nameof(EndFlash), 0.15f);
     }
 
     private void EndFlash()
     {
-        sprite.material.color = primaryColor;
+        sprite.color = previousColor;
     }
 
 }

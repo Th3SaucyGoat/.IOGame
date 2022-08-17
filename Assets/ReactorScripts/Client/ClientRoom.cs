@@ -20,6 +20,7 @@ public class ClientRoom : ksRoomScript
     public override void Initialize()
     {
         GameEvents.current.onReady += SetReadyStatus;
+        print("Subbed");
         Room.OnPlayerJoin += PlayerJoin;
         Room.OnPlayerLeave += PlayerLeave;
     }
@@ -29,6 +30,9 @@ public class ClientRoom : ksRoomScript
     {
         Room.OnPlayerJoin -= PlayerJoin;
         Room.OnPlayerLeave -= PlayerLeave;
+        print("Detached");
+        GameEvents.current.onReady -= SetReadyStatus;
+
     }
 
     // Called when a player connects.
@@ -115,7 +119,6 @@ public class ClientRoom : ksRoomScript
         }
         else
         {
-            print(Room.LocalPlayer.Properties[Prop.HIVEMINDID]);
             // Check if has hivemind. Else, show game over screen.
             if (Room.LocalPlayer.Properties[Prop.HIVEMINDID] == "")
             {

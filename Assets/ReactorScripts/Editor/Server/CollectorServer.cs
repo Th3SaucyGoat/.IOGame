@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Collections;
 using KS.Reactor.Server;
 using KS.Reactor;
+using Example;
 
-public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , ICommandable
+public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , ICommandable , ISpawnable
 {
-    public int MaxHealth { get; } = 1;
+    public uint MaxHealth { get; } = Stats.CollectorMaxHealth;
     public int foodCapacity { get; } = 5;
 
     public float Speed { set; get; } = 3;
@@ -49,6 +50,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
 
     private bool attached = false;
 
+    private Timer DebugTimer;
+
     enum BEHAVIOR { Idle, Collect, Return }
     BEHAVIOR behavior = BEHAVIOR.Collect;
     private ksIServerEntity foodTarget;
@@ -60,6 +63,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         Scripts.Get<UnitServer>().Health = MaxHealth;
         food = 0;
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
+        DebugTimer = new Timer(2.0f, OnDebugTimeout, false);
         SubscribeToEvents();
     }
 
@@ -69,7 +73,6 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         // since the initialize function happens immediately on instantiation.
         EntityToFollow = Hivemind;
         hivemindFood = Hivemind.Scripts.Get<IFoodPickup>();
-        Entity.CallRPC(RPC.SENDINFO, new ksMultiType[] { Entity.Properties[Prop.TEAMID] });
     }
 
     private void SubscribeToEvents()
@@ -79,6 +82,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
         Entity.OnCollision += OnCollisionStart;
+        Entity.OnContactLost += OnCollisionLost;
         Entity.OnContactUpdate += OnCollisionUpdate;
     }
 
@@ -97,6 +101,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
     // Called during the update cycle
     private void Update()
     {
+
+        DebugTimer.Tick(Time.Delta);
         //ksLog.Info(behavior.ToString() + " " + foodInRange.Count.ToString());
         if (Entity.PlayerController != null)
         {
@@ -125,6 +131,18 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
 
         else if (behavior == BEHAVIOR.Return)
         {
+            if (!attached)
+            {
+                // check distance between Hivemind and entity
+                if (ServerUtils.DistanceTo(Entity, Hivemind) < 0.78f)
+                {
+                    Attach();
+                    return;
+                }
+
+                moveTowardsPoint(Hivemind.Position2D);
+
+            }
             if (attached)
             {
                 feedNum++;
@@ -143,10 +161,6 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
                     Detach();
                     
                 }
-            }
-            else
-            {
-                moveTowardsPoint(Hivemind.Position2D);
             }
         }
 
@@ -170,6 +184,12 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
             }
             //Seek food if detects food
         }
+    }
+
+    private void Attach()
+    {
+        attachedOffset = Hivemind.Position2D - Entity.Position2D;
+        attached = true;
     }
 
     private void Detach()
@@ -215,7 +235,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
             // Too far away, return to entity to follow
             if (behavior != BEHAVIOR.Return)
             {
-                if (distance> 3.5 || foodInRange.Count == 0)
+                if (distance > 3.5 || foodInRange.Count == 0)
                 {
                     behavior = BEHAVIOR.Idle;
                 }
@@ -248,8 +268,8 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
 
     private void OnCollisionStart(ksContact contact)
     {
-        
-        ksLog.Info("Collision Started" + (contact.Collider1.Entity == Hivemind).ToString() + "   "+ attached.ToString());
+
+        ksLog.Info("Collision Started" + (contact.Collider1.Entity == Hivemind).ToString() + "   " + attached.ToString());
         if (contact.Collider1.Entity != Hivemind)
         {
             ksLog.Info("Collector registered a collision event that was not the Hivemind");
@@ -259,15 +279,19 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         {
             if (!attached)
             {
-                attachedOffset = Hivemind.Position2D - Entity.Position2D;
-                attached = true;
+                Attach();
                 //rb.mass = 0.1f;
 
             }
         }
     }
 
-    private void OnCollisionUpdate(ksContact contact)
+    private void OnCollisionLost(ksCollider c1, ksCollider c2 )
+    {
+        ksLog.Info("collision Lost");
+    }
+
+private void OnCollisionUpdate(ksContact contact)
     {
         ksLog.Info("Collision Updated");
         if (contact.Collider1.Entity != Hivemind)
@@ -282,8 +306,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         {
             if (!attached)
             {
-                attachedOffset = Hivemind.Position2D - Entity.Position2D;
-                attached = true;
+                    Attach();
                 //rb.mass = 0.1f;
 
             }
@@ -307,7 +330,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         {
             behavior = BEHAVIOR.Idle;
         }
-        else if ( food < foodCapacity && foodInRange.Count >0)
+        else if ( food < foodCapacity && foodInRange.Count > 0)
         {
             behavior = BEHAVIOR.Collect;
         }
@@ -317,8 +340,16 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
     private void PlayerInitiateReturn()
     {
         behavior = BEHAVIOR.Return;
+        //DebugTimer.Start();
         // Need to disable the player controller in order for AI behaviour to take over.
-        ksLog.Info("Feed initiated");
         Entity.RemoveController();
+    }
+
+    private void OnDebugTimeout()
+    {
+        if (behavior == BEHAVIOR.Return)
+        {
+            Detach();
+        }
     }
 }

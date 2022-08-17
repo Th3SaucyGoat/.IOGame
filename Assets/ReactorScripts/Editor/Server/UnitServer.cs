@@ -7,8 +7,8 @@ using KS.Reactor;
 public class UnitServer : ksServerEntityScript , IDamagable
 {
 
-    private int health;
-    public int Health
+    private uint health;
+    public uint Health
     {
         set
         {

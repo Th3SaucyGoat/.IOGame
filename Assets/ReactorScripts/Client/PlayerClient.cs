@@ -113,8 +113,7 @@ public class PlayerClient : ksPlayerScript
         if (ClientUtils.CheckTeam(Player, ally) && ally.Properties[Prop.CONTROLLEDPLAYERID] == "")
         {
             Room.CallRPC(RPC.REQUESTCONTROL, allyId);
-            // Emitted for UI changes
-            GameEvents.current.UnitTakenControl(ally.GameObject.name);
+
 
 
             return true;

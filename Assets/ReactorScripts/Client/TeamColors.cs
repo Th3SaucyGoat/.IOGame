@@ -32,19 +32,18 @@ public class TeamColors : MonoBehaviour
 
     public static Color[] DetermineTeamColor(uint teamId)
     {
-        print(teamId);
-        switch (teamId)
+        int Id = (int) teamId;
+        if (teamId > 4)
         {
-            case 1:
-                return team1;
-            case 2:
-                return team2;
-            case 3:
-                return team3;
-            case 4:
-                return team4;
-            default:
-                return null;
+            Id = (int) teamId % 4;
         }
+        return Id switch
+        {
+            1 => team1,
+            2 => team2,
+            3 => team3,
+            4 => team4,
+            _ => null,
+        };
     }
 }

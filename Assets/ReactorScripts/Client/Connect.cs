@@ -15,6 +15,10 @@ public class Connect : MonoBehaviour
     // Current room.
     private ksRoom m_room;
 
+    [SerializeField]
+    private GameObject walls;
+    private bool firstGameDone = false;  // Deals with issue of reInstantiating the walls
+
     private void Start()
     {
         ksReactor.InputManager.BindAxis(Axes.X, "Horizontal");
@@ -104,15 +108,20 @@ public class Connect : MonoBehaviour
     // Handle a ksRoom disconnect event.
     private void HandleDisconnect(ksRoom.DisconnectError status)
     {
-        print("here");
         ksLog.Info("Disconnected from " + m_room + " (" + status + ")");
         m_room.CleanUp();
+        Destroy(m_room.GameObject);
         m_room = null;
     }
 
     private void matchLeft()
     {
         m_room.Disconnect();
+        if (!firstGameDone)
+        {
+            firstGameDone = true;
+            Instantiate(walls);
+        }
     }
 
     public void setUsername(TMP_InputField input)

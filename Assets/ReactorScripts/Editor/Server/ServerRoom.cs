@@ -7,14 +7,16 @@ public class ServerRoom : ksServerRoomScript
 {
 
     private int num = 0;
-    private float[] xBounds = new float[] { -8.54f, 12.73f };
-    private float[] yBounds = new float[] { -6.17f, 7.04f };
+    private float[] xBounds = new float[] { -8f, 40f };
+    private float[] yBounds = new float[] { -22f, 7f };
 
     private ksRandom random;
     private Timer foodTimer;
+    private Timer clusterfoodTimer;
+
     private delegate void OnTimerEnd();
 
-    private int teamId = 3;
+    private int teamId = 1;
 
     private List<int> activeTeams = new List<int> { };
 
@@ -35,7 +37,8 @@ public class ServerRoom : ksServerRoomScript
 
         random = new ksRandom();
 
-        foodTimer = new Timer(1.0f, SpawnFood, false);
+        foodTimer = new Timer(0.5f, SpawnTimerTimeout, true);
+        clusterfoodTimer = new Timer(15.0f, ClusterSpawnFood, true);
     }
 
     // Cleanup the script. Called once when the script is unloaded.
@@ -77,11 +80,14 @@ public class ServerRoom : ksServerRoomScript
                 entity.Destroy();
             }
             foodTimer.Stop();
+            clusterfoodTimer.Stop();
+            
         }
     }
     private void Update()
     {
         foodTimer.Tick(Time.Delta);
+        clusterfoodTimer.Tick(Time.Delta);
     }
 
     [ksRPC(RPC.SETREADYSTATUS)]
@@ -96,7 +102,7 @@ public class ServerRoom : ksServerRoomScript
         bool initiateMatch = true;
         foreach (ksIServerPlayer p in connectedPlayers)
         {
-            if (!p.Properties[Prop.READY])
+            if (p.Properties[Prop.READY].Bool != true)
             {
                 initiateMatch = false;
                 break;
@@ -109,7 +115,7 @@ public class ServerRoom : ksServerRoomScript
             // Spawn in a hivemind for all players. Set player control to only their hivemind. Set unique team Ids.
             foreach (ksIServerPlayer p in Room.Players)
             {
-                ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(10f, -5f));
+                ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(-8f, -7f));
                 ksLog.Info("Here ");
 
                 activeTeams.Add(teamId);
@@ -130,21 +136,50 @@ public class ServerRoom : ksServerRoomScript
             Room.CallRPC(RPC.STARTMATCH);
 
             // Initial food spawn in
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < (50*Room.ConnectedPlayerCount)+100; i++)
             {
-                SpawnFood();
+                //SpawnFood(FindRandomPosition());
             }
             foodTimer.Start();
+            clusterfoodTimer.Start();
         }
     }
 
-
-
-    private void SpawnFood()
+    private void SpawnTimerTimeout()
     {
-        ksVector3 pos = new ksVector3(random.NextFloat(xBounds[0], xBounds[1]), random.NextFloat(yBounds[0], yBounds[1]), 0f);
+        SpawnFood(FindRandomPosition());
+    }
+
+    private void SpawnFood(ksVector3 pos)
+    {
         Room.SpawnEntity("Food", pos);
-        foodTimer.Start();
+    }
+
+    private void ClusterSpawnFood()
+    {
+        int num = 0;
+        int amount = random.Next(20, 40);
+        ksVector3 clusterPos = FindRandomPosition();
+        float MaxRadius = 5f;
+        
+        while (num < amount)
+        {
+            // Find random angle and radius
+            float angle = random.NextFloat(0, 360);
+            float radius = random.NextFloat(0, MaxRadius);
+            // Convert to position
+            ksVector3 pos = new ksVector3(ksMath.Cos(angle) * radius, ksMath.Sin(angle) * radius, 0f) + clusterPos;
+            // Spawn food at that position
+            SpawnFood(pos);
+            // Create a slight delay between next while iteration
+            num++;
+        }
+    }
+
+    private ksVector3 FindRandomPosition()
+    {
+        return new ksVector3(random.NextFloat(xBounds[0], xBounds[1]), random.NextFloat(yBounds[0], yBounds[1]), 0f);
+
     }
 
     [ksRPC(RPC.REQUESTCONTROL)]
