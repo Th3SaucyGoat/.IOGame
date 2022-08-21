@@ -96,6 +96,7 @@ public class ClientRoom : ksRoomScript
     [ksRPC(RPC.STARTMATCH)]
     private void StartMatch()
     {
+        print("StartMatchRPCRecieved");
         // Delete all ready labels in container
         foreach (Transform trans in playerReadyLabelContainer)
         {
@@ -103,6 +104,7 @@ public class ClientRoom : ksRoomScript
         }
         // Signal start match event
         GameEvents.current.StartMatch?.Invoke();
+        print(Room.LocalPlayerId);
     }
 
     [ksRPC(RPC.PLAYERCONTROLLEDENTITYDESTROYED)]
@@ -159,7 +161,6 @@ public class ClientRoom : ksRoomScript
     [ksRPC(RPC.ENDGAME)]
     private void InitiateGameOver(bool isVictory)
     {
-        print(isVictory);
         //// If they are controlling a unit, allow them to keep doing so
         //if (Room.LocalPlayer.Properties[Prop.CONTROLLEDENTITYID] != "" )
         //{
@@ -172,4 +173,13 @@ public class ClientRoom : ksRoomScript
         //}
         GameEvents.current.GameOver(isVictory);
     }
+
+    [ksRPC(RPC.REDIRECT)]
+    private void KickAfterTimer()
+    {
+        // Hook up a UI element to this function timer.
+        GameEvents.current.StartRedirect();
+    }
+
+
 }

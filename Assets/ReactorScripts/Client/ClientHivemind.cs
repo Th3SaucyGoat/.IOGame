@@ -49,7 +49,6 @@ public class ClientHivemind : ksEntityScript
         //player["Username"] = a[0];
         //player["Id"] = a[1];
         // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
-        //UsernameLabels.SetEntity(a[1], Entity);
 
 
         if (ClientUtils.CheckTeam(Room.LocalPlayer, Entity))
@@ -62,15 +61,16 @@ public class ClientHivemind : ksEntityScript
     }
     private void MatchStart()
     {
-        
-        GameEvents.current.StartMatch?.Invoke(); // For changing UI.
+        //GameEvents.current.StartMatch?.Invoke(); // For changing UI.
         Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
-        FoodChanged(0, 0);
+        print("Value Changed");
+        FoodChanged((ksMultiType) 0, (ksMultiType) 0);
     }
 
     private void FoodChanged(ksMultiType old, ksMultiType newV)
     {
-        GameEvents.current.FoodChanged(newV);
+        print("here");
+        GameEvents.current.FoodChanged?.Invoke(newV);
     }
 
     public void HandleSpawnRequestFromPlayer(string type)

@@ -88,8 +88,8 @@ public class FunctionTimer {
             if (timer < 0)
             {
                 // Trigger the action
-                action();
                 timer = 0f;
+                action();
                 if (oneShot)
                 {
                     DestroySelf();
@@ -115,4 +115,6 @@ public class FunctionTimer {
     }
 
     public bool IsStopped() { return !(timer > 0); }
+
+    public float TimeRemaining() { return timer; }
 }

@@ -1,0 +1,45 @@
+2022-08-21 06:04:00.8543 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-21 06:04:00.8623 [INFO; Root]  Loaded config.json
+2022-08-21 06:04:00.8623 [INFO; Root]  Loaded config.GameScene.json
+2022-08-21 06:04:00.8673 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-21 06:04:00.8673 [INFO; Root]  Reactor Server v0.10.0
+2022-08-21 06:04:00.8673 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-21 06:04:00.8683 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-21 06:04:00.8768 [DEBUG; Root]  Loading Asset Scripts
+2022-08-21 06:04:00.8793 [DEBUG; Root]  Loading Room Configs
+2022-08-21 06:04:00.8833 [DEBUG; Root]  Initializing PhysX
+2022-08-21 06:04:00.8953 [DEBUG; Root]  Loading PhysX geometry
+2022-08-21 06:04:00.9048 [INFO; Root]  Loaded 8 geometries
+2022-08-21 06:04:00.9053 [INFO; Root]  Loaded 3 geometries
+2022-08-21 06:04:00.9053 [DEBUG; Root]  Loading entity prefabs
+2022-08-21 06:04:00.9173 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-21 06:04:00.9173 [DEBUG; Root]  Loading entity instances
+2022-08-21 06:04:00.9303 [DEBUG; Root]  Initializing scripts
+2022-08-21 06:04:00.9383 [DEBUG; Root]  Room setup complete
+2022-08-21 06:04:00.9388 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-21 06:04:00.9388 [INFO; Root]  Sending client updates every 2 frames
+2022-08-21 06:04:00.9388 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-21 06:04:00.9388 [INFO; Root]  Opening TCP port 8000
+2022-08-21 06:04:05.8733 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-21 06:04:05.8763 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-21 06:04:05.8939 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-21 06:04:05.9083 [INFO; Root]  Player False joined
+2022-08-21 06:04:06.9711 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-21 06:04:06.9711 [INFO; Root]  HeheTrue
+2022-08-21 06:04:08.0076 [INFO; Root]  server received request to spawn = 0
+2022-08-21 06:04:08.0131 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 06:04:09.2131 [INFO; Root]  Received 43
+2022-08-21 06:04:09.2296 [INFO; Root]  Shooter
+2022-08-21 06:04:09.2906 [INFO; Root]  Hivemind
+2022-08-21 06:04:10.0041 [INFO; Root]  Debug Destroyed
+2022-08-21 06:04:10.0501 [INFO; Root]  Shooter
+2022-08-21 06:04:10.8561 [INFO; Root]  Shooter
+2022-08-21 06:04:11.6776 [INFO; Root]  Shooter
+2022-08-21 06:04:12.4991 [INFO; Root]  Shooter
+2022-08-21 06:04:13.2896 [INFO; Root]  Received 44
+2022-08-21 06:04:14.3741 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-21 06:04:14.3751 [INFO; Root]  Player 1 left
+2022-08-21 06:04:14.3756 [WARNING; Reactor.ServerEntity]  Cannot delete permanent entity (type: , id: 1).
+2022-08-21 06:04:14.3756 [WARNING; Reactor.ServerEntity]  Cannot delete permanent entity (type: , id: 2).
+2022-08-21 06:04:14.3756 [WARNING; Reactor.ServerEntity]  Cannot delete permanent entity (type: , id: 3).
+2022-08-21 06:04:14.3756 [WARNING; Reactor.ServerEntity]  Cannot delete permanent entity (type: , id: 4).

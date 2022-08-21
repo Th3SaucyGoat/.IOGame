@@ -1,19 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class MainMenuUI : MonoBehaviour
 {
     private GameObject playerReadyLabelContainer;
     private GameObject readyButton;
     private GameObject input;
+    private GameObject matchInProgressWarning;
 
+
+    private void OnEnable()
+    {
+        GameObject.FindGameObjectWithTag("CineMachine").GetComponent<CinemachineVirtualCamera>().ForceCameraPosition(transform.position, Quaternion.identity);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         GameEvents.current.RoomFound += OnRoomFound;
         GameEvents.current.Disconnected += BackToMainMenu;
+        GameEvents.current.MatchInProgress += MatchInProgress;
 
         foreach (Transform child in transform)
         {
@@ -31,6 +39,10 @@ public class MainMenuUI : MonoBehaviour
             if (child.name.Contains("Input"))
             {
                 input = child.gameObject;
+            }
+            if (child.name.Contains("MatchInProgress"))
+            {
+                matchInProgressWarning = child.gameObject;
             }
         }
     }
@@ -54,4 +66,9 @@ public class MainMenuUI : MonoBehaviour
         readyButton.SetActive(false);
         playerReadyLabelContainer.SetActive(false);
     }
+
+    private void MatchInProgress()
+    {
+        matchInProgressWarning.GetComponent<MatchInProgress>().ActivateWarning();
+    }    
 }

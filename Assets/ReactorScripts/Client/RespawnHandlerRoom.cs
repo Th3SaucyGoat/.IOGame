@@ -49,7 +49,8 @@ public class RespawnHandlerRoom : ksRoomScript
 
     {
         // Room not getting disabled on the initial room object - throwing errors because.
-        // Need to return if it is on that initial object.
+        // Need to return if it is on that initial object. 
+        // ^ This happened because I was using Start function not Initialize. Now it should be fine.
         if (Room == null)
         {
             // Disable this script
@@ -91,23 +92,16 @@ public class RespawnHandlerRoom : ksRoomScript
 
     public void StartRespawn()
     {
-        // Start countdown. Show UI item. Should be hooked up to the time remaining on the timer.
         respawnTimer.Start();
         respawning = true;
-        print(Room.Players);
-        // Retrieve List of all valid allies
 
         respawnEntityList = ClientUtils.RetrieveControllableAllies(Room.LocalPlayer, Room.Entities);
         respawnIndex = 0;
         refreshRespawnList.Start();
-        print(respawnEntityList);
     }
-
-
 
     private void RefreshRespawnList()
     {
-        // Add only new entities to the respawn entity list
         var list = ClientUtils.RetrieveControllableAllies(Room.LocalPlayer, Room.Entities);
         foreach (ksEntity e1 in list)
         {
@@ -151,6 +145,7 @@ public class RespawnHandlerRoom : ksRoomScript
         // Make initiate respawn impossible
         respawning = false;
         // Maybe allow for viewing of other teams units, if there is any
+
     }
 }
 

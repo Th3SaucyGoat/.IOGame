@@ -20,6 +20,9 @@ public class GameEvents : MonoBehaviour
     public Action<bool> InRangeToFeed;
     public Action<bool> RespawnTutorialComplete;
     public Action FirstUnitSpawned;
+    public Action MatchInProgress;
+    public Action StartRedirect;
+    public Action StartSpectating;
 
     public static GameEvents current;
 

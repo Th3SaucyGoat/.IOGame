@@ -101,4 +101,17 @@ public class ClientUtils : MonoBehaviour
         ksVector2 pos = ours.Position2D - other.Position2D;
         return pos.Magnitude();
     }
+
+    public static List<ksEntity> findAllEntities(ksConstList<ksEntity> entities)
+    {
+        var allEntities = new List<ksEntity>();
+        foreach (ksEntity entity in entities)
+        {
+            if (entity.GameObject.TryGetComponent(out Unit unit))
+            {
+                allEntities.Add(entity);
+            }
+        }
+        return allEntities;
+    }
 }

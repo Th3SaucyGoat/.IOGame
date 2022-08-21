@@ -56,16 +56,38 @@ public class Connect : MonoBehaviour
             ksLog.Error("Error fetching servers. " + error);
             return;
         }
-
-        // Connect to the first room in the list of rooms returned.
         if (roomList != null && roomList.Count > 0)
         {
-            ConnectToServer(roomList[0]);
+            List<ksRoomInfo> viableRooms = new List<ksRoomInfo> { };
+
+            // Check if rooms are not current matches
+            foreach (ksRoomInfo room in roomList)
+            {
+                print(room.PublicTags);
+                if (!room.PublicTags.Contains("InMatch"))
+                {
+                    viableRooms.Add(room);
+                }
+            }
+            if (viableRooms.Count > 0)
+            {
+                ConnectToServer(viableRooms[0]);
+            }
+            else
+            {
+                // Let user know there is a match in progress that needs to finish first
+                print("Match in progress");
+
+            }
         }
         else
         {
             ksLog.Warning("No servers found.");
+            print("No servers found");
         }
+
+
+
     }
 
     // Connect to a server whose location is described in a ksRoomInfo object.
@@ -99,6 +121,7 @@ public class Connect : MonoBehaviour
         {
             ksLog.Error(this, "Unable to connect to " + m_room + " (" + status + ", " + customStatus + ")");
             m_room.CleanUp();
+            Destroy(m_room.GameObject);
             m_room = null;
             GameEvents.current.Disconnected?.Invoke();
 

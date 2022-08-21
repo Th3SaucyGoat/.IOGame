@@ -33,6 +33,7 @@ public class UsernameLabels : ksRoomScript
     public static void SetEntity(uint pId, ksEntity entity)
     {
         UsernameLabel labelForThisPlayer = UsernameLabels.currentLabels[pId];
+        print("2" + labelForThisPlayer);
         if (labelForThisPlayer.gameObject.activeSelf == false)
         {
             labelForThisPlayer.gameObject.SetActive(true);

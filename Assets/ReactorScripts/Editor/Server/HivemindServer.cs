@@ -64,12 +64,11 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;
         Entity.OnDestroy += OnDestroy;
-        food = 100;
+        food = 0;
         debugTimer = new Timer(2.0f, OnDebugTimeout, false);
         //debugTimer.Start();
     }
 
-    // Called when the script is detached.
     public override void Detached()
     {
         Room.OnUpdate[0] -= Update;
@@ -78,7 +77,6 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
 
     }
 
-    // Called during the update cycle
     private void Update()
     {
         debugTimer.Tick(Time.Delta);

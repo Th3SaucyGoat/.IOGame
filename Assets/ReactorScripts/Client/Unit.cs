@@ -39,6 +39,7 @@ public class Unit : ksEntityScript
     [ksRPC(RPC.TAKECONTROL)]
     private void TakeControl(uint pId)
     {
+        print(Entity.GameObject.name);
         // Figure out if this pId is the local player's
         if (Room.LocalPlayerId == pId)
         {
@@ -61,7 +62,6 @@ public class Unit : ksEntityScript
         }
 
         Color[] colors = TeamColors.DetermineTeamColor(teamId);
-        print(colors[0] + colors[1]);
         primaryColor = colors[0];
         secondaryColor = colors[1];
         sprite.color = primaryColor;
@@ -72,9 +72,13 @@ public class Unit : ksEntityScript
     }
     private void OnHealthChanged(ksMultiType oldV, ksMultiType newV)
     {
+        if (sprite.color == Color.white)
+        {
+            return;
+        }
         previousColor = sprite.color;
         sprite.color = Color.white;
-        Invoke(nameof(EndFlash), 0.15f);
+        Invoke(nameof(EndFlash), 0.12f);
     }
 
     private void EndFlash()

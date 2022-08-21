@@ -57,6 +57,7 @@
 				35.18091,
 				1.0
 			],
+			"is permanent": 1,
 			"collision filter": {
 				"asset": 7
 			},
@@ -79,14 +80,6 @@
 						"query flag": true,
 						"enabled": true
 					}
-				},
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"constraints": 126,
-						"rigid body type": 1
-					}
 				}
 			]
 		},
@@ -101,6 +94,7 @@
 				1.017246,
 				1.0
 			],
+			"is permanent": 1,
 			"collision filter": {
 				"asset": 7
 			},
@@ -123,58 +117,6 @@
 						"query flag": true,
 						"enabled": true
 					}
-				},
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"constraints": 126,
-						"rigid body type": 1
-					}
-				}
-			]
-		},
-		{
-			"position": [
-				-10.7118,
-				-8.345,
-				0.0005272105
-			],
-			"scale": [
-				1.412774,
-				35.04267,
-				1.0
-			],
-			"collision filter": {
-				"asset": 7
-			},
-			"scripts": [
-				{
-					"name": ".ksBoxCollider",
-					"params": {
-						"shape id": 8,
-						"material": null,
-						"filter": {
-							"asset": 7
-						},
-						"offset": [
-							0.0,
-							0.0,
-							0.0
-						],
-						"trigger flag": false,
-						"simulation flag": true,
-						"query flag": true,
-						"enabled": true
-					}
-				},
-				{
-					"name": ".ksBaseRigidBody",
-					"params": {
-						"use gravity": false,
-						"constraints": 126,
-						"rigid body type": 1
-					}
 				}
 			]
 		},
@@ -189,6 +131,7 @@
 				1.432021,
 				1.0
 			],
+			"is permanent": 1,
 			"collision filter": {
 				"asset": 7
 			},
@@ -211,13 +154,39 @@
 						"query flag": true,
 						"enabled": true
 					}
-				},
+				}
+			]
+		},
+		{
+			"position": [
+				-12.9542,
+				-7.8368,
+				0.02332663
+			],
+			"scale": [
+				5.5063,
+				35.06256,
+				1.0
+			],
+			"is permanent": 1,
+			"scripts": [
 				{
-					"name": ".ksBaseRigidBody",
+					"name": ".ksBoxCollider",
 					"params": {
-						"use gravity": false,
-						"constraints": 126,
-						"rigid body type": 1
+						"shape id": -3,
+						"material": null,
+						"filter": {
+							"asset": 7
+						},
+						"offset": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"trigger flag": false,
+						"simulation flag": true,
+						"query flag": true,
+						"enabled": true
 					}
 				}
 			]

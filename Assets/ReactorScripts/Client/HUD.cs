@@ -35,7 +35,7 @@ public class HUD : MonoBehaviour
     public static bool feedLabelShown = false;
 
 
-    private void Start()
+    private void Awake()
     {
         foodText = aliveUIContainer.transform.Find("FoodLabel").GetComponent<TextMeshProUGUI>();
         spawnMenu = aliveUIContainer.transform.Find("SpawnMenu").gameObject;
