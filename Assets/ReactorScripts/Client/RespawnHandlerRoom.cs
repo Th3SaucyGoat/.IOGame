@@ -68,7 +68,8 @@ public class RespawnHandlerRoom : ksRoomScript
 
     public override void Detached()
     {
-
+        GameEvents.current.GameOver -= OnGameOver;
+        GameEvents.current.StartRespawn -= StartRespawn;
     }
     // Update is called once per frame
     void Update()

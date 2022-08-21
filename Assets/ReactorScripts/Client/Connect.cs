@@ -143,7 +143,7 @@ public class Connect : MonoBehaviour
         if (!firstGameDone)
         {
             firstGameDone = true;
-            Instantiate(walls);
+            // Instantiate(walls);   Delete? Might have fixed with making walls isPermanent again.
         }
     }
 

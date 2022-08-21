@@ -1,0 +1,312 @@
+2022-08-21 15:36:12.5737 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-21 15:36:12.6140 [INFO; Root]  Loaded config.json
+2022-08-21 15:36:12.6140 [INFO; Root]  Loaded config.GameScene.json
+2022-08-21 15:36:12.6310 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-21 15:36:12.6315 [INFO; Root]  Reactor Server v0.10.0
+2022-08-21 15:36:12.6315 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-21 15:36:12.6346 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-21 15:36:12.6648 [DEBUG; Root]  Loading Asset Scripts
+2022-08-21 15:36:12.6718 [DEBUG; Root]  Loading Room Configs
+2022-08-21 15:36:12.6818 [DEBUG; Root]  Initializing PhysX
+2022-08-21 15:36:12.7202 [DEBUG; Root]  Loading PhysX geometry
+2022-08-21 15:36:12.7490 [INFO; Root]  Loaded 8 geometries
+2022-08-21 15:36:12.7500 [INFO; Root]  Loaded 3 geometries
+2022-08-21 15:36:12.7510 [DEBUG; Root]  Loading entity prefabs
+2022-08-21 15:36:12.7865 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-21 15:36:12.7865 [DEBUG; Root]  Loading entity instances
+2022-08-21 15:36:12.8137 [DEBUG; Root]  Initializing scripts
+2022-08-21 15:36:12.8303 [DEBUG; Root]  Room setup complete
+2022-08-21 15:36:12.8308 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-21 15:36:12.8308 [INFO; Root]  Sending client updates every 2 frames
+2022-08-21 15:36:12.8308 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-21 15:36:12.8323 [INFO; Root]  Opening TCP port 8000
+2022-08-21 15:36:21.5960 [INFO; Root]  Client(id = 1, address = 10.6.167.21) connected
+2022-08-21 15:36:21.6076 [DEBUG; Root]  Client(id = 1, address = 10.6.167.21) model validated
+2022-08-21 15:36:21.6547 [DEBUG; Root]  Client(id = 1, address = 10.6.167.21) authenticated
+2022-08-21 15:36:21.6816 [INFO; Root]  Player False joined
+2022-08-21 15:36:24.9617 [INFO; Root]  Client(id = 2, address = 10.6.167.21) connected
+2022-08-21 15:36:24.9766 [DEBUG; Root]  Client(id = 2, address = 10.6.167.21) model validated
+2022-08-21 15:36:24.9936 [DEBUG; Root]  Client(id = 2, address = 10.6.167.21) authenticated
+2022-08-21 15:36:25.0006 [INFO; Root]  Player False joined
+2022-08-21 15:36:25.4439 [INFO; Root]  RPC RECEIVED True and 2
+2022-08-21 15:36:25.4439 [INFO; Root]  HeheTrue
+2022-08-21 15:36:26.7168 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-21 15:36:26.7178 [INFO; Root]  HeheTrue
+2022-08-21 15:36:31.3300 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:31.3557 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.3557 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.3818 [INFO; Root]  Shooter
+2022-08-21 15:36:31.5347 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:31.5377 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.5387 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.5387 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.5387 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.5519 [INFO; Root]  Shooter
+2022-08-21 15:36:31.6180 [INFO; Root]  Shooter
+2022-08-21 15:36:31.6498 [INFO; Root]  Shooter
+2022-08-21 15:36:31.6498 [INFO; Root]  Hivemind
+2022-08-21 15:36:31.7334 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:31.7343 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.7343 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.7343 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.7343 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.7343 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.7343 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.7500 [INFO; Root]  Shooter
+2022-08-21 15:36:31.7500 [INFO; Root]  Shooter
+2022-08-21 15:36:31.8673 [INFO; Root]  Shooter
+2022-08-21 15:36:31.9165 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:31.9185 [INFO; Root]  Hivemind
+2022-08-21 15:36:31.9343 [INFO; Root]  Shooter
+2022-08-21 15:36:31.9343 [INFO; Root]  Shooter
+2022-08-21 15:36:31.9864 [INFO; Root]  Shooter
+2022-08-21 15:36:32.0832 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.0863 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.1000 [INFO; Root]  Shooter
+2022-08-21 15:36:32.1000 [INFO; Root]  Shooter
+2022-08-21 15:36:32.1344 [INFO; Root]  Shooter
+2022-08-21 15:36:32.1495 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.1495 [INFO; Root]  Shooter
+2022-08-21 15:36:32.1835 [INFO; Root]  Shooter
+2022-08-21 15:36:32.2331 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2362 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.2504 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.2504 [INFO; Root]  Shooter
+2022-08-21 15:36:32.2504 [INFO; Root]  Shooter
+2022-08-21 15:36:32.3011 [INFO; Root]  Shooter
+2022-08-21 15:36:32.3505 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.3505 [INFO; Root]  Shooter
+2022-08-21 15:36:32.3669 [INFO; Root]  Shooter
+2022-08-21 15:36:32.3998 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4028 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4168 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4168 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:32.4168 [INFO; Root]  Shooter
+2022-08-21 15:36:32.4168 [INFO; Root]  Shooter
+2022-08-21 15:36:32.4551 [INFO; Root]  Shooter
+2022-08-21 15:36:32.5196 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.5498 [INFO; Root]  Shooter
+2022-08-21 15:36:32.5672 [INFO; Root]  Shooter
+2022-08-21 15:36:32.6829 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.7160 [INFO; Root]  Shooter
+2022-08-21 15:36:32.7505 [INFO; Root]  Shooter
+2022-08-21 15:36:32.7833 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.8534 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.8830 [INFO; Root]  Hivemind
+2022-08-21 15:36:32.9166 [INFO; Root]  Shooter
+2022-08-21 15:36:32.9668 [INFO; Root]  Shooter
+2022-08-21 15:36:33.0496 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.0656 [INFO; Root]  Shooter
+2022-08-21 15:36:33.0840 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.1823 [INFO; Root]  Shooter
+2022-08-21 15:36:33.2164 [INFO; Root]  Shooter
+2022-08-21 15:36:33.2334 [INFO; Root]  Shooter
+2022-08-21 15:36:33.2659 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:33.3179 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:33.3497 [INFO; Root]  Shooter
+2022-08-21 15:36:33.3907 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.3907 [INFO; Root]  Shooter
+2022-08-21 15:36:33.3907 [INFO; Root]  Shooter
+2022-08-21 15:36:33.4159 [INFO; Root]  Shooter
+2022-08-21 15:36:33.4499 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.4843 [INFO; Root]  Shooter
+2022-08-21 15:36:33.5337 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:33.5666 [INFO; Root]  Shooter
+2022-08-21 15:36:33.5829 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.6512 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.7173 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.7375 [INFO; Root]  Shooter
+2022-08-21 15:36:33.7375 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:33.7838 [INFO; Root]  Shooter
+2022-08-21 15:36:33.8851 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.8851 [INFO; Root]  Shooter
+2022-08-21 15:36:33.9156 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:33.9507 [INFO; Root]  Hivemind
+2022-08-21 15:36:33.9515 [INFO; Root]  Shooter
+2022-08-21 15:36:34.0060 [INFO; Root]  Shooter
+2022-08-21 15:36:34.0160 [INFO; Root]  Shooter
+2022-08-21 15:36:34.0160 [INFO; Root]  Shooter
+2022-08-21 15:36:34.0513 [INFO; Root]  Shooter
+2022-08-21 15:36:34.0513 [INFO; Root]  Shooter
+2022-08-21 15:36:34.0825 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:34.1178 [INFO; Root]  Shooter
+2022-08-21 15:36:34.1328 [INFO; Root]  Shooter
+2022-08-21 15:36:34.1846 [INFO; Root]  Hivemind
+2022-08-21 15:36:34.2328 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:34.3999 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:44.2225 [INFO; Root]  Client(id = 2, address = 10.6.167.21) disconnected: 10054-An existing connection was forcibly closed by the remote host.
+2022-08-21 15:36:44.2225 [INFO; Root]  Client(id = 1, address = 10.6.167.21) disconnected: 2-End of file
+2022-08-21 15:36:44.2346 [INFO; Root]  Player 2 left
+2022-08-21 15:36:44.2427 [INFO; Root]  Player 1 left
+2022-08-21 15:36:46.0972 [INFO; Root]  Client(id = 3, address = 10.6.167.21) connected
+2022-08-21 15:36:46.0982 [DEBUG; Root]  Client(id = 3, address = 10.6.167.21) model validated
+2022-08-21 15:36:46.0982 [DEBUG; Root]  Client(id = 3, address = 10.6.167.21) authenticated
+2022-08-21 15:36:46.1161 [INFO; Root]  Player False joined
+2022-08-21 15:36:47.1635 [INFO; Root]  Client(id = 4, address = 10.6.167.21) connected
+2022-08-21 15:36:47.1649 [DEBUG; Root]  Client(id = 4, address = 10.6.167.21) model validated
+2022-08-21 15:36:47.1655 [DEBUG; Root]  Client(id = 4, address = 10.6.167.21) authenticated
+2022-08-21 15:36:47.1821 [INFO; Root]  Player False joined
+2022-08-21 15:36:47.6497 [INFO; Root]  RPC RECEIVED True and 4
+2022-08-21 15:36:47.6497 [INFO; Root]  HeheTrue
+2022-08-21 15:36:48.7820 [INFO; Root]  RPC RECEIVED True and 3
+2022-08-21 15:36:48.7830 [INFO; Root]  HeheTrue
+2022-08-21 15:36:51.1155 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:51.1181 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.1181 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.1321 [INFO; Root]  Shooter
+2022-08-21 15:36:51.1321 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.2989 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:51.3009 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.3009 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.3009 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.3009 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.3159 [INFO; Root]  Shooter
+2022-08-21 15:36:51.3159 [INFO; Root]  Shooter
+2022-08-21 15:36:51.3159 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.3487 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.3842 [INFO; Root]  Shooter
+2022-08-21 15:36:51.4160 [INFO; Root]  Shooter
+2022-08-21 15:36:51.4487 [INFO; Root]  Shooter
+2022-08-21 15:36:51.4658 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:51.4669 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.4670 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.4670 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.4670 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.4670 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.4670 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.4819 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.4819 [INFO; Root]  Shooter
+2022-08-21 15:36:51.4829 [INFO; Root]  Shooter
+2022-08-21 15:36:51.5816 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.6151 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6155 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.6330 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.6330 [INFO; Root]  Shooter
+2022-08-21 15:36:51.6330 [INFO; Root]  Shooter
+2022-08-21 15:36:51.6825 [INFO; Root]  Shooter
+2022-08-21 15:36:51.7323 [INFO; Root]  Shooter
+2022-08-21 15:36:51.7656 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7666 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:51.7821 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.7821 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.7821 [INFO; Root]  Shooter
+2022-08-21 15:36:51.7821 [INFO; Root]  Shooter
+2022-08-21 15:36:51.8489 [INFO; Root]  Shooter
+2022-08-21 15:36:51.9502 [INFO; Root]  Hivemind
+2022-08-21 15:36:51.9502 [INFO; Root]  Shooter
+2022-08-21 15:36:51.9825 [INFO; Root]  Shooter
+2022-08-21 15:36:52.0176 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.1151 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.1330 [INFO; Root]  Shooter
+2022-08-21 15:36:52.1834 [INFO; Root]  Shooter
+2022-08-21 15:36:52.2995 [INFO; Root]  Shooter
+2022-08-21 15:36:52.3155 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.4158 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.4528 [INFO; Root]  Shooter
+2022-08-21 15:36:52.5492 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.5986 [INFO; Root]  Shooter
+2022-08-21 15:36:52.6156 [INFO; Root]  Shooter
+2022-08-21 15:36:52.7496 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.7666 [INFO; Root]  Shooter
+2022-08-21 15:36:52.7830 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.8319 [INFO; Root]  server received request to spawn = 0
+2022-08-21 15:36:52.8330 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8340 [INFO; Root]  Reactor.ServerEntity
+2022-08-21 15:36:52.8510 [INFO; Root]  Shooter
+2022-08-21 15:36:52.8510 [INFO; Root]  Hivemind
+2022-08-21 15:36:52.9500 [INFO; Root]  Shooter
+2022-08-21 15:36:53.0499 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.0667 [INFO; Root]  Shooter
+2022-08-21 15:36:53.0846 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.1159 [INFO; Root]  Shooter
+2022-08-21 15:36:53.1159 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:53.1522 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.2672 [INFO; Root]  Shooter
+2022-08-21 15:36:53.2991 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:53.3162 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.4300 [INFO; Root]  Shooter
+2022-08-21 15:36:53.4498 [INFO; Root]  Shooter
+2022-08-21 15:36:53.4658 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:53.4815 [INFO; Root]  Shooter
+2022-08-21 15:36:53.5501 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.5829 [INFO; Root]  Shooter
+2022-08-21 15:36:53.6197 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.6197 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:53.6656 [INFO; Root]  Shooter
+2022-08-21 15:36:53.6841 [INFO; Root]  Shooter
+2022-08-21 15:36:53.7656 [INFO; Root]  Shooter
+2022-08-21 15:36:53.7656 [INFO; Root]  Debug Destroyed
+2022-08-21 15:36:53.7826 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.8154 [INFO; Root]  Hivemind
+2022-08-21 15:36:53.9329 [INFO; Root]  Shooter
+2022-08-21 15:36:53.9498 [INFO; Root]  Hivemind
+2022-08-21 15:36:54.8323 [INFO; Root]  Debug Destroyed
+2022-08-21 15:37:02.8508 [INFO; Root]  Client(id = 3, address = 10.6.167.21) disconnected: 2-End of file
+2022-08-21 15:37:02.8651 [INFO; Root]  Player 3 left
+2022-08-21 15:37:03.8556 [INFO; Root]  Client(id = 4, address = 10.6.167.21) disconnected: 2-End of file
+2022-08-21 15:37:03.8645 [INFO; Root]  Player 4 left

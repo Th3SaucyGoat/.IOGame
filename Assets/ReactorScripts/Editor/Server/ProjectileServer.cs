@@ -8,7 +8,7 @@ using Example;
 public class ProjectileServer : ksServerEntityScript
 {
     private uint damage = 1;
-    private float speed = 5f;
+    private float speed = 12f;
     public uint TeamId;
 
     private Timer LiftetimeTimer;

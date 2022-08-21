@@ -52,13 +52,14 @@ public class SpectatingHandler : ksRoomScript
     public override void Initialize()
     {
         GameEvents.current.StartSpectating += StartSpectating;
-        GameEvents.current.StartRedirect += RedirectActivated;
+        GameEvents.current.Disconnected += OnDisconnectedFromRoom;
     }
 
     // Called when the script is detached.
     public override void Detached()
     {
-        
+        GameEvents.current.StartSpectating -= StartSpectating;
+        GameEvents.current.Disconnected -= OnDisconnectedFromRoom;
     }
 
     // Called every frame.
@@ -112,7 +113,7 @@ public class SpectatingHandler : ksRoomScript
         }
     }
 
-    private void RedirectActivated()
+    private void OnDisconnectedFromRoom()
     {
         spectating = false;
     }

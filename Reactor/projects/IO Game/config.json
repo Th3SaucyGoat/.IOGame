@@ -186,9 +186,7 @@
 						"params": {
 							"shape id": 8,
 							"material": null,
-							"filter": {
-								"asset": 12
-							},
+							"filter": null,
 							"offset": [
 								0.0,
 								0.0,
@@ -198,6 +196,13 @@
 							"simulation flag": true,
 							"query flag": true,
 							"enabled": true
+						}
+					},
+					{
+						"name": ".ksBaseRigidBody",
+						"params": {
+							"constraints": 126,
+							"rigid body type": 1
 						}
 					}
 				]

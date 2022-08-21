@@ -11,7 +11,7 @@ public class GameOver : MonoBehaviour
     private GameObject toggleLabel;
     private GameObject spectateButton;
 
-    private void Awake()
+    private void OnEnable()
     {
         GameEvents.current.StartRedirect += StartRedirect;
         GameEvents.current.StartSpectating += StartSpectating;

@@ -117,6 +117,10 @@ public class ServerRoom : ksServerRoomScript
     {
         foreach (ksIServerEntity entity in Room.Entities)
         {
+            if (entity.CollisionFilter.AssetName == "Obstacles") // Used to filter out isPermanent Obstacles
+            {
+                continue;
+            }
             entity.Destroy();
         }
         foodTimer.Stop();
