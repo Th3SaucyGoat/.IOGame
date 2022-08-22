@@ -7,7 +7,6 @@ using Example;
 
 public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , ICommandable , ISpawnable
 {
-    public uint MaxHealth { get; } = Stats.CollectorMaxHealth;
     public int foodCapacity { get; } = 5;
 
     public float Speed { set; get; } = 3;
@@ -60,7 +59,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
 
     public override void Initialize()
     {
-        Scripts.Get<UnitServer>().Health = MaxHealth;
+        Scripts.Get<UnitServer>().Health = Stats.CollectorMaxHealth;
         food = 0;
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         DebugTimer = new Timer(2.0f, OnDebugTimeout, false);

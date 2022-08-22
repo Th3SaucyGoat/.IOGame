@@ -1,0 +1,324 @@
+2022-08-22 05:49:00.0542 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-22 05:49:00.0642 [INFO; Root]  Loaded config.json
+2022-08-22 05:49:00.0642 [INFO; Root]  Loaded config.GameScene.json
+2022-08-22 05:49:00.0692 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-22 05:49:00.0697 [INFO; Root]  Reactor Server v0.10.0
+2022-08-22 05:49:00.0697 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-22 05:49:00.0707 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-22 05:49:00.0787 [DEBUG; Root]  Loading Asset Scripts
+2022-08-22 05:49:00.0812 [DEBUG; Root]  Loading Room Configs
+2022-08-22 05:49:00.0847 [DEBUG; Root]  Initializing PhysX
+2022-08-22 05:49:00.0972 [DEBUG; Root]  Loading PhysX geometry
+2022-08-22 05:49:00.1062 [INFO; Root]  Loaded 8 geometries
+2022-08-22 05:49:00.1067 [INFO; Root]  Loaded 3 geometries
+2022-08-22 05:49:00.1067 [DEBUG; Root]  Loading entity prefabs
+2022-08-22 05:49:00.1187 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-22 05:49:00.1187 [DEBUG; Root]  Loading entity instances
+2022-08-22 05:49:00.1312 [DEBUG; Root]  Initializing scripts
+2022-08-22 05:49:00.1377 [DEBUG; Root]  Room setup complete
+2022-08-22 05:49:00.1382 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-22 05:49:00.1382 [INFO; Root]  Sending client updates every 2 frames
+2022-08-22 05:49:00.1382 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-22 05:49:00.1387 [INFO; Root]  Opening TCP port 8000
+2022-08-22 05:49:05.5539 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-22 05:49:05.5564 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-22 05:49:05.5739 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-22 05:49:05.5824 [INFO; Root]  Player False joined
+2022-08-22 05:49:08.2120 [INFO; Root]  Client(id = 2, address = 127.0.0.1) connected
+2022-08-22 05:49:08.2150 [DEBUG; Root]  Client(id = 2, address = 127.0.0.1) model validated
+2022-08-22 05:49:08.2180 [DEBUG; Root]  Client(id = 2, address = 127.0.0.1) authenticated
+2022-08-22 05:49:08.2270 [INFO; Root]  Player False joined
+2022-08-22 05:49:08.6375 [INFO; Root]  RPC RECEIVED True and 2
+2022-08-22 05:49:08.6375 [INFO; Root]  HeheTrue
+2022-08-22 05:49:09.5133 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-22 05:49:09.5133 [INFO; Root]  HeheTrue
+2022-08-22 05:49:09.5273 [INFO; Root]  20
+2022-08-22 05:49:09.5348 [INFO; Root]  20
+2022-08-22 05:49:13.3293 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:13.3303 [INFO; Root]  5
+2022-08-22 05:49:13.3348 [INFO; Root]  Collision StartedTrue   False
+2022-08-22 05:49:14.5036 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:14.5046 [INFO; Root]  5
+2022-08-22 05:49:14.5056 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:14.5061 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:14.5061 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:14.5361 [INFO; Root]  collision Lost
+2022-08-22 05:49:15.0151 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:15.0151 [INFO; Root]  5
+2022-08-22 05:49:15.0156 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.0156 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.0156 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.0156 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.3560 [INFO; Root]  applying damage
+2022-08-22 05:49:15.3565 [INFO; Root]  19
+2022-08-22 05:49:15.9139 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:15.9139 [INFO; Root]  5
+2022-08-22 05:49:15.9144 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.9144 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.9144 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.9144 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.9144 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:15.9144 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0844 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:16.0844 [INFO; Root]  5
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:16.0849 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.3397 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:17.3397 [INFO; Root]  5
+2022-08-22 05:49:17.3402 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.4947 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:17.4947 [INFO; Root]  5
+2022-08-22 05:49:17.4952 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.4952 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.4952 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.5877 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.6497 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:17.6497 [INFO; Root]  5
+2022-08-22 05:49:17.6502 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.6502 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.6502 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.6502 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.6502 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7117 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7737 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7737 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7891 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:17.7891 [INFO; Root]  5
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.7896 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.8821 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.8821 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.8976 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.9136 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.9136 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.9286 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.9286 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:17.9756 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.0216 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.0216 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.0371 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.0371 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.0996 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.0996 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.1301 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.1301 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.1301 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.1301 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.2696 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.3006 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.3011 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.3936 [INFO; Root]  applying damage
+2022-08-22 05:49:18.3936 [INFO; Root]  19
+2022-08-22 05:49:18.4865 [INFO; Root]  applying damage
+2022-08-22 05:49:18.4865 [INFO; Root]  18
+2022-08-22 05:49:18.6880 [INFO; Root]  applying damage
+2022-08-22 05:49:18.6880 [INFO; Root]  17
+2022-08-22 05:49:18.7500 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.7500 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.8585 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.8590 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:18.8590 [INFO; Root]  applying damage
+2022-08-22 05:49:18.8590 [INFO; Root]  4
+2022-08-22 05:49:18.9515 [INFO; Root]  applying damage
+2022-08-22 05:49:18.9515 [INFO; Root]  16
+2022-08-22 05:49:18.9980 [INFO; Root]  applying damage
+2022-08-22 05:49:18.9985 [INFO; Root]  15
+2022-08-22 05:49:19.1220 [INFO; Root]  applying damage
+2022-08-22 05:49:19.1220 [INFO; Root]  3
+2022-08-22 05:49:19.2304 [INFO; Root]  applying damage
+2022-08-22 05:49:19.2304 [INFO; Root]  2
+2022-08-22 05:49:19.2614 [INFO; Root]  applying damage
+2022-08-22 05:49:19.2619 [INFO; Root]  14
+2022-08-22 05:49:19.4164 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:19.4634 [INFO; Root]  applying damage
+2022-08-22 05:49:19.4634 [INFO; Root]  4
+2022-08-22 05:49:19.4784 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:19.4784 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:19.5559 [INFO; Root]  applying damage
+2022-08-22 05:49:19.5564 [INFO; Root]  1
+2022-08-22 05:49:20.1758 [INFO; Root]  applying damage
+2022-08-22 05:49:20.1758 [INFO; Root]  4
+2022-08-22 05:49:20.2228 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:20.2228 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:21.7566 [INFO; Root]  applying damage
+2022-08-22 05:49:21.7566 [INFO; Root]  3
+2022-08-22 05:49:21.9580 [INFO; Root]  applying damage
+2022-08-22 05:49:21.9580 [INFO; Root]  2
+2022-08-22 05:49:22.5160 [INFO; Root]  Received 422
+2022-08-22 05:49:22.6559 [INFO; Root]  applying damage
+2022-08-22 05:49:22.6559 [INFO; Root]  4
+2022-08-22 05:49:22.7949 [INFO; Root]  applying damage
+2022-08-22 05:49:22.7954 [INFO; Root]  1
+2022-08-22 05:49:22.9189 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:22.9189 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.1824 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.1824 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.2908 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.2913 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.4458 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.4458 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.4618 [INFO; Root]  applying damage
+2022-08-22 05:49:23.4618 [INFO; Root]  3
+2022-08-22 05:49:23.5233 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.5238 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.5853 [INFO; Root]  applying damage
+2022-08-22 05:49:23.5853 [INFO; Root]  0
+2022-08-22 05:49:23.6323 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.6323 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.7558 [INFO; Root]  applying damage
+2022-08-22 05:49:23.7558 [INFO; Root]  2
+2022-08-22 05:49:23.7868 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.7868 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.8333 [INFO; Root]  applying damage
+2022-08-22 05:49:23.8338 [INFO; Root]  4
+2022-08-22 05:49:23.9263 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.9268 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:23.9268 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:24.2207 [INFO; Root]  applying damage
+2022-08-22 05:49:24.2207 [INFO; Root]  3
+2022-08-22 05:49:24.2517 [INFO; Root]  applying damage
+2022-08-22 05:49:24.2522 [INFO; Root]  4
+2022-08-22 05:49:24.2987 [INFO; Root]  applying damage
+2022-08-22 05:49:24.2987 [INFO; Root]  1
+2022-08-22 05:49:24.3607 [INFO; Root]  applying damage
+2022-08-22 05:49:24.3607 [INFO; Root]  0
+2022-08-22 05:49:24.4532 [INFO; Root]  applying damage
+2022-08-22 05:49:24.4537 [INFO; Root]  2
+2022-08-22 05:49:24.7171 [INFO; Root]  applying damage
+2022-08-22 05:49:24.7171 [INFO; Root]  0
+2022-08-22 05:49:24.8251 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:25.0576 [INFO; Root]  applying damage
+2022-08-22 05:49:25.0576 [INFO; Root]  1
+2022-08-22 05:49:25.0886 [INFO; Root]  applying damage
+2022-08-22 05:49:25.0886 [INFO; Root]  4
+2022-08-22 05:49:25.9565 [INFO; Root]  applying damage
+2022-08-22 05:49:25.9565 [INFO; Root]  0
+2022-08-22 05:49:26.0964 [INFO; Root]  applying damage
+2022-08-22 05:49:26.0964 [INFO; Root]  3
+2022-08-22 05:49:26.1889 [INFO; Root]  applying damage
+2022-08-22 05:49:26.1889 [INFO; Root]  3
+2022-08-22 05:49:26.4989 [INFO; Root]  applying damage
+2022-08-22 05:49:26.4989 [INFO; Root]  4
+2022-08-22 05:49:26.7623 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:27.3203 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:27.3208 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:27.3208 [INFO; Root]  applying damage
+2022-08-22 05:49:27.3208 [INFO; Root]  18
+2022-08-22 05:49:27.4442 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:28.0642 [INFO; Root]  applying damage
+2022-08-22 05:49:28.0642 [INFO; Root]  2
+2022-08-22 05:49:29.7224 [INFO; Root]  applying damage
+2022-08-22 05:49:29.7229 [INFO; Root]  1
+2022-08-22 05:49:29.7534 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:30.4508 [INFO; Root]  applying damage
+2022-08-22 05:49:30.4508 [INFO; Root]  0
+2022-08-22 05:49:30.8228 [INFO; Root]  applying damage
+2022-08-22 05:49:30.8228 [INFO; Root]  3
+2022-08-22 05:49:30.8538 [INFO; Root]  applying damage
+2022-08-22 05:49:30.8538 [INFO; Root]  2
+2022-08-22 05:49:31.3652 [INFO; Root]  applying damage
+2022-08-22 05:49:31.3652 [INFO; Root]  2
+2022-08-22 05:49:32.9614 [INFO; Root]  applying damage
+2022-08-22 05:49:32.9619 [INFO; Root]  1
+2022-08-22 05:49:32.9619 [INFO; Root]  Collision StartedTrue   False
+2022-08-22 05:49:33.7053 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:33.7053 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:33.7828 [INFO; Root]  applying damage
+2022-08-22 05:49:33.7828 [INFO; Root]  0
+2022-08-22 05:49:34.1548 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.2086 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.3946 [INFO; Root]  applying damage
+2022-08-22 05:49:35.3946 [INFO; Root]  17
+2022-08-22 05:49:35.4256 [INFO; Root]  Received 423
+2022-08-22 05:49:35.9525 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:35.9525 [INFO; Root]  5
+2022-08-22 05:49:35.9530 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.9530 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.9530 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.9530 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.9530 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:35.9835 [INFO; Root]  applying damage
+2022-08-22 05:49:35.9835 [INFO; Root]  4
+2022-08-22 05:49:36.0765 [INFO; Root]  server received request to spawn = 0
+2022-08-22 05:49:36.0765 [INFO; Root]  5
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.0770 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.2935 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.3250 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:36.4639 [INFO; Root]  Received 424
+2022-08-22 05:49:36.5879 [INFO; Root]  applying damage
+2022-08-22 05:49:36.5879 [INFO; Root]  4
+2022-08-22 05:49:36.6189 [INFO; Root]  applying damage
+2022-08-22 05:49:36.6189 [INFO; Root]  1
+2022-08-22 05:49:36.7584 [INFO; Root]  applying damage
+2022-08-22 05:49:36.7584 [INFO; Root]  0
+2022-08-22 05:49:37.0374 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:37.0374 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:37.2233 [INFO; Root]  applying damage
+2022-08-22 05:49:37.2233 [INFO; Root]  13
+2022-08-22 05:49:37.2233 [INFO; Root]  applying damage
+2022-08-22 05:49:37.2233 [INFO; Root]  3
+2022-08-22 05:49:37.3163 [INFO; Root]  applying damage
+2022-08-22 05:49:37.3163 [INFO; Root]  4
+2022-08-22 05:49:37.8432 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:37.9827 [INFO; Root]  applying damage
+2022-08-22 05:49:37.9827 [INFO; Root]  12
+2022-08-22 05:49:37.9827 [INFO; Root]  applying damage
+2022-08-22 05:49:37.9827 [INFO; Root]  2
+2022-08-22 05:49:38.0757 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:38.1842 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:39.0211 [INFO; Root]  applying damage
+2022-08-22 05:49:39.0211 [INFO; Root]  11
+2022-08-22 05:49:39.2850 [INFO; Root]  applying damage
+2022-08-22 05:49:39.2850 [INFO; Root]  16
+2022-08-22 05:49:39.9204 [INFO; Root]  applying damage
+2022-08-22 05:49:39.9204 [INFO; Root]  3
+2022-08-22 05:49:40.8498 [INFO; Root]  applying damage
+2022-08-22 05:49:40.8503 [INFO; Root]  3
+2022-08-22 05:49:42.1361 [INFO; Root]  collision Lost
+2022-08-22 05:49:44.2593 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.3523 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.8017 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.8017 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.8172 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.8327 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.8327 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:44.9102 [INFO; Root]  Reactor.ServerEntity
+2022-08-22 05:49:45.0962 [INFO; Root]  applying damage
+2022-08-22 05:49:45.0962 [INFO; Root]  3
+2022-08-22 05:49:45.2202 [INFO; Root]  applying damage
+2022-08-22 05:49:45.2207 [INFO; Root]  2
+2022-08-22 05:49:45.6231 [INFO; Root]  applying damage
+2022-08-22 05:49:45.6231 [INFO; Root]  1
+2022-08-22 05:49:45.7936 [INFO; Root]  applying damage
+2022-08-22 05:49:45.7936 [INFO; Root]  1
+2022-08-22 05:49:45.9176 [INFO; Root]  applying damage
+2022-08-22 05:49:45.9176 [INFO; Root]  0
+2022-08-22 05:49:46.3515 [INFO; Root]  applying damage
+2022-08-22 05:49:46.3515 [INFO; Root]  0
+2022-08-22 05:49:47.2194 [INFO; Root]  applying damage
+2022-08-22 05:49:47.2194 [INFO; Root]  2
+2022-08-22 05:49:47.7153 [INFO; Root]  applying damage
+2022-08-22 05:49:47.7158 [INFO; Root]  2
+2022-08-22 05:49:48.0872 [INFO; Root]  applying damage
+2022-08-22 05:49:48.0872 [INFO; Root]  1
+2022-08-22 05:49:50.5214 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-22 05:49:50.5369 [INFO; Root]  Player 1 left
+2022-08-22 05:49:52.6881 [INFO; Root]  Client(id = 2, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-22 05:49:52.6901 [INFO; Root]  Player 2 left

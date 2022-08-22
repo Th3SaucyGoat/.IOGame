@@ -10,7 +10,7 @@ public class UnitUILabel : MonoBehaviour
 
     private void Start()
     {
-        uint num = (uint) Stats.current.GetType().GetField(gameObject.name +"Cost").GetValue(Stats.current);
+        int num = (int) Stats.current.GetType().GetField(gameObject.name +"Cost").GetValue(Stats.current);
         string button = (string) Stats.current.GetType().GetField(gameObject.name + "Button").GetValue(Stats.current); // Use a better way of getting the binding
         textMesh = GetComponent<TextMeshProUGUI>();
         textMesh.text = gameObject.name + $" ({button}) " + $" cost {num}";

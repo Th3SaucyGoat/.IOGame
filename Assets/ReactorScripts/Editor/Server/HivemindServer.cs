@@ -40,7 +40,6 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         get { return Entity.Properties[Prop.FOOD]; }
     }
 
-    public uint MaxHealth { get; } = Stats.HivemindMaxHealth;
 
     public int foodCapacity { set; get; } = 200;
 
@@ -59,7 +58,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     public override void Initialize()
     {
         Room.OnUpdate[0] += Update;
-        Scripts.Get<UnitServer>().Health = MaxHealth;
+        Scripts.Get<UnitServer>().Health = Stats.HivemindMaxHealth;
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
         Entity.OnOverlapStart += OnOverlap;
         Entity.OnOverlapEnd += OnOverlapExit;

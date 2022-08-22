@@ -3,5 +3,5 @@ using System.Collections.Generic;
 
 public interface IDamagable
 {
-    uint Health { set; get; }
+    int Health { set; get; }
 }

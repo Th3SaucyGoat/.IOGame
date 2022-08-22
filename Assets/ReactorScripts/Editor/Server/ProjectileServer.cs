@@ -7,7 +7,7 @@ using Example;
 
 public class ProjectileServer : ksServerEntityScript
 {
-    private uint damage = 1;
+    private int damage = 1;
     private float speed = 12f;
     public uint TeamId;
 
@@ -38,7 +38,6 @@ public class ProjectileServer : ksServerEntityScript
     private void OnOverlapStart(ksCollider ours, ksCollider other)
     {
         // Check if is Obstacle
-        ksLog.Info(other.Entity.CollisionFilter.AssetName);
         if ((other.Entity.CollisionFilter.AssetName == "Obstacles"))
         {
             Entity.Destroy();
@@ -49,6 +48,7 @@ public class ProjectileServer : ksServerEntityScript
             IDamagable hitbox = other.Entity.Scripts.Get<IDamagable>();
             if (hitbox != null)
             {
+                ksLog.Info("applying damage");
                 hitbox.Health -= damage;
             }
             Entity.Destroy();

@@ -24,7 +24,6 @@ public class Unit : ksEntityScript
         Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
         sprite = GetComponent<SpriteRenderer>();
         IdentifyTeam(Entity.Properties[Prop.TEAMID].UInt);
-        OnHealthChanged(0, 0);
     }
 
     private void Update()

@@ -12,7 +12,6 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable , I
 
     private ksRigidBody2DView rb;
 
-    public uint MaxHealth { get; } = Stats.ShooterMaxHealth;
 
 
 
@@ -54,9 +53,9 @@ public class ShooterServer : ksServerEntityScript , IMovement , ICommandable , I
         Entity.OnOverlapEnd += OnOverlapEnd;
         ROFTimer = new Timer(0.8f, OnROFTimerTimeout, false);
         rb = Entity.Scripts.Get<ksRigidBody2DView>();
-        Scripts.Get<UnitServer>().Health = MaxHealth;
+        Scripts.Get<UnitServer>().Health = Stats.ShooterMaxHealth;
         DebugTimer = new Timer(2f, DebugDestroy, false);
-        DebugTimer.Start();
+        //DebugTimer.Start();
     }
 
     public void DelayedStart()

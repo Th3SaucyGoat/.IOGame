@@ -7,13 +7,15 @@ using KS.Reactor;
 public class UnitServer : ksServerEntityScript , IDamagable
 {
 
-    private uint health;
-    public uint Health
+    private int health;
+    public int Health
     {
         set
         {
             health = value;
             Entity.Properties[Prop.HEALTH] = value;
+            ksLog.Info(health.ToString());
+
             if (health <= 0)
             {
                 Entity.Destroy();
