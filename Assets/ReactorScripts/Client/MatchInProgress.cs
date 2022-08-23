@@ -10,6 +10,7 @@ public class MatchInProgress : MonoBehaviour
     private TextMeshProUGUI textMesh;
     private bool active;
     private FunctionTimer timer;
+    private FunctionTimer matchStartTimer;
 
     private void Start()
     {
@@ -20,6 +21,16 @@ public class MatchInProgress : MonoBehaviour
 
     private void Update()
     {
+        print(matchStartTimer);
+        print(textMesh.color.a);
+        if (matchStartTimer != null)
+        {
+            textMesh.text = $"Match will start in {(int)matchStartTimer.TimeRemaining()} seconds";
+        }
+        else if (textMesh.color.a != 0f)
+        {
+            textMesh.color = new Color(1f, 0f, 0f, 0f);
+        }
     }
 
     public void ActivateWarning()
@@ -46,5 +57,11 @@ public class MatchInProgress : MonoBehaviour
                 timer.Start(0.05f);
             }
         }
+    }
+
+    public void DisplayMatchStartTimeout(FunctionTimer theTimer)
+    {
+        matchStartTimer = theTimer;
+        textMesh.color = new Color(1, 0, 0, 1);
     }
 }

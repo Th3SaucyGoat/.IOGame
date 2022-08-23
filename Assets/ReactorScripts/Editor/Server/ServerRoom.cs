@@ -14,6 +14,8 @@ public class ServerRoom : ksServerRoomScript
     private Timer foodTimer;
     private Timer clusterfoodTimer;
 
+    private Timer matchStartTimer;
+
     private delegate void OnTimerEnd();
 
     private int teamId = 1;
@@ -39,6 +41,7 @@ public class ServerRoom : ksServerRoomScript
 
         foodTimer = new Timer(0.5f, SpawnTimerTimeout, true);
         clusterfoodTimer = new Timer(15.0f, ClusterSpawnFood, true);
+        matchStartTimer = new Timer(5.0f, InitiateMatch, false);
     }
 
     // Cleanup the script. Called once when the script is unloaded.
@@ -81,18 +84,16 @@ public class ServerRoom : ksServerRoomScript
     {
         foodTimer.Tick(Time.Delta);
         clusterfoodTimer.Tick(Time.Delta);
+        matchStartTimer.Tick(Time.Delta);
     }
 
     private void InitiateMatch()
     {
-        // Start match countdown
-        Room.PublicTags.Add("InMatch");
+
         // Spawn in a hivemind for all players. Set player control to only their hivemind. Set unique team Ids.
-        Room.CallRPC(RPC.STARTMATCH);
         foreach (ksIServerPlayer p in Room.Players)
         {
             ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(-8f, -7f));
-
             activeTeams.Add(teamId);
             p.Properties[Prop.TEAMID] = teamId;
             p.Properties[Prop.HIVEMINDID] = hivemind.Id;
@@ -131,9 +132,11 @@ public class ServerRoom : ksServerRoomScript
 [ksRPC(RPC.SETREADYSTATUS)]
     private void setPlayerReadyStatus(ksIServerPlayer player, bool readyStatus)
     {
+        if (Room.PublicTags.Contains("InMatch"))
+        {
+            return;
+        }
         // Find player label with the reference id. Set ready status to ready.
-        ksLog.Info("RPC RECEIVED " + readyStatus.ToString() + " and " + player.Id.ToString());
-        ksLog.Info("Hehe" + readyStatus.ToString());
         player.Properties[Prop.READY] = readyStatus;
         Room.CallRPC(RPC.READYSTATUS, player.Id, readyStatus);
         ksConstList<ksIServerPlayer> connectedPlayers = Room.Players;
@@ -148,7 +151,10 @@ public class ServerRoom : ksServerRoomScript
         }
         if (initiateMatch && connectedPlayers.Count > 0)
         {
-            InitiateMatch();
+            // Start match countdown
+            Room.PublicTags.Add("InMatch");
+            matchStartTimer.Start();
+            Room.CallRPC(RPC.STARTMATCH);
         }
     }
 

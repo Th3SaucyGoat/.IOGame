@@ -8,12 +8,13 @@ public class MainMenuUI : MonoBehaviour
     private GameObject playerReadyLabelContainer;
     private GameObject readyButton;
     private GameObject input;
-    private GameObject matchInProgressWarning;
+    private GameObject redMenuText;
+    private FunctionTimer matchingStartingTimer;
 
 
     private void OnEnable()
     {
-        GameObject.FindGameObjectWithTag("CineMachine").GetComponent<CinemachineVirtualCamera>().ForceCameraPosition(transform.position, Quaternion.identity);
+        GameObject.FindGameObjectWithTag("CineMachine").transform.position = Vector3.zero;
     }
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class MainMenuUI : MonoBehaviour
         GameEvents.current.RoomFound += OnRoomFound;
         GameEvents.current.Disconnected += BackToMainMenu;
         GameEvents.current.MatchInProgress += MatchInProgress;
+        GameEvents.current.StartMatchTimer += StartMatchTimer;
 
         foreach (Transform child in transform)
         {
@@ -40,12 +42,15 @@ public class MainMenuUI : MonoBehaviour
             {
                 input = child.gameObject;
             }
-            if (child.name.Contains("MatchInProgress"))
+            if (child.name.Contains("redMenuText"))
             {
-                matchInProgressWarning = child.gameObject;
+                redMenuText = child.gameObject;
             }
         }
+        
     }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -69,6 +74,23 @@ public class MainMenuUI : MonoBehaviour
 
     private void MatchInProgress()
     {
-        matchInProgressWarning.GetComponent<MatchInProgress>().ActivateWarning();
+        redMenuText.GetComponent<MatchInProgress>().ActivateWarning();
+    }
+
+    private void StartMatchTimer()
+    {
+        matchingStartingTimer = FunctionTimer.Create(StartMatch, 5.0f);
+        matchingStartingTimer.Start();
+        redMenuText.GetComponent<MatchInProgress>().DisplayMatchStartTimeout(matchingStartingTimer);
+    }
+
+    private void StartMatch()
+    {
+        GameEvents.current.StartMatch();
+
+        foreach (Transform trans in playerReadyLabelContainer.transform)
+        {
+            Destroy(trans.gameObject);
+        }
     }    
 }

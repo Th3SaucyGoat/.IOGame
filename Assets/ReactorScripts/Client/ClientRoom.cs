@@ -96,15 +96,8 @@ public class ClientRoom : ksRoomScript
     [ksRPC(RPC.STARTMATCH)]
     private void StartMatch()
     {
-        print("StartMatchRPCRecieved");
-        // Delete all ready labels in container
-        foreach (Transform trans in playerReadyLabelContainer)
-        {
-            Destroy(trans.gameObject);
-        }
         // Signal start match event
-        GameEvents.current.StartMatch?.Invoke();
-        print(Room.LocalPlayerId);
+        GameEvents.current.StartMatchTimer?.Invoke();
     }
 
     [ksRPC(RPC.PLAYERCONTROLLEDENTITYDESTROYED)]

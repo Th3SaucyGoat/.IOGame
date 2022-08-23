@@ -1,0 +1,29 @@
+2022-08-23 06:01:41.5627 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-23 06:01:41.5707 [INFO; Root]  Loaded config.json
+2022-08-23 06:01:41.5707 [INFO; Root]  Loaded config.GameScene.json
+2022-08-23 06:01:41.5752 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-23 06:01:41.5752 [INFO; Root]  Reactor Server v0.10.0
+2022-08-23 06:01:41.5752 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-23 06:01:41.5762 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-23 06:01:41.5842 [DEBUG; Root]  Loading Asset Scripts
+2022-08-23 06:01:41.5862 [DEBUG; Root]  Loading Room Configs
+2022-08-23 06:01:41.5897 [DEBUG; Root]  Initializing PhysX
+2022-08-23 06:01:41.6007 [DEBUG; Root]  Loading PhysX geometry
+2022-08-23 06:01:41.6102 [INFO; Root]  Loaded 8 geometries
+2022-08-23 06:01:41.6102 [INFO; Root]  Loaded 3 geometries
+2022-08-23 06:01:41.6102 [DEBUG; Root]  Loading entity prefabs
+2022-08-23 06:01:41.6222 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-23 06:01:41.6222 [DEBUG; Root]  Loading entity instances
+2022-08-23 06:01:41.6347 [DEBUG; Root]  Initializing scripts
+2022-08-23 06:01:41.6412 [DEBUG; Root]  Room setup complete
+2022-08-23 06:01:41.6412 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-23 06:01:41.6412 [INFO; Root]  Sending client updates every 2 frames
+2022-08-23 06:01:41.6412 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-23 06:01:41.6417 [INFO; Root]  Opening TCP port 8000
+2022-08-23 06:01:44.3817 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-23 06:01:44.3842 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-23 06:01:44.3972 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-23 06:01:44.4132 [INFO; Root]  Player False joined
+2022-08-23 06:01:45.4477 [INFO; Root]  RPC RECEIVED True and 1
+2022-08-23 06:01:45.4477 [INFO; Root]  HeheTrue
+2022-08-23 06:01:48.4552 [INFO; Root]  20

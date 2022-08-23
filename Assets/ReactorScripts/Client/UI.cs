@@ -33,6 +33,8 @@ public class UI : MonoBehaviour
 
     private void OnStartMatch()
     {
+        // Start timer. Display text
+
         mainMenu.SetActive(false);
         gameUi.SetActive(true);
     }
