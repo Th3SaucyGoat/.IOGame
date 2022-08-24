@@ -15,15 +15,20 @@ public class MatchInProgress : MonoBehaviour
     private void Start()
     {
         textMesh = GetComponent<TextMeshProUGUI>();
-        textMesh.color = new Color(1, 0, 0, 0);
         timer = FunctionTimer.Create(Timeout, 1.0f, false);
+    }
+
+    private void OnEnable()
+    {
+        if (textMesh != null)
+        {
+            textMesh.color = new Color(1, 0, 0, 0);
+        }
     }
 
     private void Update()
     {
-        print(matchStartTimer);
-        print(textMesh.color.a);
-        if (matchStartTimer != null)
+        if (matchStartTimer != null && matchStartTimer.gameObject != null)
         {
             textMesh.text = $"Match will start in {(int)matchStartTimer.TimeRemaining()} seconds";
         }

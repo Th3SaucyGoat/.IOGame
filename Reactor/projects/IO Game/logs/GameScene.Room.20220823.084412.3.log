@@ -1,0 +1,38 @@
+2022-08-23 08:44:12.6982 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-23 08:44:12.7242 [INFO; Root]  Loaded config.json
+2022-08-23 08:44:12.7252 [INFO; Root]  Loaded config.GameScene.json
+2022-08-23 08:44:12.7342 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-23 08:44:12.7342 [INFO; Root]  Reactor Server v0.10.0
+2022-08-23 08:44:12.7342 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-23 08:44:12.7372 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-23 08:44:12.7516 [DEBUG; Root]  Loading Asset Scripts
+2022-08-23 08:44:12.7548 [DEBUG; Root]  Loading Room Configs
+2022-08-23 08:44:12.7618 [DEBUG; Root]  Initializing PhysX
+2022-08-23 08:44:12.8032 [DEBUG; Root]  Loading PhysX geometry
+2022-08-23 08:44:12.8309 [INFO; Root]  Loaded 8 geometries
+2022-08-23 08:44:12.8322 [INFO; Root]  Loaded 3 geometries
+2022-08-23 08:44:12.8322 [DEBUG; Root]  Loading entity prefabs
+2022-08-23 08:44:12.8531 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-23 08:44:12.8531 [DEBUG; Root]  Loading entity instances
+2022-08-23 08:44:12.8741 [DEBUG; Root]  Initializing scripts
+2022-08-23 08:44:12.8939 [DEBUG; Root]  Room setup complete
+2022-08-23 08:44:12.8945 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-23 08:44:12.8945 [INFO; Root]  Sending client updates every 2 frames
+2022-08-23 08:44:12.8945 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-23 08:44:12.8977 [INFO; Root]  Opening TCP port 8000
+2022-08-23 08:44:18.5663 [INFO; Root]  Client(id = 1, address = 10.6.167.21) connected
+2022-08-23 08:44:18.5763 [DEBUG; Root]  Client(id = 1, address = 10.6.167.21) model validated
+2022-08-23 08:44:18.6101 [DEBUG; Root]  Client(id = 1, address = 10.6.167.21) authenticated
+2022-08-23 08:44:18.6283 [INFO; Root]  Player False joined
+2022-08-23 08:44:24.5426 [INFO; Root]  20
+2022-08-23 08:44:26.4995 [INFO; Root]  0
+2022-08-23 08:44:27.9190 [INFO; Root]  Client(id = 1, address = 10.6.167.21) disconnected: 2-End of file
+2022-08-23 08:44:27.9336 [INFO; Root]  Player 1 left
+2022-08-23 08:44:29.1947 [INFO; Root]  Client(id = 2, address = 10.6.167.21) connected
+2022-08-23 08:44:29.1957 [DEBUG; Root]  Client(id = 2, address = 10.6.167.21) model validated
+2022-08-23 08:44:29.1957 [DEBUG; Root]  Client(id = 2, address = 10.6.167.21) authenticated
+2022-08-23 08:44:29.1999 [INFO; Root]  Player False joined
+2022-08-23 08:44:35.9176 [INFO; Root]  20
+2022-08-23 08:44:37.9336 [INFO; Root]  0
+2022-08-23 08:44:38.4319 [INFO; Root]  Client(id = 2, address = 10.6.167.21) disconnected: 2-End of file
+2022-08-23 08:44:38.4487 [INFO; Root]  Player 2 left
