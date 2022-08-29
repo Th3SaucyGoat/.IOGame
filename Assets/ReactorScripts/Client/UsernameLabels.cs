@@ -7,6 +7,8 @@ using KS.Reactor.Client;
 using KS.Reactor;
 using TMPro;
 using Unity;
+using System.Net.Sockets;
+using UnityEngine.Networking;
 
 public class UsernameLabels : ksRoomScript
 {
@@ -29,7 +31,12 @@ public class UsernameLabels : ksRoomScript
     //     SetLabelOffset(label.transform, entityTransform);
     //labelTransform.SetParent(entityTransform);
     //  }
-
+    private static void Test()
+    {
+        //GlobalConfig c = new GlobalConfig();
+        //NetworkTransport.AddWebsocketHost
+        
+    }
     public static void SetEntity(uint pId, ksEntity entity)
     {
         UsernameLabel labelForThisPlayer = UsernameLabels.currentLabels[pId];

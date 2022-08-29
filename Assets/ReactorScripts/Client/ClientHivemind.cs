@@ -83,7 +83,7 @@ public class ClientHivemind : ksEntityScript
                     Entity.CallRPC(RPC.SPAWNUNIT, type);
                     if (!HUD.firstUnitSpawned)
                     {
-                        GameEvents.current.FirstUnitSpawned();
+                        GameEvents.current.FirstUnitSpawned?.Invoke();
                     }
                 }
                 break;
@@ -93,7 +93,7 @@ public class ClientHivemind : ksEntityScript
                     Entity.CallRPC(RPC.SPAWNUNIT, type);
                     if (!HUD.firstUnitSpawned)
                     {
-                        GameEvents.current.FirstUnitSpawned();
+                        GameEvents.current.FirstUnitSpawned?.Invoke();
                     }
                 }
                 break;

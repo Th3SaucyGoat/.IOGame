@@ -1,0 +1,661 @@
+2022-08-25 09:05:35.6202 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-08-25 09:05:35.6297 [INFO; Root]  Loaded config.json
+2022-08-25 09:05:35.6302 [INFO; Root]  Loaded config.GameScene.json
+2022-08-25 09:05:35.6357 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-08-25 09:05:35.6357 [INFO; Root]  Reactor Server v0.10.0
+2022-08-25 09:05:35.6357 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-08-25 09:05:35.6367 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-08-25 09:05:35.6462 [DEBUG; Root]  Loading Asset Scripts
+2022-08-25 09:05:35.6487 [DEBUG; Root]  Loading Room Configs
+2022-08-25 09:05:35.6532 [DEBUG; Root]  Initializing PhysX
+2022-08-25 09:05:35.6657 [DEBUG; Root]  Loading PhysX geometry
+2022-08-25 09:05:35.6752 [INFO; Root]  Loaded 8 geometries
+2022-08-25 09:05:35.6757 [INFO; Root]  Loaded 2 geometries
+2022-08-25 09:05:35.6757 [DEBUG; Root]  Loading entity prefabs
+2022-08-25 09:05:35.6887 [INFO; Root]  Loaded 5 entity prefabs
+2022-08-25 09:05:35.6892 [DEBUG; Root]  Loading entity instances
+2022-08-25 09:05:35.7017 [DEBUG; Root]  Initializing scripts
+2022-08-25 09:05:35.7087 [DEBUG; Root]  Room setup complete
+2022-08-25 09:05:35.7087 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-08-25 09:05:35.7087 [INFO; Root]  Sending client updates every 2 frames
+2022-08-25 09:05:35.7087 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-08-25 09:05:35.7092 [INFO; Root]  Opening TCP port 8000
+2022-08-25 09:05:36.4362 [INFO; Root]  Client(id = 1, address = 127.0.0.1) connected
+2022-08-25 09:05:36.4392 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) model validated
+2022-08-25 09:05:36.4537 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1) authenticated
+2022-08-25 09:05:36.4642 [INFO; Root]  Player False joined
+2022-08-25 09:05:37.4562 [INFO; Root]  Client(id = 2, address = 127.0.0.1) connected
+2022-08-25 09:05:37.4592 [DEBUG; Root]  Client(id = 2, address = 127.0.0.1) model validated
+2022-08-25 09:05:37.4622 [DEBUG; Root]  Client(id = 2, address = 127.0.0.1) authenticated
+2022-08-25 09:05:37.4772 [INFO; Root]  Player False joined
+2022-08-25 09:05:43.9709 [INFO; Root]  20
+2022-08-25 09:05:43.9779 [INFO; Root]  20
+2022-08-25 09:05:51.0435 [INFO; Root]  server received request to spawn = 5
+2022-08-25 09:05:51.0445 [INFO; Root]  5
+2022-08-25 09:05:51.0490 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:05:51.9396 [INFO; Root]  collision Lost
+2022-08-25 09:05:53.7836 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:05:54.4811 [INFO; Root]  collision Lost
+2022-08-25 09:05:55.5351 [INFO; Root]  server received request to spawn = 5
+2022-08-25 09:05:55.5356 [INFO; Root]  5
+2022-08-25 09:05:55.5356 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:05:56.2017 [INFO; Root]  collision Lost
+2022-08-25 09:05:59.0857 [INFO; Root]  cluster food
+2022-08-25 09:05:59.1932 [INFO; Root]  cluster food
+2022-08-25 09:05:59.2397 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:05:59.3172 [INFO; Root]  cluster food
+2022-08-25 09:05:59.3947 [INFO; Root]  collision Lost
+2022-08-25 09:05:59.4412 [INFO; Root]  cluster food
+2022-08-25 09:05:59.5497 [INFO; Root]  cluster food
+2022-08-25 09:05:59.6742 [INFO; Root]  cluster food
+2022-08-25 09:05:59.7822 [INFO; Root]  cluster food
+2022-08-25 09:05:59.9062 [INFO; Root]  cluster food
+2022-08-25 09:06:00.0147 [INFO; Root]  cluster food
+2022-08-25 09:06:00.1387 [INFO; Root]  cluster food
+2022-08-25 09:06:00.2472 [INFO; Root]  cluster food
+2022-08-25 09:06:00.3713 [INFO; Root]  cluster food
+2022-08-25 09:06:00.4803 [INFO; Root]  cluster food
+2022-08-25 09:06:00.6038 [INFO; Root]  cluster food
+2022-08-25 09:06:00.7123 [INFO; Root]  cluster food
+2022-08-25 09:06:00.8363 [INFO; Root]  cluster food
+2022-08-25 09:06:00.9448 [INFO; Root]  cluster food
+2022-08-25 09:06:01.0688 [INFO; Root]  cluster food
+2022-08-25 09:06:01.1778 [INFO; Root]  cluster food
+2022-08-25 09:06:01.3013 [INFO; Root]  cluster food
+2022-08-25 09:06:01.4098 [INFO; Root]  cluster food
+2022-08-25 09:06:01.5343 [INFO; Root]  cluster food
+2022-08-25 09:06:01.6583 [INFO; Root]  cluster food
+2022-08-25 09:06:01.7663 [INFO; Root]  cluster food
+2022-08-25 09:06:01.8903 [INFO; Root]  cluster food
+2022-08-25 09:06:01.9988 [INFO; Root]  cluster food
+2022-08-25 09:06:02.1233 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:02.1233 [INFO; Root]  cluster food
+2022-08-25 09:06:02.2313 [INFO; Root]  cluster food
+2022-08-25 09:06:02.3553 [INFO; Root]  cluster food
+2022-08-25 09:06:02.9293 [INFO; Root]  collision Lost
+2022-08-25 09:06:08.0284 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:08.4004 [INFO; Root]  collision Lost
+2022-08-25 09:06:08.6484 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:08.7880 [INFO; Root]  collision Lost
+2022-08-25 09:06:10.5860 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:10.6015 [INFO; Root]  collision Lost
+2022-08-25 09:06:12.5235 [INFO; Root]  server received request to spawn = 15
+2022-08-25 09:06:12.5250 [INFO; Root]  10
+2022-08-25 09:06:12.5255 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:12.5260 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:12.5260 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:12.5545 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:12.8025 [INFO; Root]  collision Lost
+2022-08-25 09:06:14.1046 [INFO; Root]  cluster food
+2022-08-25 09:06:14.2136 [INFO; Root]  cluster food
+2022-08-25 09:06:14.3371 [INFO; Root]  cluster food
+2022-08-25 09:06:14.4456 [INFO; Root]  cluster food
+2022-08-25 09:06:14.5696 [INFO; Root]  cluster food
+2022-08-25 09:06:14.6781 [INFO; Root]  cluster food
+2022-08-25 09:06:14.8021 [INFO; Root]  cluster food
+2022-08-25 09:06:14.9106 [INFO; Root]  cluster food
+2022-08-25 09:06:15.0346 [INFO; Root]  Received 102
+2022-08-25 09:06:15.0351 [INFO; Root]  cluster food
+2022-08-25 09:06:15.1121 [INFO; Root]  Received 103
+2022-08-25 09:06:15.1431 [INFO; Root]  cluster food
+2022-08-25 09:06:15.2671 [INFO; Root]  cluster food
+2022-08-25 09:06:15.3911 [INFO; Root]  cluster food
+2022-08-25 09:06:15.4996 [INFO; Root]  cluster food
+2022-08-25 09:06:15.5926 [INFO; Root]  Received 104
+2022-08-25 09:06:15.6236 [INFO; Root]  cluster food
+2022-08-25 09:06:15.7321 [INFO; Root]  cluster food
+2022-08-25 09:06:15.8561 [INFO; Root]  cluster food
+2022-08-25 09:06:15.9646 [INFO; Root]  cluster food
+2022-08-25 09:06:16.0886 [INFO; Root]  cluster food
+2022-08-25 09:06:16.1971 [INFO; Root]  cluster food
+2022-08-25 09:06:16.2901 [INFO; Root]  Received 105
+2022-08-25 09:06:16.3216 [INFO; Root]  cluster food
+2022-08-25 09:06:16.4296 [INFO; Root]  cluster food
+2022-08-25 09:06:16.5536 [INFO; Root]  cluster food
+2022-08-25 09:06:16.6621 [INFO; Root]  cluster food
+2022-08-25 09:06:16.7861 [INFO; Root]  cluster food
+2022-08-25 09:06:16.8791 [INFO; Root]  Received 106
+2022-08-25 09:06:16.8946 [INFO; Root]  cluster food
+2022-08-25 09:06:17.0186 [INFO; Root]  cluster food
+2022-08-25 09:06:17.1271 [INFO; Root]  cluster food
+2022-08-25 09:06:17.2512 [INFO; Root]  cluster food
+2022-08-25 09:06:20.6302 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:20.6307 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:20.9557 [INFO; Root]  collision Lost
+2022-08-25 09:06:20.9557 [INFO; Root]  collision Lost
+2022-08-25 09:06:29.1249 [INFO; Root]  cluster food
+2022-08-25 09:06:29.2329 [INFO; Root]  cluster food
+2022-08-25 09:06:29.3569 [INFO; Root]  cluster food
+2022-08-25 09:06:29.4344 [INFO; Root]  server received request to spawn = 5
+2022-08-25 09:06:29.4344 [INFO; Root]  5
+2022-08-25 09:06:29.4349 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:29.4654 [INFO; Root]  cluster food
+2022-08-25 09:06:29.5274 [INFO; Root]  collision Lost
+2022-08-25 09:06:29.5894 [INFO; Root]  cluster food
+2022-08-25 09:06:29.6979 [INFO; Root]  cluster food
+2022-08-25 09:06:29.8219 [INFO; Root]  cluster food
+2022-08-25 09:06:29.9305 [INFO; Root]  cluster food
+2022-08-25 09:06:30.0545 [INFO; Root]  cluster food
+2022-08-25 09:06:30.1630 [INFO; Root]  cluster food
+2022-08-25 09:06:30.2870 [INFO; Root]  cluster food
+2022-08-25 09:06:30.3955 [INFO; Root]  cluster food
+2022-08-25 09:06:30.5195 [INFO; Root]  cluster food
+2022-08-25 09:06:30.5505 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:30.6280 [INFO; Root]  cluster food
+2022-08-25 09:06:30.7520 [INFO; Root]  cluster food
+2022-08-25 09:06:30.8610 [INFO; Root]  cluster food
+2022-08-25 09:06:30.9845 [INFO; Root]  cluster food
+2022-08-25 09:06:31.0310 [INFO; Root]  server received request to spawn = 5
+2022-08-25 09:06:31.0310 [INFO; Root]  5
+2022-08-25 09:06:31.0315 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:31.0930 [INFO; Root]  collision Lost
+2022-08-25 09:06:31.0930 [INFO; Root]  cluster food
+2022-08-25 09:06:31.1395 [INFO; Root]  collision Lost
+2022-08-25 09:06:31.2170 [INFO; Root]  cluster food
+2022-08-25 09:06:31.3410 [INFO; Root]  cluster food
+2022-08-25 09:06:31.4500 [INFO; Root]  cluster food
+2022-08-25 09:06:31.5735 [INFO; Root]  cluster food
+2022-08-25 09:06:31.6820 [INFO; Root]  cluster food
+2022-08-25 09:06:31.8060 [INFO; Root]  cluster food
+2022-08-25 09:06:31.9145 [INFO; Root]  cluster food
+2022-08-25 09:06:35.4486 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:35.4641 [INFO; Root]  collision Lost
+2022-08-25 09:06:35.4796 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:35.4951 [INFO; Root]  collision Lost
+2022-08-25 09:06:35.8671 [INFO; Root]  server received request to spawn = 20
+2022-08-25 09:06:35.8671 [INFO; Root]  10
+2022-08-25 09:06:35.8676 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:35.8676 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:35.8676 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:36.1461 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:37.0921 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:37.4481 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:38.0371 [INFO; Root]  collision Lost
+2022-08-25 09:06:38.7502 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:38.7812 [INFO; Root]  server received request to spawn = 15
+2022-08-25 09:06:38.7812 [INFO; Root]  10
+2022-08-25 09:06:38.7817 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:38.7817 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:38.7817 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:38.7817 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:38.7817 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:38.7967 [INFO; Root]  collision Lost
+2022-08-25 09:06:38.8897 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:39.6182 [INFO; Root]  collision Lost
+2022-08-25 09:06:40.0057 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:40.9517 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:41.5402 [INFO; Root]  collision Lost
+2022-08-25 09:06:41.9122 [INFO; Root]  collision Lost
+2022-08-25 09:06:43.0593 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.1288 [INFO; Root]  cluster food
+2022-08-25 09:06:44.2528 [INFO; Root]  cluster food
+2022-08-25 09:06:44.3613 [INFO; Root]  cluster food
+2022-08-25 09:06:44.4853 [INFO; Root]  cluster food
+2022-08-25 09:06:44.5163 [INFO; Root]  server received request to spawn = 17
+2022-08-25 09:06:44.5163 [INFO; Root]  10
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5168 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:44.5938 [INFO; Root]  cluster food
+2022-08-25 09:06:44.7178 [INFO; Root]  cluster food
+2022-08-25 09:06:44.8263 [INFO; Root]  cluster food
+2022-08-25 09:06:44.9503 [INFO; Root]  cluster food
+2022-08-25 09:06:45.0588 [INFO; Root]  cluster food
+2022-08-25 09:06:45.1833 [INFO; Root]  cluster food
+2022-08-25 09:06:45.2918 [INFO; Root]  cluster food
+2022-08-25 09:06:45.4153 [INFO; Root]  cluster food
+2022-08-25 09:06:45.5393 [INFO; Root]  cluster food
+2022-08-25 09:06:45.6478 [INFO; Root]  cluster food
+2022-08-25 09:06:45.7718 [INFO; Root]  cluster food
+2022-08-25 09:06:45.8803 [INFO; Root]  cluster food
+2022-08-25 09:06:46.0043 [INFO; Root]  cluster food
+2022-08-25 09:06:46.0508 [INFO; Root]  collision Lost
+2022-08-25 09:06:46.0818 [INFO; Root]  collision Lost
+2022-08-25 09:06:46.1128 [INFO; Root]  cluster food
+2022-08-25 09:06:46.2368 [INFO; Root]  cluster food
+2022-08-25 09:06:46.3453 [INFO; Root]  cluster food
+2022-08-25 09:06:46.4698 [INFO; Root]  cluster food
+2022-08-25 09:06:46.5778 [INFO; Root]  cluster food
+2022-08-25 09:06:46.7023 [INFO; Root]  cluster food
+2022-08-25 09:06:46.8103 [INFO; Root]  cluster food
+2022-08-25 09:06:46.9344 [INFO; Root]  cluster food
+2022-08-25 09:06:47.0429 [INFO; Root]  cluster food
+2022-08-25 09:06:47.0739 [INFO; Root]  server received request to spawn = 16
+2022-08-25 09:06:47.0739 [INFO; Root]  10
+2022-08-25 09:06:47.0744 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.0744 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.0744 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.0744 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.0744 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.0744 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.1049 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.1049 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.1514 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.1669 [INFO; Root]  cluster food
+2022-08-25 09:06:47.2909 [INFO; Root]  cluster food
+2022-08-25 09:06:47.3994 [INFO; Root]  cluster food
+2022-08-25 09:06:47.4614 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.5234 [INFO; Root]  cluster food
+2022-08-25 09:06:47.6009 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.6009 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.6319 [INFO; Root]  cluster food
+2022-08-25 09:06:47.7559 [INFO; Root]  cluster food
+2022-08-25 09:06:47.8024 [INFO; Root]  applying damage
+2022-08-25 09:06:47.8029 [INFO; Root]  19
+2022-08-25 09:06:47.8334 [INFO; Root]  applying damage
+2022-08-25 09:06:47.8334 [INFO; Root]  9
+2022-08-25 09:06:47.8649 [INFO; Root]  cluster food
+2022-08-25 09:06:47.9574 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:47.9884 [INFO; Root]  cluster food
+2022-08-25 09:06:48.0969 [INFO; Root]  cluster food
+2022-08-25 09:06:48.2054 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:48.2209 [INFO; Root]  cluster food
+2022-08-25 09:06:48.2364 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:48.2829 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:48.3294 [INFO; Root]  cluster food
+2022-08-25 09:06:48.3449 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:48.3449 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:48.3604 [INFO; Root]  applying damage
+2022-08-25 09:06:48.3609 [INFO; Root]  4
+2022-08-25 09:06:48.4534 [INFO; Root]  cluster food
+2022-08-25 09:06:48.6239 [INFO; Root]  collision Lost
+2022-08-25 09:06:48.7324 [INFO; Root]  applying damage
+2022-08-25 09:06:48.7324 [INFO; Root]  9
+2022-08-25 09:06:48.7944 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:48.7944 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:49.1664 [INFO; Root]  applying damage
+2022-08-25 09:06:49.1669 [INFO; Root]  8
+2022-08-25 09:06:49.2904 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:49.3989 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:49.5229 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.0344 [INFO; Root]  collision Lost
+2022-08-25 09:06:50.1274 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.1274 [INFO; Root]  applying damage
+2022-08-25 09:06:50.1274 [INFO; Root]  3
+2022-08-25 09:06:50.2054 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.4064 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.4374 [INFO; Root]  applying damage
+2022-08-25 09:06:50.4379 [INFO; Root]  18
+2022-08-25 09:06:50.4379 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.4379 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.5149 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:50.5149 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.1660 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.1665 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.2435 [INFO; Root]  applying damage
+2022-08-25 09:06:51.2435 [INFO; Root]  2
+2022-08-25 09:06:51.2435 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.4295 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.4920 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.5850 [INFO; Root]  applying damage
+2022-08-25 09:06:51.5850 [INFO; Root]  4
+2022-08-25 09:06:51.6310 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.6775 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:51.9255 [INFO; Root]  collision Lost
+2022-08-25 09:06:51.9720 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:51.9720 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:52.0650 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:52.2355 [INFO; Root]  applying damage
+2022-08-25 09:06:52.2355 [INFO; Root]  7
+2022-08-25 09:06:52.3285 [INFO; Root]  applying damage
+2022-08-25 09:06:52.3285 [INFO; Root]  17
+2022-08-25 09:06:52.4530 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.4680 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.4990 [INFO; Root]  applying damage
+2022-08-25 09:06:52.4990 [INFO; Root]  19
+2022-08-25 09:06:52.5305 [INFO; Root]  applying damage
+2022-08-25 09:06:52.5305 [INFO; Root]  6
+2022-08-25 09:06:52.5765 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.6075 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.6230 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.6385 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.6540 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.6695 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.6850 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.7005 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.7160 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.7315 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.7470 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.7625 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.7780 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.7940 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.8245 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:06:52.8250 [INFO; Root]  collision Lost
+2022-08-25 09:06:52.8555 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:52.9330 [INFO; Root]  applying damage
+2022-08-25 09:06:52.9330 [INFO; Root]  8
+2022-08-25 09:06:52.9640 [INFO; Root]  applying damage
+2022-08-25 09:06:52.9640 [INFO; Root]  5
+2022-08-25 09:06:52.9640 [INFO; Root]  collision Lost
+2022-08-25 09:06:53.0725 [INFO; Root]  applying damage
+2022-08-25 09:06:53.0730 [INFO; Root]  7
+2022-08-25 09:06:53.2895 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:53.3360 [INFO; Root]  applying damage
+2022-08-25 09:06:53.3360 [INFO; Root]  4
+2022-08-25 09:06:53.6150 [INFO; Root]  collision Lost
+2022-08-25 09:06:53.6615 [INFO; Root]  applying damage
+2022-08-25 09:06:53.6615 [INFO; Root]  9
+2022-08-25 09:06:53.7390 [INFO; Root]  applying damage
+2022-08-25 09:06:53.7390 [INFO; Root]  6
+2022-08-25 09:06:53.8010 [INFO; Root]  applying damage
+2022-08-25 09:06:53.8010 [INFO; Root]  3
+2022-08-25 09:06:53.8940 [INFO; Root]  applying damage
+2022-08-25 09:06:53.8945 [INFO; Root]  5
+2022-08-25 09:06:53.8945 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:54.1730 [INFO; Root]  applying damage
+2022-08-25 09:06:54.1735 [INFO; Root]  2
+2022-08-25 09:06:54.3280 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:06:54.6695 [INFO; Root]  applying damage
+2022-08-25 09:06:54.6695 [INFO; Root]  1
+2022-08-25 09:06:54.9015 [INFO; Root]  applying damage
+2022-08-25 09:06:54.9015 [INFO; Root]  4
+2022-08-25 09:06:54.9325 [INFO; Root]  applying damage
+2022-08-25 09:06:54.9325 [INFO; Root]  8
+2022-08-25 09:06:55.0255 [INFO; Root]  applying damage
+2022-08-25 09:06:55.0255 [INFO; Root]  1
+2022-08-25 09:06:55.1030 [INFO; Root]  applying damage
+2022-08-25 09:06:55.1030 [INFO; Root]  7
+2022-08-25 09:06:55.3511 [INFO; Root]  collision Lost
+2022-08-25 09:06:55.4596 [INFO; Root]  applying damage
+2022-08-25 09:06:55.4596 [INFO; Root]  0
+2022-08-25 09:06:55.6301 [INFO; Root]  applying damage
+2022-08-25 09:06:55.6301 [INFO; Root]  3
+2022-08-25 09:06:55.7696 [INFO; Root]  applying damage
+2022-08-25 09:06:55.7696 [INFO; Root]  6
+2022-08-25 09:06:55.7696 [INFO; Root]  applying damage
+2022-08-25 09:06:55.7696 [INFO; Root]  2
+2022-08-25 09:06:55.9401 [INFO; Root]  applying damage
+2022-08-25 09:06:55.9401 [INFO; Root]  5
+2022-08-25 09:06:56.0486 [INFO; Root]  collision Lost
+2022-08-25 09:06:56.5601 [INFO; Root]  applying damage
+2022-08-25 09:06:56.5606 [INFO; Root]  4
+2022-08-25 09:06:56.6376 [INFO; Root]  applying damage
+2022-08-25 09:06:56.6376 [INFO; Root]  1
+2022-08-25 09:06:56.6996 [INFO; Root]  applying damage
+2022-08-25 09:06:56.6996 [INFO; Root]  3
+2022-08-25 09:06:56.8391 [INFO; Root]  applying damage
+2022-08-25 09:06:56.8391 [INFO; Root]  4
+2022-08-25 09:06:57.0716 [INFO; Root]  applying damage
+2022-08-25 09:06:57.0716 [INFO; Root]  2
+2022-08-25 09:06:57.1956 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:57.2271 [INFO; Root]  applying damage
+2022-08-25 09:06:57.2271 [INFO; Root]  1
+2022-08-25 09:06:57.3041 [INFO; Root]  applying damage
+2022-08-25 09:06:57.3041 [INFO; Root]  0
+2022-08-25 09:06:57.3971 [INFO; Root]  applying damage
+2022-08-25 09:06:57.3971 [INFO; Root]  0
+2022-08-25 09:06:57.7226 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:57.7691 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:06:58.0946 [INFO; Root]  applying damage
+2022-08-25 09:06:58.0946 [INFO; Root]  3
+2022-08-25 09:06:58.7611 [INFO; Root]  applying damage
+2022-08-25 09:06:58.7616 [INFO; Root]  18
+2022-08-25 09:06:59.1486 [INFO; Root]  cluster food
+2022-08-25 09:06:59.2726 [INFO; Root]  cluster food
+2022-08-25 09:06:59.3811 [INFO; Root]  cluster food
+2022-08-25 09:06:59.5051 [INFO; Root]  applying damage
+2022-08-25 09:06:59.5051 [INFO; Root]  17
+2022-08-25 09:06:59.5056 [INFO; Root]  cluster food
+2022-08-25 09:06:59.6137 [INFO; Root]  cluster food
+2022-08-25 09:06:59.7377 [INFO; Root]  applying damage
+2022-08-25 09:06:59.7382 [INFO; Root]  16
+2022-08-25 09:06:59.7382 [INFO; Root]  cluster food
+2022-08-25 09:06:59.8462 [INFO; Root]  cluster food
+2022-08-25 09:06:59.9702 [INFO; Root]  cluster food
+2022-08-25 09:07:00.0787 [INFO; Root]  cluster food
+2022-08-25 09:07:00.2027 [INFO; Root]  cluster food
+2022-08-25 09:07:00.3112 [INFO; Root]  cluster food
+2022-08-25 09:07:00.4352 [INFO; Root]  cluster food
+2022-08-25 09:07:00.5437 [INFO; Root]  cluster food
+2022-08-25 09:07:00.6677 [INFO; Root]  cluster food
+2022-08-25 09:07:00.7762 [INFO; Root]  cluster food
+2022-08-25 09:07:00.9002 [INFO; Root]  cluster food
+2022-08-25 09:07:01.0242 [INFO; Root]  cluster food
+2022-08-25 09:07:01.1327 [INFO; Root]  cluster food
+2022-08-25 09:07:01.2567 [INFO; Root]  cluster food
+2022-08-25 09:07:01.3652 [INFO; Root]  cluster food
+2022-08-25 09:07:01.4892 [INFO; Root]  cluster food
+2022-08-25 09:07:01.5667 [INFO; Root]  applying damage
+2022-08-25 09:07:01.5667 [INFO; Root]  15
+2022-08-25 09:07:01.5977 [INFO; Root]  cluster food
+2022-08-25 09:07:01.7217 [INFO; Root]  cluster food
+2022-08-25 09:07:01.8302 [INFO; Root]  cluster food
+2022-08-25 09:07:01.9542 [INFO; Root]  cluster food
+2022-08-25 09:07:02.0012 [INFO; Root]  applying damage
+2022-08-25 09:07:02.0012 [INFO; Root]  3
+2022-08-25 09:07:02.0627 [INFO; Root]  cluster food
+2022-08-25 09:07:02.1867 [INFO; Root]  cluster food
+2022-08-25 09:07:02.2642 [INFO; Root]  applying damage
+2022-08-25 09:07:02.2642 [INFO; Root]  2
+2022-08-25 09:07:02.2952 [INFO; Root]  cluster food
+2022-08-25 09:07:02.4192 [INFO; Root]  cluster food
+2022-08-25 09:07:02.5277 [INFO; Root]  cluster food
+2022-08-25 09:07:02.6517 [INFO; Root]  cluster food
+2022-08-25 09:07:02.7602 [INFO; Root]  cluster food
+2022-08-25 09:07:02.8687 [INFO; Root]  applying damage
+2022-08-25 09:07:02.8687 [INFO; Root]  1
+2022-08-25 09:07:02.8842 [INFO; Root]  cluster food
+2022-08-25 09:07:02.9927 [INFO; Root]  cluster food
+2022-08-25 09:07:03.1167 [INFO; Root]  cluster food
+2022-08-25 09:07:03.3647 [INFO; Root]  applying damage
+2022-08-25 09:07:03.3647 [INFO; Root]  2
+2022-08-25 09:07:03.8608 [INFO; Root]  applying damage
+2022-08-25 09:07:03.8608 [INFO; Root]  1
+2022-08-25 09:07:04.6978 [INFO; Root]  applying damage
+2022-08-25 09:07:04.6978 [INFO; Root]  0
+2022-08-25 09:07:04.7908 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:05.7363 [INFO; Root]  applying damage
+2022-08-25 09:07:05.7363 [INFO; Root]  0
+2022-08-25 09:07:08.7279 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:08.8364 [INFO; Root]  collision Lost
+2022-08-25 09:07:12.1229 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:12.4170 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:14.1685 [INFO; Root]  cluster food
+2022-08-25 09:07:14.2770 [INFO; Root]  cluster food
+2022-08-25 09:07:14.4010 [INFO; Root]  cluster food
+2022-08-25 09:07:14.5095 [INFO; Root]  cluster food
+2022-08-25 09:07:14.6335 [INFO; Root]  cluster food
+2022-08-25 09:07:14.7420 [INFO; Root]  cluster food
+2022-08-25 09:07:14.8660 [INFO; Root]  cluster food
+2022-08-25 09:07:14.9900 [INFO; Root]  cluster food
+2022-08-25 09:07:15.0985 [INFO; Root]  cluster food
+2022-08-25 09:07:15.2230 [INFO; Root]  cluster food
+2022-08-25 09:07:15.3310 [INFO; Root]  cluster food
+2022-08-25 09:07:15.4550 [INFO; Root]  cluster food
+2022-08-25 09:07:15.5480 [INFO; Root]  server received request to spawn = 17
+2022-08-25 09:07:15.5480 [INFO; Root]  5
+2022-08-25 09:07:15.5485 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:15.5635 [INFO; Root]  cluster food
+2022-08-25 09:07:15.6875 [INFO; Root]  cluster food
+2022-08-25 09:07:15.7960 [INFO; Root]  cluster food
+2022-08-25 09:07:15.8270 [INFO; Root]  collision Lost
+2022-08-25 09:07:15.9200 [INFO; Root]  cluster food
+2022-08-25 09:07:15.9355 [INFO; Root]  server received request to spawn = 12
+2022-08-25 09:07:15.9355 [INFO; Root]  5
+2022-08-25 09:07:15.9360 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:16.0285 [INFO; Root]  cluster food
+2022-08-25 09:07:16.1525 [INFO; Root]  cluster food
+2022-08-25 09:07:16.2610 [INFO; Root]  cluster food
+2022-08-25 09:07:16.3695 [INFO; Root]  collision Lost
+2022-08-25 09:07:16.3850 [INFO; Root]  cluster food
+2022-08-25 09:07:16.4936 [INFO; Root]  cluster food
+2022-08-25 09:07:16.6176 [INFO; Root]  cluster food
+2022-08-25 09:07:16.7261 [INFO; Root]  cluster food
+2022-08-25 09:07:16.8501 [INFO; Root]  cluster food
+2022-08-25 09:07:16.9741 [INFO; Root]  cluster food
+2022-08-25 09:07:17.0826 [INFO; Root]  cluster food
+2022-08-25 09:07:17.2066 [INFO; Root]  cluster food
+2022-08-25 09:07:17.4701 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:17.7491 [INFO; Root]  collision Lost
+2022-08-25 09:07:18.3841 [INFO; Root]  collision Lost
+2022-08-25 09:07:18.5236 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:07:19.0351 [INFO; Root]  collision Lost
+2022-08-25 09:07:19.3296 [INFO; Root]  collision Lost
+2022-08-25 09:07:19.8721 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:07:20.5386 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:20.8022 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:07:21.4222 [INFO; Root]  applying damage
+2022-08-25 09:07:21.4222 [INFO; Root]  4
+2022-08-25 09:07:21.5157 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:07:22.1662 [INFO; Root]  applying damage
+2022-08-25 09:07:22.1662 [INFO; Root]  14
+2022-08-25 09:07:22.2282 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:22.4142 [INFO; Root]  collision Lost
+2022-08-25 09:07:22.4762 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:07:22.9257 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:07:23.1432 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:07:23.1737 [INFO; Root]  applying damage
+2022-08-25 09:07:23.1737 [INFO; Root]  13
+2022-08-25 09:07:23.5612 [INFO; Root]  applying damage
+2022-08-25 09:07:23.5617 [INFO; Root]  12
+2022-08-25 09:07:23.7937 [INFO; Root]  applying damage
+2022-08-25 09:07:23.7937 [INFO; Root]  11
+2022-08-25 09:07:23.8557 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:24.3982 [INFO; Root]  applying damage
+2022-08-25 09:07:24.3982 [INFO; Root]  10
+2022-08-25 09:07:24.5997 [INFO; Root]  applying damage
+2022-08-25 09:07:24.5997 [INFO; Root]  9
+2022-08-25 09:07:25.1733 [INFO; Root]  applying damage
+2022-08-25 09:07:25.1738 [INFO; Root]  8
+2022-08-25 09:07:25.3593 [INFO; Root]  applying damage
+2022-08-25 09:07:25.3593 [INFO; Root]  7
+2022-08-25 09:07:25.9948 [INFO; Root]  applying damage
+2022-08-25 09:07:25.9953 [INFO; Root]  6
+2022-08-25 09:07:26.1653 [INFO; Root]  applying damage
+2022-08-25 09:07:26.1653 [INFO; Root]  5
+2022-08-25 09:07:26.8008 [INFO; Root]  applying damage
+2022-08-25 09:07:26.8013 [INFO; Root]  4
+2022-08-25 09:07:26.9713 [INFO; Root]  applying damage
+2022-08-25 09:07:26.9713 [INFO; Root]  3
+2022-08-25 09:07:27.6383 [INFO; Root]  applying damage
+2022-08-25 09:07:27.6383 [INFO; Root]  2
+2022-08-25 09:07:27.7928 [INFO; Root]  applying damage
+2022-08-25 09:07:27.7928 [INFO; Root]  1
+2022-08-25 09:07:28.4283 [INFO; Root]  applying damage
+2022-08-25 09:07:28.4288 [INFO; Root]  0
+2022-08-25 09:07:29.1879 [INFO; Root]  cluster food
+2022-08-25 09:07:29.2964 [INFO; Root]  cluster food
+2022-08-25 09:07:29.4204 [INFO; Root]  cluster food
+2022-08-25 09:07:29.5289 [INFO; Root]  cluster food
+2022-08-25 09:07:29.6529 [INFO; Root]  cluster food
+2022-08-25 09:07:29.7614 [INFO; Root]  cluster food
+2022-08-25 09:07:29.8854 [INFO; Root]  cluster food
+2022-08-25 09:07:29.9939 [INFO; Root]  cluster food
+2022-08-25 09:07:30.1179 [INFO; Root]  cluster food
+2022-08-25 09:07:30.2264 [INFO; Root]  cluster food
+2022-08-25 09:07:30.3504 [INFO; Root]  cluster food
+2022-08-25 09:07:30.4589 [INFO; Root]  cluster food
+2022-08-25 09:07:30.5829 [INFO; Root]  cluster food
+2022-08-25 09:07:30.6914 [INFO; Root]  cluster food
+2022-08-25 09:07:30.8154 [INFO; Root]  cluster food
+2022-08-25 09:07:30.9394 [INFO; Root]  cluster food
+2022-08-25 09:07:31.0479 [INFO; Root]  cluster food
+2022-08-25 09:07:31.1719 [INFO; Root]  cluster food
+2022-08-25 09:07:31.2804 [INFO; Root]  cluster food
+2022-08-25 09:07:31.4044 [INFO; Root]  cluster food
+2022-08-25 09:07:31.5129 [INFO; Root]  cluster food
+2022-08-25 09:07:38.4416 [INFO; Root]  Client(id = 1, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-25 09:07:38.4421 [INFO; Root]  Client(id = 2, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-25 09:07:38.4731 [INFO; Root]  Player 1 left
+2022-08-25 09:07:38.4751 [INFO; Root]  Player 2 left
+2022-08-25 09:07:41.9987 [INFO; Root]  Client(id = 3, address = 127.0.0.1) connected
+2022-08-25 09:07:41.9987 [DEBUG; Root]  Client(id = 3, address = 127.0.0.1) model validated
+2022-08-25 09:07:41.9992 [DEBUG; Root]  Client(id = 3, address = 127.0.0.1) authenticated
+2022-08-25 09:07:42.0222 [INFO; Root]  Player False joined
+2022-08-25 09:07:42.8967 [INFO; Root]  Client(id = 4, address = 127.0.0.1) connected
+2022-08-25 09:07:42.8972 [DEBUG; Root]  Client(id = 4, address = 127.0.0.1) model validated
+2022-08-25 09:07:42.8977 [DEBUG; Root]  Client(id = 4, address = 127.0.0.1) authenticated
+2022-08-25 09:07:42.9057 [INFO; Root]  Player False joined
+2022-08-25 09:07:49.2453 [INFO; Root]  20
+2022-08-25 09:07:49.2458 [INFO; Root]  20
+2022-08-25 09:07:53.8799 [INFO; Root]  server received request to spawn = 5
+2022-08-25 09:07:53.8799 [INFO; Root]  5
+2022-08-25 09:07:53.8809 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:07:54.5619 [INFO; Root]  collision Lost
+2022-08-25 09:08:02.8701 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:08:03.8622 [INFO; Root]  collision Lost
+2022-08-25 09:08:04.3892 [INFO; Root]  cluster food
+2022-08-25 09:08:04.4977 [INFO; Root]  cluster food
+2022-08-25 09:08:04.6217 [INFO; Root]  cluster food
+2022-08-25 09:08:04.7302 [INFO; Root]  cluster food
+2022-08-25 09:08:04.8542 [INFO; Root]  cluster food
+2022-08-25 09:08:04.9627 [INFO; Root]  cluster food
+2022-08-25 09:08:05.0867 [INFO; Root]  cluster food
+2022-08-25 09:08:05.1952 [INFO; Root]  cluster food
+2022-08-25 09:08:05.3192 [INFO; Root]  cluster food
+2022-08-25 09:08:05.4277 [INFO; Root]  cluster food
+2022-08-25 09:08:05.5517 [INFO; Root]  cluster food
+2022-08-25 09:08:05.6602 [INFO; Root]  cluster food
+2022-08-25 09:08:05.7842 [INFO; Root]  cluster food
+2022-08-25 09:08:05.8927 [INFO; Root]  cluster food
+2022-08-25 09:08:06.0167 [INFO; Root]  cluster food
+2022-08-25 09:08:06.1252 [INFO; Root]  cluster food
+2022-08-25 09:08:06.2492 [INFO; Root]  cluster food
+2022-08-25 09:08:06.3577 [INFO; Root]  cluster food
+2022-08-25 09:08:06.4817 [INFO; Root]  cluster food
+2022-08-25 09:08:06.6057 [INFO; Root]  cluster food
+2022-08-25 09:08:06.7142 [INFO; Root]  cluster food
+2022-08-25 09:08:06.8382 [INFO; Root]  cluster food
+2022-08-25 09:08:06.9467 [INFO; Root]  cluster food
+2022-08-25 09:08:07.0707 [INFO; Root]  cluster food
+2022-08-25 09:08:07.1792 [INFO; Root]  cluster food
+2022-08-25 09:08:07.3032 [INFO; Root]  cluster food
+2022-08-25 09:08:07.4118 [INFO; Root]  cluster food
+2022-08-25 09:08:07.5358 [INFO; Root]  cluster food
+2022-08-25 09:08:07.6443 [INFO; Root]  cluster food
+2022-08-25 09:08:07.7683 [INFO; Root]  cluster food
+2022-08-25 09:08:07.8768 [INFO; Root]  cluster food
+2022-08-25 09:08:08.0008 [INFO; Root]  cluster food
+2022-08-25 09:08:08.1093 [INFO; Root]  cluster food
+2022-08-25 09:08:08.2333 [INFO; Root]  cluster food
+2022-08-25 09:08:08.3418 [INFO; Root]  cluster food
+2022-08-25 09:08:08.4658 [INFO; Root]  cluster food
+2022-08-25 09:08:08.5743 [INFO; Root]  cluster food
+2022-08-25 09:08:08.6983 [INFO; Root]  cluster food
+2022-08-25 09:08:10.6668 [INFO; Root]  Collision StartedTrue   True
+2022-08-25 09:08:11.1008 [INFO; Root]  collision Lost
+2022-08-25 09:08:11.5658 [INFO; Root]  server received request to spawn = 20
+2022-08-25 09:08:11.5658 [INFO; Root]  10
+2022-08-25 09:08:11.5663 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:08:11.5663 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:08:12.6664 [INFO; Root]  Received 41
+2022-08-25 09:08:14.5419 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:08:14.6504 [INFO; Root]  Received 42
+2022-08-25 09:08:14.8984 [INFO; Root]  Received 43
+2022-08-25 09:08:14.9139 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:08:15.1929 [INFO; Root]  collision Lost
+2022-08-25 09:08:16.4640 [INFO; Root]  Reactor.ServerEntity
+2022-08-25 09:08:16.9910 [INFO; Root]  Received 44
+2022-08-25 09:08:17.5335 [INFO; Root]  Collision StartedTrue   False
+2022-08-25 09:08:17.7960 [INFO; Root]  Client(id = 3, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-25 09:08:17.7970 [INFO; Root]  Player 3 left
+2022-08-25 09:08:19.3935 [INFO; Root]  cluster food
+2022-08-25 09:08:19.5175 [INFO; Root]  cluster food
+2022-08-25 09:08:19.6260 [INFO; Root]  cluster food
+2022-08-25 09:08:19.7440 [INFO; Root]  Client(id = 4, address = 127.0.0.1) disconnected: 2-End of file
+2022-08-25 09:08:19.7501 [INFO; Root]  Player 4 left
+2022-08-25 09:08:19.7520 [INFO; Root]  cluster food
+2022-08-25 09:08:19.8585 [INFO; Root]  cluster food
+2022-08-25 09:08:19.9825 [INFO; Root]  cluster food
+2022-08-25 09:08:20.0911 [INFO; Root]  cluster food
+2022-08-25 09:08:20.2151 [INFO; Root]  cluster food
+2022-08-25 09:08:20.3391 [INFO; Root]  cluster food
+2022-08-25 09:08:20.4476 [INFO; Root]  cluster food
+2022-08-25 09:08:20.5716 [INFO; Root]  cluster food
+2022-08-25 09:08:20.6801 [INFO; Root]  cluster food
+2022-08-25 09:08:20.8041 [INFO; Root]  cluster food
+2022-08-25 09:08:20.9126 [INFO; Root]  cluster food
+2022-08-25 09:08:21.0359 [INFO; Root]  cluster food
+2022-08-25 09:08:21.1427 [INFO; Root]  cluster food
+2022-08-25 09:08:21.2653 [INFO; Root]  cluster food
+2022-08-25 09:08:21.3881 [INFO; Root]  cluster food
+2022-08-25 09:08:21.4956 [INFO; Root]  cluster food
+2022-08-25 09:08:21.6188 [INFO; Root]  cluster food
+2022-08-25 09:08:21.7264 [INFO; Root]  cluster food
+2022-08-25 09:08:21.8493 [INFO; Root]  cluster food
+2022-08-25 09:08:21.9571 [INFO; Root]  cluster food
+2022-08-25 09:08:22.0808 [INFO; Root]  cluster food

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KS.Reactor;
+using KS.Reactor.Client;
 using KS.Reactor.Client.Unity;
 using TMPro;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ public class Connect : MonoBehaviour
         ksReactor.InputManager.BindAxis(Axes.Y, "Vertical");
         ksReactor.InputManager.BindButton(Buttons.SpawnCollector, "Fire3");
         GameEvents.current.Disconnected += matchLeft;
+        
     }
 
     // Run when the game starts.
@@ -63,7 +65,6 @@ public class Connect : MonoBehaviour
             // Check if rooms are not current matches
             foreach (ksRoomInfo room in roomList)
             {
-                print(room.PublicTags);
                 if (!room.PublicTags.Contains("InMatch"))
                 {
                     viableRooms.Add(room);
@@ -71,19 +72,24 @@ public class Connect : MonoBehaviour
             }
             if (viableRooms.Count > 0)
             {
-                ConnectToServer(viableRooms[0]);
+                ksRoomInfo selectedRoom = viableRooms[0];
+#if UNITY_WEBGL && !UNITY_EDITOR
+            // WebGL rooms connect securely using websockets on port 451
+            selectedRoom.Port = 451;
+#endif
+                ConnectToServer(selectedRoom);
             }
             else
             {
                 // Let user know there is a match in progress that needs to finish first
                 print("Match in progress");
+                GameEvents.current.MatchInProgress?.Invoke();
 
             }
         }
         else
         {
             ksLog.Warning("No servers found.");
-            print("No servers found");
         }
 
 
@@ -93,6 +99,11 @@ public class Connect : MonoBehaviour
     // Connect to a server whose location is described in a ksRoomInfo object.
     private void ConnectToServer(ksRoomInfo roomInfo)
     {
+        if (roomInfo.PublicTags.Contains("InMatch"))
+        {
+            GameEvents.current.MatchInProgress?.Invoke();
+            return;
+        }
         m_room = new ksRoom(roomInfo);
 
         // Register an event handler that will be called when a connection attempt completes.
@@ -105,7 +116,9 @@ public class Connect : MonoBehaviour
         {
             UserName = "NoName";
         }
-
+#if UNITY_WEBGL && !UNITY_EDITOR
+            m_room.Protocol = ksConnection.Protocols.WEBSOCKETS;
+#endif
         m_room.Connect(UserName);
     }
 

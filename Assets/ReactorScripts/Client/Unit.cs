@@ -6,6 +6,7 @@ using KS.Reactor.Client.Unity;
 using KS.Reactor.Client;
 using KS.Reactor;
 using Cinemachine;
+using UnityEngine.Assertions;
 
 public class Unit : ksEntityScript
 {
@@ -13,9 +14,11 @@ public class Unit : ksEntityScript
     public UsernameLabel usernameLabel;
 
     private SpriteRenderer sprite;
+    [HideInInspector]
     public Color primaryColor = new Color();
+    [HideInInspector]
     public Color secondaryColor = new Color();
-
+    [HideInInspector]
     public Color previousColor = new();
 
 
@@ -23,7 +26,9 @@ public class Unit : ksEntityScript
     {
         Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
         sprite = GetComponent<SpriteRenderer>();
+        Assert.AreNotEqual("", Entity.Properties[Prop.TEAMID].String);
         IdentifyTeam(Entity.Properties[Prop.TEAMID].UInt);
+
     }
 
     private void Update()

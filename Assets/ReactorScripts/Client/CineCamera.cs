@@ -16,4 +16,5 @@ public class CineCamera : MonoBehaviour
         cine.LookAt = T;
         cine.Follow = T;
     }
+
 }

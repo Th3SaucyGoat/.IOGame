@@ -72,7 +72,7 @@ public class MainMenuUI : MonoBehaviour
         playerReadyLabelContainer.SetActive(false);
     }
 
-    private void MatchInProgress()
+    public void MatchInProgress()
     {
         redMenuText.GetComponent<MatchInProgress>().ActivateWarning();
     }

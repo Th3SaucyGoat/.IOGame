@@ -36,17 +36,18 @@ mergeInto(LibraryManager.library, {
             },
             
             HandleOpen: function(event) {
-                Runtime.dynCall('vi', this.OnConnect, [this.id]);
+                Module['dynCall_vi'](this.OnConnect, this.id);
+
             },
                 
             HandleClose: function(event) {
-                Runtime.dynCall('vii', this.OnDisconnect, [this.id, event.code]);
+                Module['dynCall_vii'](this.OnDisconnect, this.id, event.code);
             },
                 
             HandleMessage: function(event) {
                 this.buffers.push(new Uint8Array(event.data));
                 this.bufferTotal += event.data.byteLength;
-                Runtime.dynCall('vii', this.OnMessage, [this.id, this.bufferTotal]);
+                Module['dynCall_vii'](this.OnMessage, this.id, this.bufferTotal);
             },
             
             Read: function(data, offset, count) {

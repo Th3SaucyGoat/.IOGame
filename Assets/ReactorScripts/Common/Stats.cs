@@ -7,12 +7,12 @@ using System.Collections.Generic;
 public class Stats
 {
     // Keep naming convention of these variables the same
-    public static int CollectorCost = 0;
+    public static int CollectorCost = 5;
     public static int CollectorMaxHealth = 5;
     public string CollectorButton = "1"; // Temporary
     
-    public static int ShooterCost = 0;
-    public static int ShooterMaxHealth = 5;
+    public static int ShooterCost = 15;
+    public static int ShooterMaxHealth = 10;
     public string ShooterButton = "2";
 
     public static int HivemindMaxHealth = 20;

@@ -92,9 +92,7 @@ public class CollectorServer : ksServerEntityScript , IFoodPickup , IMovement , 
         Entity.OnOverlapEnd -= OnOverlapExit;
         Entity.OnCollision -= OnCollisionStart;
         Entity.OnContactUpdate -= OnCollisionUpdate;
-
-
-
+        Entity.OnContactLost += OnCollisionLost;
     }
 
     // Called during the update cycle

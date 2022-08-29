@@ -11,10 +11,16 @@ public class ServerRoom : ksServerRoomScript
     private float[] yBounds = new float[] { -22f, 7f };
 
     private ksRandom random;
+
     private Timer foodTimer;
     private Timer clusterfoodTimer;
-
+    private Timer clusterfoodDelay;
     private Timer matchStartTimer;
+
+    private int clusterNum;
+    private int currentclusterNum;
+    private ksVector2 clusterPos;
+
 
     private delegate void OnTimerEnd();
 
@@ -39,9 +45,10 @@ public class ServerRoom : ksServerRoomScript
 
         random = new ksRandom();
 
-        foodTimer = new Timer(0.5f, SpawnTimerTimeout, true);
+        foodTimer = new Timer(0.75f, SpawnTimerTimeout, true);
         clusterfoodTimer = new Timer(15.0f, ClusterSpawnFood, true);
         matchStartTimer = new Timer(5.0f, InitiateMatch, false);
+        clusterfoodDelay = new Timer(0.1f, clusterfoodDelayTimeout, false);
     }
 
     // Cleanup the script. Called once when the script is unloaded.
@@ -83,6 +90,7 @@ public class ServerRoom : ksServerRoomScript
     private void Update()
     {
         foodTimer.Tick(Time.Delta);
+        clusterfoodDelay.Tick(Time.Delta);
         clusterfoodTimer.Tick(Time.Delta);
         matchStartTimer.Tick(Time.Delta);
     }
@@ -93,7 +101,7 @@ public class ServerRoom : ksServerRoomScript
         // Spawn in a hivemind for all players. Set player control to only their hivemind. Set unique team Ids.
         foreach (ksIServerPlayer p in Room.Players)
         {
-            ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", new ksVector2(-8f, -7f));
+            ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", FindRandomPosition());
             activeTeams.Add(teamId);
             p.Properties[Prop.TEAMID] = teamId;
             p.Properties[Prop.HIVEMINDID] = hivemind.Id;
@@ -105,9 +113,9 @@ public class ServerRoom : ksServerRoomScript
         }
 
         // Initial food spawn in
-        for (int i = 0; i < (50 * Room.ConnectedPlayerCount) + 100; i++)
+        for (int i = 0; i < (25 * Room.ConnectedPlayerCount) + 50; i++)
         {
-            //SpawnFood(FindRandomPosition());
+            SpawnFood(FindRandomPosition());
         }
         foodTimer.Start();
         clusterfoodTimer.Start();
@@ -149,7 +157,7 @@ public class ServerRoom : ksServerRoomScript
                 break;
             }
         }
-        if (initiateMatch && connectedPlayers.Count > 0)
+        if (initiateMatch && connectedPlayers.Count > 1)
         {
             // Start match countdown
             Room.PublicTags.Add("InMatch");
@@ -163,35 +171,45 @@ public class ServerRoom : ksServerRoomScript
         SpawnFood(FindRandomPosition());
     }
 
-    private void SpawnFood(ksVector3 pos)
+    private void SpawnFood(ksVector2 pos)
     {
         Room.SpawnEntity("Food", pos);
     }
 
     private void ClusterSpawnFood()
     {
-        int num = 0;
-        int amount = random.Next(20, 40);
-        ksVector3 clusterPos = FindRandomPosition();
+        currentclusterNum = 0;
+        clusterNum = random.Next(30, 50);
+        clusterPos = FindRandomPosition();
+        clusterfoodDelay.Start();
+    }
+
+    private void clusterfoodDelayTimeout()
+    {
+        ksLog.Info("cluster food");
         float MaxRadius = 5f;
-        
-        while (num < amount)
+        // Find random angle and radius
+        float angle = random.NextFloat(0, 360);
+        float radius = random.NextFloat(0, MaxRadius);
+        // Convert to position
+        ksVector2 pos = new ksVector2(ksMath.Cos(angle) * radius, ksMath.Sin(angle) * radius) + clusterPos;
+        // Spawn food at that position
+        SpawnFood(pos);
+        currentclusterNum++;
+        // Create a slight delay between next while iteration
+        if (currentclusterNum >= clusterNum)
         {
-            // Find random angle and radius
-            float angle = random.NextFloat(0, 360);
-            float radius = random.NextFloat(0, MaxRadius);
-            // Convert to position
-            ksVector3 pos = new ksVector3(ksMath.Cos(angle) * radius, ksMath.Sin(angle) * radius, 0f) + clusterPos;
-            // Spawn food at that position
-            SpawnFood(pos);
-            // Create a slight delay between next while iteration
-            num++;
+            clusterfoodDelay.Stop();
+        }
+        else
+        {
+            clusterfoodDelay.Start();
         }
     }
 
-    private ksVector3 FindRandomPosition()
+    private ksVector2 FindRandomPosition()
     {
-        return new ksVector3(random.NextFloat(xBounds[0], xBounds[1]), random.NextFloat(yBounds[0], yBounds[1]), 0f);
+        return new ksVector2(random.NextFloat(xBounds[0], xBounds[1]), random.NextFloat(yBounds[0], yBounds[1]));
 
     }
 

@@ -114,26 +114,9 @@
 						"name": "HivemindServer"
 					},
 					{
-						"name": ".ksSphereCollider",
-						"params": {
-							"shape id": 1,
-							"material": null,
-							"filter": null,
-							"offset": [
-								0.0,
-								0.0,
-								0.0
-							],
-							"trigger flag": false,
-							"simulation flag": true,
-							"query flag": true,
-							"enabled": true
-						}
-					},
-					{
 						"name": ".ksBaseRigidBody",
 						"params": {
-							"mass": 1000.0,
+							"mass": 500.0,
 							"use gravity": false,
 							"drag": 1.0,
 							"collision detection": 1,
@@ -158,6 +141,23 @@
 								0.0
 							],
 							"trigger flag": true,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 1,
+							"material": null,
+							"filter": null,
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": false,
 							"simulation flag": true,
 							"query flag": true,
 							"enabled": true
@@ -317,7 +317,7 @@
 			"name": "/ksCollisionFilter",
 			"fields": {
 				"m_group": 2,
-				"m_notify": 1,
+				"m_notify": 0,
 				"m_collide": 58
 			}
 		},

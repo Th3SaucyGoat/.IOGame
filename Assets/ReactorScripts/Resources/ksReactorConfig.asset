@@ -22,7 +22,7 @@ MonoBehaviour:
     AutoRebuildServerRuntime: 1
   Build:
     LastBuildVersion: 0.10.0
-    ImageBinding: 13236.8022.1607
+    ImageBinding: 13236.8022.1623
     APIKey: 
     APIClientSecret: 
     APIServerSecret: 

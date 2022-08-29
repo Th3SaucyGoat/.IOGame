@@ -65,7 +65,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         Entity.OnDestroy += OnDestroy;
         food = 0;
         debugTimer = new Timer(2.0f, OnDebugTimeout, false);
-        debugTimer.Start();
+        //debugTimer.Start();
     }
 
     public override void Detached()
