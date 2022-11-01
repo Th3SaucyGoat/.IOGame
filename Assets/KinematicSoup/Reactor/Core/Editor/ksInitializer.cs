@@ -44,11 +44,27 @@ namespace KS.Reactor.Client.Unity.Editor
         private static void Init()
         {
             EditorApplication.update -= Init;
-            ksPublishService.Get().Start();
             CreateReactorConfig();
+
+            // Detect if we are in a development environment
+            if (File.Exists(Application.dataPath + "/KSSource/Reactor.asmdef"))
+            {
+                if (ksEditorUtils.SetDefineSymbol("KS_DEVELOPMENT"))
+                {
+                    return;
+                }
+            }
+            else if (ksEditorUtils.ClearDefineSymbol("KS_DEVELOPMENT"))
+            {
+                return;
+            }
+
+            ksPublishService.Get().Start();
             PrioritizeUpdate();
             UpdateVersion();
             new ksIconManager().SetScriptIcons();
+            ksServerProjectUpdater.Instance.GenerateMissingAsmDefs();
+            ksPaths.FindCommonAndServerFolders();
             ksServerProjectWatcher.Get().Run();
             ksScriptGenerator.Get().LoadAttachments();
             
@@ -81,16 +97,6 @@ namespace KS.Reactor.Client.Unity.Editor
             if (window != null)
             {
                 window.Repaint();
-            }
-
-            // Detect if we are in a development environment
-            if (File.Exists(Application.dataPath + "/KSSource/Reactor.asmdef"))
-            {
-                ksEditorUtils.SetDefineSymbol("KS_DEVELOPMENT");
-            }
-            else
-            {
-                ksEditorUtils.ClearDefineSymbol("KS_DEVELOPMENT");
             }
         }
 
@@ -144,36 +150,47 @@ namespace KS.Reactor.Client.Unity.Editor
                 }
                 if (isValid)
                 {
-                    if (version < new ksVersion(0, 9, 16, 0))
-                    {
-                        DisplayUpgradeMessage("Cannot automatically upgrade projects older than " +
-                            "0.9.17. You should upgrade to 0.9.17+ before upgrading to 0.10.", true);
-                        return;
-                    }
-
                     if (version < new ksVersion(0, 10, 0, 0))
                     {
-                        ksReactorUpgrade_0_10_0.Upgrade();
-                        DisplayUpgradeMessage("Upgrade to 0.10.0 complete. See logs for details");
+                        DisplayUpgradeMessage("Cannot automatically upgrade projects older than " +
+                            "0.10.0. You should upgrade to 0.10.0 before upgrading further.", true);
                     }
-
-                    if (version < ksVersion.Current)
+                    else
                     {
-                        DeleteMarkedFiles();
-                        ksLog.Info(LOG_CHANNEL, "This project was using an old Reactor version " + version +
-                            ". Your project has been successfully updated to " + ksVersion.Current);
-                    }
-                    else if (version > ksVersion.Current)
-                    {
-                        if (!EditorUtility.DisplayDialog(
-                            "Reactor Project Version Mismatch",
-                            "This project is using a newer Reactor version (" + version + 
-                            ") than the current version (" + ksVersion.Current + 
-                            ") and may be incompatible. Continue anyway?",
-                            "OK",
-                            "Cancel"))
+                        if (version < new ksVersion(0, 10, 1, 0))
                         {
-                            EditorApplication.Exit(0);
+                            // Remove the old KSReactor-Editor.dll
+                            ksPathUtils.Delete(ksPaths.ReactorRoot + "Core/Editor/KSReactor-Editor.dll", true,
+                                ksPathUtils.LoggingFlags.ALL);
+                            ksPathUtils.Delete(ksPaths.ReactorRoot + "Core/Editor/KSReactor-Editor.xml", true,
+                                ksPathUtils.LoggingFlags.ALL);
+                            // Move server runtime folder from ReactorScripts/Editor/Server to ReactorScripts/Server
+                            ksPathUtils.Move(ksPaths.ReactorScripts + "Editor/Server", ksPaths.ServerScripts, false,
+                                ksPathUtils.LoggingFlags.ALL);
+                            ksPathUtils.Delete(ksPaths.ReactorScripts + "Editor", false, ksPathUtils.LoggingFlags.ALL);
+                            // Rebuild the server runtime, and regenerate project files and asmdefs.
+                            new ksConfigWriter().Build(false, true, false, ksServerScriptCompiler.Configurations.LOCAL_RELEASE, true);
+                            DisplayUpgradeMessage("Upgrade to 0.10.1 complete. See logs for details");
+                        }
+
+                        if (version < ksVersion.Current)
+                        {
+                            DeleteMarkedFiles();
+                            ksLog.Info(LOG_CHANNEL, "This project was using an old Reactor version " + version +
+                                ". Your project has been successfully updated to " + ksVersion.Current);
+                        }
+                        else if (version > ksVersion.Current)
+                        {
+                            if (!EditorUtility.DisplayDialog(
+                                "Reactor Project Version Mismatch",
+                                "This project is using a newer Reactor version (" + version +
+                                ") than the current version (" + ksVersion.Current +
+                                ") and may be incompatible. Continue anyway?",
+                                "OK",
+                                "Cancel"))
+                            {
+                                EditorApplication.Exit(0);
+                            }
                         }
                     }
                 }
@@ -186,7 +203,7 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <summary>
         /// Create a <see cref="ksReactorConfig"/> asset if one does not already exist.
         /// </summary>
-        private static void CreateReactorConfig()
+        public static void CreateReactorConfig()
         {
             if (ksReactorConfig.Instance == null)
             {
@@ -251,112 +268,6 @@ namespace KS.Reactor.Client.Unity.Editor
                 ksLog.Error(LOG_CHANNEL, "Error deleting old files.", e);
             }
 #endif
-        }
-
-        /// <summary>
-        /// Upgrades a project to version 0.9.13 from a prior version of Reactor.
-        /// - Moves developer Reactor scripts to Assets/ReactorScripts.
-        /// - Renames namespace 'KS.Reactor.Client.Unity.Adaptors' to 'KS.Reactor.Client.Unity' in all scripts.
-        /// - Updates file ids/guids in scenes, prefabs, and assets to refer to open-source Reactor scripts.
-        /// - Deletes old unused Reactor dlls."
-        /// </summary>
-        private static bool UpgradeTo0_9_13()
-        {
-            SerializationMode serializationMode = EditorSettings.serializationMode;
-            if (serializationMode != SerializationMode.ForceText)
-            {
-                // We need .meta files to be serialized as text so we can parse and update them.
-                // Setting this forces the files to reserialize
-                EditorSettings.serializationMode = SerializationMode.ForceText;
-            }
-
-            ksPathUtils.LoggingFlags logging = ksPathUtils.LoggingFlags.ALL;
-            string reactorRoot = Application.dataPath + "/KinematicSoup/Reactor/";
-            ksPathUtils.Move(reactorRoot + "Client", ksPaths.ClientScripts, true, logging);
-            ksPathUtils.Move(reactorRoot + "Common", ksPaths.CommonScripts, true, logging);
-            ksPathUtils.Move(reactorRoot + "Editor/ServerRuntime", ksPaths.ServerRuntime, true, logging);
-            ksPathUtils.Move(reactorRoot + "Proxies", ksPaths.Proxies, true, logging);
-            ksPathUtils.Move(reactorRoot + "Resources", ksPaths.ReactorScripts + "Resources", true, logging);
-            string icons = reactorRoot + "Editor/Icons/";
-            ksPathUtils.Delete(icons + "ConeCollider.png", false, logging);
-            ksPathUtils.Delete(icons + "CylinderCollider.png", false, logging);
-            ksPathUtils.Delete(icons + "KSClientEntityScript.png", false, logging);
-            ksPathUtils.Delete(icons + "KSPlayerEntityScript.png", false, logging);
-            ksPathUtils.Delete(icons + "KSRoomEntitySript.png", false, logging);
-            ksPathUtils.Delete(icons + "KSEntity.png", false, logging);
-            ksPathUtils.Delete(icons + "KSRoomType.png", false, logging);
-            ksPathUtils.Delete(icons + "KSServerEntityScript.png", false, logging);
-            ksPathUtils.Delete(icons + "KSServerPlayerScript.png", false, logging);
-            ksPathUtils.Delete(icons + "KSServerRoomScript.png", false, logging);
-            ksPathUtils.Delete(icons + "Offline.png", false, logging);
-            ksPathUtils.Delete(icons + "Online.png", false, logging);
-            ksPathUtils.Delete(icons + "Reactor.png", false, logging);
-            ksPathUtils.Delete(icons, false, logging);
-            ksPathUtils.Delete(reactorRoot + "Scripts/ksPlayerAPIExtensions.cs", false, logging);
-            string newSampleConnect = reactorRoot + "Examples/ksSampleConnect.cs";
-            string oldSampleConnect = reactorRoot + "Scripts/Samples/ksSampleConnect.cs";
-            if (File.Exists(newSampleConnect))
-            {
-                ksPathUtils.Delete(oldSampleConnect, false, logging);
-            }
-            else
-            {
-                ksPathUtils.Move(oldSampleConnect, newSampleConnect, false, logging);
-            }
-            ksPathUtils.Delete(reactorRoot + "Scripts/Samples", false, logging);
-            ksPathUtils.Delete(reactorRoot + "Scripts", false, logging);
-            ksPathUtils.Delete(reactorRoot + "KSReactor.dll", false, logging);
-            ksPathUtils.Delete(reactorRoot + "KSReactor.WebGL.dll", false, logging);
-
-            ksScriptGuidUpdater guidUpdater = new ksScriptGuidUpdater();
-            // Guids for ksPhysicsSettings
-            guidUpdater.AddReplacement(
-              1175044150, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "dc28043044ad1994785f539458df6e85");
-            // Guids for ksRoomType
-            guidUpdater.AddReplacement(
-             -1169119406, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "27f9fafc72047e9419604f25afe390b0");
-            // Guids for ksEntityComponent
-            guidUpdater.AddReplacement(
-                11043901, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "ee06f2f9480b8674880fcaa5a0eaa08d");
-            // Guids for ksCylinderCollider
-            guidUpdater.AddReplacement(
-              -143262860, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "074d4b57371816c4f917173c65f5e89a");
-            // Guids for ksConeCollider
-            guidUpdater.AddReplacement(
-               -74257297, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "c6b6e7c35aa2d4b41bf2fbc0b9b6ed83");
-            // Guids for ksReactorConfig
-            guidUpdater.AddReplacement(
-               699804721, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "092fd99ff970176479d0e3364aa61c0c");
-            // Guids for ksCollisionFilterAsset
-            guidUpdater.AddReplacement(
-              -214489396, "2508e5f770cc93b47b6da4fcac48c53e",
-                11500000, "af7c2b923e0887143a8f52e243a38955");
-            guidUpdater.ReplaceAll();
-
-            ksScriptUpdater scriptUpdater = new ksScriptUpdater();
-            scriptUpdater.AddReplacement(@"KS\.Reactor\.Client\.Unity\.Adaptors", "KS.Reactor.Client.Unity");
-            scriptUpdater.ExcludePath(Application.dataPath + "/KinematicSoup");
-            scriptUpdater.ReplaceAll();
-
-            if (serializationMode != SerializationMode.ForceText)
-            {
-                // Restore serialization mode
-                EditorSettings.serializationMode = serializationMode;
-            }
-
-            DisplayUpgradeMessage("- Moved developer Reactor scripts to Assets/ReactorScripts.\n" +
-                "- Renamed namespace 'KS.Reactor.Client.Unity.Adaptors' to 'KS.Reactor.Client.Unity' in all scripts.\n" +
-                "- Updated file ids/guids in scenes, prefabs, and assets to refer to open-source Reactor scripts.\n" +
-                "- Deleted old unused Reactor dlls.\n" +
-                "See logs for more details.");
-
-            return true;
         }
     }
 }

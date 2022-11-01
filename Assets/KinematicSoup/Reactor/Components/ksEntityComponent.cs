@@ -38,6 +38,11 @@ namespace KS.Reactor.Client.Unity
         [SerializeField]
         private bool m_isPermanent = true;
 
+        [Tooltip("Default sync group the entity will be placed in. This entity will not be synced to players who "+
+            "are not in the same sync group. Sync group 0 entities are always synced to all players.")]
+        [SerializeField]
+        public uint SyncGroup = 0;
+
         /// <summary>Collision filter for entity groups, notifications, and interactions.</summary>
         [Tooltip("Collision filter for entity groups, notifications, and interactions.")]
         [ksAsset]
@@ -103,16 +108,6 @@ namespace KS.Reactor.Client.Unity
         /// <summary>Entity Id</summary>
         [ksReadOnly]
         public uint EntityId = 0;
-
-        /// <summary>Center of mass</summary>
-        [HideInInspector]
-        [Obsolete("Use Entity.RigidBody.CenterOfMass instead.")]
-        public Vector3 CenterOfMass = new Vector3();
-
-        /// <summary>Physics Enabled</summary>
-        [HideInInspector]
-        [Obsolete("Check if the entity has a rigid body instead.")]
-        public bool PhysicsEnabled = false;
 
         /// <summary>Entity Type</summary>
         [HideInInspector]

@@ -2,6 +2,7 @@
 13|*ReactorScripts/ksCollisionFilters/EntityLocator
 2|*ReactorScripts/ksCollisionFilters/Food
 6|*ReactorScripts/ksCollisionFilters/FoodLocator
+14|*ReactorScripts/ksCollisionFilters/FoodTesting
 4|*ReactorScripts/ksCollisionFilters/Hivemind
 7|*ReactorScripts/ksCollisionFilters/Obstacles
 12|*ReactorScripts/ksCollisionFilters/Projectile

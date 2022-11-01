@@ -37,7 +37,7 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <param name="instanceId">Asset instance ID</param>
         /// <param name="line">Line number</param>
         /// <returns>True if the asset instance was opened.</returns>
-        [OnOpenAsset]
+        [OnOpenAsset(-1)]
         private static bool OnOpen(int instanceId, int line)
         {
             try
@@ -49,18 +49,22 @@ namespace KS.Reactor.Client.Unity.Editor
                 }
                 int index = path.LastIndexOf("/");
                 string fileName = path.Substring(index + 1);
-                if (File.Exists(ksPaths.ServerRuntime + fileName))
+                foreach (string folder in ksPaths.IterateCommonAndServerFolders())
                 {
-                    MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(ksPaths.ServerRuntime +
-                        fileName);
-                    return AssetDatabase.OpenAsset(script, line);
-                }
-                foreach (string filePath in Directory.GetFiles(ksPaths.ServerRuntime, "*.cs", SearchOption.AllDirectories))
-                {
-                    if (filePath.EndsWith(fileName))
+                    if (File.Exists(folder + fileName))
                     {
-                        MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(ksPathUtils.ToAssetPath(filePath));
+                        MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(folder + fileName);
                         return AssetDatabase.OpenAsset(script, line);
+                    }
+                    foreach (string filePath in Directory.GetFiles(folder, "*.cs", SearchOption.AllDirectories))
+                    {
+                        if (filePath.EndsWith(fileName) &&
+                            (ksPaths.IsServerPath(fileName) || ksPaths.IsCommonPath(fileName)))
+                        {
+                            MonoScript script = AssetDatabase.LoadAssetAtPath<MonoScript>(
+                                ksPathUtils.ToAssetPath(filePath));
+                            return AssetDatabase.OpenAsset(script, line);
+                        }
                     }
                 }
                 ksLog.Info(LOG_CHANNEL, "Could not find server script for proxy '" + path +

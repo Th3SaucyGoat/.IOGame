@@ -11,6 +11,9 @@
 			},
 			"cluster reconnect delay": 10,
 			"cluster reconnect attempts": -1,
+			"physics threads": 4,
+			"network threads": 4,
+			"encoding threads": 4,
 			"scripts": [
 				{
 					"name": "ServerRoom"

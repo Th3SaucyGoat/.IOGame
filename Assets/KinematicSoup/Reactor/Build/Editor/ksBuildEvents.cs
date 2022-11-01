@@ -29,37 +29,50 @@ namespace KS.Reactor.Client.Unity.Editor
     /// </summary>
     public static class ksBuildEvents
     {
-        /// <summary>Handler for pre-build-config events called before common and scene configs are written.</summary>
-        /// <param name="scene">Scene to be built. <see cref="Scene.IsValid()"/> = false for common configs.</param>
-        public delegate void PreBuildConfigHandler(Scene scene);
+        /// <summary>Callback for pre-build events called before any build process starts.</summary>
+        public delegate void PreBuildCallback();
 
-        /// <summary>Handler for post-build-config events called after common and scene configs are written.</summary> 
+        /// <summary>Callback for post-build events called after all build process complete.</summary>
+        /// <param name="success">Was the build successful?</param>
+        public delegate void PostBuildCallback(bool success);
+
+        /// <summary>Callback for pre-build-config events called before common and scene configs are written.</summary>
+        /// <param name="scene">Scene to be built. <see cref="Scene.IsValid()"/> = false for common configs.</param>
+        public delegate void PreBuildConfigCallback(Scene scene);
+
+        /// <summary>Callback for post-build-config events called after common and scene configs are written.</summary> 
         /// <param name="scene">Scene to be built. <see cref="Scene.IsValid()"/> = false for common configs.</param>
         /// <param name="success">Was the config created successfully?</param>
-        public delegate void PostBuildConfigHandler(Scene scene, bool success);
+        public delegate void PostBuildConfigCallback(bool success, Scene scene);
 
-        /// <summary>Handler for pre-build events called before the KSServerRuntime is compiled.</summary>
+        /// <summary>Callback for pre-build events called before the KSServerRuntime is compiled.</summary>
         /// <param name="configuration">Build configuration</param>
-        public delegate void PreBuildServerHandler(ksServerScriptCompiler.Configurations configuration);
+        public delegate void PreBuildServerCallback(ksServerScriptCompiler.Configurations configuration);
 
-        /// <summary>Handler for post-build events called after the KSServerRuntime compile completes.</summary>
+        /// <summary>Callback for post-build events called after the KSServerRuntime compile completes.</summary>
         /// <param name="configuration">Build configuration</param>
         /// <param name="success">Was the KSServerRuntime compiled successfully?</param>
-        public delegate void PostBuildServerHandler(ksServerScriptCompiler.Configurations configuration, bool success);
+        public delegate void PostBuildServerCallback(bool success, ksServerScriptCompiler.Configurations configuration);
 
-        // Events
+        
+        /// <summary>Invoked before any build process.</summary>
+        public static event PreBuildCallback PreBuild;
+
+        /// <summary>Invoked after any build process.</summary>
+        public static event PostBuildCallback PostBuild;
 
         /// <summary>Invoked before common and scene configs are written.</summary>
-        public static event PreBuildConfigHandler PreBuildConfig;
+        public static event PreBuildConfigCallback PreBuildConfig;
 
         /// <summary>Invoked after common and scene configs are written.</summary>
-        public static event PostBuildConfigHandler PostBuildConfig;
+        public static event PostBuildConfigCallback PostBuildConfig;
 
         /// <summary>Invoked before the KSServerRuntime is compiled.</summary>
-        public static event PreBuildServerHandler PreBuildServer;
+        public static event PreBuildServerCallback PreBuildServer;
 
         /// <summary>Invoked after the KSServerRuntime is compiled.</summary>
-        public static event PostBuildServerHandler PostBuildServer;
+        public static event PostBuildServerCallback PostBuildServer;
+
 
         /// <summary>Invoke registered <see cref="PreBuildConfig"/> events.</summary>
         /// <param name="scene">Scene to be built. <see cref="Scene.IsValid()"/> = false for common configs.</param>
@@ -78,7 +91,7 @@ namespace KS.Reactor.Client.Unity.Editor
         {
             if (PostBuildConfig != null)
             {
-                PostBuildConfig(scene, success);
+                PostBuildConfig(success, scene);
             }
         }
 
@@ -99,7 +112,26 @@ namespace KS.Reactor.Client.Unity.Editor
         {
             if (PostBuildServer != null)
             {
-                PostBuildServer(configuration, success);
+                PostBuildServer(success, configuration);
+            }
+        }
+
+        /// <summary>Invoke registered <see cref="PreBuild"/> events.</summary>
+        public static void InvokePreBuild()
+        {
+            if (PreBuild != null)
+            {
+                PreBuild();
+            }
+        }
+
+        /// <summary>Invoke registered <see cref="PostBuild"/> events.</summary>
+        /// <param name="success">Was the build successful?</param>
+        public static void InvokePostBuild(bool success)
+        {
+            if (PostBuild != null)
+            {
+                PostBuild(success);
             }
         }
     }

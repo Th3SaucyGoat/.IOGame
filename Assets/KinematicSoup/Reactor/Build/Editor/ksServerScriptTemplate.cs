@@ -167,7 +167,7 @@ namespace KSProxies.Scripts%NAMESPACE%
         /// <summary>Default path for scripts generated from this template.</summary>
         public string DefaultPath
         {
-            get { return ksPaths.ServerRuntime; }
+            get { return ksPaths.ServerScripts; }
         }
 
         /// <summary>Optional methods the template can generate.</summary>
@@ -285,10 +285,6 @@ namespace KSProxies.Scripts%NAMESPACE%
             if (m_gameObjects != null && proxyPath != null)
             {
                 m_generator.SaveAttachments(ksPathUtils.ToAssetPath(proxyPath), m_gameObjects);
-            }
-            if (path.StartsWith(ksPaths.ServerRuntime))
-            {
-                path = path.Substring(ksPaths.ServerRuntime.Length);
             }
             m_csprojUpdater.AddFileToProject(path);
         }

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
+using KS.Unity.Editor;
 
 namespace KS.Reactor.Client.Unity.Editor
 {
@@ -28,6 +29,17 @@ namespace KS.Reactor.Client.Unity.Editor
     {
         private static List<string> m_newPrefabPaths = new List<string>();
         private static List<string> m_checkPrefabPaths = new List<string>();
+        private static HashSet<string> m_ignorePaths = new HashSet<string>();
+
+        /// <summary>
+        /// Tells the watcher to ignore the next time a prefab is created at the given path. Use this to prevent the
+        /// asset id of the new prefab from being cleared.
+        /// </summary>
+        /// <param name="path">Path to ignore.</param>
+        public static void Ignore(string path)
+        {
+            m_ignorePaths.Add(ksPathUtils.Clean(path));
+        }
 
         /// <summary>
         /// Called before a new asset is created. If the asset is a prefab, stores the path so we can clear the IDs
@@ -36,6 +48,10 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <param name="path">Path that will be created.</param>
         public static void OnWillCreateAsset(string path)
         {
+            if (m_ignorePaths.Remove(ksPathUtils.Clean(path)))
+            {
+                return;
+            }
             if (path.EndsWith(".prefab"))
             {
                 m_newPrefabPaths.Add(path);
@@ -80,8 +96,7 @@ namespace KS.Reactor.Client.Unity.Editor
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 if (prefab != null)
                 {
-                    ksEntityComponent entity = prefab.GetComponent<ksEntityComponent>();
-                    if (entity != null)
+                    foreach (ksEntityComponent entity in prefab.GetComponentsInChildren<ksEntityComponent>())
                     {
                         entity.AssetId = 0;
                         foreach (ksColliderData data in entity.ColliderData)
@@ -107,15 +122,15 @@ namespace KS.Reactor.Client.Unity.Editor
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 if (prefab != null)
                 {
-                    ksEntityComponent entity = prefab.GetComponent<ksEntityComponent>();
+                    ksEntityComponent entity = prefab.GetComponentInChildren<ksEntityComponent>();
                     if (entity != null && !string.IsNullOrEmpty(path) && !(
                         path.Contains(Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar) ||
                         path.Contains(Path.AltDirectorySeparatorChar + "Resources" + Path.AltDirectorySeparatorChar)))
                     {
                         ksLog.Warning(
                             typeof(ksNewPrefabWatcher).ToString(),
-                            "Entity prefabs cannot be instantiated by the server unless  they are located under a " +
-                            "Resources folder.\n- " + path
+                            "Entity prefabs cannot be instantiated by the server unless they are located under a " +
+                            "Resources folder or asset bundle.\n- " + path
                         );
                     }
                 }

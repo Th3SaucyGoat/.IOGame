@@ -50,19 +50,28 @@ namespace KS.Reactor.Client.Unity
             SceneManager.MoveGameObjectToScene(m_container, m_scene);
             foreach (ksEntityComponent entityComponent in UnityEngine.Object.FindObjectsOfType<ksEntityComponent>())
             {
-                if (entityComponent.EntityId != 0)
-                {
-                    if (entityComponent.IsPermanent)
-                    {
-                        entityComponent.enabled = false;
-                        m_permanentObjects.Add(entityComponent);
-                        continue;
-                    }
-                    m_map[entityComponent.EntityId] = entityComponent.gameObject;
-                }
-                entityComponent.transform.SetParent(m_container.transform);
+                TrackEntity(entityComponent);
             }
             m_container.SetActive(false);
+        }
+
+        /// <summary>
+        /// Add an entity to the linker.
+        /// </summary>
+        /// <param name="entityComponent"></param>
+        public void TrackEntity(ksEntityComponent entityComponent)
+        {
+            if (entityComponent.EntityId != 0)
+            {
+                if (entityComponent.IsPermanent)
+                {
+                    entityComponent.enabled = false;
+                    m_permanentObjects.Add(entityComponent);
+                    return;
+                }
+                m_map[entityComponent.EntityId] = entityComponent.gameObject;
+            }
+            entityComponent.transform.SetParent(m_container.transform);
         }
 
         /// <summary>

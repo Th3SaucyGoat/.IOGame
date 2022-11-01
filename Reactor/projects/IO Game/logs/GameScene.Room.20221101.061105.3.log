@@ -1,0 +1,413 @@
+2022-11-01 06:11:05.4032 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-11-01 06:11:05.4077 [INFO; Root]  Reactor Server v0.10.1
+2022-11-01 06:11:05.4304 [WARNING; Reactor.Server]  Error parsing model file 'model.bin'. Defaulting to dynmaic model generation.
+2022-11-01 06:11:05.4339 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-11-01 06:11:05.4445 [DEBUG; Root]  Loading Asset Scripts
+2022-11-01 06:11:05.4470 [DEBUG; Root]  Loading Room Configs
+2022-11-01 06:11:05.4515 [DEBUG; Root]  Initializing PhysX
+2022-11-01 06:11:05.4672 [DEBUG; Root]  Loading PhysX geometry
+2022-11-01 06:11:05.4697 [INFO; Root]  Loaded 8 geometries
+2022-11-01 06:11:05.4697 [INFO; Root]  Loaded 2 geometries
+2022-11-01 06:11:05.4697 [DEBUG; Root]  Loading entity prefabs
+2022-11-01 06:11:05.4842 [INFO; Root]  Loaded 5 entity prefabs
+2022-11-01 06:11:05.4842 [DEBUG; Root]  Loading entity instances
+2022-11-01 06:11:05.4989 [DEBUG; Root]  Initializing scripts
+2022-11-01 06:11:05.5059 [DEBUG; Root]  Room setup complete
+2022-11-01 06:11:05.5070 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-11-01 06:11:05.5070 [INFO; Root]  Sending client updates every 2 frames
+2022-11-01 06:11:05.5070 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-11-01 06:11:05.5075 [INFO; Root]  Opening TCP port 8000
+2022-11-01 06:11:10.2587 [INFO; Root]  Client(id = 1, address = 127.0.0.1:60671) connected
+2022-11-01 06:11:10.2617 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1:60671) model validated
+2022-11-01 06:11:10.2758 [DEBUG; Root]  Client(id = 1, address = 127.0.0.1:60671) authenticated
+2022-11-01 06:11:10.2945 [INFO; Root]  Player False joined
+2022-11-01 06:11:12.1398 [INFO; Root]  20
+2022-11-01 06:11:13.1316 [INFO; Root]  OnOverlap
+2022-11-01 06:11:14.6703 [INFO; Root]  OnOverlap
+2022-11-01 06:11:16.6243 [INFO; Root]  OnOverlap
+2022-11-01 06:11:17.2854 [INFO; Root]  OnOverlap
+2022-11-01 06:11:17.6696 [INFO; Root]  OnOverlap
+2022-11-01 06:11:18.0725 [INFO; Root]  server received request to spawn = 5
+2022-11-01 06:11:18.0735 [INFO; Root]  5
+2022-11-01 06:11:18.0755 [INFO; Root]  OnOverlap
+2022-11-01 06:11:18.0766 [INFO; Root]  Collision StartedTrue   False
+2022-11-01 06:11:18.0786 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1013 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1166 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1317 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1469 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1624 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1776 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.1927 [INFO; Root]  Collision Updated
+2022-11-01 06:11:18.2093 [INFO; Root]  collision Lost
+2022-11-01 06:11:18.5302 [INFO; Root]  OnOverlap
+2022-11-01 06:11:21.0884 [INFO; Root]  OnOverlap
+2022-11-01 06:11:21.3043 [INFO; Root]  Collision StartedTrue   False
+2022-11-01 06:11:21.3194 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.3355 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.3506 [INFO; Root]  OnOverlap
+2022-11-01 06:11:21.3506 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.3666 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.3822 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.3978 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.4130 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.4286 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.4441 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.4596 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.4751 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5067 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5072 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5378 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5533 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5688 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5843 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.5999 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.6154 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.6310 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.6466 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.6626 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.6776 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.6931 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.7087 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.7248 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.7552 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.7708 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.7869 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8020 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8172 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8328 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8484 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8639 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8801 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.8952 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.9113 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.9269 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.9425 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.9580 [INFO; Root]  Collision Updated
+2022-11-01 06:11:21.9897 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0047 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0203 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0358 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0514 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0670 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0825 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.0981 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.1132 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.1293 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.1443 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.1599 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.1754 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2077 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2082 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2370 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2526 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2682 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2838 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.2989 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.3141 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.3297 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.3453 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.3609 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.3765 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.3916 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.4229 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.4385 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.4535 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.4687 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.4842 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.4994 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.5151 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.5312 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.5458 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.5619 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.5770 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.5926 [INFO; Root]  Collision Updated
+2022-11-01 06:11:22.6082 [INFO; Root]  collision Lost
+2022-11-01 06:11:22.9974 [INFO; Root]  OnOverlap
+2022-11-01 06:11:25.3428 [INFO; Root]  Collision StartedTrue   False
+2022-11-01 06:11:25.3579 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.3891 [INFO; Root]  OnOverlap
+2022-11-01 06:11:25.3891 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4043 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4199 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4350 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4506 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4667 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4828 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.4980 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.5132 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.5288 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.5444 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.5599 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.5755 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.5911 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.6224 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.6380 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.6535 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.6696 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.6852 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7008 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7164 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7312 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7479 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7620 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7775 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.7935 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.8086 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.8241 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.8552 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.8707 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.8867 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9022 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9178 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9333 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9488 [INFO; Root]  OnOverlap
+2022-11-01 06:11:25.9488 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9644 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9800 [INFO; Root]  Collision Updated
+2022-11-01 06:11:25.9955 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.0111 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.0266 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.0421 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.0576 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.0888 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1043 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1204 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1354 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1506 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1666 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1821 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.1976 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.2131 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.2287 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.2442 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.2597 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.2757 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.3069 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.3074 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.3384 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.3534 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.3689 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.3844 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4000 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4155 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4311 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4467 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4622 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4792 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.4932 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.5088 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.5243 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.5558 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.5708 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.5868 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6024 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6179 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6334 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6486 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6646 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6796 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.6951 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.7107 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.7267 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.7423 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.7578 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.7889 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8045 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8200 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8355 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8511 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8672 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8827 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.8977 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.9133 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.9288 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.9443 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.9598 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.9753 [INFO; Root]  Collision Updated
+2022-11-01 06:11:26.9914 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.0220 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.0373 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.0528 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.0684 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.0839 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.0995 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.1147 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.1302 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.1457 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.1612 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.1768 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.1923 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.2083 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.2389 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.2545 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.2701 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.2706 [INFO; Root]  cluster food
+2022-11-01 06:11:27.2856 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3008 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3165 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3320 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3475 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3631 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3786 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.3786 [INFO; Root]  cluster food
+2022-11-01 06:11:27.3942 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.4097 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.4252 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.4412 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.4715 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.4871 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5027 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5027 [INFO; Root]  cluster food
+2022-11-01 06:11:27.5182 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5338 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5494 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5649 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5804 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.5965 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.6121 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.6121 [INFO; Root]  cluster food
+2022-11-01 06:11:27.6276 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.6431 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.6586 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.6742 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7057 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7213 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7369 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7369 [INFO; Root]  cluster food
+2022-11-01 06:11:27.7524 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7680 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7835 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.7990 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.8150 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.8300 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.8455 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.8455 [INFO; Root]  cluster food
+2022-11-01 06:11:27.8616 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.8767 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.8928 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.9083 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.9243 [INFO; Root]  Collision Updated
+2022-11-01 06:11:27.9549 [INFO; Root]  collision Lost
+2022-11-01 06:11:27.9704 [INFO; Root]  cluster food
+2022-11-01 06:11:28.0797 [INFO; Root]  cluster food
+2022-11-01 06:11:28.2045 [INFO; Root]  cluster food
+2022-11-01 06:11:28.3124 [INFO; Root]  cluster food
+2022-11-01 06:11:28.4372 [INFO; Root]  cluster food
+2022-11-01 06:11:28.5457 [INFO; Root]  cluster food
+2022-11-01 06:11:28.6700 [INFO; Root]  cluster food
+2022-11-01 06:11:28.7783 [INFO; Root]  cluster food
+2022-11-01 06:11:28.9026 [INFO; Root]  cluster food
+2022-11-01 06:11:29.0121 [INFO; Root]  cluster food
+2022-11-01 06:11:29.1365 [INFO; Root]  cluster food
+2022-11-01 06:11:29.2447 [INFO; Root]  cluster food
+2022-11-01 06:11:29.3696 [INFO; Root]  cluster food
+2022-11-01 06:11:29.4789 [INFO; Root]  cluster food
+2022-11-01 06:11:29.6035 [INFO; Root]  cluster food
+2022-11-01 06:11:29.7123 [INFO; Root]  cluster food
+2022-11-01 06:11:29.8369 [INFO; Root]  cluster food
+2022-11-01 06:11:29.9451 [INFO; Root]  cluster food
+2022-11-01 06:11:30.0689 [INFO; Root]  cluster food
+2022-11-01 06:11:30.1776 [INFO; Root]  cluster food
+2022-11-01 06:11:30.3002 [INFO; Root]  cluster food
+2022-11-01 06:11:30.4090 [INFO; Root]  cluster food
+2022-11-01 06:11:30.5324 [INFO; Root]  cluster food
+2022-11-01 06:11:30.6410 [INFO; Root]  cluster food
+2022-11-01 06:11:30.7643 [INFO; Root]  cluster food
+2022-11-01 06:11:30.8884 [INFO; Root]  cluster food
+2022-11-01 06:11:30.9965 [INFO; Root]  cluster food
+2022-11-01 06:11:31.1213 [INFO; Root]  cluster food
+2022-11-01 06:11:31.2300 [INFO; Root]  cluster food
+2022-11-01 06:11:31.3546 [INFO; Root]  cluster food
+2022-11-01 06:11:31.4625 [INFO; Root]  cluster food
+2022-11-01 06:11:31.5865 [INFO; Root]  cluster food
+2022-11-01 06:11:31.6952 [INFO; Root]  cluster food
+2022-11-01 06:11:31.8188 [INFO; Root]  cluster food
+2022-11-01 06:11:32.2212 [INFO; Root]  OnOverlap
+2022-11-01 06:11:32.3919 [INFO; Root]  OnOverlap
+2022-11-01 06:11:32.4997 [INFO; Root]  Collision StartedTrue   False
+2022-11-01 06:11:32.5153 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.5309 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.5465 [INFO; Root]  OnOverlap
+2022-11-01 06:11:32.5465 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.5620 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.5775 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.5930 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.6084 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.6239 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.6556 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.6707 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.6869 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.7019 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.7171 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.7322 [INFO; Root]  Collision Updated
+2022-11-01 06:11:32.7478 [INFO; Root]  collision Lost
+2022-11-01 06:11:32.7634 [INFO; Root]  OnOverlap
+2022-11-01 06:11:32.8100 [INFO; Root]  OnOverlap
+2022-11-01 06:11:33.0120 [INFO; Root]  server received request to spawn = 7
+2022-11-01 06:11:33.0120 [INFO; Root]  5
+2022-11-01 06:11:33.0125 [INFO; Root]  Collision StartedTrue   False
+2022-11-01 06:11:33.0275 [INFO; Root]  OnOverlap
+2022-11-01 06:11:33.0275 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.0430 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.0585 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.0896 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1047 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1202 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1357 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1512 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1668 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1828 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.1984 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.2134 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.2294 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.2449 [INFO; Root]  Collision Updated
+2022-11-01 06:11:33.2604 [INFO; Root]  collision Lost
+2022-11-01 06:11:34.0991 [INFO; Root]  Collision StartedTrue   False
+2022-11-01 06:11:34.1147 [INFO; Root]  Collision Updated
+2022-11-01 06:11:34.1298 [INFO; Root]  Collision Updated
+2022-11-01 06:11:34.1453 [INFO; Root]  Collision Updated
+2022-11-01 06:11:34.1608 [INFO; Root]  collision Lost
+2022-11-01 06:11:34.7978 [INFO; Root]  OnOverlap
+2022-11-01 06:11:35.6834 [INFO; Root]  OnOverlap
+2022-11-01 06:11:36.1796 [INFO; Root]  OnOverlap
+2022-11-01 06:11:36.5365 [INFO; Root]  OnOverlap
+2022-11-01 06:11:38.6020 [INFO; Root]  OnOverlap
+2022-11-01 06:11:39.4852 [INFO; Root]  OnOverlap
+2022-11-01 06:11:40.6203 [INFO; Root]  OnOverlap
+2022-11-01 06:11:41.3334 [INFO; Root]  OnOverlap
+2022-11-01 06:11:42.2807 [INFO; Root]  cluster food
+2022-11-01 06:11:42.4048 [INFO; Root]  cluster food
+2022-11-01 06:11:42.5141 [INFO; Root]  cluster food
+2022-11-01 06:11:42.6384 [INFO; Root]  cluster food
+2022-11-01 06:11:42.7472 [INFO; Root]  cluster food
+2022-11-01 06:11:42.8700 [INFO; Root]  cluster food
+2022-11-01 06:11:42.9457 [INFO; Root]  Client(id = 1, address = 127.0.0.1:60671) disconnected: 2-End of file
+2022-11-01 06:11:42.9487 [INFO; Root]  Player 1 left
+2022-11-01 06:11:42.9804 [INFO; Root]  cluster food
+2022-11-01 06:11:43.1033 [INFO; Root]  cluster food
+2022-11-01 06:11:43.2122 [INFO; Root]  cluster food
+2022-11-01 06:11:43.3350 [INFO; Root]  cluster food
+2022-11-01 06:11:43.4439 [INFO; Root]  cluster food
+2022-11-01 06:11:43.5680 [INFO; Root]  cluster food
+2022-11-01 06:11:43.6750 [INFO; Root]  cluster food
+2022-11-01 06:11:43.7994 [INFO; Root]  cluster food
+2022-11-01 06:11:43.9074 [INFO; Root]  cluster food
+2022-11-01 06:11:44.0309 [INFO; Root]  cluster food
+2022-11-01 06:11:44.1558 [INFO; Root]  cluster food
+2022-11-01 06:11:44.2650 [INFO; Root]  cluster food
+2022-11-01 06:11:44.3882 [INFO; Root]  cluster food
+2022-11-01 06:11:44.4966 [INFO; Root]  cluster food
+2022-11-01 06:11:44.6200 [INFO; Root]  cluster food
+2022-11-01 06:11:44.7286 [INFO; Root]  cluster food
+2022-11-01 06:11:44.8531 [INFO; Root]  cluster food
+2022-11-01 06:11:44.9591 [INFO; Root]  cluster food
+2022-11-01 06:11:45.0844 [INFO; Root]  cluster food
+2022-11-01 06:11:45.1904 [INFO; Root]  cluster food
+2022-11-01 06:11:45.3150 [INFO; Root]  cluster food
+2022-11-01 06:11:45.4242 [INFO; Root]  cluster food
+2022-11-01 06:11:45.5480 [INFO; Root]  cluster food
+2022-11-01 06:11:45.6725 [INFO; Root]  cluster food
+2022-11-01 06:11:45.7799 [INFO; Root]  cluster food
+2022-11-01 06:11:45.9034 [INFO; Root]  cluster food
+2022-11-01 06:11:46.0109 [INFO; Root]  cluster food

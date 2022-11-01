@@ -88,7 +88,7 @@ namespace KS.Reactor.Client.Unity
         public class BuildConfigs
         {
             /// <summary>Last Reactor build version.</summary>
-            public string LastBuildVersion = "0.10.0";
+            public string LastBuildVersion = "0.10.1";
 
             /// <summary>Identification information for finding running public server instances.</summary>
             public string ImageBinding = "";
@@ -139,7 +139,7 @@ namespace KS.Reactor.Client.Unity
         [NonSerialized]
 #endif
         /// <summary>Reactor version.</summary>
-        public string Version = "0.10.0";
+        public string Version = "0.10.1";
 
         /// <summary>Reactor client release number for the current version.</summary>
         public string ClientVersion = "0";

@@ -17,7 +17,10 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Collections.Generic;
+using System.Linq;
 using KS.Unity.Editor;
+using UnityEngine;
+using UnityEditor;
 
 namespace KS.Reactor.Client.Unity.Editor
 {
@@ -45,7 +48,8 @@ namespace KS.Reactor.Client.Unity.Editor
 
         /// <summary>
         /// Updates the contents of the KSServerRuntime project with any unreferenced .cs and dll files and
-        /// removes references to missing files.
+        /// removes references to missing files. Updates the common and server scripts asmdef files with references to
+        /// dll files.
         /// </summary>
         public void UpdateIncludes()
         {
@@ -53,6 +57,7 @@ namespace KS.Reactor.Client.Unity.Editor
             {
                 return;
             }
+            UpdateAsmDefPrecompiledReferences();
             try
             {
                 XmlDocument projectXml = LoadProject();
@@ -61,9 +66,10 @@ namespace KS.Reactor.Client.Unity.Editor
                     return;
                 }
 
-                if (UpdateCompileIncludes(projectXml) || 
-                    UpdateReferenceIncludes(projectXml) ||
-                    UpdateDefineSymbols(projectXml))
+                bool changed = UpdateCompileIncludes(projectXml);
+                changed = UpdateReferenceIncludes(projectXml) || changed;
+                changed = UpdateDefineSymbols(projectXml) || changed;
+                if (changed)
                 {
                     SaveProject(projectXml);
                 }
@@ -71,6 +77,58 @@ namespace KS.Reactor.Client.Unity.Editor
             catch (Exception e)
             {
                 ksLog.Error(this, "Error updating KSServerRuntime project includes", e);
+            }
+        }
+
+        /// <summary>
+        /// Updates the common and server scripts asmdef files with references to dll files located in the common or
+        /// server folders.
+        /// </summary>
+        public void UpdateAsmDefPrecompiledReferences()
+        {
+            try
+            {
+                if (!File.Exists(ksPaths.CommonScriptsAsmDef) || !File.Exists(ksPaths.ServerScriptsAsmDef))
+                {
+                    return;
+                }
+                List<string> references = new List<string>();
+                int index = 0;
+#if !KS_DEVELOPMENT
+                references.Add("\"KSCommon.dll\"");
+                index++;
+#endif
+                // Get dlls from common folders.
+                foreach (string path in ksPaths.CommonFolders)
+                {
+                    GetFilesInAsmDefFolder(path, "dll", references);
+                }
+                // Convert paths to file names surrounded by '"'.
+                for (; index < references.Count; index++)
+                {
+                    references[index] = "\"" + ksPathUtils.GetName(references[index]) + "\"";
+                }
+                UpdateAsmDefPrecompiledReferences(ksPaths.CommonScriptsAsmDef, references);
+
+#if !KS_DEVELOPMENT
+                references.Add("\"KSReactor.dll\"");
+                index++;
+#endif
+                // Get dlls from server folders.
+                foreach (string path in ksPaths.ServerFolders)
+                {
+                    GetFilesInAsmDefFolder(path, "dll", references);
+                }
+                // Convert paths to file names surrounded by '"'.
+                for (; index < references.Count; index++)
+                {
+                    references[index] = "\"" + ksPathUtils.GetName(references[index]) + "\"";
+                }
+                UpdateAsmDefPrecompiledReferences(ksPaths.ServerScriptsAsmDef, references);
+            }
+            catch (Exception e)
+            {
+                ksLog.Error(this, "Error updating asmdef precompiled references.", e);
             }
         }
 
@@ -129,28 +187,47 @@ namespace KS.Reactor.Client.Unity.Editor
         }
 
         /// <summary>Adds a file to the server runtime project's includes.</summary>
-        /// <param name="fileName">Name of file to add.</param>
-        public void AddFileToProject(string fileName)
+        /// <param name="path">Path to file to add.</param>
+        public void AddFileToProject(string path)
         {
             if (!GenerateMissingFiles(true))
             {
                 return;
             }
-            fileName = fileName.Replace('/', '\\');
+            path = ksPathUtils.MakeRelative(path, ksPaths.ServerScripts);
+            
             try
             {
                 XmlDocument projectXml = LoadProject();
-                if (!IsFileIncluded(projectXml, fileName))
+                if (!IsFileIncluded(projectXml, path))
                 {
                     HashSet<string> fileHash = new HashSet<string>();
-                    fileHash.Add(fileName);
+                    fileHash.Add(path);
                     AddFilesToProject(projectXml, fileHash);
                     SaveProject(projectXml);
                 }
             }
             catch (Exception e)
             {
-                ksLog.Error(this, "Error adding " + fileName + " to KSServerRuntime project", e);
+                ksLog.Error(this, "Error adding " + path + " to KSServerRuntime project", e);
+            }
+        }
+
+        /// <summary>Generates missing asmdef files for common and server scripts.</summary>
+        public void GenerateMissingAsmDefs()
+        {
+            if (!ksPathUtils.Create(ksPaths.ServerScripts, true) ||
+                !ksPathUtils.Create(ksPaths.CommonScripts, true))
+            {
+                return;
+            }
+            if (!File.Exists(ksPaths.CommonScriptsAsmDef))
+            {
+                GenerateCommonAsmDef();
+            }
+            if (!File.Exists(ksPaths.ServerScriptsAsmDef))
+            {
+                GenerateServerAsmDef();
             }
         }
 
@@ -170,14 +247,21 @@ namespace KS.Reactor.Client.Unity.Editor
                 return false;
             }
 
-            if (!ksPathUtils.Create(ksPaths.ServerRuntime, true))
+            if (!ksPathUtils.Create(ksPaths.ServerScripts, true) ||
+                !ksPathUtils.Create(ksPaths.CommonScripts, true) ||
+                !ksPathUtils.Create(ksPaths.Proxies, true))
             {
                 return false;
             }
 
-            if (!ksPathUtils.Create(ksPaths.Proxies, true))
+            if (!File.Exists(ksPaths.CommonScriptsAsmDef))
             {
-                return false;
+                GenerateCommonAsmDef();
+            }
+
+            if (!File.Exists(ksPaths.ServerScriptsAsmDef))
+            {
+                GenerateServerAsmDef();
             }
 
             if (!File.Exists(ksPaths.ServerRuntimeSolution))
@@ -248,13 +332,24 @@ namespace KS.Reactor.Client.Unity.Editor
             }
         }
 
-        /// <summary>Returns a fileHash set of .cs files from the KSServerRuntime project folder.</summary>
+        /// <summary>
+        /// Returns a set of files with the given extension in common and server folders, relative to the server
+        /// runtime folder.
+        /// </summary>
+        /// <param name="ext">File extension</param>
         /// <returns>File names found.</returns>
-        private HashSet<string> GetServerFiles()
+        private HashSet<string> GetCommonAndServerFiles(string ext)
         {
-            HashSet<string> filesInDirectory = new HashSet<string>();
-            GetFilesInFolder(ksPaths.ServerRuntime, "cs", filesInDirectory);
-            return filesInDirectory;
+            HashSet<string> files = new HashSet<string>();
+            foreach (string path in ksPaths.CommonFolders)
+            {
+                GetFilesInAsmDefFolder(path, ext, files, ksPaths.ServerScripts);
+            }
+            foreach (string path in ksPaths.ServerFolders)
+            {
+                GetFilesInAsmDefFolder(path, ext, files, ksPaths.ServerScripts);
+            }
+            return files;
         }
 
         /// <summary>
@@ -265,7 +360,7 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <returns>True if a reference was added or removed.</returns>
         private bool UpdateCompileIncludes(XmlDocument projectXml)
         {
-            HashSet<string> files = GetServerFiles();
+            HashSet<string> files = GetCommonAndServerFiles("cs");
             List<XmlNode> removeList = new List<XmlNode>();
             XmlNodeList compileNodes = FindNodes(projectXml.DocumentElement, "Compile");
             bool changed = false;
@@ -276,8 +371,8 @@ namespace KS.Reactor.Client.Unity.Editor
                 {
                     continue;
                 }
-                string path = includeAttribute.InnerText.Replace('/', '\\');
-                if (!path.EndsWith("*.cs") && !files.Remove(path))// * is not a wild card
+                string path = ksPathUtils.Clean(includeAttribute.InnerText);
+                if (!files.Remove(path))
                 {
                     removeList.Add(node);
                     changed = true;
@@ -355,7 +450,7 @@ namespace KS.Reactor.Client.Unity.Editor
             foreach (XmlNode node in compileNodes)
             {
                 XmlNode includeAttribute = node.Attributes.GetNamedItem("Include", root.NamespaceURI);
-                if (includeAttribute != null && includeAttribute.InnerText.Replace('/', '\\').Equals(fileName))
+                if (includeAttribute != null && ksPathUtils.Clean(includeAttribute.InnerText).Equals(fileName))
                 {
                     return true;
                 }
@@ -401,17 +496,6 @@ namespace KS.Reactor.Client.Unity.Editor
             }
         }
 
-        /// <returns>
-        /// DLLs in the server runtime and common folders, with paths relative to the server runtime folder.
-        /// </returns>
-        private HashSet<string> GetLibraries()
-        {
-            HashSet<string> libraries = new HashSet<string>();
-            GetFilesInFolder(ksPaths.ServerRuntime, "dll", libraries);
-            GetFilesInFolder(ksPaths.CommonScripts, "dll", libraries, ksPaths.ServerRuntime);
-            return libraries;
-        }
-
         /// <summary>
         /// Adds references to unreferenced dlls in the server runtime folder,
         /// and removes references to missing dlls.
@@ -420,7 +504,7 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <returns>True if a reference was added or removed.</returns>
         private bool UpdateReferenceIncludes(XmlDocument projectXml)
         {
-            HashSet<string> libraries = GetLibraries();
+            HashSet<string> libraries = GetCommonAndServerFiles("dll");
             List<XmlNode> removeList = new List<XmlNode>();
             XmlNodeList compileNodes = FindNodes(projectXml.DocumentElement, "HintPath");
             bool changed = false;
@@ -430,7 +514,7 @@ namespace KS.Reactor.Client.Unity.Editor
                 {
                     continue;
                 }
-                string path = node.InnerText.Replace('/', '\\');
+                string path = ksPathUtils.Clean(node.InnerText);
                 if (!libraries.Remove(path))
                 {
                     removeList.Add(node.ParentNode);
@@ -449,21 +533,90 @@ namespace KS.Reactor.Client.Unity.Editor
             return changed;
         }
 
-        /// <summary>Fills a hashset with a list of files in a folder and its subfolders.</summary>
+        /// <summary>
+        /// Updates the precompiled references in an asmdef file. Parses the file to see if the existing references
+        /// match the new <paramref name="references"/>, and updates the file if they do not.
+        /// </summary>
+        /// <param name="path">Path to the asmdef file.</param>
+        /// <param name="references">
+        /// Precompiled references. Each reference should be the file name of a dll including the extension, surrounded
+        /// by '"'.
+        /// </param>
+        private void UpdateAsmDefPrecompiledReferences(string path, List<string> references)
+        {
+            string fileText = File.ReadAllText(path);
+            int startIndex = fileText.IndexOf("\"precompiledReferences\":");
+            if (startIndex < 0)
+            {
+                ksLog.Warning(this, "Could not find precompiledReferences in '" + path + "'.");
+                return;
+            }
+            startIndex = fileText.IndexOf('[', startIndex) + 1;
+            int endIndex = fileText.IndexOf(']', startIndex);
+            string referencesStr = fileText.Substring(startIndex, endIndex - startIndex);
+            string[] parts = referencesStr.Split(',');
+            // Build a set of the current precompiled references.
+            HashSet<string> currentReferences = new HashSet<string>();
+            foreach (string str in parts)
+            {
+                // Remove parts of string outside quotes.
+                int s = str.IndexOf('"');
+                int e = str.LastIndexOf('"');
+                if (s >= e)
+                {
+                    continue;
+                }
+                currentReferences.Add(str.Substring(s, e - s + 1));
+            }
+            if (ContentsEqual(references, currentReferences))
+            {
+                // The references do not need updating.
+                return;
+            }
+            // Write the file with the updated references.
+            referencesStr = string.Join(", ", references);
+            fileText = fileText.Substring(0, startIndex) + referencesStr + fileText.Substring(endIndex);
+            Write(path, fileText);
+        }
+
+        /// <summary>Checks if a list and a set of strings contain the same contents.</summary>
+        /// <param name="list">List</param>
+        /// <param name="set">Set</param>
+        /// <returns>
+        /// True if the <paramref name="list"/> and the <paramref name="set"/> have the same contents.
+        /// </returns>
+        private bool ContentsEqual(List<string> list, HashSet<string> set)
+        {
+            if (list.Count != set.Count)
+            {
+                return false;
+            }
+            foreach (string str in list)
+            {
+                if (!set.Contains(str))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Fills a collection with a list of files in a folder and its subfolders. Does not check subfolders that
+        /// contain an asmdef or asmref.
+        /// </summary>
         /// <param name="path">Path to search for files.</param>
         /// <param name="extension">Extension of files to find.</param>
-        /// <param name="outFiles">Hash set to put file names in.</param>
+        /// <param name="outFiles">Collection to put file names in.</param>
         /// <param name="relativeTo">
         /// If provided, file names will be relative to this folder. If null, they are relative to <paramref name="path"/>.
         /// </param>
-        private void GetFilesInFolder(string path, string extension, HashSet<string> outFiles, string relativeTo = null)
+        private void GetFilesInAsmDefFolder(string path, string extension, ICollection<string> outFiles, string relativeTo = null)
         {
             string relativePath = "";
             if (relativeTo != null)
             {
-                Uri root = new Uri(ksPaths.ProjectRoot);
-                Uri relativeToUri = new Uri(root, relativeTo);
-                relativePath = relativeToUri.MakeRelativeUri(new Uri(root, path)).ToString();
+                relativePath = ksPathUtils.MakeRelative(path, relativeTo);
             }
             try
             {
@@ -471,16 +624,38 @@ namespace KS.Reactor.Client.Unity.Editor
                 {
                     return;
                 }
-                foreach (string fileName in Directory.GetFiles(path, "*." + extension, SearchOption.AllDirectories))
+                foreach (string fileName in Directory.GetFiles(path, "*." + extension))
                 {
-                    string name = fileName.Substring(path.Length).Replace('/', '\\');
-                    outFiles.Add(relativePath + name);
+                    string name = ksPathUtils.Clean(fileName.Substring(path.Length));
+                    if (name.StartsWith("/") || name.StartsWith("\\"))
+                    {
+                        name = name.Substring(1);
+                    }
+                    outFiles.Add(Path.Combine(relativePath, name));
+                }
+
+                // Search sub directories that don't have asmdefs or asmrefs.
+                foreach (string directory in Directory.GetDirectories(path))
+                {
+                    if (!HasAsmDefOrRef(directory))
+                    {
+                        GetFilesInAsmDefFolder(directory, extension, outFiles, relativeTo == null ? path : relativeTo);
+                    }
                 }
             }
             catch (Exception e)
             {
                 ksLog.Error(this, "Error loading " + extension + " files in " + path, e);
             }
+        }
+
+        /// <summary>Checks if a directory has an asmdef or asmref file.</summary>
+        /// <param name="directory">Directory to check.</param>
+        /// <returns>True if the directory has an amsdef or asmref file.</returns>
+        private bool HasAsmDefOrRef(string directory)
+        {
+            return Directory.GetFiles(directory, "*.asmdef").Length != 0 || 
+                Directory.GetFiles(directory, "*.asmref").Length != 0;
         }
 
         /// <summary>Removes an XML node. Remove's the node's parent if the parent has no other children.</summary>
@@ -535,7 +710,7 @@ namespace KS.Reactor.Client.Unity.Editor
                 installationPathUri = new Uri(root, ksReactorConfig.Instance.Server.ServerPath);
             }
             Uri reflectionToolPathUri = new Uri(installationPathUri, "KSServerRuntime/");
-            Uri serverRuntimeUri = new Uri(root, ksPaths.ServerRuntime);
+            Uri serverRuntimeUri = new Uri(root, ksPaths.ServerScripts);
             outputPath = serverRuntimeUri.MakeRelativeUri(installationPathUri).ToString();
             proxyPath = reflectionToolPathUri.MakeRelativeUri(new Uri(root, ksPaths.Proxies)).ToString();
 #if !UNITY_2019_3_OR_NEWER
@@ -559,6 +734,64 @@ namespace KS.Reactor.Client.Unity.Editor
                 default:
                     return "KSReflectionTool.exe \"" + proxyPath + "\"";
             }
+        }
+
+        /// <summary>Generates the common scripts asmdef.</summary>
+        private void GenerateCommonAsmDef()
+        {
+            string template =
+@"{
+    ""name"": ""KSScripts-Common"",
+    ""rootNamespace"": """",
+    ""references"": %REFERENCES%,
+    ""includePlatforms"": [],
+    ""excludePlatforms"": [],
+    ""allowUnsafeCode"": false,
+    ""overrideReferences"": true,
+    ""precompiledReferences"": %PRECOMPILED%,
+    ""autoReferenced"": true,
+    ""defineConstraints"": [],
+    ""versionDefines"": [],
+    ""noEngineReferences"": true
+}";
+#if KS_DEVELOPMENT
+            template = template.Replace("%REFERENCES%", "[\"Reactor\"]")
+                .Replace("%PRECOMPILED%", "[]");
+#else
+            template = template.Replace("%REFERENCES%", "[]")
+                .Replace("%PRECOMPILED%", "[\"KSCommon.dll\"]");
+#endif
+            Write(ksPaths.CommonScriptsAsmDef, template);
+        }
+
+        /// <summary>Generates the server scripts asmdef.</summary>
+        private void GenerateServerAsmDef()
+        {
+            string template =
+@"{
+    ""name"": ""KSScripts-Server"",
+    ""rootNamespace"": """",
+    ""references"": %REFERENCES%,
+    ""includePlatforms"": [
+        ""Editor""
+    ],
+    ""excludePlatforms"": [],
+    ""allowUnsafeCode"": false,
+    ""overrideReferences"": true,
+    ""precompiledReferences"": %PRECOMPILED%,
+    ""autoReferenced"": false,
+    ""defineConstraints"": [],
+    ""versionDefines"": [],
+    ""noEngineReferences"": true
+}";
+#if KS_DEVELOPMENT
+            template = template.Replace("%REFERENCES%", "[\"KSScripts-Common\", \"Reactor\", \"ReactorEditor\"]")
+                .Replace("%PRECOMPILED%", "[]");
+#else
+            template = template.Replace("%REFERENCES%", "[\"KSScripts-Common\"]")
+                .Replace("%PRECOMPILED%", "[\"KSCommon.dll\", \"KSReactor.dll\"]");
+#endif
+            Write(ksPaths.ServerScriptsAsmDef, template);
         }
 
         /// <summary>Generates the KSServerRuntime solution.</summary>
@@ -617,7 +850,7 @@ EndGlobal";
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
-    <BaseIntermediateOutputPath>../../../../KSServerRuntime/obj/</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>../../../KSServerRuntime/obj/</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="" '$(Configuration)|$(Platform)' == 'LocalDebug|AnyCPU' "">
     <DebugSymbols>true</DebugSymbols>
@@ -683,7 +916,7 @@ EndGlobal";
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include=""..\..\Common\**\*.cs"">
+    <Compile Include=""..\Common\**\*.cs"">
       <Link>%(RecursiveDir)%(FileName)</Link>
     </Compile>
   </ItemGroup>

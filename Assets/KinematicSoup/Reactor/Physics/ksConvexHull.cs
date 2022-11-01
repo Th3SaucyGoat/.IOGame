@@ -47,13 +47,6 @@ namespace KS.Reactor.Client.Unity
             get { return m_geometricCenter; }
         }
 
-        /// <summary>Center of mass.</summary>
-        [Obsolete("Use GeometricCenter instead.")]
-        public Vector3 CenterOfMass
-        {
-            get { return m_geometricCenter; }
-        }
-
         private static Dictionary<Mesh, ksConvexHull> m_cache = new Dictionary<Mesh, ksConvexHull>();
         private static ConvexHullCalculator m_calculator = new ConvexHullCalculator();
         private static HashSet<Mesh> m_rejects = new HashSet<Mesh>();

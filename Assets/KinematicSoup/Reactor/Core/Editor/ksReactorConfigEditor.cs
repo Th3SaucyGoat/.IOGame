@@ -13,7 +13,7 @@ material is strictly forbidden unless prior written permission is obtained from
 KinematicSoup Technologies Incorporated.
 */
 
-using System.IO;
+using System;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Build;
@@ -229,6 +229,78 @@ namespace KS.Reactor.Client.Unity.Editor
             m_tempAPIServerSecret = null;
             EditorUtility.SetDirty(ksReactorConfig.Instance);
             AssetDatabase.SaveAssets();
+        }
+
+        /// <summary>
+        /// Sets a server define symbol and optionally builds the server if the defines changed.
+        /// </summary>
+        /// <param name="symbol">Symbol to define</param>
+        /// <param name="buildServer">If true, builds the server if the defines change.</param>
+        /// <returns>True if the symbol was added. False if it was already defined.</returns>
+        public static bool SetServerDefineSymbol(string symbol, bool buildServer = true)
+        {
+            if (ksReactorConfig.Instance == null)
+            {
+                ksInitializer.CreateReactorConfig();
+            }
+            string defineSymbols = ksReactorConfig.Instance.Server.DefineSymbols;
+            // replace commas, and spaces with semi-colons
+            defineSymbols = defineSymbols.Replace(',', ';').Replace(' ', ';');
+            string[] symbols = defineSymbols.Split(';');
+            if (Array.IndexOf(symbols, symbol) == -1)
+            {
+                ksLog.Info(typeof(ksReactorConfigEditor).ToString(), "Setting server define symbol " + symbol);
+                ksReactorConfig.Instance.Server.DefineSymbols = 
+                    string.IsNullOrEmpty(defineSymbols) ? symbol : defineSymbols + ";" + symbol;
+                EditorUtility.SetDirty(ksReactorConfig.Instance);
+                if (buildServer)
+                {
+                    ksServerScriptCompiler.Instance.BuildServerRuntime();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>Removes a server define symbol and optionally builds the server if the defines changed.</summary>
+        /// <param name="symbol">Symbol to clear.</param>
+        /// <param name="buildServer">If true, builds the server if the defines change.</param>
+        /// <returns>True if the symbol was removed. False if it was not defined.</returns>
+        public static bool ClearServerDefineSymbol(string symbol, bool buildServer = true)
+        {
+            if (ksReactorConfig.Instance == null)
+            {
+                ksInitializer.CreateReactorConfig();
+            }
+            string defineSymbols = ksReactorConfig.Instance.Server.DefineSymbols;
+            // replace commas, and spaces with semi-colons
+            defineSymbols = defineSymbols.Replace(',', ';').Replace(' ', ';');
+            string[] symbols = defineSymbols.Split(';');
+            int index = Array.IndexOf(symbols, symbol);
+            if (index == -1)
+            {
+                return false;
+            }
+            string defines = "";
+            for (int i = 0; i < symbols.Length; i++)
+            {
+                if (i != index)
+                {
+                    if (defines != "")
+                    {
+                        defines += ";";
+                    }
+                    defines += symbols[i];
+                }
+            }
+            ksLog.Info(typeof(ksReactorConfigEditor).ToString(), "Clearing server define symbol " + symbol);
+            ksReactorConfig.Instance.Server.DefineSymbols = defines;
+            EditorUtility.SetDirty(ksReactorConfig.Instance);
+            if (buildServer)
+            {
+                ksServerScriptCompiler.Instance.BuildServerRuntime();
+            }
+            return true;
         }
     }
 }

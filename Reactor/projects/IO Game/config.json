@@ -76,9 +76,6 @@
 					0.2,
 					1.0
 				],
-				"collision filter": {
-					"asset": 2
-				},
 				"scripts": [
 					{
 						"name": "ServerFood"
@@ -88,7 +85,28 @@
 						"params": {
 							"shape id": 2,
 							"material": null,
-							"filter": null,
+							"filter": {
+								"asset": 2
+							},
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": true,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					},
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 1,
+							"material": null,
+							"filter": {
+								"asset": 14
+							},
 							"offset": [
 								0.0,
 								0.0,
@@ -300,7 +318,7 @@
 			"fields": {
 				"m_group": 1,
 				"m_notify": 18,
-				"m_collide": 0
+				"m_collide": 18
 			}
 		},
 		"ReactorScripts/ksCollisionFilters/FoodLocator": {
@@ -308,7 +326,16 @@
 			"name": "/ksCollisionFilter",
 			"fields": {
 				"m_group": 4,
-				"m_notify": 1,
+				"m_notify": 128,
+				"m_collide": 0
+			}
+		},
+		"ReactorScripts/ksCollisionFilters/FoodTesting": {
+			"asset id": 14,
+			"name": "/ksCollisionFilter",
+			"fields": {
+				"m_group": 128,
+				"m_notify": 0,
 				"m_collide": 0
 			}
 		},

@@ -43,11 +43,6 @@ namespace KS.Reactor.Client.Unity
         /// <returns>Geometric center of the collider.</returns>
         Vector3 GeometricCenter();
 
-        /// <summary>Gets the center of mass of the collider.</summary>
-        /// <returns>Center of mass of the collider.</returns>
-        [Obsolete("Use GeometricCenter() instead.")]
-        Vector3 CenterOfMass();
-
         /// <summary>Serializes the collider by shape type.</summary>
         /// <returns>Serialized collider data.</returns>
         byte[] Serialize();

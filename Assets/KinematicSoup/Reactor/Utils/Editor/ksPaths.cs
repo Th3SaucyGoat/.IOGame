@@ -13,8 +13,13 @@ material is strictly forbidden unless prior written permission is obtained from
 KinematicSoup Technologies Incorporated.
 */
 
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using KS.Unity.Editor;
 
 namespace KS.Reactor.Client.Unity.Editor
 {
@@ -25,13 +30,16 @@ namespace KS.Reactor.Client.Unity.Editor
         private static string LOG_CHANNEL = typeof(ksPaths).ToString();
 
         private const string REACTOR_SCRIPTS = "Assets/ReactorScripts/";
-        private const string SERVER_SCRIPTS = "Editor/Server/";
+        private const string SERVER_SCRIPTS = "Server/";
         private const string CLIENT_SCRIPTS = "Client/";
         private const string COMMON_SCRIPTS = "Common/";
         private const string PROXIE_SCRIPTS = "Proxies/";
 
         private static string m_projectRoot;
         private static string m_reactorRoot = null;
+
+        private static List<string> m_commonFolders = new List<string>();
+        private static List<string> m_serverFolders = new List<string>();
 
         /// <summary>Static intialization</summary>
         static ksPaths()
@@ -87,6 +95,83 @@ namespace KS.Reactor.Client.Unity.Editor
             get { return m_projectRoot; }
         }
 
+        /// <summary>List of folders containing common scripts.</summary>
+        public static List<string> CommonFolders
+        {
+            get { return m_commonFolders; }
+        }
+
+        /// <summary>List of folders containing server scripts.</summary>
+        public static List<string> ServerFolders
+        {
+            get { return m_serverFolders; }
+        }
+
+        /// <summary>Iterates the <see cref="CommonFolders"/> and <see cref="ServerFolders"/>.</summary>
+        /// <returns>Iterator</returns>
+        public static IEnumerable<string> IterateCommonAndServerFolders()
+        {
+            return CommonFolders.Concat(ServerFolders);
+        }
+
+        /// <summary>
+        /// Builds the lists of <see cref="CommonFolders"/> and <see cref="ServerFolders"/> by finding all asmref files
+        /// that reference the <see cref="CommonScriptsAsmDef"/> and <see cref="ServerScriptsAsmDef"/> asmdefs. Folders
+        /// containing an asmref referencing <see cref="CommonScriptsAsmDef"/> are common folders and folders
+        /// containing an asmref referencing <see cref="ServerScriptsAsmDef"/> are server folders.
+        /// </summary>
+        public static void FindCommonAndServerFolders()
+        {
+            m_commonFolders.Clear();
+            m_serverFolders.Clear();
+            m_commonFolders.Add(CommonScripts);
+            m_serverFolders.Add(ServerScripts);
+            // Get the name and guid of the common and server script asmdefs.
+            string commonGuid = AssetDatabase.AssetPathToGUID(CommonScriptsAsmDef);
+            string commonGuidStr = string.IsNullOrEmpty(commonGuid) ? null : "GUID:" + commonGuid;
+            string commonName = ksPathUtils.GetName(CommonScriptsAsmDef, false);
+            string serverGuid = AssetDatabase.AssetPathToGUID(ServerScriptsAsmDef);
+            string serverGuidStr = string.IsNullOrEmpty(serverGuid) ? null : "GUID:" + serverGuid;
+            string serverName = ksPathUtils.GetName(ServerScriptsAsmDef, false);
+            // Find all asmrefs
+            string[] guids = AssetDatabase.FindAssets("t:AsmRef");
+            foreach (string guid in guids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                // Get the referenced asmdef string.
+                string reference = ParseAsmReference(path);
+                if (reference == null)
+                {
+                    continue;
+                }
+                // Add the path to the common or server folders if it is referencing the common or server asmdef.
+                if (reference == commonName || reference == commonGuidStr)
+                {
+                    m_commonFolders.Add(ksPathUtils.GetDirectory(path).Replace('\\', '/') + "/");
+                }
+                else if (reference == serverName || reference == serverGuidStr)
+                {
+                    m_serverFolders.Add(ksPathUtils.GetDirectory(path).Replace('\\', '/') + "/");
+                }
+            }
+        }
+
+        /// <summary>Checks if a path is in one of the <see cref="CommonFolders"/> containing common scripts.</summary>
+        /// <param name="path">Path to check.</param>
+        /// <returns>True if the path is in one of the <see cref="CommonFolders"/>.</returns>
+        public static bool IsCommonPath(string path)
+        {
+            return BelongsToAsmDef(path, m_commonFolders);
+        }
+
+        /// <summary>Checks if a path is in one of the <see cref="ServerFolders"/> containing server scripts.</summary>
+        /// <param name="path">Path to check.</param>
+        /// <returns>True if the path is in one of the <see cref="ServerFolders"/>.</returns>
+        public static bool IsServerPath(string path)
+        {
+            return BelongsToAsmDef(path, m_serverFolders);
+        }
+
         /// <summary>Location of textures.</summary>
         public static string Textures
         {
@@ -130,22 +215,28 @@ namespace KS.Reactor.Client.Unity.Editor
             get { return REACTOR_SCRIPTS + "AssetBundles/"; }
         }
 
-        /// <summary>Server runtime folder.</summary>
-        public static string ServerRuntime
+        /// <summary>Server scripts folder.</summary>
+        public static string ServerScripts
         {
             get { return REACTOR_SCRIPTS + SERVER_SCRIPTS; }
+        }
+
+        /// <summary>Asmdef file for server scripts.</summary>
+        public static string ServerScriptsAsmDef
+        {
+            get { return ServerScripts + "KSScripts-Server.asmdef"; }
         }
 
         /// <summary>Server runtime project.</summary>
         public static string ServerRuntimeProject
         {
-            get { return ServerRuntime + "KSServerRuntime.csproj"; }
+            get { return ServerScripts + "KSServerRuntime.csproj"; }
         }
 
         /// <summary>Server runtime solution.</summary>
         public static string ServerRuntimeSolution
         {
-            get { return ServerRuntime + "KSServerRuntime.sln"; }
+            get { return ServerScripts + "KSServerRuntime.sln"; }
         }
 
         /// <summary>Local server runtime dll.</summary>
@@ -184,16 +275,28 @@ namespace KS.Reactor.Client.Unity.Editor
             get { return REACTOR_SCRIPTS + COMMON_SCRIPTS; }
         }
 
+        /// <summary>Asmdef file for common scripts.</summary>
+        public static string CommonScriptsAsmDef
+        {
+            get { return CommonScripts + "KSScripts-Common.asmdef"; }
+        }
+
+        /// <summary>Reactor server directory.</summary>
+        public static string ServerDir
+        {
+            get { return ksReactorConfig.Instance.Server.ServerPath; }
+        }
+
         /// <summary>Reactor build directory.</summary>
         public static string BuildDir
         {
-            get { return ksReactorConfig.Instance.Server.ServerPath + "projects/" + Application.productName + "/"; }
+            get { return ServerDir + "projects/" + Application.productName + "/"; }
         }
 
         /// <summary>Reactor cluster directory.</summary>
         public static string ClusterDir
         {
-            get { return ksReactorConfig.Instance.Server.ServerPath + "cluster/"; }
+            get { return ServerDir + "cluster/"; }
         }
 
         /// <summary>Reactor log directory.</summary>
@@ -289,6 +392,89 @@ namespace KS.Reactor.Client.Unity.Editor
             m_reactorRoot = "Assets/KinematicSoup/Reactor/";
             ksLog.Error(LOG_CHANNEL, "Error detecting Reactor folder: " + errorMessage +
                 ". Setting Reactor folder to " + m_reactorRoot);
+        }
+
+        /// <summary>
+        /// Checks if a <paramref name="path"/> is a subpath of one of the <paramref name="asmDefFolders"/> and is part
+        /// of the same asmdef or asmref defined in that folder.
+        /// </summary>
+        /// <param name="path">Path to check.</param>
+        /// <param name="asmDefFolders">
+        /// List of folders containing asmdef/refs to check if the <paramref name="path"/> is in.
+        /// </param>
+        /// <returns>
+        /// True if the <paramref name="path"/> is a subpath of one of the <paramref name="asmDefFolders"/> and is part
+        /// of the same asmdef or asmref.
+        /// </returns>
+        private static bool BelongsToAsmDef(string path, List<string> asmDefFolders)
+        {
+            path = ksPathUtils.Clean(path);
+            if (!Directory.Exists(path))
+            {
+                path = ksPathUtils.GetDirectory(path);
+            }
+            bool foundAsm = false;
+            foreach (string p in asmDefFolders)
+            {
+                string folder = ksPathUtils.Clean(p);
+                // If the path is in this folder...
+                if (path.StartsWith(folder))
+                {
+                    // Check if any of the subfolders between the path and the folder contain an asmdef or asmref.
+                    while (true)
+                    {
+                        if (path.Length == folder.Length)
+                        {
+                            return true;
+                        }
+                        if (foundAsm || Directory.GetFiles(path, "*.asmdef").Length != 0 ||
+                            Directory.GetFiles(path, "*.asmref").Length != 0)
+                        {
+                            foundAsm = true;
+                            break;
+                        }
+                        // There is no asmdef/asmref in this folder, so check the parent folder.
+                        path = ksPathUtils.GetDirectory(path);
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>Parses an asmref to get the referenced asmdef string.</summary>
+        /// <param name="path">Path to asmref.</param>
+        /// <returns>
+        /// Referenced asmdef string. This is either the name of the asmdef, or `GUID:X` where X is the asmdef guid.
+        /// Returns null if the asmdef could not be parsed.
+        /// </returns>
+        private static string ParseAsmReference(string path)
+        {
+            try
+            {
+                // The asmref file should have a single field called "reference". Find the "reference" field.
+                string fileText = File.ReadAllText(path);
+                string searchStr = "\"reference\":";
+                int startIndex = fileText.IndexOf(searchStr);
+                if (startIndex < 0)
+                {
+                    ksLog.Warning(LOG_CHANNEL, "Could not find reference in '" + path + "'.");
+                    return null;
+                }
+                startIndex = fileText.IndexOf('"', startIndex + searchStr.Length);
+                startIndex++;
+                int endIndex = fileText.IndexOf('"', startIndex);
+                if (startIndex >= endIndex)
+                {
+                    return null;
+                }
+                // Return the value of the "reference" field.
+                return fileText.Substring(startIndex, endIndex - startIndex);
+            }
+            catch (Exception e)
+            {
+                ksLog.Error(LOG_CHANNEL, "Error parsing '" + path + "'.", e);
+                return null;
+            }
         }
     }
 }

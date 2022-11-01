@@ -216,7 +216,7 @@ namespace KS.Reactor.Client.Unity.Editor
                     return;
                 }
             }
-            if (configWriter.Build(true, true, false, true))
+            if (configWriter.Build(true, true, true, ksServerScriptCompiler.Configurations.ONLINE_RELEASE))
             {
                 ksLog.Info("Build complete." + configWriter.Summary);
 

@@ -16,6 +16,7 @@ KinematicSoup Technologies Incorporated.
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using KS.Unity.Editor;
@@ -93,9 +94,10 @@ namespace KS.Reactor.Client.Unity.Editor
                 EditorApplication.delayCall += Compile;
             }
             ksFileWatcher.Flags flags = ksFileWatcher.Flags.ALL;
-            if (ksPathUtils.Create(ksPaths.CommonScripts, true) && ksPathUtils.Create(ksPaths.ServerRuntime, true))
+            if (ksPathUtils.Create(ksPaths.CommonScripts, true) && ksPathUtils.Create(ksPaths.ServerScripts, true))
             {
-                new ksFileWatcher(OnChange, "*.cs|*.dll", flags, ksPaths.ServerRuntime, ksPaths.CommonScripts).Start();
+                string[] paths = ksPaths.IterateCommonAndServerFolders().ToArray();
+                new ksFileWatcher(OnChange, "*.cs|*.dll", flags, paths).Start();
             }
         }
 
@@ -134,6 +136,12 @@ namespace KS.Reactor.Client.Unity.Editor
                 m_ignoredFiles.Remove(path);
                 return;
             }
+            string assetPath = ksPathUtils.ToAssetPath(path);
+            if (!ksPaths.IsServerPath(assetPath) && !ksPaths.IsCommonPath(assetPath))
+            {
+                // This is in a subfolder that has a different asmdef making it not a server or common folder.
+                return;
+            }
             RenamedEventArgs args = e as RenamedEventArgs;
             if (args != null)
             {
@@ -148,6 +156,10 @@ namespace KS.Reactor.Client.Unity.Editor
                 if (!ksReactorConfig.Instance.Server.AutoRebuildServerRuntime)
                 {
                     m_serverProjectDirty = true;
+                    if (path.EndsWith(".dll"))
+                    {
+                        ksServerProjectUpdater.Instance.UpdateAsmDefPrecompiledReferences();
+                    }
                     return;
                 }
                 m_compileRuntime = true;
@@ -165,8 +177,8 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <param name="newPath">Path server script was moved to.</param>
         private void HandleRename(string oldPath, string newPath)
         {
-            string oldName = ksPathUtils.GetFileName(oldPath);
-            string newName = ksPathUtils.GetFileName(newPath);
+            string oldName = ksPathUtils.GetName(oldPath);
+            string newName = ksPathUtils.GetName(newPath);
             if (oldName == newName)
             {
                 return;
@@ -244,7 +256,7 @@ namespace KS.Reactor.Client.Unity.Editor
         {
             try
             {
-                string name = ksPathUtils.GetFileName(path);
+                string name = ksPathUtils.GetName(path);
                 string[] paths = Directory.GetFiles(ksPaths.Proxies, name, SearchOption.AllDirectories);
                 if (paths.Length == 0)
                 {

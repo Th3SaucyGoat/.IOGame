@@ -66,13 +66,12 @@ namespace KS.Reactor.Client.Unity.Editor
                 m_foldout = EditorGUILayout.BeginFoldoutHeaderGroup(m_foldout, m_foldoutLabel);
                 if (m_foldout)
                 {
+                    EditorGUI.indentLevel++;
                     if (serializedObject.isEditingMultipleObjects)
                     {
-                        EditorGUI.indentLevel++;
                         EditorGUILayout.HelpBox(
                             "Cannot edit Reactor rigid body data for multiple game objects at once.",
                             MessageType.Warning);
-                        EditorGUI.indentLevel--;
                     }
                     else
                     {
@@ -89,57 +88,17 @@ namespace KS.Reactor.Client.Unity.Editor
                             }
                             if (spRigidBodyData.name != "ContactOffset")
                             {
-                                EditorGUI.indentLevel++;
-                                EditorGUILayout.BeginHorizontal();
-                                EditorGUI.BeginChangeCheck();
-                                // Get the tooltip using reflection because of Unity bug that causes the tooltip to be null
-                                // on the SerializedProperty.
+                                // Get the tooltip using reflection because of a Unity bug that causes the tooltip to
+                                // be null on the SerializedProperty.
                                 ksReflectionObject m_field = m_reflectionObj.GetField(spRigidBodyData.name);
                                 TooltipAttribute tooltipAttribute = m_field.FieldInfo == null ?
                                     null : m_field.FieldInfo.GetCustomAttribute<TooltipAttribute>();
                                 string tooltip = tooltipAttribute == null ? null : tooltipAttribute.tooltip;
-                                // Display a checkbox to override the property. The checkbox is unchecked if the value is negative.
-                                bool value = EditorGUILayout.Toggle(
-                                    new GUIContent(spRigidBodyData.displayName, tooltip),
-                                    spRigidBodyData.propertyType == SerializedPropertyType.Float ?
-                                    spRigidBodyData.floatValue >= 0 : spRigidBodyData.intValue >= 0);
-                                if (EditorGUI.EndChangeCheck())
-                                {
-                                    // Change the toggle value.
-                                    if (!value)
-                                    {
-                                        if (spRigidBodyData.propertyType == SerializedPropertyType.Float)
-                                        {
-                                            spRigidBodyData.floatValue = -1f;
-                                        }
-                                        else
-                                        {
-                                            spRigidBodyData.intValue = -1;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // If the toggle just became checked, set the value to the default value.
-                                        if (spRigidBodyData.propertyType == SerializedPropertyType.Float)
-                                        {
-                                            spRigidBodyData.floatValue = (float)m_field.GetValue();
-                                        }
-                                        else
-                                        {
-                                            spRigidBodyData.intValue = (int)m_field.GetValue();
-                                        }
-                                    }
-                                }
-                                EditorGUI.indentLevel--;
-                                // Display the property if the toggle is checked.
-                                if (value)
-                                {
-                                    EditorGUILayout.PropertyField(spRigidBodyData, new GUIContent(""));
-                                }
-                                EditorGUILayout.EndHorizontal();
+                                ksStyle.NumericOverrideField(spRigidBodyData, m_field.GetValue(), tooltip);
                             }
                         }
                     }
+                    EditorGUI.indentLevel--;
                 }
                 EditorGUILayout.EndFoldoutHeaderGroup();
             }

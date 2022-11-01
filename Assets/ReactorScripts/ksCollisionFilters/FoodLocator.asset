@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   __ksAssetId: 6
   m_group: 4
-  m_notify: 1
+  m_notify: 128
   m_collide: 0

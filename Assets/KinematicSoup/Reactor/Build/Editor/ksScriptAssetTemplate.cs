@@ -106,7 +106,7 @@ namespace KSProxies.Scripts%NAMESPACE%
         public string Generate(string path, string className, string scriptNamespace, HashSet<uint> optionalMethods)
         {
             ksServerProjectWatcher.Get().Ignore(path);
-            bool isServerScript = path.Replace('\\', '/').StartsWith(ksPaths.ServerRuntime);
+            bool isServerScript = ksPaths.IsServerPath(path);
             string template = CLASS_TEMPLATE
                 .Replace("%TAGS%", isServerScript ? "%DELETE%" : "[ksSharedData]")
                 .Replace("%NAME%", className);
@@ -134,16 +134,7 @@ namespace KSProxies.Scripts%NAMESPACE%
         public void HandleCreate(string path, string className, string scriptNamespace)
         {
             GenerateProxyScript(className, scriptNamespace);
-            if (path.Replace('\\', '/').StartsWith(ksPaths.ServerRuntime))
-            {
-                path = path.Substring(ksPaths.ServerRuntime.Length);
-                ksServerProjectUpdater.Instance.AddFileToProject(path);
-            }
-            else if (File.Exists(ksPaths.ServerRuntimeProject))
-            {
-                // Make the server runtime project aware of the new file.
-                File.SetLastWriteTime(ksPaths.ServerRuntimeProject, DateTime.Now);
-            }
+            ksServerProjectUpdater.Instance.AddFileToProject(path);
             AssetDatabase.Refresh();
         }
 

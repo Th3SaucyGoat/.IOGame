@@ -16,6 +16,7 @@ KinematicSoup Technologies Incorporated.
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -81,7 +82,7 @@ public class " + className + @" : ksPlayerController
     // Unique non-zero identifier for this player controller class.
     public override uint Type
     {
-        get { return 1; }
+        get { return %TYPE%; }
     }
 
     // Register all buttons and axes you will be using here.
@@ -111,6 +112,24 @@ public class " + className + @" : ksPlayerController
                 template += classBody + "}";
             }
 
+            uint type = 1;
+            try
+            {
+                Assembly assembly = Assembly.Load("KSScripts-Common");
+                ksPlayerControllerFactory factory = new ksPlayerControllerFactory();
+                factory.RegisterFromAssembly(assembly);
+                type = factory.NextUnusedType();
+            }
+            catch (FileNotFoundException)
+            {
+                // This happens when there are no common scripts.
+            }
+            catch (Exception e)
+            {
+                ksLog.Error(this, "Error loading player controller data from assembly 'KSScripts-Common'.", e);
+            }
+            template = template.Replace("%TYPE%", type.ToString());
+
             return template;
         }
 
@@ -120,11 +139,7 @@ public class " + className + @" : ksPlayerController
         /// <param name="scriptNamespace">Namespace of the generated class.</param>
         public void HandleCreate(string path, string className, string scriptNamespace)
         {
-            // Make the server runtime project aware of the new file
-            if (File.Exists(ksPaths.ServerRuntimeProject))
-            {
-                File.SetLastWriteTime(ksPaths.ServerRuntimeProject, DateTime.Now);
-            }
+            ksServerProjectUpdater.Instance.AddFileToProject(path);
             AssetDatabase.Refresh();
         }
     }

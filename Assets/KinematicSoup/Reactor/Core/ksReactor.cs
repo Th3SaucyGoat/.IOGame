@@ -130,7 +130,7 @@ namespace KS.Reactor.Client.Unity
             {
                 ksService.AppDataPath = Application.persistentDataPath;// This makes the path work on Android
                 m_service = new ksService();
-                Assembly gameAssembly = LoadReflectionData();
+                Assembly assembly = LoadReflectionData();
 
                 // Initialize player API
                 ksReactorConfig config = ksReactorConfig.Instance;
@@ -144,7 +144,7 @@ namespace KS.Reactor.Client.Unity
 
                 // Initialize prefab cache and asset loader.
                 m_prefabCache = new ksPrefabCache(m_assetBundles);
-                m_assetLoader = new ksAssetLoader(m_assetBundles, gameAssembly);
+                m_assetLoader = new ksAssetLoader(m_assetBundles, assembly);
                 ksScriptAsset.Assets = m_assetLoader;
                 // Load asset data from Resources.
                 RegisterResourceAssets();
@@ -294,21 +294,26 @@ namespace KS.Reactor.Client.Unity
         }
 
         /// <summary>Loads reflection data from developer scripts.</summary>
-        /// <returns>Game assembly.</returns>
+        /// <returns>Common assembly.</returns>
         private static Assembly LoadReflectionData()
         {
-            Assembly gameAssembly;
+            Assembly assembly;
             try
             {
-                gameAssembly = Assembly.Load("Assembly-CSharp");
+                assembly = Assembly.Load("KSScripts-Common");
+            }
+            catch (FileNotFoundException)
+            {
+                // This happens if there are no common scripts.
+                return null;
             }
             catch (Exception e)
             {
-                ksLog.Error(LOG_CHANNEL, "Unable to load Assembly-CSharp", e);
+                ksLog.Error(LOG_CHANNEL, "Unable to load KSScripts-Common", e);
                 return null;
             }
-            m_service.PlayerControllerFactory.RegisterFromAssembly(gameAssembly);
-            return gameAssembly;
+            m_service.PlayerControllerFactory.RegisterFromAssembly(assembly);
+            return assembly;
         }
     }
 }

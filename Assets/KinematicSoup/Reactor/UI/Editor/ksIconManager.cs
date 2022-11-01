@@ -39,6 +39,7 @@ namespace KS.Reactor.Client.Unity.Editor
         private const string SERVER_PLAYER_SCRIPT = "KSServerPlayerScript";
         private const string SCRIPT_ASSET = "KSScriptAsset";
         private const string COLLISION_FILTER = "KSCollisionFilter";
+        private const string PLAYER_CONTROLLER = "KSPlayerController";
 
         /// <summary>Iterates all Reactor scripts using reflection and sets their icons.</summary>
         public void SetScriptIcons()
@@ -69,6 +70,7 @@ namespace KS.Reactor.Client.Unity.Editor
             SetIcon<ksProxyRoomScript>(util, gameAssembly, SERVER_ROOM_SCRIPT);
             SetIcon<ksProxyPlayerScript>(util, gameAssembly, SERVER_PLAYER_SCRIPT);
             SetIcon<ksProxyScriptAsset>(util, gameAssembly, SCRIPT_ASSET);
+            SetIcon<ksPlayerControllerAsset>(util, gameAssembly, PLAYER_CONTROLLER);
             SetIcon<ksPredictor>(util, gameAssembly, PREDICTOR);
 
             util.SetIcon<ksEntityComponent>(LoadIcon(ENTITY));
@@ -77,6 +79,7 @@ namespace KS.Reactor.Client.Unity.Editor
             util.SetIcon<ksConeCollider>(LoadIcon(CONE_COLLIDER));
             util.SetIcon<ksCylinderCollider>(LoadIcon(CYLINDER_COLLIDER));
             util.SetIcon<ksCollisionFilterAsset>(LoadIcon(COLLISION_FILTER));
+            util.SetIcon<ksPlayerControllerAsset>(LoadIcon(PLAYER_CONTROLLER));
             util.SetIcon<ksNewClientEntityScript>(LoadIcon(CLIENT_ENTITY_SCRIPT));
             util.SetIcon<ksNewClientRoomScript>(LoadIcon(CLIENT_ROOM_SCRIPT));
             util.SetIcon<ksNewClientPlayerScript>(LoadIcon(CLIENT_PLAYER_SCRIPT));

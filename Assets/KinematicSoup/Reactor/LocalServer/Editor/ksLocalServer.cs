@@ -320,7 +320,7 @@ namespace KS.Reactor.Client.Unity.Editor
             arguments += " -id=1";
             arguments += " -t=\"" + m_room + "\"";
             arguments += " -s=\"" + m_scene + "\"";
-            arguments += " -rt=KSServerRuntime.Local.dll";
+            arguments += " -rt=\"KSServerRuntime.Local.dll\"";
             arguments += " -" + m_protocol + "=" + m_port;
             arguments += " -l=\"" + m_logFile + "\"";
             arguments += " -api-url=\"" + ksReactorConfig.Instance.Urls.PlayerAPI + "\"";

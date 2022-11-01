@@ -79,7 +79,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void StartMatchTimer()
     {
-        matchingStartingTimer = FunctionTimer.Create(StartMatch, 5.0f);
+        matchingStartingTimer = FunctionTimer.Create(StartMatch, 1.0f);
         matchingStartingTimer.Start();
         redMenuText.GetComponent<MatchInProgress>().DisplayMatchStartTimeout(matchingStartingTimer);
     }

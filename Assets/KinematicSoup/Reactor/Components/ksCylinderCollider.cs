@@ -16,6 +16,7 @@ KinematicSoup Technologies Incorporated.
 using System;
 using System.IO;
 using UnityEngine;
+using KS.LZMA;
 
 namespace KS.Reactor.Client.Unity
 {
@@ -163,7 +164,22 @@ namespace KS.Reactor.Client.Unity
         /// </summary>
         public ksBounds Bounds
         {
-            get { return m_childCollider.bounds; }
+            get
+            {
+                if (m_childCollider != null)
+                {
+                    return m_childCollider.bounds;
+                }
+                if (!Application.isPlaying)
+                {
+                    ksLog.Warning(this, "Cannot access Bounds outside of play mode.");
+                }
+                else
+                {
+                    ksLog.Warning(this, "Cannot access Bounds; child collider is null.");
+                }
+                return new ksBounds();
+            }
         }
 
         /// <summary>Physics material</summary>
@@ -233,8 +249,33 @@ namespace KS.Reactor.Client.Unity
 
         /// <summary>Get/Set contact offset on a collider</summary>
         public float ContactOffset {
-            get { return m_childCollider.contactOffset; }
-            set { m_childCollider.contactOffset = value; }
+            get
+            {
+                if (m_childCollider != null)
+                {
+                    return m_childCollider.contactOffset;
+                }
+                ksEntityComponent entity = EntityComponent;
+                ksColliderData colliderData;
+                if (entity != null && entity.TryGetColliderData(this, out colliderData))
+                {
+                    return colliderData.ContactOffset;
+                }
+                return 0.01f;
+            }
+            set
+            {
+                if (m_childCollider != null)
+                {
+                    m_childCollider.contactOffset = value;
+                }
+                ksEntityComponent entity = EntityComponent;
+                ksColliderData colliderData;
+                if (entity != null && entity.TryGetColliderData(this, out colliderData))
+                {
+                    colliderData.ContactOffset = value;
+                }
+            }
         }
 
         private GameObject m_child;
@@ -256,6 +297,13 @@ namespace KS.Reactor.Client.Unity
             m_childCollider.isTrigger = m_isTrigger;
             m_childCollider.sharedMesh = ksCylinderMeshFactory.GetMesh(m_radius, m_height, m_direction, m_numSides);
             m_childCollider.convex = true;
+
+            ksEntityComponent entity = EntityComponent;
+            ksColliderData colliderData;
+            if (entity != null && entity.TryGetColliderData(this, out colliderData) && colliderData.ContactOffset > 0f)
+            {
+                m_childCollider.contactOffset = colliderData.ContactOffset;
+            }
         }
 
         /// <summary>
@@ -284,14 +332,6 @@ namespace KS.Reactor.Client.Unity
             return m_center;
         }
 
-        /// <summary>Center of mass of the cylinder.</summary>
-        /// <returns>Center of mass</returns>
-        [Obsolete("Use GeometricCenter() instead.")]
-        public Vector3 CenterOfMass()
-        {
-            return GeometricCenter();
-        }
-
         /// <summary>Serializes the cylinder collider by generating convex hull vertices.</summary>
         /// <returns>Serialized geometry</returns>
         public byte[] Serialize()
@@ -315,7 +355,7 @@ namespace KS.Reactor.Client.Unity
                 }
             }
 
-            return geometry;
+            return ksLZMA.Compress(geometry);
         }
 
         /// <summary>Compare the geometry sources of each collider and return true if they are equal.</summary>

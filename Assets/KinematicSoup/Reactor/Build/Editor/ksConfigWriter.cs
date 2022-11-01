@@ -63,7 +63,7 @@ namespace KS.Reactor.Client.Unity.Editor
         private static ksSceneTracker m_sceneTracker = null;
 
         // Geometry Tracking
-        private static ushort GEOMETRY_FILE_VERSION = 1;
+        private static ushort GEOMETRY_FILE_VERSION = 2;
         private List<GeometryData> m_geometryCache = new List<GeometryData>();
         private List<GeometryData> m_instanceGeometryCache = new List<GeometryData>();
 
@@ -122,17 +122,20 @@ namespace KS.Reactor.Client.Unity.Editor
         private string m_summary = "";
 
         /// <summary>Build the project.</summary>
-        /// <param name="rebuildAllConfigs">Rebuild all project configs.</param>
-        /// <param name="rebuildRuntime">Rebuild the server runtime.</param>
+        /// <param name="buildConfigs">Build server configs files when this parameter is true.</param>
+        /// <param name="buildRuntime">Build the server runtime when this parameter is true.</param>
+        /// <param name="rebuildAllConfigs">Rebuild all server config files when <paramref name="buildConfigs"/> is true.</param>
+        /// <param name="runtimeConfig">Sets the runtime configuration to build when <paramref name="buildRuntime"/> is true.</param>
         /// <param name="regenProjectFiles">Regenerate the runtime solution and project files.</param>
-        /// <param name="publish">Build to the publish directory.</param>
         /// <returns>True if no errors were encountered.</returns>
         public bool Build(
+            bool buildConfigs = true,
+            bool buildRuntime = true,
             bool rebuildAllConfigs = true,
-            bool rebuildRuntime = true,
-            bool regenProjectFiles = false,
-            bool publish = false)
+            ksServerScriptCompiler.Configurations runtimeConfig = ksServerScriptCompiler.Configurations.LOCAL_RELEASE,
+            bool regenProjectFiles = false)
         {
+            ksBuildEvents.InvokePreBuild();
             if (m_sceneTracker == null)
             {
                 m_sceneTracker = ScriptableObject.CreateInstance<ksSceneTracker>();
@@ -151,71 +154,30 @@ namespace KS.Reactor.Client.Unity.Editor
                 }
 
                 // Build the runtime
-                if (rebuildRuntime)
+                if (buildRuntime)
                 {
                     UpdateProgressBar("KS Reactor - Building runtime", null, 0.1f);
-                    ksServerScriptCompiler.Configurations configuration = publish ?
-                        ksServerScriptCompiler.Configurations.ONLINE_RELEASE : ksServerScriptCompiler.Configurations.LOCAL_RELEASE;
-                    if (!RebuildRuntime(configuration, regenProjectFiles))
+                    if (!BuildRuntime(runtimeConfig, regenProjectFiles))
                     {
+                        ksBuildEvents.InvokePostBuild(false);
                         return false;
                     }
                 }
 
-                // Write the common config file
-                UpdateProgressBar("KS Reactor - Writing common configs", null, 0.4f);
-                ksBuildEvents.InvokePreBuildConfig(new Scene());
-                bool buildSuccess = WriteCommonConfig();
-                ksBuildEvents.InvokePostBuildConfig(new Scene(), buildSuccess);
-                if (!buildSuccess)
+                // Build config files
+                if (buildConfigs)
                 {
-                    return false;
-                }
-
-                // Write scene files
-                bool success = true;
-                if (rebuildAllConfigs)
-                {
-                    DeleteAllSceneConfigs();
-                    m_sceneTracker.Clear();
-                }
-
-                // Track the current scene layout
-                SceneSetup[] sceneSetup = EditorSceneManager.GetSceneManagerSetup();
-
-                // Write new scene configs
-                List<string> scenePaths = m_sceneTracker.GetModifiedScenes();
-                for (int i = 0; i < scenePaths.Count; i++)
-                {
-                    string path = scenePaths[i];
-                    Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
-                    UpdateProgressBar(
-                        "KS Reactor - Writing scene configs (" + (i+1) + " of " + scenePaths.Count + "): " + scene.name,
-                        null, 0.6f
-                    );
-
-                    ksBuildEvents.InvokePreBuildConfig(scene);
-                    SceneBuildResults result = WriteSceneConfig(scene);
-                    ksBuildEvents.InvokePostBuildConfig(scene, result != SceneBuildResults.ERROR);
-                    if (result == SceneBuildResults.ERROR)
+                    UpdateProgressBar("KS Reactor - Writing common configs", null, 0.4f);
+                    if (!BuildConfigs(rebuildAllConfigs))
                     {
-                        success = false;
-                        break;
+                        ksBuildEvents.InvokePostBuild(false);
+                        return false;
                     }
-                    m_sceneTracker.TrackScene(path, result == SceneBuildResults.SUCCESS);
-                }
-                // Restore the scene layout
-                EditorSceneManager.RestoreSceneManagerSetup(sceneSetup);
-                ExpandSceneHierarchy(EditorSceneManager.GetActiveScene(), true);
-
-                if (!success)
-                {
-                    return false;
                 }
 
-                // Write geometry data file
-                UpdateProgressBar("KS Reactor - Writing geometry data.", null, 0.8f);
-                return WriteGeometryCache(ksPaths.GeometryFile, m_geometryCache, null);
+                
+                ksBuildEvents.InvokePostBuild(true);
+                return true;
             }
             finally
             {
@@ -227,9 +189,9 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <param name="configuration">Build configuration.</param>
         /// <param name="regenProjectFiles">Regenerate the runtime solution and project files.</param>
         /// <returns>True if no errors were encountered.</returns>
-        public bool RebuildRuntime(
-            ksServerScriptCompiler.Configurations configuration = ksServerScriptCompiler.Configurations.LOCAL_RELEASE,
-            bool regenProjectFiles = false)
+        private bool BuildRuntime(
+            ksServerScriptCompiler.Configurations configuration,
+            bool regenProjectFiles)
         {
             if (regenProjectFiles && !(ksPathUtils.Delete(ksPaths.ServerRuntimeProject) && ksPathUtils.Delete(ksPaths.ServerRuntimeSolution)))
             {
@@ -241,13 +203,74 @@ namespace KS.Reactor.Client.Unity.Editor
                 ksServerProjectUpdater.Instance.UpdateOutputPath();
             }
             // Rebuild the new runtime
-            if (ksServerScriptCompiler.Instance.BuildServerRuntimeSync(true, configuration) ==
+            if (ksServerScriptCompiler.Instance.BuildServerRuntimeSync(true, configuration, !regenProjectFiles) ==
                 ksServerScriptCompiler.CompileResults.SUCCESS)
             {
                 AddSummaryMessage("Updated " + ksPaths.BuildDir + "KSServerRuntime.dll");
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Build the Reactor config files.
+        /// </summary>
+        /// <param name="rebuildAllConfigs">Delete existing config files and rebuild all of them.</param>
+        /// <returns>True if the build process completed without errors.</returns>
+        private bool BuildConfigs(bool rebuildAllConfigs)
+        {
+            // Build the game config
+            ksBuildEvents.InvokePreBuildConfig(new Scene());
+            bool buildSuccess = WriteCommonConfig();
+            ksBuildEvents.InvokePostBuildConfig(new Scene(), buildSuccess);
+            if (!buildSuccess)
+            {
+                return false;
+            }
+
+            if (rebuildAllConfigs)
+            {
+                DeleteAllSceneConfigs();
+                m_sceneTracker.Clear();
+            }
+
+            bool success = true;
+            // Track the current scene layout
+            SceneSetup[] sceneSetup = EditorSceneManager.GetSceneManagerSetup();
+
+            // Write new scene configs
+            List<string> scenePaths = m_sceneTracker.GetModifiedScenes();
+            for (int i = 0; i < scenePaths.Count; i++)
+            {
+                string path = scenePaths[i];
+                Scene scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+                UpdateProgressBar(
+                    "KS Reactor - Writing scene configs (" + (i + 1) + " of " + scenePaths.Count + "): " + scene.name,
+                    null, 0.6f
+                );
+
+                ksBuildEvents.InvokePreBuildConfig(scene);
+                SceneBuildResults result = WriteSceneConfig(scene);
+                ksBuildEvents.InvokePostBuildConfig(scene, result != SceneBuildResults.ERROR);
+                if (result == SceneBuildResults.ERROR)
+                {
+                    success = false;
+                    break;
+                }
+                m_sceneTracker.TrackScene(path, result == SceneBuildResults.SUCCESS);
+            }
+            // Restore the scene layout
+            EditorSceneManager.RestoreSceneManagerSetup(sceneSetup);
+            ExpandSceneHierarchy(EditorSceneManager.GetActiveScene(), true);
+
+            if (!success)
+            {
+                return false;
+            }
+
+            // Write geometry data file
+            UpdateProgressBar("KS Reactor - Writing geometry data.", null, 0.8f);
+            return WriteGeometryCache(ksPaths.GeometryFile, m_geometryCache, null);
         }
 
         /// <summary>Create and write a new common config.</summary>
@@ -658,7 +681,26 @@ namespace KS.Reactor.Client.Unity.Editor
             }
             ksJSON json = new ksJSON();
             json["asset"] = assetId;
+            if (asset is ksPlayerControllerAsset && !IsInResourcesOrAssetBundle(asset))
+            {
+                ksLog.Warning(this, "Player controller asset '" + AssetDatabase.GetAssetPath(asset) +
+                    "' cannot be used because it is not in Resources or an asset bundle.");
+            }
             return json;
+        }
+
+        /// <summary>Checks if an asset is in a Resources folder or an asset bundle.</summary>
+        /// <param name="asset">Asset to check.</param>
+        /// <returns>True if the asset is in Resources or an asset bundle.</returns>
+        private bool IsInResourcesOrAssetBundle(UnityEngine.Object asset)
+        {
+            string path = AssetDatabase.GetAssetPath(asset);
+            path = ksPathUtils.Clean(path);
+            if (path.IndexOf(Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar) >= 0)
+            {
+                return true;
+            }
+            return !string.IsNullOrEmpty(AssetDatabase.GetImplicitAssetBundleName(path));
         }
 
         /// <summary>
@@ -769,6 +811,12 @@ namespace KS.Reactor.Client.Unity.Editor
                 if (entity.IsPermanent != prefabPermanent)
                 {
                     jsonInstance["is permanent"] = entity.IsPermanent ? 1 : 0;
+                }
+
+                if ((prefabEntity == null && entity.SyncGroup != 0) ||
+                    (prefabEntity != null && entity.SyncGroup != prefabEntity.SyncGroup))
+                {
+                    jsonInstance["sync group"] = Math.Min(entity.SyncGroup, ksFixedDataWriter.ENCODE_4BYTE);
                 }
 
                 // Collision filter
@@ -891,6 +939,7 @@ namespace KS.Reactor.Client.Unity.Editor
                 json["transform precision"] = jsonPrecision;
             }
 
+            // Cluster
             if (prefabType == null || prefabType.ClusterReconnectDelay != roomType.ClusterReconnectDelay)
             {
                 json["cluster reconnect delay"] = (int)roomType.ClusterReconnectDelay;
@@ -898,6 +947,20 @@ namespace KS.Reactor.Client.Unity.Editor
             if (prefabType == null || prefabType.ClusterReconnectAttempts != roomType.ClusterReconnectAttempts)
             {
                 json["cluster reconnect attempts"] = roomType.ClusterReconnectAttempts;
+            }
+
+            // Threading
+            if (prefabType == null || prefabType.PhysicsThreads != roomType.PhysicsThreads)
+            {
+                json["physics threads"] = roomType.PhysicsThreads;
+            }
+            if (prefabType == null || prefabType.NetworkThreads != roomType.NetworkThreads)
+            {
+                json["network threads"] = roomType.NetworkThreads;
+            }
+            if (prefabType == null || prefabType.EncodingThreads != roomType.EncodingThreads)
+            {
+                json["encoding threads"] = roomType.EncodingThreads;
             }
 
             CreatePhysicsConfig(json, gameObject);
@@ -1083,13 +1146,16 @@ namespace KS.Reactor.Client.Unity.Editor
             ref uint nextId)
         {
             ksEntityComponent entity = GetSingleComponent<ksEntityComponent>(prefab);
-            if (entity != null)
+            if (entity != null && entity.enabled)
             {
                 jsonCollection.Add(CreateEntityType(type, entity, assetList, usedIds, ref nextId));
             }
             foreach (Transform child in prefab.transform)
             {
-                CreateEntityCollection(type, child.gameObject, jsonCollection, assetList, usedIds, ref nextId);
+                if (child.gameObject.activeSelf)
+                {
+                    CreateEntityCollection(type, child.gameObject, jsonCollection, assetList, usedIds, ref nextId);
+                }
             }
         }
 
@@ -1141,6 +1207,11 @@ namespace KS.Reactor.Client.Unity.Editor
             if (entity.IsPermanent)
             {
                 json["is permanent"] = 1;
+            }
+
+            if (entity.SyncGroup != 0)
+            {
+                json["sync group"] = Math.Min(entity.SyncGroup, ksFixedDataWriter.ENCODE_4BYTE);
             }
 
             if (entity.CollisionFilter != null)
@@ -1421,7 +1492,9 @@ namespace KS.Reactor.Client.Unity.Editor
                 }
                 enterChildren = false;
                 // If the prefab instance script has the same value as the prefab, we don't write it.
-                if (isPrefabComponent && !iter.prefabOverride)
+                // Always write it if it references a scene object since the prefab and instance will always
+                // reference different objects.
+                if (isPrefabComponent && !iter.prefabOverride && !IsSceneObjectReference(iter))
                 {
                     continue;
                 }
@@ -1448,6 +1521,16 @@ namespace KS.Reactor.Client.Unity.Editor
             return jsonScript;
         }
 
+        /// <summary>Checks if a property is referencing a scene object.</summary>
+        /// <param name="property">Property to check.</param>
+        /// <returns>True if the property is referencing a scene object.</returns>
+        private bool IsSceneObjectReference(SerializedProperty property)
+        {
+            return property.propertyType == SerializedPropertyType.ObjectReference &&
+                property.objectReferenceValue != null && 
+                string.IsNullOrEmpty(AssetDatabase.GetAssetPath(property.objectReferenceValue));
+        }
+
         /// <summary>
         /// Create a config for a <see cref="KS.Reactor.Server.ksCollider"/> script.
         /// </summary>
@@ -1463,12 +1546,16 @@ namespace KS.Reactor.Client.Unity.Editor
             ksIUnityCollider collider = component is Collider ? new ksUnityCollider((Collider)component) : component as ksIUnityCollider;
             ksEntityComponent entity = gameObject.GetComponent<ksEntityComponent>();
             ksCollisionFilterAsset collisionFilter = entity.GetCollisionFilterAsset(collider, false);
+            ksColliderData colliderData;
+            entity.TryGetColliderData(collider, out colliderData);
 
             ksIUnityCollider prefabCollider = null;
             ksCollisionFilterAsset prefabCollisionFilter = null;
+            ksColliderData prefabColliderData = null;
 
             // Check for differences between the prefab and instance colliders
             bool isDefault = false;
+            string prefabScriptName = null;
             if (isInstance && isPrefabComponent)
             {
                 // Get prefab collider objects and components
@@ -1476,6 +1563,13 @@ namespace KS.Reactor.Client.Unity.Editor
                 Component prefabComponent = PrefabUtility.GetCorrespondingObjectFromSource(component);
                 prefabCollider = prefabEntity.GetCollider(prefabComponent, false);
                 prefabCollisionFilter = prefabEntity.GetCollisionFilterAsset(prefabCollider, false);
+                if (prefabCollider != null)
+                {
+                    prefabEntity.TryGetColliderData(prefabCollider, out prefabColliderData);
+                    prefabScriptName = GetScriptName<ksProxyEntityScript>(
+                            prefabComponent.gameObject,
+                            prefabComponent);
+                }
 
                 isDefault = true;
                 // Check Unity component for override values
@@ -1504,7 +1598,11 @@ namespace KS.Reactor.Client.Unity.Editor
             }
 
             // Create new collider config
-            if (!isPrefabComponent)
+
+            // If the component is a MeshCollider and the instance overrides the MeshCollider.convex,
+            // the script name will be different from the prefab. If MeshCollider.convex is true,
+            // the name will be ".ksConvexMeshCollider". Otherwise, it will be ".ksTriangleMeshCollider".
+            if (scriptName != prefabScriptName)
             {
                 jsonScript["name"] = scriptName;
             }
@@ -1518,6 +1616,11 @@ namespace KS.Reactor.Client.Unity.Editor
             jsonParams["trigger flag"] = collider.IsTrigger;
             jsonParams["simulation flag"] = collider.IsSimulationCollider;
             jsonParams["query flag"] = collider.IsQueryCollider;
+            if (colliderData != null && (prefabColliderData == null ? 
+                colliderData.ContactOffset >= 0 : colliderData.ContactOffset != prefabColliderData.ContactOffset))
+            {
+                jsonParams["contact offset"] = colliderData.ContactOffset;
+            }
             jsonParams["enabled"] = collider.IsEnabled;
             if (jsonParams.Count > 0)
             {
@@ -2081,6 +2184,10 @@ namespace KS.Reactor.Client.Unity.Editor
                     GameObject.DestroyImmediate(m_scriptDefaults);
                     return null;
                 }
+                if (!prefab.GameObject.activeSelf)
+                {
+                    continue;
+                }
 
                 if (CreateRoomType(jsonRooms, prefab.GameObject))
                 {
@@ -2184,10 +2291,20 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <returns>True if any entity components were found on the object or its descendants.</returns>
         private bool FindEntityComponents(GameObject gameObject, HashSet<uint> usedIds, Dictionary<int, ksIUnityCollider> shapeMap)
         {
+            bool foundEntity = false;
             ksEntityComponent[] entities = gameObject.GetComponentsInChildren<ksEntityComponent>();
             foreach (ksEntityComponent entity in entities)
             {
-                if (entity.AssetId != 0 && !usedIds.Add(entity.AssetId))
+                if (!entity.enabled)
+                {
+                    continue;
+                }
+                foundEntity = true;
+                // If this is a nested prefab with the same id as the source prefab, change the nested prefab's id so
+                // it will override the source prefab.
+                ksEntityComponent prefab = PrefabUtility.GetCorrespondingObjectFromSource(entity);
+                if (entity.AssetId != 0 &&
+                    ((prefab != null && prefab.AssetId == entity.AssetId) || !usedIds.Add(entity.AssetId)))
                 {
                     LogDuplicateAssetId(entity.AssetId);
                     entity.AssetId = 0;
@@ -2223,7 +2340,7 @@ namespace KS.Reactor.Client.Unity.Editor
                     }
                 }
             }
-            return entities.Length > 0;
+            return foundEntity;
         }
 
         /// <summary>
@@ -2410,9 +2527,9 @@ namespace KS.Reactor.Client.Unity.Editor
                 {
                     m_sceneTracker.RemoveAssetSceneReferences(scenePath);
                 }
-                using (MemoryStream memStream = new MemoryStream())
+                using (FileStream fileStream = new FileStream(path, FileMode.Create))
                 {
-                    using (BinaryWriter writer = new BinaryWriter(memStream))
+                    using (BinaryWriter writer = new BinaryWriter(fileStream))
                     {
                         // data offset
                         int dataStart = sizeof(ushort) + sizeof(uint) + cache.Count * (3 * sizeof(int) + 1);
@@ -2451,13 +2568,7 @@ namespace KS.Reactor.Client.Unity.Editor
                             {
                                 continue;
                             }
-                            memStream.Write(data.Geometry, 0, data.Geometry.Length);
-                        }
-
-                        using (FileStream fileStream = new FileStream(path, FileMode.Create))
-                        {
-                            ksICompressionTask task = ksLZMA.GetCompressTask(memStream, fileStream, null);
-                            while (!task.IsComplete);
+                            fileStream.Write(data.Geometry, 0, data.Geometry.Length);
                         }
                     }
                 }

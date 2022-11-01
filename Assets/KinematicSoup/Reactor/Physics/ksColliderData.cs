@@ -49,10 +49,6 @@ namespace KS.Reactor.Client.Unity
             "If false, physics queries will never return this collider in results.")]
         public bool IsQuery = true;
 
-        [HideInInspector]
-        [Obsolete("Use IsSimulation and IsQuery instead.")]
-        public ksShape.ColliderFlags Flag;
-
         /// <summary>
         /// Collision filter on a specific collder. This overrides the collision filter
         /// set in the scene or whole entity.
@@ -60,5 +56,13 @@ namespace KS.Reactor.Client.Unity
         [Tooltip("Set the collision filter on a specific collder. " +
             "This overrides the collision filter set in the scene or whole entity.")]
         public ksCollisionFilterAsset Filter;
+
+        /// <summary>
+        /// Colliders whose distance is less than the sum of their contact offset values will generate contacts.
+        /// </summary>
+        [Tooltip(
+            "Colliders whose distance is less than the sum of their contact offset values will generate contacts. " +
+            "(Unchecked = Use default room settings)")]
+        public float ContactOffset = -1f;
     }
 }

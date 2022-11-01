@@ -159,15 +159,17 @@ namespace KS.Reactor.Client.Unity.Samples
         /// <param name="roomInfo">Information needed to connect to a server room.</param>
         private void ConnectToRoom(ksRoomInfo roomInfo)
         {
-            m_room = new ksRoom(roomInfo);
-            m_room.OnConnect += OnConnect;
-            m_room.OnDisconnect += OnDisconnect;
+            if (m_room == null)
+            {
+                m_room = new ksRoom(roomInfo);
+                m_room.OnConnect += OnConnect;
+                m_room.OnDisconnect += OnDisconnect;
+            }
 
 #if UNITY_WEBGL && !UNITY_EDITOR
             ksWSConnection.Config.Secure = ConnectionMethod == ServerConnectionMethods.ONLINE;
             m_room.Protocol = ksConnection.Protocols.WEBSOCKETS;
 #endif
-
             if (m_session != null)
             {
                 m_room.Connect(m_session);
@@ -190,6 +192,8 @@ namespace KS.Reactor.Client.Unity.Samples
             else
             {
                 ksLog.Error(this, "Unable to connect to " + m_room + ". Status = " + status + "(" + customStatus + ")");
+                m_room.CleanUp();
+                m_room = null;
             }
         }
 
@@ -198,6 +202,8 @@ namespace KS.Reactor.Client.Unity.Samples
         private void OnDisconnect(ksBaseRoom.DisconnectError status)
         {
             ksLog.Info("Disconnected from " + m_room + ". Status = " + status);
+            m_room.CleanUp();
+            m_room = null;
         }
     }
 }

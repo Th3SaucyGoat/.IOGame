@@ -1,5 +1,7 @@
 using UnityEditor;
 using UnityEngine;
+using System.Reflection;
+using KS.Unity.Editor;
 
 namespace KS.Reactor.Client.Unity.Editor
 {
@@ -11,6 +13,7 @@ namespace KS.Reactor.Client.Unity.Editor
     {
         protected static GUIContent m_foldoutLabel;
         private static bool m_foldout = false;
+        private static string m_contactOffsetTooltip;
 
         /// <summary>
         /// Draw the base inspector without changes and append inspector GUI elements for the <see cref="ksColliderData"/>
@@ -71,7 +74,24 @@ namespace KS.Reactor.Client.Unity.Editor
                             {
                                 break;
                             }
-                            EditorGUILayout.PropertyField(spColliderData);
+                            if (spColliderData.name == "ContactOffset")
+                            {
+                                if (m_contactOffsetTooltip == null)
+                                {
+                                    // Get the tooltip using reflection because of a Unity bug that causes the tooltip to
+                                    // be null on the SerializedProperty.
+                                    FieldInfo field = new ksReflectionObject(typeof(ksColliderData))
+                                        .GetField("ContactOffset").FieldInfo;
+                                    TooltipAttribute tooltipAttribute = field == null ?
+                                        null : field.GetCustomAttribute<TooltipAttribute>();
+                                    m_contactOffsetTooltip = tooltipAttribute == null ? "" : tooltipAttribute.tooltip;
+                                }
+                                ksStyle.NumericOverrideField(spColliderData, .01f, m_contactOffsetTooltip);
+                            }
+                            else
+                            {
+                                EditorGUILayout.PropertyField(spColliderData);
+                            }
                         }
                     }
                     EditorGUI.indentLevel--;

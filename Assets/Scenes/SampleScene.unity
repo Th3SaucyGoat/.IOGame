@@ -535,6 +535,9 @@ MonoBehaviour:
   m_clusterReconnectDelay: 10
   m_shutdownWithoutCluster: 0
   m_clusterReconnectAttempts: 3
+  m_physicsThreads: 4
+  m_networkThreads: 4
+  m_encodingThreads: 4
   m_port: 8000
 --- !u!4 &406147794
 Transform:

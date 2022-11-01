@@ -80,7 +80,7 @@ namespace KS.Reactor.Client.Unity.Editor
             }
             ksConfigWriter configWriter = new ksConfigWriter();
             configWriter.PrettyConfigs = true;
-            if (configWriter.Build(false, false))
+            if (configWriter.Build(true, false, false))
             {
                 ksLog.Info("Build complete." + configWriter.Summary);
                 ksLocalServer.Manager.StopServers();
@@ -103,7 +103,7 @@ namespace KS.Reactor.Client.Unity.Editor
             try
             {
                 ksConfigWriter configWriter = new ksConfigWriter();
-                if (configWriter.RebuildRuntime())
+                if (configWriter.Build(false, true))
                 {
                     buildSuccess = true;
                     ksLog.Info("Config build complete." + configWriter.Summary);
@@ -127,9 +127,10 @@ namespace KS.Reactor.Client.Unity.Editor
 
             ksConfigWriter configWriter = new ksConfigWriter();
             configWriter.PrettyConfigs = true;
-            if (configWriter.Build(true, true, true))
+            if (configWriter.Build(true, true, true, ksServerScriptCompiler.Configurations.LOCAL_RELEASE, true))
             {
                 ksLog.Info("Config and server build complete." + configWriter.Summary);
+                ksLocalServer.Manager.RestartOrRemoveStoppedServers();
             }
         }
 
@@ -137,7 +138,7 @@ namespace KS.Reactor.Client.Unity.Editor
         [MenuItem(ksMenuNames.REACTOR + "Launch Local Cluster", priority = ksStyle.BUILD_GROUP)]
         private static void LaunchLocalCluster()
         {
-            ksLocalServerMenu.Open();
+            ksLocalServerMenu.Open(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
         }
 
         /// <summary>Context menu for creating a <see cref="ksRoomScript"/> in the project views right click menu.</summary>
@@ -185,15 +186,14 @@ namespace KS.Reactor.Client.Unity.Editor
         [MenuItem(ksMenuNames.CREATE + "Client Room Script", true)]
         [MenuItem(ksMenuNames.CREATE + "Client Player Script", true)]
         [MenuItem(ksMenuNames.CREATE + "Client Entity Script", true)]
-        [MenuItem(ksMenuNames.CREATE + "Collision Filter", true)]
-        [MenuItem(ksMenuNames.CREATE + "Predictor Script", true)]
+        [MenuItem(ksMenuNames.CREATE + "Predictor", true)]
         static bool ValidateClientScriptPath()
         {
             string path = GetSelectedFolder();
             return !string.IsNullOrEmpty(path) &&
-                !path.StartsWith(ksPaths.CommonScripts) &&
+                !ksPaths.IsCommonPath(path) &&
                 !path.StartsWith(ksPaths.Proxies) &&
-                !path.StartsWith(ksPaths.ServerRuntime) &&
+                !ksPaths.IsServerPath(path) &&
                 !Application.isPlaying;
         }
 
@@ -216,7 +216,7 @@ namespace KS.Reactor.Client.Unity.Editor
         {
             string path = GetSelectedFolder();
             return !string.IsNullOrEmpty(path) &&
-                path.StartsWith(ksPaths.CommonScripts) &&
+                ksPaths.IsCommonPath(path) &&
                 !Application.isPlaying;
         }
 
@@ -271,7 +271,7 @@ namespace KS.Reactor.Client.Unity.Editor
         {
             string path = GetSelectedFolder();
             return !string.IsNullOrEmpty(path) &&
-                path.StartsWith(ksPaths.ServerRuntime) &&
+                ksPaths.IsServerPath(path) &&
                 !Application.isPlaying;
         }
 
@@ -280,7 +280,11 @@ namespace KS.Reactor.Client.Unity.Editor
         [MenuItem(ksMenuNames.CREATE + "Script Asset", true)]
         static bool ValidateScriptAssetPath()
         {
-            return ValidateServerScriptPath() || ValidatePlayerControllerPath();
+            string path = GetSelectedFolder();
+            return !string.IsNullOrEmpty(path) &&
+                (ksPaths.IsServerPath(path) ||
+                ksPaths.IsCommonPath(path)) &&
+                !Application.isPlaying;
         }
 
         /// <summary>

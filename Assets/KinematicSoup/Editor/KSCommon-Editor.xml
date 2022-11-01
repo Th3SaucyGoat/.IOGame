@@ -224,11 +224,13 @@
             Sets a define symbol for the current build target.
             
             @param   string symbol to define.
+            @return  bool true if the define symbol was added. False if it was already defined.
         </member>
         <member name="M:KS.Unity.Editor.ksEditorUtils.ClearDefineSymbol(System.String)">
             Clears a define symbol for the current build target.
             
             @param   string symbol to clear
+            @return  bool true if the define symbol was removed. False if it was not defined.
         </member>
         <member name="M:KS.Unity.Editor.ksEditorUtils.GetPropertyValue``1(UnityEditor.SerializedProperty,UnityEngine.Object)">
             Gets the value of a serialized property using reflection.
@@ -483,6 +485,9 @@
         <member name="T:KS.Unity.Editor.ksPathUtils.LoggingFlags">
             Types of log messages to log.
         </member>
+        <member name="M:KS.Unity.Editor.ksPathUtils.#cctor">
+            Static initialization
+        </member>
         <member name="P:KS.Unity.Editor.ksPathUtils.ProjectRoot">
             The root of the Unity project.
         </member>
@@ -492,10 +497,11 @@
             @param   string path to get directory for.
             @return  string directory
         </member>
-        <member name="M:KS.Unity.Editor.ksPathUtils.GetFileName(System.String)">
+        <member name="M:KS.Unity.Editor.ksPathUtils.GetName(System.String,System.Boolean)">
             Gets the file name portion of a path.
             
             @param   string path to get file name for.
+            @param   includeExt - if false, will remove the file extension from the name.
             @return  string file name.
         </member>
         <member name="M:KS.Unity.Editor.ksPathUtils.Clean(System.String)">
@@ -521,6 +527,13 @@
             
             @param   string path to convert.
             @return  string Unity asset path.
+        </member>
+        <member name="M:KS.Unity.Editor.ksPathUtils.MakeRelative(System.String,System.String)">
+            Converts a path to be relative to another path.
+            
+            @param   string path to make relative.
+            @param   string relativeTo - path it should be relative to.
+            @return  string relative path.
         </member>
         <member name="M:KS.Unity.Editor.ksPathUtils.Move(System.String,System.String,System.Boolean,KS.Unity.Editor.ksPathUtils.LoggingFlags,System.Boolean)">
             Moves a file or directory, optionally overwriting the existing file or directory. If the source and dest are
@@ -869,6 +882,16 @@
             
             @param   string[] texts
             @return  GUIContent[]
+        </member>
+        <member name="M:KS.Unity.Editor.ksStyle.NumericOverrideField(UnityEditor.SerializedProperty,System.Object,System.String)">
+            <summary>
+            Creates an int or float field with a checkbox. When the value is less than zero, the checkbox is unchecked
+            and the numeric field box is hidden. Checking the checkbox will show the numeric field box and set the
+            value to <paramref name="defaultValue"/>.
+            </summary>
+            <param name="property">The numeric property to create the field for.</param>
+            <param name="defaultValue">The default value to set when the checkbox is checked.</param>
+            <param name="tooltip">Optional tooltip</param>
         </member>
         <member name="T:KS.Unity.Editor.ksWindow">
             Editor window the uses an interface to create the GUI. Swapping the interface allows

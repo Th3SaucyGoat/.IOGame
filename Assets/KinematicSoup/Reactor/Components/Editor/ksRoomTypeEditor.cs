@@ -48,6 +48,7 @@ namespace KS.Reactor.Client.Unity.Editor
 
         private string focusedName = "";
         private bool m_showClusterSettings = false;
+        private bool m_showAdvancedSettings = false;
         private bool m_localServerWasRunning = false;
 
         /// <summary>Called when inspector becomes visible.</summary>
@@ -137,6 +138,28 @@ namespace KS.Reactor.Client.Unity.Editor
                             EditorGUI.indentLevel = 1;
                             EditorGUILayout.PropertyField(iterator, new GUIContent("Reconnect Attempts"));
                             EditorGUI.showMixedValue = false;
+                            EditorGUI.indentLevel = 0;
+                        }
+                        break;
+                    }
+                    case "m_physicsThreads":
+                    {
+                        m_showAdvancedSettings = EditorGUILayout.Foldout(m_showAdvancedSettings, "Advanced");
+                        if (m_showAdvancedSettings)
+                        {
+                            EditorGUI.indentLevel = 1;
+                            EditorGUILayout.PropertyField(iterator);
+                            EditorGUI.indentLevel = 0;
+                        }
+                        break;
+                    }
+                    case "m_networkThreads":
+                    case "m_encodingThreads":
+                    {
+                        if (m_showAdvancedSettings)
+                        {
+                            EditorGUI.indentLevel = 1;
+                            EditorGUILayout.PropertyField(iterator);
                             EditorGUI.indentLevel = 0;
                         }
                         break;

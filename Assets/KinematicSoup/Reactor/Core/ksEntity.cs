@@ -242,7 +242,10 @@ namespace KS.Reactor.Client.Unity
         /// <summary>
         /// Cleans up the entity and returns it to a pool of reusable entity resources.
         /// </summary>
-        protected override void Destroy()
+        /// <param name="isSyncGroupRemoval">
+        /// True when the entity is destroyed because it is in a different sync group than the local player.
+        /// </param>
+        protected override void Destroy(bool isSyncGroupRemoval)
         {
             // Detach scripts before destroying the game object.
             if (m_component.IsInitialized)
@@ -260,7 +263,14 @@ namespace KS.Reactor.Client.Unity
                 }
                 else
                 {
-                    GameObject.Destroy(m_gameObject);
+                    if (isSyncGroupRemoval)
+                    {
+                        ksReactor.GetEntityLinker(m_gameObject.scene).TrackEntity(m_component);
+                    }
+                    else
+                    {
+                        GameObject.Destroy(m_gameObject);
+                    }
                 }
             }
             // Clean up object for reuse

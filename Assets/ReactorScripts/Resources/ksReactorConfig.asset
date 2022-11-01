@@ -16,12 +16,12 @@ MonoBehaviour:
   Server:
     DefineSymbols: 
     ServerPath: Reactor\
-    BuildToolPath: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\MSBuild.exe
+    BuildToolPath: C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe
     LogHistorySize: 5
     RestartOnUpdate: 1
     AutoRebuildServerRuntime: 1
   Build:
-    LastBuildVersion: 0.10.0
+    LastBuildVersion: 0.10.1
     ImageBinding: 13236.8022.1623
     APIKey: 
     APIClientSecret: 
@@ -44,7 +44,7 @@ MonoBehaviour:
   - Collector
   - Shooter
   - Projectile
-  - 7
+  - FoodTesting
   - 8
   - 9
   - 10

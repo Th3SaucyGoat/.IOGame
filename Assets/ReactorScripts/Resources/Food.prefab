@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8615993434190721037}
   - component: {fileID: 8615993434190721040}
   - component: {fileID: -5522559863871982513}
+  - component: {fileID: 6326351491781635230}
   m_Layer: 0
   m_Name: Food
   m_TagString: Untagged
@@ -101,15 +102,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 0
-  CollisionFilter: {fileID: 11400000, guid: b3506128d56f7ae4396e0a3d8e95f489, type: 2}
+  SyncGroup: 0
+  CollisionFilter: {fileID: 0}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
   - Collider: {fileID: -5522559863871982513}
     ShapeId: 2
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
-    Filter: {fileID: 0}
+    Filter: {fileID: 11400000, guid: b3506128d56f7ae4396e0a3d8e95f489, type: 2}
+    ContactOffset: -1
+  - Collider: {fileID: 6326351491781635230}
+    ShapeId: 1
+    IsSimulation: 1
+    IsQuery: 1
+    Filter: {fileID: 11400000, guid: 74914333fdca9e54f97f02d332affd7c, type: 2}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -128,8 +136,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 3
   EntityId: 0
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: Food
   IsStatic: 1
 --- !u!114 &8615993434190721040
@@ -152,8 +158,21 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8615993434190721039}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &6326351491781635230
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615993434190721039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}

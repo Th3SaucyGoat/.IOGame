@@ -591,28 +591,50 @@ namespace KS.Reactor.Client.Unity.Editor
                 // Update virtual machines list GUI data
                 if (m_updateVirtualMachines)
                 {
+                    // Track the old location so that we can update the selected location index
+                    string oldLocation = "";
+                    if (m_GUILocationText.Count > 0)
+                    {
+                        oldLocation = m_GUILocationText[m_locationIndex < m_GUILocationText.Count ? m_locationIndex : 0];
+                        if (oldLocation.EndsWith(" (overloaded)"))
+                        {
+                            oldLocation = oldLocation.Substring(0, oldLocation.Length - " (overloaded)".Length);
+                        }
+                    }
+                    m_locationIndex = 0;
+
                     m_GUILocationText.Clear();
                     m_updateVirtualMachines = false;
                     m_GUILocationText.Add("Any");
                     if (m_service.VirtualMachines != null)
                     {
-                        List<string> locationIsNotOverloaded = new List<string>();
+                        // Add overloaded locations after other locations.  If the location matches the
+                        // old selected location, then update the selected location index.
+                        List<string> overloadedLocations = new List<string>();
                         foreach (ksJSON vm in m_service.VirtualMachines.Array)
                         {
-                            if (vm.GetField("overloaded", 0) == 0)
+                            string location = vm["location"];
+                            if (vm.GetField("overloaded", 0) == 1)
                             {
-                                locationIsNotOverloaded.Add(vm["location"]);
-                            }
-                        }
-                        foreach (ksJSON vm in m_service.VirtualMachines.Array)
-                        {
-                            if (locationIsNotOverloaded.Contains(vm["location"]))
-                            {
-                                m_GUILocationText.Add(vm["location"]);
+                                overloadedLocations.Add(location);
                             }
                             else
                             {
-                                m_GUILocationText.Add(vm["location"] + " (overloaded)");
+                                m_GUILocationText.Add(location);
+                                if (m_locationIndex == 0 && location == oldLocation)
+                                {
+                                    m_locationIndex = m_GUILocationText.Count - 1;
+                                }
+                            }
+                        }
+
+                        // Add overloaded locations at the bottom of the list
+                        foreach (string overloadedLocation in overloadedLocations)
+                        {
+                            m_GUILocationText.Add(overloadedLocation + " (overloaded)");
+                            if (m_locationIndex == 0 && overloadedLocation == oldLocation)
+                            {
+                                m_locationIndex = m_GUILocationText.Count - 1;
                             }
                         }
                     }

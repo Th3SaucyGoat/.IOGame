@@ -183,7 +183,7 @@ namespace KS.Reactor.Client.Unity
             {
                 if (!silent)
                 {
-                    ksLog.Warning(this, "Could not find asset with id " + assetId + ".");
+                    ksLog.Error(this, "Could not find asset with id " + assetId + ".");
                 }
                 return null;
             }
@@ -320,7 +320,7 @@ namespace KS.Reactor.Client.Unity
                 proxy = Resources.Load<ksProxyScriptAsset>(path);
                 if (proxy == null && !silent)
                 {
-                    ksLog.Warning(this, "Could not load proxy asset from Resources/ " + path + ".");
+                    ksLog.Error(this, "Could not load proxy asset from Resources/ " + path + ".");
                 }
                 return proxy;
             }
@@ -329,7 +329,7 @@ namespace KS.Reactor.Client.Unity
             {
                 if (!silent)
                 {
-                    ksLog.Warning(this, "Invalid asset path '" + path + 
+                    ksLog.Error(this, "Invalid asset path '" + path + 
                         "'. Path must be in Resources or an asset bundle.");
                 }
                 return null;
@@ -341,14 +341,14 @@ namespace KS.Reactor.Client.Unity
             {
                 if (!silent)
                 {
-                    ksLog.Warning(this, "Could not find asset bundle '" + bundleName + "'.");
+                    ksLog.Error(this, "Could not find asset bundle '" + bundleName + "'.");
                 }
                 return null;
             }
             proxy = bundle.LoadAsset<ksProxyScriptAsset>(assetName);
             if (proxy == null && !silent)
             {
-                ksLog.Warning(this, "Could not load asset '" + assetName + "' in asset bundle '" + bundleName + "'.");
+                ksLog.Error(this, "Could not load asset '" + assetName + "' in asset bundle '" + bundleName + "'.");
             }
             return proxy;
         }

@@ -74,6 +74,7 @@ namespace KS.Reactor.Client.Unity.Editor
         private CompileCompleteHandler m_callback;
         private Thread m_thread;
         private bool m_playWhenCompiled = false;
+        private bool m_restartServers = false;
 
         /// <summary>Is the server runtime compiling?</summary>
         public bool IsCompiling
@@ -89,17 +90,19 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <summary>Builds the serverruntime syncronously.</summary>
         /// <param name="rebuild">If true, will force a rebuild.</param>
         /// <param name="configuration">Build configuration.</param>
+        /// <param name="restartServers">Restart servers after building.</param>
         /// <returns>Compile result</returns>
         public CompileResults BuildServerRuntimeSync(
-            bool rebuild = false, 
-            Configurations configuration = Configurations.LOCAL_RELEASE)
+            bool rebuild = false,
+            Configurations configuration = Configurations.LOCAL_RELEASE,
+            bool restartServers = true)
         {
             if (m_thread != null && m_thread.IsAlive)
             {
                 return CompileResults.BUILD_IN_PROGRESS;
             }
             m_result = CompileResults.ERROR;
-            BuildServerRuntime(rebuild, null, configuration);
+            BuildServerRuntime(rebuild, null, configuration, restartServers);
             if (m_thread != null && m_thread.IsAlive)
             {
                 m_thread.Join();
@@ -112,10 +115,12 @@ namespace KS.Reactor.Client.Unity.Editor
         /// <param name="rebuild">If true, will force a rebuild.</param>
         /// <param name="callback">Called when compile finishes.</param>
         /// <param name="configuration">Build configuration.</param>
+        /// <param name="restartServers">Restart servers after building.</param>
         public void BuildServerRuntime(
             bool rebuild = false,
             CompileCompleteHandler callback = null,
-            Configurations configuration = Configurations.LOCAL_RELEASE)
+            Configurations configuration = Configurations.LOCAL_RELEASE,
+            bool restartServers = true)
         {
             if (!Directory.Exists(ksReactorConfig.Instance.Server.ServerPath) ||
                 (m_thread != null && m_thread.IsAlive))
@@ -127,6 +132,7 @@ namespace KS.Reactor.Client.Unity.Editor
                 return;
             }
             m_result = CompileResults.ERROR;
+            m_restartServers = restartServers;
             m_callback = callback;
             m_projectUpdater.UpdateIncludes();
             string currentOS = ksPaths.OperatingSystem;
@@ -216,8 +222,12 @@ namespace KS.Reactor.Client.Unity.Editor
                     ksPaths.BuildDir,
                     new string[] { ".dll", ".pdb" },
                     new string[] { "KSReactor", "KSCommon", "KSLZMA" });
+
                 // Restart local servers.
-                ksLocalServer.Manager.RestartOrRemoveStoppedServers();
+                if (m_restartServers)
+                {
+                    ksLocalServer.Manager.RestartOrRemoveStoppedServers();
+                }
             }
             catch (Exception e)
             {

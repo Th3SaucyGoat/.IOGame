@@ -79,7 +79,7 @@ namespace KS.Reactor.Client.Unity.Editor
                     continue;
                 }
                 // Check if the scene config file exists
-                string name = ksPathUtils.GetFileName(path);
+                string name = ksPathUtils.GetName(path);
                 int index = name.LastIndexOf('.');
                 if (index >= 0)
                 {

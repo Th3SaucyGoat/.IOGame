@@ -137,6 +137,24 @@ namespace KS.Reactor.Client.Unity
         [Tooltip("Number of failed cluster connection attempts to make before shuttingdown.")]
         private byte m_clusterReconnectAttempts = 3;
 
+        public int PhysicsThreads { get { return m_physicsThreads; } }
+        [SerializeField]
+        [Tooltip("Number of threads to allocate to physics simulations. Live servers will limit the total number of concurrent threads to 32.")]
+        [Range(1, 32)]
+        private int m_physicsThreads = 4;
+
+        public int NetworkThreads { get { return m_networkThreads; } }
+        [SerializeField]
+        [Tooltip("Number of threads to allocate to network connections. Live servers will limit the total number of concurrent threads to 32.")]
+        [Range(1, 32)]
+        private int m_networkThreads = 4;
+
+        public int EncodingThreads { get { return m_encodingThreads; } }
+        [SerializeField]
+        [Tooltip("Number of threads to allocate to encoding. Live servers will limit the total number of concurrent threads to 32.")]
+        [Range(1, 32)]
+        private int m_encodingThreads = 4;
+
         /// <summary>
         /// Port to use for local server.
         /// </summary>

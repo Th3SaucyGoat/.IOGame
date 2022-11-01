@@ -189,6 +189,7 @@ namespace KS.Reactor.Client.Unity.Editor
             {
                 entity.TransformPrecisionOverrides.Validate();
                 entity.PhysicsOverrides.Validate();
+                entity.SyncGroup = Math.Min(entity.SyncGroup, ksFixedDataWriter.ENCODE_4BYTE);
             }
 
             if (GUI.changed)
@@ -319,6 +320,7 @@ namespace KS.Reactor.Client.Unity.Editor
                     sp.FindPropertyRelative("IsSimulation").boolValue = !colliders[i].IsTrigger;
                     sp.FindPropertyRelative("IsQuery").boolValue = true;
                     sp.FindPropertyRelative("Collider").objectReferenceValue = colliders[i].Component;
+                    sp.FindPropertyRelative("ContactOffset").floatValue = -1f;
                     hadChanges = true;
                 }
                 else if (spIndex != i)

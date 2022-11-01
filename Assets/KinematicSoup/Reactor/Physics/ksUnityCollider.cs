@@ -15,6 +15,7 @@ KinematicSoup Technologies Incorporated.
 
 using System;
 using System.IO;
+using KS.LZMA;
 using UnityEngine;
 
 namespace KS.Reactor.Client.Unity
@@ -172,7 +173,16 @@ namespace KS.Reactor.Client.Unity
         public float ContactOffset
         {
             get { return m_collider.contactOffset; }
-            set { m_collider.contactOffset = value; }
+            set 
+            { 
+                m_collider.contactOffset = value;
+                ksEntityComponent entity = EntityComponent;
+                ksColliderData colliderData;
+                if (entity != null && entity.TryGetColliderData(this, out colliderData))
+                {
+                    colliderData.ContactOffset = value;
+                }
+            }
         }
 
         /// <summary>Constructor</summary>
@@ -185,6 +195,14 @@ namespace KS.Reactor.Client.Unity
             if ((object)collider == null)
             {
                 throw new ArgumentNullException("collider");
+            }
+            m_collider = collider;
+
+            ksEntityComponent entity = EntityComponent;
+            ksColliderData colliderData;
+            if (entity != null && entity.TryGetColliderData(this, out colliderData) && colliderData.ContactOffset > 0f)
+            {
+                collider.contactOffset = colliderData.ContactOffset;
             }
 
             SphereCollider sphere;
@@ -233,8 +251,6 @@ namespace KS.Reactor.Client.Unity
             {
                 throw new ArgumentException("Unsupported collider type");
             }
-
-            m_collider = collider;
         }
 
         /// <summary>Calculate the volume of the collider.</summary>
@@ -289,14 +305,6 @@ namespace KS.Reactor.Client.Unity
                 }
             }
             return m_hull.GeometricCenter;
-        }
-
-        /// <summary>Calculate the center of mass of the collider.</summary>
-        /// <returns>Center of mass of the collider.</returns>
-        [Obsolete("Use GeometricCenter() instead.")]
-        public Vector3 CenterOfMass()
-        {
-            return GeometricCenter();
         }
 
         /// <summary>Serializes the collider by shape type.</summary>
@@ -403,7 +411,7 @@ namespace KS.Reactor.Client.Unity
                     }
                 }
             }
-            return geometry;
+            return ksLZMA.Compress(geometry);
         }
 
         /// <summary>Serializes vertex and triangle data from a mesh collider.</summary>
@@ -443,7 +451,7 @@ namespace KS.Reactor.Client.Unity
                     }
                 }
             }
-            return geometry;
+            return ksLZMA.Compress(geometry);
         }
 
         /// <summary>Serializes heightmap data from a terrain collider.</summary>
@@ -468,7 +476,7 @@ namespace KS.Reactor.Client.Unity
                 3 * sizeof(float) +     // x, y, and z sizes (float + float + float)
                 2 * sizeof(int) +       // resolution (int + int)
                 sizeof(float);          // thickness (float)
-            byte[] geometry = new byte[dataOffset + xRes * yRes * sizeof(float)];
+            byte[] geometry = new byte[dataOffset + xRes * yRes * sizeof(ushort)];
 
             using (MemoryStream memStream = new MemoryStream(geometry))
             {
@@ -481,15 +489,47 @@ namespace KS.Reactor.Client.Unity
                     writer.Write(yRes);
 #if UNITY_2019_3_OR_NEWER
                     // Unity removed the thickness property from the terrain data. So we write the default value 1.
-                    writer.Write(1);
+                    writer.Write(1f);
 #else
                     writer.Write(heightMap.thickness);
 #endif
                 }
             }
 
-            Buffer.BlockCopy(heightMap.GetHeights(0, 0, xRes, yRes), 0, geometry, dataOffset, xRes * yRes * sizeof(float));
-            return geometry;
+            // Write heights as XOR deltas between sequential height values
+            float[,] heights = heightMap.GetHeights(0, 0, xRes, yRes);
+            int Xmax = heights.GetLength(0);
+            int Ymax = heights.GetLength(1);
+            int i = dataOffset;
+            int value;
+            int lastValue = 0;
+            float range = (float)short.MaxValue;
+            for (int x = 0; x < Xmax; ++x)
+            {
+                for (int y = 0; y < Ymax; ++y)
+                {
+                    value = (int)(heights[x, y] * range);
+                    WriteUShortBytes((ushort)(value ^ lastValue), geometry, i);
+                    lastValue = value;
+                    i += 2;
+                }
+            }
+            return ksLZW.Compress(geometry);
+        }
+
+        /// <summary>
+        /// Write a ushort value into a byte array.
+        /// </summary>
+        /// <param name="value">Value to write</param>
+        /// <param name="array">Array to write the uint value to</param>
+        /// <param name="offset">Offset in the array to start writing the bytes</param>
+        private void WriteUShortBytes(ushort value, byte[] array, int offset)
+        {
+            if (array.Length > offset + 4)
+            {
+                array[offset] = (byte)value;
+                array[offset + 1] = (byte)(value >> 8);
+            }
         }
 
         /// <summary>Compare the geometry sources of each collider and return true if they are equal.</summary>

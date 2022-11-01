@@ -1224,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -1231,8 +1232,8 @@ MonoBehaviour:
     ShapeId: 0
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -1251,8 +1252,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 0
   EntityId: 1
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: 
   IsStatic: 1
 --- !u!65 &392428703
@@ -1368,6 +1367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -1375,8 +1375,8 @@ MonoBehaviour:
     ShapeId: 0
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -1395,8 +1395,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 0
   EntityId: 2
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: 
   IsStatic: 1
 --- !u!65 &464061461
@@ -3663,6 +3661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -3670,8 +3669,8 @@ MonoBehaviour:
     ShapeId: 0
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -3690,8 +3689,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 0
   EntityId: 3
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: 
   IsStatic: 1
 --- !u!65 &1447805374
@@ -5274,6 +5271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -5281,8 +5279,8 @@ MonoBehaviour:
     ShapeId: 0
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 11400000, guid: adc3508e34731054e90c5fffc95eb84b, type: 2}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -5301,8 +5299,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 0
   EntityId: 4
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: 
   IsStatic: 1
 --- !u!212 &1769588485
@@ -6338,7 +6334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 762560fdd74b10f4dbc24b053e8d3a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseLocalServer: 0
+  UseLocalServer: 1
   UserName: 
   walls: {fileID: 4794620217813710855, guid: 9948c04d7e1c0084a90e1570ce72b07c, type: 3}
 --- !u!114 &2078771117
@@ -6364,6 +6360,9 @@ MonoBehaviour:
   m_clusterReconnectDelay: 10
   m_shutdownWithoutCluster: 0
   m_clusterReconnectAttempts: 3
+  m_physicsThreads: 4
+  m_networkThreads: 4
+  m_encodingThreads: 4
   m_port: 8000
 --- !u!4 &2078771118
 Transform:
