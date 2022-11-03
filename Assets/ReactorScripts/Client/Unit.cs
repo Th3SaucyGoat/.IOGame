@@ -27,7 +27,7 @@ public class Unit : ksEntityScript
         Entity.OnPropertyChange[Prop.HEALTH] += OnHealthChanged;
         sprite = GetComponent<SpriteRenderer>();
         Assert.AreNotEqual("", Entity.Properties[Prop.TEAMID].String);
-        IdentifyTeam(Entity.Properties[Prop.TEAMID].UInt);
+        //IdentifyTeam(Entity.Properties[Prop.TEAMID].UInt);
 
     }
 

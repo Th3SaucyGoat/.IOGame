@@ -1,0 +1,150 @@
+2022-11-02 16:20:59.2425 [INFO; Reactor.Server]  Loaded KSServerRuntime.Local.dll
+2022-11-02 16:20:59.2691 [INFO; Root]  Loaded config.json
+2022-11-02 16:20:59.2714 [INFO; Root]  Loaded config.GameScene.json
+2022-11-02 16:20:59.2814 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-11-02 16:20:59.2814 [INFO; Root]  Reactor Server v0.10.0
+2022-11-02 16:20:59.2824 [DEBUG; Root]  Could not open model file: model.bin. Compression will use the default model for sync transforms, and dynamic models for update transforms.
+2022-11-02 16:20:59.2834 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-11-02 16:20:59.3010 [DEBUG; Root]  Loading Asset Scripts
+2022-11-02 16:20:59.3045 [DEBUG; Root]  Loading Room Configs
+2022-11-02 16:20:59.3159 [DEBUG; Root]  Initializing PhysX
+2022-11-02 16:20:59.3580 [DEBUG; Root]  Loading PhysX geometry
+2022-11-02 16:20:59.3768 [INFO; Root]  Loaded 7 geometries
+2022-11-02 16:20:59.3778 [INFO; Root]  Loaded 2 geometries
+2022-11-02 16:20:59.3778 [DEBUG; Root]  Loading entity prefabs
+2022-11-02 16:20:59.3984 [INFO; Root]  Loaded 5 entity prefabs
+2022-11-02 16:20:59.3984 [DEBUG; Root]  Loading entity instances
+2022-11-02 16:20:59.4219 [DEBUG; Root]  Initializing scripts
+2022-11-02 16:20:59.4326 [DEBUG; Root]  Room setup complete
+2022-11-02 16:20:59.4337 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-11-02 16:20:59.4337 [INFO; Root]  Sending client updates every 2 frames
+2022-11-02 16:20:59.4337 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-11-02 16:20:59.4346 [INFO; Root]  Opening TCP port 8000
+2022-11-02 16:21:02.9750 [INFO; Root]  Client(id = 1, address = 10.6.167.36) connected
+2022-11-02 16:21:02.9760 [DEBUG; Root]  Client(id = 1, address = 10.6.167.36) model validated
+2022-11-02 16:21:03.0094 [DEBUG; Root]  Client(id = 1, address = 10.6.167.36) authenticated
+2022-11-02 16:21:03.0251 [INFO; Root]  Player False joined
+2022-11-02 16:21:04.1514 [INFO; Root]  20
+2022-11-02 16:21:19.2539 [INFO; Root]  cluster food
+2022-11-02 16:21:19.3686 [INFO; Root]  cluster food
+2022-11-02 16:21:19.4855 [INFO; Root]  cluster food
+2022-11-02 16:21:19.6027 [INFO; Root]  cluster food
+2022-11-02 16:21:19.7189 [INFO; Root]  cluster food
+2022-11-02 16:21:19.8360 [INFO; Root]  cluster food
+2022-11-02 16:21:19.9517 [INFO; Root]  cluster food
+2022-11-02 16:21:20.0696 [INFO; Root]  cluster food
+2022-11-02 16:21:20.1861 [INFO; Root]  cluster food
+2022-11-02 16:21:20.3023 [INFO; Root]  cluster food
+2022-11-02 16:21:20.4185 [INFO; Root]  cluster food
+2022-11-02 16:21:20.5357 [INFO; Root]  cluster food
+2022-11-02 16:21:20.6523 [INFO; Root]  cluster food
+2022-11-02 16:21:20.7684 [INFO; Root]  cluster food
+2022-11-02 16:21:20.8856 [INFO; Root]  cluster food
+2022-11-02 16:21:21.0024 [INFO; Root]  cluster food
+2022-11-02 16:21:21.1190 [INFO; Root]  cluster food
+2022-11-02 16:21:21.2361 [INFO; Root]  cluster food
+2022-11-02 16:21:21.3525 [INFO; Root]  cluster food
+2022-11-02 16:21:21.4687 [INFO; Root]  cluster food
+2022-11-02 16:21:21.5856 [INFO; Root]  cluster food
+2022-11-02 16:21:21.7018 [INFO; Root]  cluster food
+2022-11-02 16:21:21.8188 [INFO; Root]  cluster food
+2022-11-02 16:21:21.9356 [INFO; Root]  cluster food
+2022-11-02 16:21:22.0520 [INFO; Root]  cluster food
+2022-11-02 16:21:22.1689 [INFO; Root]  cluster food
+2022-11-02 16:21:22.2859 [INFO; Root]  cluster food
+2022-11-02 16:21:22.4015 [INFO; Root]  cluster food
+2022-11-02 16:21:22.5189 [INFO; Root]  cluster food
+2022-11-02 16:21:22.6355 [INFO; Root]  cluster food
+2022-11-02 16:21:22.7522 [INFO; Root]  cluster food
+2022-11-02 16:21:22.8685 [INFO; Root]  cluster food
+2022-11-02 16:21:22.9857 [INFO; Root]  cluster food
+2022-11-02 16:21:23.1019 [INFO; Root]  cluster food
+2022-11-02 16:21:23.2195 [INFO; Root]  cluster food
+2022-11-02 16:21:23.3358 [INFO; Root]  cluster food
+2022-11-02 16:21:34.2683 [INFO; Root]  cluster food
+2022-11-02 16:21:34.3846 [INFO; Root]  cluster food
+2022-11-02 16:21:34.5010 [INFO; Root]  cluster food
+2022-11-02 16:21:34.6183 [INFO; Root]  cluster food
+2022-11-02 16:21:34.7357 [INFO; Root]  cluster food
+2022-11-02 16:21:34.8520 [INFO; Root]  cluster food
+2022-11-02 16:21:34.9685 [INFO; Root]  cluster food
+2022-11-02 16:21:35.0849 [INFO; Root]  cluster food
+2022-11-02 16:21:35.2016 [INFO; Root]  cluster food
+2022-11-02 16:21:35.3180 [INFO; Root]  cluster food
+2022-11-02 16:21:35.4352 [INFO; Root]  cluster food
+2022-11-02 16:21:35.5519 [INFO; Root]  cluster food
+2022-11-02 16:21:35.6691 [INFO; Root]  cluster food
+2022-11-02 16:21:35.7853 [INFO; Root]  cluster food
+2022-11-02 16:21:35.9028 [INFO; Root]  cluster food
+2022-11-02 16:21:36.0182 [INFO; Root]  cluster food
+2022-11-02 16:21:36.1347 [INFO; Root]  cluster food
+2022-11-02 16:21:36.2518 [INFO; Root]  cluster food
+2022-11-02 16:21:36.3684 [INFO; Root]  cluster food
+2022-11-02 16:21:36.4850 [INFO; Root]  cluster food
+2022-11-02 16:21:36.6007 [INFO; Root]  cluster food
+2022-11-02 16:21:36.7188 [INFO; Root]  cluster food
+2022-11-02 16:21:36.8349 [INFO; Root]  cluster food
+2022-11-02 16:21:36.9522 [INFO; Root]  cluster food
+2022-11-02 16:21:37.0678 [INFO; Root]  cluster food
+2022-11-02 16:21:37.1849 [INFO; Root]  cluster food
+2022-11-02 16:21:37.3019 [INFO; Root]  cluster food
+2022-11-02 16:21:37.4178 [INFO; Root]  cluster food
+2022-11-02 16:21:37.5350 [INFO; Root]  cluster food
+2022-11-02 16:21:37.6518 [INFO; Root]  cluster food
+2022-11-02 16:21:37.7689 [INFO; Root]  cluster food
+2022-11-02 16:21:37.8850 [INFO; Root]  cluster food
+2022-11-02 16:21:38.0014 [INFO; Root]  cluster food
+2022-11-02 16:21:38.1180 [INFO; Root]  cluster food
+2022-11-02 16:21:38.2351 [INFO; Root]  cluster food
+2022-11-02 16:21:38.3510 [INFO; Root]  cluster food
+2022-11-02 16:21:49.2847 [INFO; Root]  cluster food
+2022-11-02 16:21:49.4013 [INFO; Root]  cluster food
+2022-11-02 16:21:49.5173 [INFO; Root]  cluster food
+2022-11-02 16:21:49.6341 [INFO; Root]  cluster food
+2022-11-02 16:21:49.7520 [INFO; Root]  cluster food
+2022-11-02 16:21:49.8680 [INFO; Root]  cluster food
+2022-11-02 16:21:49.9839 [INFO; Root]  cluster food
+2022-11-02 16:21:50.1015 [INFO; Root]  cluster food
+2022-11-02 16:21:50.2179 [INFO; Root]  cluster food
+2022-11-02 16:21:50.3336 [INFO; Root]  cluster food
+2022-11-02 16:21:50.4511 [INFO; Root]  cluster food
+2022-11-02 16:21:50.5677 [INFO; Root]  cluster food
+2022-11-02 16:21:50.6855 [INFO; Root]  cluster food
+2022-11-02 16:21:50.8013 [INFO; Root]  cluster food
+2022-11-02 16:21:50.9180 [INFO; Root]  cluster food
+2022-11-02 16:21:51.0341 [INFO; Root]  cluster food
+2022-11-02 16:21:51.1516 [INFO; Root]  cluster food
+2022-11-02 16:21:51.2675 [INFO; Root]  cluster food
+2022-11-02 16:21:51.3837 [INFO; Root]  cluster food
+2022-11-02 16:21:51.5014 [INFO; Root]  cluster food
+2022-11-02 16:21:51.6173 [INFO; Root]  cluster food
+2022-11-02 16:21:51.7351 [INFO; Root]  cluster food
+2022-11-02 16:21:51.8511 [INFO; Root]  cluster food
+2022-11-02 16:21:51.9681 [INFO; Root]  cluster food
+2022-11-02 16:21:52.0843 [INFO; Root]  cluster food
+2022-11-02 16:21:52.2013 [INFO; Root]  cluster food
+2022-11-02 16:21:52.3180 [INFO; Root]  cluster food
+2022-11-02 16:21:52.4348 [INFO; Root]  cluster food
+2022-11-02 16:21:52.5525 [INFO; Root]  cluster food
+2022-11-02 16:21:52.6670 [INFO; Root]  cluster food
+2022-11-02 16:21:52.7846 [INFO; Root]  cluster food
+2022-11-02 16:21:52.9023 [INFO; Root]  cluster food
+2022-11-02 16:21:53.0182 [INFO; Root]  cluster food
+2022-11-02 16:21:53.1340 [INFO; Root]  cluster food
+2022-11-02 16:21:53.2508 [INFO; Root]  cluster food
+2022-11-02 16:21:53.3680 [INFO; Root]  cluster food
+2022-11-02 16:21:53.4848 [INFO; Root]  cluster food
+2022-11-02 16:21:53.6014 [INFO; Root]  cluster food
+2022-11-02 16:21:53.7177 [INFO; Root]  cluster food
+2022-11-02 16:21:53.8342 [INFO; Root]  cluster food
+2022-11-02 16:21:53.9504 [INFO; Root]  cluster food
+2022-11-02 16:21:54.0667 [INFO; Root]  cluster food
+2022-11-02 16:21:54.1839 [INFO; Root]  cluster food
+2022-11-02 16:21:54.3010 [INFO; Root]  cluster food
+2022-11-02 16:21:54.4175 [INFO; Root]  cluster food
+2022-11-02 16:21:54.5340 [INFO; Root]  cluster food
+2022-11-02 16:21:54.6514 [INFO; Root]  cluster food
+2022-11-02 16:21:54.7678 [INFO; Root]  cluster food
+2022-11-02 16:21:54.8839 [INFO; Root]  cluster food
+2022-11-02 16:22:02.2497 [INFO; Root]  Client(id = 1, address = 10.6.167.36) disconnected: 2-End of file
+2022-11-02 16:22:02.2701 [INFO; Root]  Player 1 left

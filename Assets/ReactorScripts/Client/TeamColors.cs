@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TeamColors : MonoBehaviour
@@ -51,6 +52,7 @@ public class TeamColors : MonoBehaviour
         {
             Id = (int) teamId % colors.Length;
         }
+        var color = colors[Id];
         return colors[Id];
     }
 }

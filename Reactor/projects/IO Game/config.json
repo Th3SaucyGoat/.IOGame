@@ -250,7 +250,7 @@
 					{
 						"name": ".ksSphereCollider",
 						"params": {
-							"shape id": 6,
+							"shape id": 1,
 							"material": null,
 							"filter": null,
 							"offset": [

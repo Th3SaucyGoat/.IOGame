@@ -101,7 +101,7 @@ public class ServerRoom : ksServerRoomScript
         // Spawn in a hivemind for all players. Set player control to only their hivemind. Set unique team Ids.
         foreach (ksIServerPlayer p in Room.Players)
         {
-            ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", FindRandomPosition());
+            ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", ksVector2.Zero);
             activeTeams.Add(teamId);
             p.Properties[Prop.TEAMID] = teamId;
             p.Properties[Prop.HIVEMINDID] = hivemind.Id;

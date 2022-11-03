@@ -12,6 +12,10 @@ using Example;
 public class ClientHivemind : ksEntityScript
 {
     public UsernameLabel prefab;
+    public Transform softBody;
+    [SerializeField]
+    private Transform organelle;
+    private Transform softBodyInstanced;
     public Dictionary<string, ksMultiType> player;
     // Called after properties are initialized.
 
@@ -23,12 +27,29 @@ public class ClientHivemind : ksEntityScript
     {
         player = new Dictionary<string, ksMultiType>();
         // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
+        
+        softBodyInstanced = Instantiate(softBody, transform.position, Quaternion.identity);
+
+
+        Instantiate(organelle, transform.position, Quaternion.identity);
     }
 
 
     private void Start()
     {
+        Invoke("LateStart", 0.5f);
+    }
 
+    private void LateStart()
+    {
+        foreach (Transform t in softBodyInstanced)
+        {
+            var here = t.GetComponents<SpringJoint2D>();
+            foreach (SpringJoint2D sping in here)
+            {
+                sping.autoConfigureDistance = false;
+            }
+        }
     }
 
     // Called when the script is detached.
@@ -40,6 +61,10 @@ public class ClientHivemind : ksEntityScript
     // Called every frame.
     private void Update()
     {
+        //foreach (Transform t in softBodyInstanced)
+        //{
+        //    t.localPosition = Vector3.zero;
+        //}
     }
 
     [ksRPC(RPC.SENDINFO)]
