@@ -1,0 +1,19 @@
+2022-11-04 13:30:42.6227 [INFO; Root]  KinematicSoup Technologies Inc.
+2022-11-04 13:30:42.6267 [INFO; Root]  Reactor Server v0.10.1
+2022-11-04 13:30:42.7004 [WARNING; Reactor.Server]  Error parsing model file 'model.bin'. Defaulting to dynmaic model generation.
+2022-11-04 13:30:42.7043 [INFO; Reactor.Server]  Missing API configuration. PlayerAPI features disabled.
+2022-11-04 13:30:42.7149 [DEBUG; Root]  Loading Asset Scripts
+2022-11-04 13:30:42.7178 [DEBUG; Root]  Loading Room Configs
+2022-11-04 13:30:42.7219 [DEBUG; Root]  Initializing PhysX
+2022-11-04 13:30:42.7365 [DEBUG; Root]  Loading PhysX geometry
+2022-11-04 13:30:42.7380 [INFO; Root]  Loaded 7 geometries
+2022-11-04 13:30:42.7380 [INFO; Root]  Loaded 3 geometries
+2022-11-04 13:30:42.7380 [DEBUG; Root]  Loading entity prefabs
+2022-11-04 13:30:42.7511 [INFO; Root]  Loaded 5 entity prefabs
+2022-11-04 13:30:42.7511 [DEBUG; Root]  Loading entity instances
+2022-11-04 13:30:42.7652 [DEBUG; Root]  Initializing scripts
+2022-11-04 13:30:42.7723 [DEBUG; Root]  Room setup complete
+2022-11-04 13:30:42.7728 [INFO; Reactor.ServerRoom]  Starting room 1
+2022-11-04 13:30:42.7728 [INFO; Root]  Sending client updates every 2 frames
+2022-11-04 13:30:42.7728 [INFO; Root]  Attempting to sync simulation time to match elapsed time.
+2022-11-04 13:30:42.7733 [INFO; Root]  Opening TCP port 8000

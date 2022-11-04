@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1848c0a90c862ba49a54202940a5b73c, type: 3}
   m_Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 1
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: 1283f5d8ee9c31e4f9f5510600469083, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -142,14 +143,14 @@ MonoBehaviour:
     ShapeId: 3
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 0}
+    ContactOffset: -1
   - Collider: {fileID: 8463670613325847758}
     ShapeId: 4
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 11400000, guid: 08019865215e1bf47962f167113e620a, type: 2}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -168,8 +169,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 5
   EntityId: 0
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: Collector
   IsStatic: 0
 --- !u!135 &8463670613325847758
@@ -214,6 +213,7 @@ MonoBehaviour:
   usernameLabel: {fileID: 0}
   primaryColor: {r: 0, g: 0, b: 0, a: 0}
   secondaryColor: {r: 0, g: 0, b: 0, a: 0}
+  previousColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7026864367955897630
 MonoBehaviour:
   m_ObjectHideFlags: 0

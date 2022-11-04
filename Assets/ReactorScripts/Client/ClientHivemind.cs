@@ -17,6 +17,10 @@ public class ClientHivemind : ksEntityScript
     private Transform organelle;
     private Transform softBodyInstanced;
     public Dictionary<string, ksMultiType> player;
+
+    private int frameNum;
+    private bool isFiring;
+
     // Called after properties are initialized.
 
     private void Awake()
@@ -31,7 +35,7 @@ public class ClientHivemind : ksEntityScript
         softBodyInstanced = Instantiate(softBody, transform.position, Quaternion.identity);
 
 
-        Instantiate(organelle, transform.position, Quaternion.identity);
+        //Instantiate(organelle, transform.position, Quaternion.identity);
     }
 
 
@@ -61,16 +65,32 @@ public class ClientHivemind : ksEntityScript
     // Called every frame.
     private void Update()
     {
-        //foreach (Transform t in softBodyInstanced)
-        //{
-        //    t.localPosition = Vector3.zero;
-        //}
+        if (Entity.PlayerController != null)
+        {
+            if (Input.GetMouseButtonDown(0) && isFiring == false)
+            {
+                Entity.CallRPC(RPC.FIRING, true);
+                isFiring = true;
+            }
+            else if (Input.GetMouseButtonUp(0) && isFiring == true)
+            {
+                Entity.CallRPC(RPC.FIRING, false);
+                isFiring = false;
+            }
+            if (frameNum == 10)
+            {
+                frameNum = 0;
+                ksMultiType pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Entity.CallRPC(RPC.RELAYMOUSEINFO, pos);
+            }
+            frameNum++;
+        }
+
     }
 
     [ksRPC(RPC.SENDINFO)]
     public void RegisterInfo( ksMultiType[] a)
     {
-        print("Register Info Called");
         //player["Username"] = a[0];
         //player["Id"] = a[1];
         // UsernameLabel label = Room.GameObject.GetComponent<UsernameLabels>().CreateUserLabel(a[1].UInt, a[0].ToString());
@@ -88,13 +108,11 @@ public class ClientHivemind : ksEntityScript
     {
         //GameEvents.current.StartMatch?.Invoke(); // For changing UI.
         Entity.OnPropertyChange[Prop.FOOD] += FoodChanged;
-        print("Value Changed");
         FoodChanged((ksMultiType) 0, (ksMultiType) 0);
     }
 
     private void FoodChanged(ksMultiType old, ksMultiType newV)
     {
-        print("here");
         GameEvents.current.FoodChanged?.Invoke(newV);
     }
 

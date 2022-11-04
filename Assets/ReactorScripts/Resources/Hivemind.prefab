@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 0
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: 136c8785ebe34014bb5607d717f55c53, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -62,14 +63,14 @@ MonoBehaviour:
     ShapeId: 5
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 11400000, guid: 08019865215e1bf47962f167113e620a, type: 2}
+    ContactOffset: -1
   - Collider: {fileID: 4241588673068502951}
-    ShapeId: 1
+    ShapeId: 6
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 0}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -88,8 +89,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 1
   EntityId: 0
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: Hivemind
   IsStatic: 0
 --- !u!114 &3554316287458957906
@@ -232,12 +231,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1848c0a90c862ba49a54202940a5b73c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

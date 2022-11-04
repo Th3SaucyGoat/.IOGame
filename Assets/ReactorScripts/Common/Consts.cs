@@ -14,6 +14,7 @@ public class Prop
     public const uint FIRING = 7;             // Used by certain entities
     public const uint LISTOFPLAYERS = 8;
     public const uint HEALTH = 9;
+    public const uint ORGANELLEOWNER = 10;
 }
 
 public class RPC
@@ -33,5 +34,6 @@ public class RPC
     public const uint ENDGAME = 12; // Used by Room to players
     public const uint RETURN = 13;  // Used by Collector
     public const uint REDIRECT = 14;
+    public const uint ORGANELLEPOSITION = 15;
 }
 

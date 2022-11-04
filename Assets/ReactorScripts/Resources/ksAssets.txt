@@ -5,10 +5,11 @@
 14|*ReactorScripts/ksCollisionFilters/FoodTesting
 4|*ReactorScripts/ksCollisionFilters/Hivemind
 7|*ReactorScripts/ksCollisionFilters/Obstacles
+9|*ReactorScripts/ksCollisionFilters/Organelle
 12|*ReactorScripts/ksCollisionFilters/Projectile
 11|*ReactorScripts/ksCollisionFilters/Shooter
 5|Collector
 3|Food
 1|Hivemind
+15|Organelle
 10|Projectile
-9|Shooter

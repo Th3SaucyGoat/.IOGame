@@ -7,8 +7,8 @@ public class ServerRoom : ksServerRoomScript
 {
 
     private int num = 0;
-    private float[] xBounds = new float[] { -8f, 40f };
-    private float[] yBounds = new float[] { -22f, 7f };
+    private float[] xBounds = new float[] { -5f, 5f };
+    private float[] yBounds = new float[] { -5f, 5f };
 
     private ksRandom random;
 
@@ -97,11 +97,14 @@ public class ServerRoom : ksServerRoomScript
 
     private void InitiateMatch()
     {
+        Room.SpawnEntity("Organelle", ksVector2.Zero);
+        Room.SpawnEntity("Organelle", FindRandomPosition());
+
 
         // Spawn in a hivemind for all players. Set player control to only their hivemind. Set unique team Ids.
         foreach (ksIServerPlayer p in Room.Players)
         {
-            ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", ksVector2.Zero);
+            ksIServerEntity hivemind = Room.SpawnEntity("Hivemind", FindRandomPosition());
             activeTeams.Add(teamId);
             p.Properties[Prop.TEAMID] = teamId;
             p.Properties[Prop.HIVEMINDID] = hivemind.Id;
@@ -186,7 +189,7 @@ public class ServerRoom : ksServerRoomScript
 
     private void clusterfoodDelayTimeout()
     {
-        ksLog.Info("cluster food");
+        //ksLog.Info("cluster food");
         float MaxRadius = 5f;
         // Find random angle and radius
         float angle = random.NextFloat(0, 360);

@@ -22,8 +22,8 @@ TagManager:
   - Hitbox
   - UnitSelection
   - OrganelleBoundary
-  - 
-  - 
+  - Organelle
+  - CapturedOrganelle
   - 
   - 
   - 

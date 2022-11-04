@@ -54,6 +54,10 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
 
     private ksRigidBody2DView rb;
 
+    public List<OrganelleServer> organellesControlling = new List<OrganelleServer> { };
+    private bool playerFiring;
+    private ksVector2 firePoint;
+
     // Called when the script is attached.
     public override void Initialize()
     {
@@ -81,6 +85,7 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
         debugTimer.Tick(Time.Delta);
         //Room.CallRPC(new List<ksIServerPlayer> { Room.GetPlayer(Entity.Properties[Prop.CONTROLLEDPLAYERID].UInt) }, RPC.ENDGAME, false);
         //Entity.Destroy();
+        //ksLog.Info("Id: "+ Entity.Owner.Id);
         if (EntityToFollow != null)
         {
             // Stay at a distance from player
@@ -115,6 +120,17 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
             else
             {
                 moveTowardsPoint(foodTarget.Position2D);
+            }
+        }
+        if (organellesControlling.Count > 0 && playerFiring)
+        {
+            foreach (OrganelleServer organ in organellesControlling)
+            {
+                //OrganelleServer organelle = organ.Scripts.Get<OrganelleServer>();
+                //if (organelle == null)
+                //    ksLog.Info("Attempted to get organelle server but failed!");
+                //else
+                organ.FireOrganelle(firePoint, Entity.Properties[Prop.TEAMID].Int);
             }
         }
     }
@@ -206,4 +222,25 @@ public class HivemindServer : ksServerEntityScript , IFoodPickup , IMovement , I
     {
         Room.Scripts.Get<ServerRoom>().OnEntityDestroyed(Entity);
     }
+
+    [ksRPC(RPC.FIRING)]
+    private void ChangeFiringStatus(ksIServerPlayer player, bool isFiring)
+    {
+        //ksLog.Info("Received " + num.ToString());
+        playerFiring = isFiring;
+        //num++;
+    }
+
+    [ksRPC(RPC.RELAYMOUSEINFO)]
+    private void FireDirection(ksIServerPlayer player, ksMultiType point)
+    {
+        // Save direction from organelle position to point
+        if (point.KSVector2 == ksVector2.Zero)
+        {
+            ksLog.Info("Mouse Input is zero");
+            return;
+        }
+        firePoint = point;
+    }
+
 }

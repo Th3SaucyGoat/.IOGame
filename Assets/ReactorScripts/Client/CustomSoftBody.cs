@@ -10,7 +10,7 @@ public class CustomSoftBody : MonoBehaviour
     {
         GameObject organelleBoundary = transform.Find("OrganelleBoundary").gameObject;
         organelleBoundary.transform.localScale = transform.localScale;
-        organelleBoundary.transform.localPosition = transform.localPosition;
+        //organelleBoundary.transform.localPosition = transform.localPosition;
         GetComponent<AdjustEdgePoints>().edgeColliderObject = organelleBoundary;
     }
 

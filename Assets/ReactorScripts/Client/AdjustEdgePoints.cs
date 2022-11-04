@@ -28,6 +28,7 @@ public class AdjustEdgePoints : MonoBehaviour
             }
 
         }
+        
 
         softBodyVertices = new Transform[boneCount];
         // Needed cause need to connect end point to start
@@ -36,7 +37,7 @@ public class AdjustEdgePoints : MonoBehaviour
             softBodyVertices[i] = transform.GetChild(i);
             if (transform.GetChild(i).gameObject.name.Contains("Boun"))
             {
-                Debug.LogError("Boundary found instead of bones!");
+                Debug.Log("Boundary found instead of bones!");
             }
         }
         verticesPositions = new Vector2[softBodyVertices.Length + 1];
@@ -55,10 +56,10 @@ public class AdjustEdgePoints : MonoBehaviour
         {
             if (i == verticesPositions.Length-1)
             {
-                verticesPositions[i] = new Vector2(softBodyVertices[0].position.x, softBodyVertices[0].position.y);
+                verticesPositions[i] = new Vector2(softBodyVertices[0].localPosition.x, softBodyVertices[0].localPosition.y);
             }
             else
-                verticesPositions[i] = new Vector2(softBodyVertices[i].position.x, softBodyVertices[i].position.y);
+                verticesPositions[i] = new Vector2(softBodyVertices[i].localPosition.x, softBodyVertices[i].localPosition.y);
         }
         boundary.points = verticesPositions;
     }

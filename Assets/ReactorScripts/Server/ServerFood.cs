@@ -38,7 +38,7 @@ public class ServerFood : ksServerEntityScript
         if (otherEntityFood.food < otherEntityFood.foodCapacity)
         {
             otherEntityFood.food += foodValue;
-            //Entity.Destroy();
+            Entity.Destroy();
             ksLog.Info("OnOverlap");
         }
 

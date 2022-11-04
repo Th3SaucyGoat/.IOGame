@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyWithServer: 1
   m_isPermanent: 0
+  SyncGroup: 0
   CollisionFilter: {fileID: 11400000, guid: afd82fe64a0299b4fb7216485e4d5a9f, type: 2}
   PhysicsMaterial: {fileID: 0}
   ColliderData:
@@ -109,8 +110,8 @@ MonoBehaviour:
     ShapeId: 8
     IsSimulation: 1
     IsQuery: 1
-    Flag: 0
     Filter: {fileID: 0}
+    ContactOffset: -1
   PhysicsOverrides:
     ContactOffset: -1
     SleepThreshold: -1
@@ -129,8 +130,6 @@ MonoBehaviour:
   OverrideServerGhostMaterial: {fileID: 0}
   AssetId: 10
   EntityId: 5
-  CenterOfMass: {x: 0, y: 0, z: 0}
-  PhysicsEnabled: 0
   Type: Projectile
   IsStatic: 1
 --- !u!114 &8192373823815276827

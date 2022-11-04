@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class Stats
 {
     // Keep naming convention of these variables the same
-    public static int CollectorCost = 5;
+    public static int CollectorCost = 1;
     public static int CollectorMaxHealth = 5;
     public string CollectorButton = "1"; // Temporary
     
@@ -15,7 +15,7 @@ public class Stats
     public static int ShooterMaxHealth = 10;
     public string ShooterButton = "2";
 
-    public static int HivemindMaxHealth = 20;
+    public static int HivemindMaxHealth = 2000;
     
 
     

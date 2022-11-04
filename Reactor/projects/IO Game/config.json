@@ -72,10 +72,13 @@
 			{
 				"asset id": 3,
 				"scale": [
-					0.2,
-					0.2,
+					0.1,
+					0.1,
 					1.0
 				],
+				"collision filter": {
+					"asset": 2
+				},
 				"scripts": [
 					{
 						"name": "ServerFood"
@@ -83,29 +86,10 @@
 					{
 						"name": ".ksSphereCollider",
 						"params": {
-							"shape id": 2,
-							"material": null,
-							"filter": {
-								"asset": 2
-							},
-							"offset": [
-								0.0,
-								0.0,
-								0.0
-							],
-							"trigger flag": true,
-							"simulation flag": true,
-							"query flag": true,
-							"enabled": true
-						}
-					},
-					{
-						"name": ".ksSphereCollider",
-						"params": {
 							"shape id": 1,
 							"material": null,
 							"filter": {
-								"asset": 14
+								"asset": 2
 							},
 							"offset": [
 								0.0,
@@ -167,7 +151,7 @@
 					{
 						"name": ".ksSphereCollider",
 						"params": {
-							"shape id": 1,
+							"shape id": 6,
 							"material": null,
 							"filter": null,
 							"offset": [
@@ -179,6 +163,50 @@
 							"simulation flag": true,
 							"query flag": true,
 							"enabled": true
+						}
+					}
+				]
+			}
+		],
+		"Organelle": [
+			{
+				"asset id": 15,
+				"scale": [
+					0.25,
+					0.25,
+					1.0
+				],
+				"collision filter": {
+					"asset": 9
+				},
+				"scripts": [
+					{
+						"name": ".ksSphereCollider",
+						"params": {
+							"shape id": 2,
+							"material": null,
+							"filter": null,
+							"offset": [
+								0.0,
+								0.0,
+								0.0
+							],
+							"trigger flag": false,
+							"simulation flag": true,
+							"query flag": true,
+							"enabled": true
+						}
+					},
+					{
+						"name": "OrganelleServer"
+					},
+					{
+						"name": ".ksBaseRigidBody",
+						"params": {
+							"use gravity": false,
+							"drag": 0.5,
+							"constraints": 72,
+							"rigid body type": 1
 						}
 					}
 				]
@@ -225,72 +253,6 @@
 					}
 				]
 			}
-		],
-		"Shooter": [
-			{
-				"asset id": 9,
-				"scale": [
-					0.7,
-					0.7,
-					1.0
-				],
-				"collision filter": {
-					"asset": 11
-				},
-				"scripts": [
-					{
-						"name": ".ksBaseRigidBody",
-						"params": {
-							"mass": 50.0,
-							"drag": 2.0,
-							"constraints": 120,
-							"rigid body type": 1
-						}
-					},
-					{
-						"name": ".ksSphereCollider",
-						"params": {
-							"shape id": 1,
-							"material": null,
-							"filter": null,
-							"offset": [
-								0.0,
-								0.0,
-								0.0
-							],
-							"trigger flag": false,
-							"simulation flag": true,
-							"query flag": true,
-							"enabled": true
-						}
-					},
-					{
-						"name": ".ksSphereCollider",
-						"params": {
-							"shape id": 7,
-							"material": null,
-							"filter": {
-								"asset": 13
-							},
-							"offset": [
-								0.0,
-								0.0,
-								0.0
-							],
-							"trigger flag": true,
-							"simulation flag": true,
-							"query flag": true,
-							"enabled": true
-						}
-					},
-					{
-						"name": "UnitServer"
-					},
-					{
-						"name": "ShooterServer"
-					}
-				]
-			}
 		]
 	},
 	"assets": {
@@ -318,7 +280,7 @@
 			"fields": {
 				"m_group": 1,
 				"m_notify": 18,
-				"m_collide": 18
+				"m_collide": 0
 			}
 		},
 		"ReactorScripts/ksCollisionFilters/FoodLocator": {
@@ -326,7 +288,7 @@
 			"name": "/ksCollisionFilter",
 			"fields": {
 				"m_group": 4,
-				"m_notify": 128,
+				"m_notify": 1,
 				"m_collide": 0
 			}
 		},
@@ -345,7 +307,7 @@
 			"fields": {
 				"m_group": 2,
 				"m_notify": 0,
-				"m_collide": 58
+				"m_collide": 314
 			}
 		},
 		"ReactorScripts/ksCollisionFilters/Obstacles": {
@@ -355,6 +317,15 @@
 				"m_group": 8,
 				"m_notify": 0,
 				"m_collide": 122
+			}
+		},
+		"ReactorScripts/ksCollisionFilters/Organelle": {
+			"asset id": 9,
+			"name": "/ksCollisionFilter",
+			"fields": {
+				"m_group": 256,
+				"m_notify": 2,
+				"m_collide": 56
 			}
 		},
 		"ReactorScripts/ksCollisionFilters/Projectile": {
