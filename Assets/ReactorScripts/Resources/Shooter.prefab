@@ -227,7 +227,7 @@ MonoBehaviour:
   PhysicsMaterial: {fileID: 0}
   ColliderData:
   - Collider: {fileID: 8806138884908260067}
-    ShapeId: 1
+    ShapeId: 6
     IsSimulation: 1
     IsQuery: 1
     Flag: 0
